@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="flex justify-between mb-6">
+  <h1 class="text-2xl font-bold">{% trans "Mes annonces" %}</h1>
+  <a href="{% url 'listings:create' %}" class="rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Créer" %}</a>
+</div>
+<ul class="space-y-2">
+  {% for listing in object_list %}
+    <li><a href="{% url 'listings:detail' listing.pk %}" class="text-sky-700">{{ listing.title }}</a> ({{ listing.get_status_display }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}

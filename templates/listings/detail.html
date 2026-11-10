@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<article class="rounded-xl border bg-white p-6 shadow-sm">
+  <h1 class="text-2xl font-bold">{{ listing.title }}</h1>
+  <p class="text-slate-600">{{ listing.departure_name }} → {{ listing.arrival_name }}</p>
+  <p class="text-sm">S{{ listing.week_from }}–S{{ listing.week_to }} {{ listing.year }} · {{ listing.get_programme_type_display }}</p>
+  <p class="mt-4 whitespace-pre-line">{{ listing.description }}</p>
+  {% if listing.daily_contribution_eur %}
+    <p class="mt-2 text-sm">{% trans "Participation indicative" %}: {{ listing.daily_contribution_eur }} €/{% trans "jour" %} ({% trans "non commerciale" %})</p>
+  {% endif %}
+</article>
+{% if user.is_authenticated and listing.author_id != user.id and listing.status == 'published' %}
+<section class="mt-6 rounded-xl border bg-white p-6">
+  <h2 class="font-semibold">{% trans "Postuler" %}</h2>
+  <form method="post" action="{% url 'listings:apply' listing.pk %}">
+    {% csrf_token %}
+    {{ application_form.as_p }}
+    <button type="submit" class="mt-2 rounded bg-sky-600 px-4 py-2 text-white">{% trans "Envoyer" %}</button>
+  </form>
+</section>
+{% endif %}
+{% if user.is_authenticated and listing.author_id == user.id %}
+<section class="mt-6">
+  <h2 class="font-semibold">{% trans "Candidatures" %}</h2>
+  <ul class="mt-2 space-y-2">
+    {% for app in listing.applications.all %}
+      <li class="border rounded p-3 flex justify-between items-center">
+        <span>{{ app.applicant.email }} — {{ app.get_status_display }}</span>
+        {% if app.status == 'pending' %}
+          <span class="space-x-2">
+            <a href="{% url 'listings:application_decide' app.pk 'accept' %}" class="text-green-700 text-sm">{% trans "Accepter" %}</a>
+            <a href="{% url 'listings:application_decide' app.pk 'reject' %}" class="text-red-700 text-sm">{% trans "Refuser" %}</a>
+          </span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

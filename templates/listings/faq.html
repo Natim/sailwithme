@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">{% trans "FAQ & sécurité" %}</h1>
+<div class="prose max-w-none space-y-4 rounded-xl border bg-white p-6">
+  <p>{% trans "La participation aux frais de bord doit rester strictement non lucrative. Sails with Me n'est pas un transport commercial de passagers." %}</p>
+  <p>{% trans "Avant le départ : contrat d'embarquement, assurance, équipement de sécurité, permis et certifications adaptés au programme." %}</p>
+  <p>{% trans "Échangez via la messagerie, vérifiez les profils et les avis après navigation." %}</p>
+</div>
+{% endblock %}

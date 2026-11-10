@@ -1,0 +1,46 @@
+[project]
+name = "sailswithme"
+version = "0.1.0"
+description = "Sails with Me — crew matching for long-distance sailing"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "Django>=5.1,<6",
+    "django-environ>=0.11",
+    "django-allauth[socialaccount]>=65.0",
+    "psycopg[binary]>=3.2",
+    "Pillow>=10.0",
+    "geopy>=2.4",
+    "django-q2>=1.6",
+    "stripe>=11.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-django>=4.9",
+    "factory-boy>=3.3",
+    "ruff>=0.8",
+    "pre-commit>=4.0",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.dev"
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = [".venv", ".conda", ".pgdata", "migrations"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["config*", "apps*"]

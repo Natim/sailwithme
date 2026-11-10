@@ -1,0 +1,62 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}" class="h-full">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="min-h-full bg-slate-50 text-slate-900">
+  <header class="border-b border-slate-200 bg-white">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
+    <a href="{% url 'home' %}" class="text-xl font-bold text-sky-700">{{ SITE_NAME }}</a>
+    <nav class="flex flex-wrap items-center gap-3 text-sm font-medium">
+      <a href="{% url 'listings:search' %}" class="hover:text-sky-700">{% trans "Annonces" %}</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'profiles:me' %}" class="hover:text-sky-700">{% trans "Mon profil" %}</a>
+        <a href="{% url 'listings:mine' %}" class="hover:text-sky-700">{% trans "Mes annonces" %}</a>
+        <a href="{% url 'messaging:inbox' %}" class="relative hover:text-sky-700">
+          {% trans "Messages" %}
+          {% if unread_message_count %}
+            <span id="nav-unread-badge" class="ml-1 rounded-full bg-red-500 px-1.5 text-xs text-white">{{ unread_message_count }}</span>
+          {% endif %}
+        </a>
+        <a href="{% url 'account_logout' %}" class="hover:text-sky-700">{% trans "Déconnexion" %}</a>
+      {% else %}
+        <a href="{% url 'account_login' %}" class="hover:text-sky-700">{% trans "Connexion" %}</a>
+        <a href="{% url 'account_signup' %}" class="rounded-lg bg-sky-600 px-3 py-1.5 text-white hover:bg-sky-700">{% trans "Inscription" %}</a>
+      {% endif %}
+    </nav>
+  </div>
+  </header>
+
+  {% if messages %}
+  <div class="mx-auto max-w-6xl px-4 pt-4">
+    {% for message in messages %}
+      <div class="mb-2 rounded-lg border px-4 py-2 text-sm {% if message.tags == 'error' %}border-red-200 bg-red-50{% else %}border-sky-200 bg-sky-50{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main class="mx-auto max-w-6xl px-4 py-8">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="mt-12 border-t border-slate-200 bg-white py-8 text-center text-sm text-slate-600">
+    <p>{% trans "Trouvez votre équipage. Traversez l'océan." %}</p>
+    <p class="mt-2"><a href="{% url 'billing:pricing' %}" class="text-sky-700">{% trans "Tarifs" %}</a> · <a href="{% url 'listings:faq' %}" class="text-sky-700">{% trans "FAQ / Sécurité" %}</a></p>
+  </footer>
+  {% block extra_js %}{% endblock %}
+  {% if user.is_authenticated %}
+  <div hx-get="{% url 'messaging:unread_count' %}" hx-trigger="every 30s" hx-swap="outerHTML" id="nav-unread-poll"></div>
+  {% endif %}
+</body>
+</html>

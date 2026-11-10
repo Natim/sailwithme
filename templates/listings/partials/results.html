@@ -1,0 +1,11 @@
+<ul class="space-y-3">
+  {% for listing in results %}
+    <li class="rounded-lg border bg-white p-4 shadow-sm">
+      <a href="{% url 'listings:detail' listing.pk %}" class="text-lg font-semibold text-sky-800">{{ listing.title }}</a>
+      <p class="text-sm text-slate-600">{{ listing.departure_name }} → {{ listing.arrival_name }}</p>
+      <p class="text-sm">S{{ listing.week_from }}–S{{ listing.week_to }} {{ listing.year }} · {{ listing.get_kind_display }}</p>
+    </li>
+  {% empty %}
+    <li class="text-slate-600">{% load i18n %}{% trans "Aucune annonce." %}</li>
+  {% endfor %}
+</ul>

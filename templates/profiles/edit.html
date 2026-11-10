@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Mon profil" %}{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-6">{% trans "Mon profil" %} ({{ profile.completeness_score }}%)</h1>
+<div class="grid gap-6 lg:grid-cols-3">
+  <section id="section-basics" hx-get="{% url 'profiles:edit_section' 'basics' %}" hx-trigger="load" hx-swap="innerHTML">
+    {% include "profiles/partials/basics_form.html" with form=basics_form %}
+  </section>
+  <section id="section-experience" hx-get="{% url 'profiles:edit_section' 'experience' %}" hx-trigger="load" hx-swap="innerHTML">
+    {% include "profiles/partials/experience_form.html" with form=experience_form %}
+  </section>
+  <section id="section-preferences" hx-get="{% url 'profiles:edit_section' 'preferences' %}" hx-trigger="load" hx-swap="innerHTML">
+    {% include "profiles/partials/preferences_form.html" with form=preferences_form %}
+  </section>
+</div>
+<p class="mt-6"><a href="{% url 'profiles:detail' user.pk %}" class="text-sky-700">{% trans "Voir le profil public" %}</a></p>
+{% endblock %}

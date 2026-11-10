@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Recherche d'annonces" %}{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">{% trans "Annonces" %}</h1>
+<form
+  id="search-form"
+  method="get"
+  hx-get="{% url 'listings:search' %}"
+  hx-target="#search-results"
+  hx-push-url="true"
+  class="grid gap-4 rounded-xl border bg-white p-4 md:grid-cols-4"
+>
+  {{ form.as_p }}
+  <div class="md:col-span-4">
+    <button type="submit" class="rounded bg-sky-600 px-4 py-2 text-white">{% trans "Rechercher" %}</button>
+  </div>
+</form>
+<div id="map" class="mt-4 h-80 rounded-xl border"></div>
+<div id="search-results" class="mt-6">
+  {% include "listings/partials/results.html" %}
+</div>
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'listings:save_alert' %}" class="mt-4">
+  {% csrf_token %}
+  {% for field in form %}
+    {% if field.value %}<input type="hidden" name="{{ field.name }}" value="{{ field.value }}">{% endif %}
+  {% endfor %}
+  <button type="submit" class="rounded border px-4 py-2 text-sm">{% trans "Enregistrer cette recherche comme alerte" %}</button>
+</form>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const mapData = {{ map_data_json|safe }};
+  const map = L.map('map').setView([20, -20], 3);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' }).addTo(map);
+  mapData.forEach(item => {
+    L.marker(item.departure).addTo(map).bindPopup(`<a href="${item.url}">${item.title}</a>`);
+    L.marker(item.arrival).addTo(map);
+    L.polyline([item.departure, item.arrival], {dashArray: '6 8', color: '#0369a1'}).addTo(map);
+  });
+</script>
+{% endblock %}

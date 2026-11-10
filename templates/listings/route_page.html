@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-3xl font-bold">{{ route_page.title }}</h1>
+<p class="mt-2 text-slate-600">{{ route_page.meta_description }}</p>
+<div class="mt-6 prose">{{ route_page.body|linebreaks }}</div>
+{% include "listings/partials/results.html" with results=listings %}
+{% endblock %}

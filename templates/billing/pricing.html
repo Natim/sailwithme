@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-8">{% trans "Tarifs" %}</h1>
+<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+  <div class="rounded-xl border bg-white p-6 shadow-sm">
+    <h2 class="font-bold">{% trans "Skipper" %}</h2>
+    <p class="text-3xl font-bold mt-2">0 €</p>
+    <p class="text-sm text-slate-600 mt-2">{% trans "Annonces et candidatures illimitées." %}</p>
+    <a href="{% url 'billing:checkout' 'skipper_plus' %}" class="mt-4 inline-block text-sm text-sky-700">Skipper+ 5 €/{% trans "mois" %}</a>
+  </div>
+  <div class="rounded-xl border-2 border-sky-500 bg-white p-6 shadow-sm">
+    <h2 class="font-bold">Crew Pass</h2>
+    <p class="text-3xl font-bold mt-2">29 €</p>
+    <p class="text-sm text-slate-600">{% trans "Une saison — postuler, alertes, annuaire." %}</p>
+    <a href="{% url 'billing:checkout' 'crew_season' %}" class="mt-4 inline-block rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Activer" %}</a>
+  </div>
+  <div class="rounded-xl border bg-white p-6 shadow-sm">
+    <h2 class="font-bold">Crew Pass {% trans "à vie" %}</h2>
+    <p class="text-3xl font-bold mt-2">79 €</p>
+    <a href="{% url 'billing:checkout' 'crew_lifetime' %}" class="mt-4 inline-block rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Lifetime" %}</a>
+  </div>
+  <div class="rounded-xl border bg-white p-6 shadow-sm">
+    <h2 class="font-bold">{% trans "Identité vérifiée" %}</h2>
+    <p class="text-3xl font-bold mt-2">5 €</p>
+    <a href="{% url 'billing:checkout' 'identity' %}" class="mt-4 inline-block text-sky-700 text-sm">{% trans "Vérifier" %}</a>
+  </div>
+</div>
+<p class="mt-8 text-sm text-slate-600 max-w-2xl">{% trans "Sans commission sur la participation aux frais de bord. Les montants partagés à bord doivent rester non commerciaux." %}</p>
+{% endblock %}

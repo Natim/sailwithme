@@ -1,0 +1,3 @@
+{% for photo in boat.photos.all %}
+  <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" class="rounded object-cover h-32 w-full">
+{% endfor %}

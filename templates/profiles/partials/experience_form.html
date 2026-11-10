@@ -1,0 +1,9 @@
+<div class="rounded-xl border bg-white p-6 shadow-sm">
+  <h2 class="font-semibold mb-4">{% load i18n %}{% trans "Expérience" %}</h2>
+  {% if saved %}<p class="mb-2 text-sm text-green-700">{% trans "Enregistré." %}</p>{% endif %}
+  <form hx-post="{% url 'profiles:edit_section' 'experience' %}" hx-target="closest div" hx-swap="outerHTML" class="space-y-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Enregistrer" %}</button>
+  </form>
+</div>
