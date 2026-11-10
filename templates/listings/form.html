@@ -17,6 +17,7 @@
 {% endblock %}
 
 {% block extra_js %}
+{% include "includes/map_tile_config.html" %}
 <script src="{% static 'js/map-basemap.js' %}"></script>
 <script>
   const map = L.map('listing-map').setView([28.1, -15.4], 4);

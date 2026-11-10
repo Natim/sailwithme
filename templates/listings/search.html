@@ -34,6 +34,7 @@
 {% endblock %}
 
 {% block extra_js %}
+{% include "includes/map_tile_config.html" %}
 <script src="{% static 'js/map-basemap.js' %}"></script>
 <script>
   const mapData = {{ map_data_json|safe }};

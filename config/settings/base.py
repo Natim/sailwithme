@@ -129,6 +129,9 @@ STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY", default="")
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY", default="")
 STRIPE_WEBHOOK_SECRET = env("STRIPE_WEBHOOK_SECRET", default="")
 
+# Optional: https://carto.com/basemaps/ — otherwise OSM France tiles are used.
+CARTO_API_KEY = env("CARTO_API_KEY", default="")
+
 # Billing prices (cents EUR) — placeholders for Stripe Price IDs in production
 CREW_PASS_SEASON_PRICE_CENTS = 2900
 CREW_PASS_LIFETIME_PRICE_CENTS = 7900
