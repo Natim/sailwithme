@@ -1,49 +1,45 @@
 {% extends "account/base_entrance.html" %}
-{% load allauth i18n %}
-{% block head_title %}
-    {% trans "Inscription" %}
-{% endblock head_title %}
-{% block content %}
-    {% element h1 %}
-        {% trans "Inscription" %}
-    {% endelement %}
-    {% url 'cgu' as cgu_url %}
-    {% element p %}
-        {% blocktranslate %}En créant un compte, vous acceptez les <a href="{{ cgu_url }}" target="_blank" rel="noopener">conditions générales d'utilisation</a> de {{ SITE_NAME }}, édité par SAS CLOUDY.{% endblocktranslate %}
-    {% endelement %}
-    {% setvar link %}
-        <a href="{{ login_url }}">
-        {% endsetvar %}
-        {% setvar end_link %}
-        </a>
-    {% endsetvar %}
-    {% element p %}
-        {% blocktranslate %}Déjà inscrit ? {{ link }}Connectez-vous{{ end_link }}.{% endblocktranslate %}
-    {% endelement %}
-    {% if not SOCIALACCOUNT_ONLY %}
-        {% url 'account_signup' as action_url %}
-        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-            {% slot body %}
-                {% csrf_token %}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
-                {{ redirect_field }}
-            {% endslot %}
-            {% slot actions %}
-                {% element button tags="prominent,signup" type="submit" %}
-                    {% trans "S'inscrire" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
-    {% endif %}
-    {% if PASSKEY_SIGNUP_ENABLED %}
-        {% element hr %}
-        {% endelement %}
-        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}
-            {% trans "S'inscrire avec une clé d'accès" %}
-        {% endelement %}
-    {% endif %}
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
-{% endblock content %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Inscription" %}{% endblock %}
+
+{% block account_content %}
+<h1 class="text-2xl font-bold text-sky-900">{% trans "Inscription" %}</h1>
+<p class="mt-2 text-sm text-slate-600">
+  {% url 'cgu' as cgu_url %}
+  {% blocktrans %}En créant un compte, vous acceptez les <a href="{{ cgu_url }}" class="text-sky-700 hover:underline" target="_blank" rel="noopener">conditions générales d'utilisation</a> de {{ SITE_NAME }}, édité par SAS CLOUDY.{% endblocktrans %}
+</p>
+<p class="mt-2 text-sm text-slate-600">
+  {% trans "Déjà inscrit ?" %}
+  <a href="{% url 'account_login' %}" class="text-sky-700 font-medium hover:underline">{% trans "Connexion" %}</a>
+</p>
+
+{% if form.non_field_errors %}
+  <ul class="mt-4 text-sm text-red-600">
+    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+  </ul>
+{% endif %}
+
+<form method="post" action="{% url 'account_signup' %}" class="mt-6 space-y-4">
+  {% csrf_token %}
+  {% for field in form.visible_fields %}
+    <div>
+      <label class="block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      <input
+        type="{{ field.field.widget.input_type }}"
+        name="{{ field.html_name }}"
+        id="{{ field.id_for_label }}"
+        {% if field.value != None %}value="{{ field.value }}"{% endif %}
+        {% if field.field.required %}required{% endif %}
+        class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+        autocomplete="{% if 'password' in field.name %}new-password{% elif field.name == 'email' %}email{% endif %}"
+      >
+      {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+    </div>
+  {% endfor %}
+  {{ redirect_field }}
+  <button type="submit" class="w-full rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700">
+    {% trans "S'inscrire" %}
+  </button>
+</form>
+{% endblock %}

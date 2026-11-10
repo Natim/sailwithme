@@ -1,0 +1,45 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Connexion" %}{% endblock %}
+
+{% block account_content %}
+<h1 class="text-2xl font-bold text-sky-900">{% trans "Connexion" %}</h1>
+<p class="mt-2 text-sm text-slate-600">
+  {% trans "Pas encore de compte ?" %}
+  <a href="{% url 'account_signup' %}" class="text-sky-700 font-medium hover:underline">{% trans "S'inscrire" %}</a>
+</p>
+
+{% if form.non_field_errors %}
+  <ul class="mt-4 text-sm text-red-600">
+    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+  </ul>
+{% endif %}
+
+<form method="post" action="{% url 'account_login' %}" class="mt-6 space-y-4">
+  {% csrf_token %}
+  {% for field in form.visible_fields %}
+    <div>
+      <label class="block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      <input
+        type="{{ field.field.widget.input_type }}"
+        name="{{ field.html_name }}"
+        id="{{ field.id_for_label }}"
+        {% if field.value != None %}value="{{ field.value }}"{% endif %}
+        {% if field.field.required %}required{% endif %}
+        class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+        autocomplete="{% if field.name == 'login' %}username{% elif field.name == 'password' %}current-password{% endif %}"
+      >
+      {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+    </div>
+  {% endfor %}
+  {{ redirect_field }}
+  <button type="submit" class="w-full rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700">
+    {% trans "Se connecter" %}
+  </button>
+</form>
+
+<p class="mt-4 text-center text-sm">
+  <a href="{% url 'account_reset_password' %}" class="text-sky-700 hover:underline">{% trans "Mot de passe oublié ?" %}</a>
+</p>
+{% endblock %}
