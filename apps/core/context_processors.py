@@ -5,7 +5,7 @@ from apps.core.map_tiles import leaflet_tile_layer
 
 def site_settings(request):
     ctx = {
-        "SITE_NAME": "Sails with Me",
+        "SITE_NAME": "Sail with Me",
         "STRIPE_PUBLIC_KEY": getattr(settings, "STRIPE_PUBLIC_KEY", ""),
         "leaflet_tile": leaflet_tile_layer(),
         "nav_profile_photo_url": None,

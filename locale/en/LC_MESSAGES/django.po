@@ -1194,19 +1194,19 @@ msgstr "Intellectual property"
 #: templates/legal/cgu.html:115
 msgid ""
 "\n"
-"      Le nom « Sails with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
+"      Le nom « Sail with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
 "      de SAS CLOUDY ou de ses ayants droit.\n"
 "      Le code source de l'application est publié sous la\n"
 "      <strong>GNU Affero General Public License version 3</strong> (voir fichier LICENSE du dépôt).\n"
-"      Cette licence ne couvre pas le nom « Sails with Me », les logos ni la charte graphique.\n"
+"      Cette licence ne couvre pas le nom « Sail with Me », les logos ni la charte graphique.\n"
 "      "
 msgstr ""
 "\n"
-"      The name \"Sails with Me\", the site's visual identity (excluding code), and editorial content are owned by\n"
+"      The name \"Sail with Me\", the site's visual identity (excluding code), and editorial content are owned by\n"
 "      SAS CLOUDY or its licensors.\n"
 "      The application source code is published under the\n"
 "      <strong>GNU Affero General Public License version 3</strong> (see the LICENSE file in the repository).\n"
-"      That licence does not cover the name \"Sails with Me\", logos, or visual identity.\n"
+"      That licence does not cover the name \"Sail with Me\", logos, or visual identity.\n"
 "      "
 
 #: templates/legal/cgu.html:126
@@ -1292,10 +1292,10 @@ msgstr "Cost sharing"
 
 #: templates/listings/faq.html:13
 msgid ""
-"On-board cost sharing must remain strictly non-commercial. Sails with Me is "
+"On-board cost sharing must remain strictly non-commercial. Sail with Me is "
 "not commercial passenger transport."
 msgstr ""
-"On-board cost sharing must remain strictly non-commercial. Sails with Me is "
+"On-board cost sharing must remain strictly non-commercial. Sail with Me is "
 "not commercial passenger transport."
 
 #: templates/listings/faq.html:18

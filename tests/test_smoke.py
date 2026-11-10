@@ -6,4 +6,4 @@ from django.urls import reverse
 def test_home(client):
     response = client.get(reverse("home"))
     assert response.status_code == 200
-    assert b"Sails with Me" in response.content or b"equipage" in response.content
+    assert b"Sail with Me" in response.content or b"equipage" in response.content

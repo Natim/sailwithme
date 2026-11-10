@@ -26,3 +26,21 @@ def leaflet_tile_layer() -> dict:
         "subdomains": "abc",
         "maxZoom": 19,
     }
+
+
+def openlayers_tile_layer() -> dict:
+    """XYZ options for the Django GIS admin map (OpenLayers, not Leaflet).
+
+    tile.openstreetmap.org answers with a 403 "Access blocked" tile when the
+    app does not meet the volunteer tile-usage policy. Reuse the Leaflet
+    source and rewrite ``{s}`` into OpenLayers' ``{a-c}`` form.
+    """
+    layer = leaflet_tile_layer()
+    subdomains = layer["subdomains"]
+    ol_subdomains = f"{{{subdomains[0]}-{subdomains[-1]}}}"
+    url = layer["url"].replace("{s}", ol_subdomains).replace("{r}", "")
+    return {
+        "url": url,
+        "attribution": layer["attribution"],
+        "maxZoom": layer["maxZoom"],
+    }

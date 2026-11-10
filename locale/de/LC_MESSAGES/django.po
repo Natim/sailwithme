@@ -1180,19 +1180,19 @@ msgstr "Geistiges Eigentum"
 #: templates/legal/cgu.html:115
 msgid ""
 "\n"
-"      Le nom « Sails with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
+"      Le nom « Sail with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
 "      de SAS CLOUDY ou de ses ayants droit.\n"
 "      Le code source de l'application est publié sous la\n"
 "      <strong>GNU Affero General Public License version 3</strong> (voir fichier LICENSE du dépôt).\n"
-"      Cette licence ne couvre pas le nom « Sails with Me », les logos ni la charte graphique.\n"
+"      Cette licence ne couvre pas le nom « Sail with Me », les logos ni la charte graphique.\n"
 "      "
 msgstr ""
 "\n"
-"      Der Name „Sails with Me“, das Erscheinungsbild der Website (außer dem Code) und die redaktionellen Inhalte sind Eigentum\n"
+"      Der Name „Sail with Me“, das Erscheinungsbild der Website (außer dem Code) und die redaktionellen Inhalte sind Eigentum\n"
 "      von SAS CLOUDY oder ihrer Rechteinhaber.\n"
 "      Der Quellcode der Anwendung steht unter der\n"
 "      <strong>GNU Affero General Public License version 3</strong> (siehe Datei LICENSE im Repository).\n"
-"      Diese Lizenz umfasst nicht den Namen „Sails with Me“, die Logos oder das Erscheinungsbild.\n"
+"      Diese Lizenz umfasst nicht den Namen „Sail with Me“, die Logos oder das Erscheinungsbild.\n"
 "      "
 
 #: templates/legal/cgu.html:126
@@ -1278,11 +1278,11 @@ msgstr "Kostenbeteiligung"
 
 #: templates/listings/faq.html:13
 msgid ""
-"On-board cost sharing must remain strictly non-commercial. Sails with Me is "
+"On-board cost sharing must remain strictly non-commercial. Sail with Me is "
 "not commercial passenger transport."
 msgstr ""
 "Die Beteiligung an den Bordkosten muss strikt nicht-gewerblich bleiben. "
-"Sails with Me ist kein gewerblicher Passagiertransport."
+"Sail with Me ist kein gewerblicher Passagiertransport."
 
 #: templates/listings/faq.html:18
 msgid "Before departure"

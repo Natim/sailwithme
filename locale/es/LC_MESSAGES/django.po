@@ -1205,19 +1205,19 @@ msgstr "Propiedad intelectual"
 #: templates/legal/cgu.html:115
 msgid ""
 "\n"
-"      Le nom « Sails with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
+"      Le nom « Sail with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
 "      de SAS CLOUDY ou de ses ayants droit.\n"
 "      Le code source de l'application est publié sous la\n"
 "      <strong>GNU Affero General Public License version 3</strong> (voir fichier LICENSE du dépôt).\n"
-"      Cette licence ne couvre pas le nom « Sails with Me », les logos ni la charte graphique.\n"
+"      Cette licence ne couvre pas le nom « Sail with Me », les logos ni la charte graphique.\n"
 "      "
 msgstr ""
 "\n"
-"      Le nom « Sails with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
+"      Le nom « Sail with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
 "      de SAS CLOUDY ou de ses ayants droit.\n"
 "      Le code source de l'application est publié sous la\n"
 "      <strong>GNU Affero General Public License version 3</strong> (voir fichier LICENSE du dépôt).\n"
-"      Cette licence ne couvre pas le nom « Sails with Me », les logos ni la charte graphique.\n"
+"      Cette licence ne couvre pas le nom « Sail with Me », les logos ni la charte graphique.\n"
 "      "
 
 #: templates/legal/cgu.html:126
@@ -1303,11 +1303,11 @@ msgstr "Reparto de costes"
 
 #: templates/listings/faq.html:13
 msgid ""
-"On-board cost sharing must remain strictly non-commercial. Sails with Me is "
+"On-board cost sharing must remain strictly non-commercial. Sail with Me is "
 "not commercial passenger transport."
 msgstr ""
 "El reparto de costes a bordo debe seguir siendo estrictamente no comercial. "
-"Sails with Me no es un transporte comercial de pasajeros."
+"Sail with Me no es un transporte comercial de pasajeros."
 
 #: templates/listings/faq.html:18
 msgid "Before departure"

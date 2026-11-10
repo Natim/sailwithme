@@ -1,7 +1,7 @@
 [project]
-name = "sailswithme"
+name = "sailwithme"
 version = "0.1.0"
-description = "Sails with Me — crew matching for long-distance sailing"
+description = "Sail with Me — crew matching for long-distance sailing"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
