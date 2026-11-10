@@ -2,10 +2,34 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">{% trans "FAQ & sécurité" %}</h1>
-<div class="prose max-w-none space-y-4 rounded-xl border bg-white p-6">
-  <p>{% trans "La participation aux frais de bord doit rester strictement non lucrative. Sails with Me n'est pas un transport commercial de passagers." %}</p>
-  <p>{% trans "Avant le départ : contrat d'embarquement, assurance, équipement de sécurité, permis et certifications adaptés au programme." %}</p>
-  <p>{% trans "Échangez via la messagerie, vérifiez les profils et les avis après navigation." %}</p>
+<h1 class="font-display text-3xl font-bold text-ocean">{% trans "FAQ & sécurité" %}</h1>
+<div class="mt-8 space-y-3" x-data="{ open: 'safety' }">
+  <div class="card">
+    <button type="button" class="flex w-full justify-between font-display font-semibold text-ocean" @click="open = open === 'safety' ? '' : 'safety'">
+      {% trans "Participation aux frais" %}
+      <span x-text="open === 'safety' ? '−' : '+'"></span>
+    </button>
+    <p x-show="open === 'safety'" x-cloak class="mt-3 text-sm text-slate-700">
+      {% trans "La participation aux frais de bord doit rester strictement non lucrative. Sails with Me n'est pas un transport commercial de passagers." %}
+    </p>
+  </div>
+  <div class="card">
+    <button type="button" class="flex w-full justify-between font-display font-semibold text-ocean" @click="open = open === 'prep' ? '' : 'prep'">
+      {% trans "Avant le départ" %}
+      <span x-text="open === 'prep' ? '−' : '+'"></span>
+    </button>
+    <p x-show="open === 'prep'" x-cloak class="mt-3 text-sm text-slate-700">
+      {% trans "Contrat d'embarquement, assurance, équipement de sécurité, permis et certifications adaptés au programme." %}
+    </p>
+  </div>
+  <div class="card">
+    <button type="button" class="flex w-full justify-between font-display font-semibold text-ocean" @click="open = open === 'trust' ? '' : 'trust'">
+      {% trans "Confiance" %}
+      <span x-text="open === 'trust' ? '−' : '+'"></span>
+    </button>
+    <p x-show="open === 'trust'" x-cloak class="mt-3 text-sm text-slate-700">
+      {% trans "Échange via la messagerie, vérifie les profils et lis les avis après navigation." %}
+    </p>
+  </div>
 </div>
 {% endblock %}

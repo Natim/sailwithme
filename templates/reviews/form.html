@@ -2,10 +2,58 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">{% trans "Laisser un avis" %}</h1>
-<form method="post" class="max-w-lg rounded-xl border bg-white p-6 space-y-3">
+<h1 class="font-display text-2xl font-bold text-ocean">{% trans "Laisser un avis" %}</h1>
+<form method="post" class="card mt-6 max-w-lg space-y-5"
+  x-data="{ rating_overall: 0, rating_seamanship: 0, rating_reliability: 0, rating_atmosphere: 0, rating_safety: 0, rating_commitment: 0 }">
   {% csrf_token %}
-  <div class="space-y-3">{% include "includes/form_fields.html" %}</div>
-  <button type="submit" class="rounded bg-sky-600 px-4 py-2 text-white">{% trans "Publier" %}</button>
+
+  <div>
+    <label class="text-sm font-bold text-ocean">{{ form.rating_overall.label }}</label>
+    <input type="hidden" name="rating_overall" :value="rating_overall">
+    <div class="mt-1 flex gap-1">
+      <template x-for="n in 5"><button type="button" class="text-2xl" @click="rating_overall=n" :class="n<=rating_overall?'text-sun':'text-slate-300'">★</button></template>
+    </div>
+  </div>
+  <div>
+    <label class="text-sm font-bold text-ocean">{{ form.rating_seamanship.label }}</label>
+    <input type="hidden" name="rating_seamanship" :value="rating_seamanship||''">
+    <div class="mt-1 flex gap-1">
+      <template x-for="n in 5"><button type="button" class="text-2xl" @click="rating_seamanship=n" :class="n<=rating_seamanship?'text-sun':'text-slate-300'">★</button></template>
+    </div>
+  </div>
+  <div>
+    <label class="text-sm font-bold text-ocean">{{ form.rating_reliability.label }}</label>
+    <input type="hidden" name="rating_reliability" :value="rating_reliability||''">
+    <div class="mt-1 flex gap-1">
+      <template x-for="n in 5"><button type="button" class="text-2xl" @click="rating_reliability=n" :class="n<=rating_reliability?'text-sun':'text-slate-300'">★</button></template>
+    </div>
+  </div>
+  <div>
+    <label class="text-sm font-bold text-ocean">{{ form.rating_atmosphere.label }}</label>
+    <input type="hidden" name="rating_atmosphere" :value="rating_atmosphere||''">
+    <div class="mt-1 flex gap-1">
+      <template x-for="n in 5"><button type="button" class="text-2xl" @click="rating_atmosphere=n" :class="n<=rating_atmosphere?'text-sun':'text-slate-300'">★</button></template>
+    </div>
+  </div>
+  <div>
+    <label class="text-sm font-bold text-ocean">{{ form.rating_safety.label }}</label>
+    <input type="hidden" name="rating_safety" :value="rating_safety||''">
+    <div class="mt-1 flex gap-1">
+      <template x-for="n in 5"><button type="button" class="text-2xl" @click="rating_safety=n" :class="n<=rating_safety?'text-sun':'text-slate-300'">★</button></template>
+    </div>
+  </div>
+  <div>
+    <label class="text-sm font-bold text-ocean">{{ form.rating_commitment.label }}</label>
+    <input type="hidden" name="rating_commitment" :value="rating_commitment||''">
+    <div class="mt-1 flex gap-1">
+      <template x-for="n in 5"><button type="button" class="text-2xl" @click="rating_commitment=n" :class="n<=rating_commitment?'text-sun':'text-slate-300'">★</button></template>
+    </div>
+  </div>
+
+  <div>
+    <label class="text-sm font-bold text-ocean" for="{{ form.comment.id_for_label }}">{{ form.comment.label }}</label>
+    {{ form.comment }}
+  </div>
+  <button type="submit" class="btn-primary">{% trans "Publier" %}</button>
 </form>
 {% endblock %}

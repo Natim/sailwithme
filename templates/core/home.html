@@ -4,29 +4,97 @@
 {% block title %}{{ SITE_NAME }} — {% trans "Grande croisière" %}{% endblock %}
 
 {% block content %}
-<section class="rounded-2xl bg-gradient-to-br from-sky-600 to-sky-800 px-8 py-16 text-white shadow-lg">
-  <h1 class="text-4xl font-bold tracking-tight">{% trans "Trouvez votre équipage. Traversez l'océan." %}</h1>
-  <p class="mt-4 max-w-2xl text-lg text-sky-100">
-    {% trans "Skippers avec bateau, équipiers sans bateau : annonces géolocalisées par semaine, messagerie et avis après navigation." %}
-  </p>
-  <div class="mt-8 flex flex-wrap gap-4">
-    <a href="{% url 'listings:search' %}" class="rounded-lg bg-white px-5 py-2.5 font-semibold text-sky-800 hover:bg-sky-50">{% trans "Voir les annonces" %}</a>
-    <a href="{% url 'account_signup' %}" class="rounded-lg border border-white/40 px-5 py-2.5 font-semibold hover:bg-white/10">{% trans "Créer un compte" %}</a>
+<section class="relative overflow-hidden rounded-4xl bg-gradient-to-br from-lagoon-light via-lagoon to-ocean px-6 py-14 text-white shadow-lift md:px-12 md:py-20">
+  <div class="relative z-10 max-w-2xl">
+    <p class="text-sm font-bold uppercase tracking-wide text-sun">⛵ {% trans "Long cours & transats" %}</p>
+    <h1 class="font-display mt-3 text-4xl font-bold leading-tight md:text-5xl">{% trans "Trouve ton équipage. Traverse l'océan." %}</h1>
+    <p class="mt-4 text-lg text-teal-50/95">
+      {% trans "Skippers avec bateau, équipiers sans bateau : annonces géolocalisées par semaine, messagerie et avis après navigation." %}
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="{% url 'listings:search' %}" class="rounded-full bg-white px-6 py-3 font-bold text-ocean shadow-lg hover:bg-sand">{% trans "Voir les annonces" %}</a>
+      <a href="{% url 'account_signup' %}" class="rounded-full border-2 border-white/50 px-6 py-3 font-bold hover:bg-white/10">{% trans "Créer un compte" %}</a>
+    </div>
+  </div>
+  <div class="absolute -bottom-6 -right-6 h-40 w-40 rounded-full bg-sun/20 blur-2xl" aria-hidden="true"></div>
+</section>
+
+<form method="get" action="{% url 'listings:search' %}" class="card -mt-8 relative z-20 mx-auto max-w-4xl border-lagoon/20 shadow-lift">
+  <p class="font-display text-lg font-semibold text-ocean">{% trans "Où veux-tu naviguer ?" %} 🌊</p>
+  <div class="mt-4 grid gap-3 sm:grid-cols-3">
+    <div class="sm:col-span-1">
+      <label class="text-xs font-bold text-ocean/70">{% trans "Départ" %}</label>
+      <select name="departure_port" class="input mt-1">
+        <option value="">{% trans "— Tous —" %}</option>
+        {% for port in ports %}
+          <option value="{{ port.pk }}">{{ port.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label class="text-xs font-bold text-ocean/70">{% trans "Programme" %}</label>
+      <select name="programme_type" class="input mt-1">
+        <option value="">{% trans "Tous" %}</option>
+        <option value="transatlantic">{% trans "Transatlantique" %}</option>
+        <option value="transpacific">{% trans "Transpacifique" %}</option>
+        <option value="mediterranean">{% trans "Méditerranée" %}</option>
+      </select>
+    </div>
+    <div>
+      <label class="text-xs font-bold text-ocean/70">{% trans "Année" %}</label>
+      <input type="number" name="year" class="input mt-1" placeholder="2026" min="2024" max="2035">
+    </div>
+  </div>
+  <button type="submit" class="btn-primary mt-4">{% trans "Rechercher" %}</button>
+</form>
+
+<section class="mt-16">
+  <h2 class="section-title text-center">{% trans "Comment ça marche" %}</h2>
+  <div class="mt-8 grid gap-6 md:grid-cols-3">
+    <article class="card text-center">
+      <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-lagoon-pale font-display text-lg font-bold text-lagoon">1</span>
+      <h3 class="mt-3 font-display font-semibold text-ocean">{% trans "Trouve ta route" %}</h3>
+      <p class="mt-2 text-sm text-slate-600">{% trans "Filtre par escale, programme et semaines ISO." %}</p>
+    </article>
+    <article class="card text-center">
+      <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sun-pale font-display text-lg font-bold text-coral">2</span>
+      <h3 class="mt-3 font-display font-semibold text-ocean">{% trans "Échange avec le skipper" %}</h3>
+      <p class="mt-2 text-sm text-slate-600">{% trans "Messagerie intégrée pour préparer l'équipage." %}</p>
+    </article>
+    <article class="card text-center">
+      <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-lagoon-pale font-display text-lg font-bold text-lagoon">3</span>
+      <h3 class="mt-3 font-display font-semibold text-ocean">{% trans "Largue les amarres" %}</h3>
+      <p class="mt-2 text-sm text-slate-600">{% trans "Avis croisés après la traversée pour la confiance." %}</p>
+    </article>
   </div>
 </section>
 
-<section class="mt-12 grid gap-8 md:grid-cols-3">
-  <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-    <h2 class="text-lg font-semibold text-sky-800">{% trans "Confiance" %}</h2>
-    <p class="mt-2 text-slate-600">{% trans "Avis croisés après chaque traversée confirmée, identité vérifiable." %}</p>
-  </article>
-  <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-    <h2 class="text-lg font-semibold text-sky-800">{% trans "Pertinence" %}</h2>
-    <p class="mt-2 text-slate-600">{% trans "Recherche par route, escale et semaine ISO — fenêtres météo réelles." %}</p>
-  </article>
-  <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-    <h2 class="text-lg font-semibold text-sky-800">{% trans "Communauté" %}</h2>
-    <p class="mt-2 text-slate-600">{% trans "Transatlantique, Pacifique, Méditerranée : une place de marché dédiée au long cours." %}</p>
-  </article>
+<section class="mt-16">
+  <h2 class="section-title">{% trans "Routes populaires" %}</h2>
+  <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {% for s in season_shortcuts %}
+      <a href="{% url 'listings:search' %}?programme_type={{ s.key }}" class="card block transition hover:-translate-y-0.5 hover:shadow-lift">
+        <span class="badge-lagoon">{{ s.label }}</span>
+        <p class="mt-2 text-sm text-slate-600">S{{ s.week_from }}–S{{ s.week_to }}</p>
+      </a>
+    {% endfor %}
+    {% for route in route_pages %}
+      <a href="{% url 'listings:route_page' route.slug %}" class="card block hover:-translate-y-0.5 hover:shadow-lift">
+        <span class="badge-coral">{{ route.title }}</span>
+        <p class="mt-2 text-sm text-slate-600">{{ route.meta_description|truncatewords:12 }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="mt-16 rounded-4xl bg-sand-dark p-8">
+  <h2 class="section-title">{% trans "Tu navigues en confiance" %}</h2>
+  <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+    <li class="flex gap-2 text-sm"><span class="text-lagoon">✓</span> {% trans "Avis croisés après chaque traversée confirmée" %}</li>
+    <li class="flex gap-2 text-sm"><span class="text-lagoon">✓</span> {% trans "Identité vérifiable (Crew Pass)" %}</li>
+    <li class="flex gap-2 text-sm"><span class="text-lagoon">✓</span> {% trans "Signalement depuis la messagerie" %}</li>
+    <li class="flex gap-2 text-sm"><span class="text-lagoon">✓</span> {% trans "Participation aux frais : transparence sur les annonces" %}</li>
+  </ul>
+  <a href="{% url 'listings:faq' %}" class="btn-secondary mt-6 inline-flex">{% trans "FAQ & sécurité" %}</a>
 </section>
 {% endblock %}

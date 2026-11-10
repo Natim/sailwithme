@@ -22,7 +22,7 @@
               class="h-24 w-24 shrink-0 rounded-full border-2 border-white object-cover shadow-md ring-1 ring-slate-200"
             >
             <div class="min-w-0 flex-1">
-              <p class="text-sm text-slate-600">{% trans "Photo enregistrée sur votre profil." %}</p>
+              <p class="text-sm text-slate-600">{% trans "Photo enregistrée sur ton profil." %}</p>
               <label class="mt-2 flex items-center gap-2 text-sm text-slate-700">
                 <input type="checkbox" name="photo-clear" id="id_photo-clear" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
                 {% trans "Supprimer la photo" %}
@@ -32,7 +32,7 @@
             <div class="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border border-dashed border-slate-300 bg-white text-xs text-slate-400">
               {% trans "Aucune" %}
             </div>
-            <p class="text-sm text-slate-500">{% trans "Ajoutez une photo pour personnaliser votre profil public." %}</p>
+            <p class="text-sm text-slate-500">{% trans "Ajoute une photo pour personnaliser ton profil public." %}</p>
           {% endif %}
         </div>
         <input
@@ -45,7 +45,7 @@
         {% for error in form.photo.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
       </div>
     </div>
-    <button type="submit" class="mt-6 w-full rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700 sm:w-auto">
+    <button type="submit" class="btn-primary mt-6 w-full sm:w-auto">
       {% trans "Enregistrer" %}
     </button>
 {% include "profiles/partials/section_shell_end.html" %}

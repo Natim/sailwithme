@@ -2,6 +2,10 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="text-2xl font-bold">{% trans "Merci !" %}</h1>
-<p><a href="{% url 'home' %}" class="text-sky-700">{% trans "Retour à l'accueil" %}</a></p>
+<div class="card mx-auto max-w-md border-sun/30 bg-gradient-to-br from-sand to-sun-pale text-center">
+  <p class="text-4xl">🎉</p>
+  <h1 class="font-display mt-4 text-2xl font-bold text-ocean">{% trans "Merci !" %}</h1>
+  <p class="mt-2 text-slate-600">{% trans "Ton abonnement est actif — à toi de larguer les amarres." %}</p>
+  <a href="{% url 'listings:search' %}" class="btn-primary mt-6 inline-flex">{% trans "Voir les annonces" %}</a>
+</div>
 {% endblock %}

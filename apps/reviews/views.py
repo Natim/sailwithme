@@ -18,10 +18,10 @@ def _user_on_voyage(voyage: Voyage, user) -> bool:
 def write_review(request, voyage_id, subject_id):
     voyage = get_object_or_404(Voyage, pk=voyage_id, reviews_open=True)
     if not _user_on_voyage(voyage, request.user):
-        messages.error(request, "Vous n'avez pas participé à ce voyage.")
+        messages.error(request, "Tu n'as pas participé à ce voyage.")
         return redirect("profiles:detail", pk=subject_id)
     if request.user.id == subject_id:
-        messages.error(request, "Vous ne pouvez pas vous évaluer vous-même.")
+        messages.error(request, "Tu ne peux pas t'évaluer toi-même.")
         return redirect("profiles:detail", pk=subject_id)
     if not _user_on_voyage(voyage, voyage.skipper if subject_id == voyage.skipper_id else None):
         pass
@@ -36,7 +36,7 @@ def write_review(request, voyage_id, subject_id):
         subject_id=subject_id,
     ).first()
     if existing:
-        messages.info(request, "Vous avez déjà laissé un avis pour ce voyage.")
+        messages.info(request, "Tu as déjà laissé un avis pour ce voyage.")
         return redirect("profiles:detail", pk=subject_id)
 
     if request.method == "POST":
@@ -48,7 +48,7 @@ def write_review(request, voyage_id, subject_id):
             review.subject_id = subject_id
             review.save()
             review.try_publish()
-            messages.success(request, "Merci pour votre avis.")
+            messages.success(request, "Merci pour ton avis.")
             return redirect("profiles:detail", pk=subject_id)
     else:
         form = ReviewForm()

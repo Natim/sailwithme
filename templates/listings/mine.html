@@ -2,13 +2,18 @@
 {% load i18n %}
 
 {% block content %}
-<div class="flex justify-between mb-6">
-  <h1 class="text-2xl font-bold">{% trans "Mes annonces" %}</h1>
-  <a href="{% url 'listings:create' %}" class="rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Créer" %}</a>
+<div class="flex flex-wrap items-center justify-between gap-4">
+  <h1 class="font-display text-2xl font-bold text-ocean">{% trans "Mes annonces" %}</h1>
+  <a href="{% url 'listings:create' %}" class="btn-coral">{% trans "Créer" %}</a>
 </div>
-<ul class="space-y-2">
+<ul class="mt-6 space-y-3">
   {% for listing in object_list %}
-    <li><a href="{% url 'listings:detail' listing.pk %}" class="text-sky-700">{{ listing.title }}</a> ({{ listing.get_status_display }})</li>
+    <li class="card flex flex-wrap items-center justify-between gap-2">
+      <a href="{% url 'listings:detail' listing.pk %}" class="font-display font-semibold text-ocean hover:text-lagoon">{{ listing.title }}</a>
+      <span class="{% if listing.status == 'published' %}badge-lagoon{% else %}chip{% endif %}">{{ listing.get_status_display }}</span>
+    </li>
+  {% empty %}
+    <li class="card border-dashed text-center text-slate-500">{% trans "Tu n'as pas encore publié d'annonce." %}</li>
   {% endfor %}
 </ul>
 {% endblock %}

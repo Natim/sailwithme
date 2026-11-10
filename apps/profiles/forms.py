@@ -1,12 +1,10 @@
 from django import forms
 
+from apps.core.forms_ui import INPUT_CLASS
+
 from .models import Profile
 
-INPUT_CLASS = (
-    "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 "
-    "shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-)
-CHECKBOX_CLASS = "rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+CHECKBOX_CLASS = "rounded border-slate-300 text-teal-600 focus:ring-teal-500"
 
 CERTIFICATION_CHOICES = [
     ("permis_mer", "Permis mer / Yachtmaster"),
@@ -38,7 +36,7 @@ class ProfileBasicsForm(forms.ModelForm):
         model = Profile
         fields = ["role", "bio", "nationality", "home_port", "skill_level", "availability_notes"]
         widgets = {
-            "bio": forms.Textarea(attrs={"rows": 4, "class": INPUT_CLASS, "placeholder": "Quelques mots sur vous…"}),
+            "bio": forms.Textarea(attrs={"rows": 4, "class": INPUT_CLASS, "placeholder": "Quelques mots sur toi…"}),
             "role": forms.Select(attrs={"class": INPUT_CLASS}),
             "nationality": forms.TextInput(attrs={"class": INPUT_CLASS, "placeholder": "France"}),
             "home_port": forms.TextInput(attrs={"class": INPUT_CLASS, "placeholder": "Lorient"}),

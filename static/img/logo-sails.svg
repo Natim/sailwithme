@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Sails with Me">
+  <circle cx="24" cy="24" r="23" fill="#0d9488"/>
+  <path fill="#fff" d="M14 32 L24 10 L34 32 Z" opacity="0.95"/>
+  <path fill="#fbbf24" d="M24 10 L34 32 L24 28 Z"/>
+  <path fill="#0c4a6e" d="M8 36 Q24 30 40 36 L40 40 L8 40 Z"/>
+</svg>

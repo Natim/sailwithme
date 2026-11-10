@@ -2,30 +2,32 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="text-2xl font-bold mb-8">{% trans "Tarifs" %}</h1>
-<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-  <div class="rounded-xl border bg-white p-6 shadow-sm">
-    <h2 class="font-bold">{% trans "Skipper" %}</h2>
-    <p class="text-3xl font-bold mt-2">0 €</p>
-    <p class="text-sm text-slate-600 mt-2">{% trans "Annonces et candidatures illimitées." %}</p>
-    <a href="{% url 'billing:checkout' 'skipper_plus' %}" class="mt-4 inline-block text-sm text-sky-700">Skipper+ 5 €/{% trans "mois" %}</a>
+<h1 class="font-display text-3xl font-bold text-ocean">{% trans "Tarifs" %}</h1>
+<p class="mt-2 text-slate-600">{% trans "Pas de commission sur la participation aux frais de bord." %}</p>
+<div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+  <div class="card">
+    <h2 class="font-display font-semibold text-ocean">{% trans "Skipper" %}</h2>
+    <p class="mt-2 font-display text-3xl font-bold text-lagoon">0 €</p>
+    <p class="mt-2 text-sm text-slate-600">{% trans "Annonces et candidatures illimitées." %}</p>
+    <a href="{% url 'billing:checkout' 'skipper_plus' %}" class="mt-4 inline-block text-sm font-semibold text-lagoon">Skipper+ 5 €/{% trans "mois" %}</a>
   </div>
-  <div class="rounded-xl border-2 border-sky-500 bg-white p-6 shadow-sm">
-    <h2 class="font-bold">Crew Pass</h2>
-    <p class="text-3xl font-bold mt-2">29 €</p>
-    <p class="text-sm text-slate-600">{% trans "Une saison — postuler, alertes, annuaire." %}</p>
-    <a href="{% url 'billing:checkout' 'crew_season' %}" class="mt-4 inline-block rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Activer" %}</a>
+  <div class="card relative border-2 border-sun shadow-lift ring-2 ring-sun/30">
+    <span class="absolute -top-3 right-4 rounded-full bg-sun px-3 py-0.5 text-xs font-bold text-ocean-deep">⭐ {% trans "Populaire" %}</span>
+    <h2 class="font-display font-semibold text-ocean">Crew Pass</h2>
+    <p class="mt-2 font-display text-3xl font-bold text-coral">29 €</p>
+    <p class="mt-2 text-sm text-slate-600">{% trans "Une saison — postule, alertes, annuaire." %}</p>
+    <a href="{% url 'billing:checkout' 'crew_season' %}" class="btn-primary mt-4 inline-flex w-full justify-center">{% trans "Activer" %}</a>
   </div>
-  <div class="rounded-xl border bg-white p-6 shadow-sm">
-    <h2 class="font-bold">Crew Pass {% trans "à vie" %}</h2>
-    <p class="text-3xl font-bold mt-2">79 €</p>
-    <a href="{% url 'billing:checkout' 'crew_lifetime' %}" class="mt-4 inline-block rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Lifetime" %}</a>
+  <div class="card">
+    <h2 class="font-display font-semibold text-ocean">Crew Pass {% trans "à vie" %}</h2>
+    <p class="mt-2 font-display text-3xl font-bold text-lagoon">79 €</p>
+    <a href="{% url 'billing:checkout' 'crew_lifetime' %}" class="btn-secondary mt-4 inline-flex w-full justify-center">{% trans "Lifetime" %}</a>
   </div>
-  <div class="rounded-xl border bg-white p-6 shadow-sm">
-    <h2 class="font-bold">{% trans "Identité vérifiée" %}</h2>
-    <p class="text-3xl font-bold mt-2">5 €</p>
-    <a href="{% url 'billing:checkout' 'identity' %}" class="mt-4 inline-block text-sky-700 text-sm">{% trans "Vérifier" %}</a>
+  <div class="card">
+    <h2 class="font-display font-semibold text-ocean">{% trans "Identité vérifiée" %}</h2>
+    <p class="mt-2 font-display text-3xl font-bold text-lagoon">5 €</p>
+    <a href="{% url 'billing:checkout' 'identity' %}" class="btn-ghost mt-4">{% trans "Vérifier" %}</a>
   </div>
 </div>
-<p class="mt-8 text-sm text-slate-600 max-w-2xl">{% trans "Sans commission sur la participation aux frais de bord. Les montants partagés à bord doivent rester non commerciaux." %}</p>
+<p class="mt-8 max-w-2xl text-sm text-slate-600">{% trans "Les montants partagés à bord doivent rester non commerciaux." %}</p>
 {% endblock %}

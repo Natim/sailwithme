@@ -4,15 +4,21 @@
 {% block title %}{% trans "Annuaire équipiers" %}{% endblock %}
 
 {% block content %}
-<h1 class="text-2xl font-bold mb-6">{% trans "Annuaire des équipiers" %}</h1>
-<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+<h1 class="font-display text-3xl font-bold text-ocean">{% trans "Annuaire des équipiers" %}</h1>
+<p class="mt-2 text-slate-600">{% trans "Profils visibles (Crew Pass)." %}</p>
+<div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
   {% for profile in object_list %}
-    <a href="{% url 'profiles:detail' profile.user_id %}" class="rounded-lg border bg-white p-4 shadow-sm hover:border-sky-300">
-      <p class="font-semibold">{{ profile.user.email }}</p>
-      <p class="text-sm text-slate-600">{{ profile.get_skill_level_display }} · {{ profile.nautical_miles }} mn</p>
+    <a href="{% url 'profiles:detail' profile.user_id %}" class="card flex items-center gap-3 transition hover:-translate-y-0.5 hover:shadow-lift">
+      {% if profile.photo %}
+        <img src="{{ profile.photo.url }}" alt="" class="h-14 w-14 rounded-full object-cover">
+      {% endif %}
+      <div>
+        <p class="font-semibold text-ocean">{{ profile.user.get_full_name|default:profile.user.email }}</p>
+        <p class="text-sm text-slate-600">{{ profile.get_skill_level_display }} · {{ profile.nautical_miles }} mn</p>
+      </div>
     </a>
   {% empty %}
-    <p>{% trans "Aucun profil visible." %}</p>
+    <p class="text-slate-500">{% trans "Aucun profil visible." %}</p>
   {% endfor %}
 </div>
 {% endblock %}

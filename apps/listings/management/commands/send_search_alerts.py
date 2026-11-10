@@ -48,7 +48,7 @@ class Command(BaseCommand):
             if matches:
                 body = "\n".join(f"- {listing.title}: {listing.get_absolute_url()}" for listing in matches)
                 send_mail(
-                    subject="Sails with Me — nouvelles annonces pour votre alerte",
+                    subject="Sails with Me — nouvelles annonces pour ton alerte",
                     message=body,
                     from_email=None,
                     recipient_list=[alert.user.email],

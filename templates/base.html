@@ -4,42 +4,105 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{% static 'img/logo-sails.svg' %}" type="image/svg+xml">
   <title>{% block title %}{{ SITE_NAME }}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            lagoon: { DEFAULT: '#0d9488', light: '#14b8a6', pale: '#ccfbf1' },
+            ocean: { DEFAULT: '#0c4a6e', deep: '#082f49' },
+            coral: { DEFAULT: '#f97316', hover: '#ea580c' },
+            sun: { DEFAULT: '#fbbf24', pale: '#fef3c7' },
+            sand: { DEFAULT: '#fffbeb', dark: '#fef3c7' },
+          },
+          fontFamily: {
+            display: ['Fredoka', 'system-ui', 'sans-serif'],
+            sans: ['Nunito', 'system-ui', 'sans-serif'],
+          },
+          borderRadius: { '4xl': '2rem' },
+          boxShadow: {
+            soft: '0 4px 24px rgba(12, 74, 110, 0.08)',
+            lift: '0 8px 30px rgba(13, 148, 136, 0.25)',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="{% static 'css/theme.css' %}">
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   <script defer src="https://unpkg.com/alpinejs@3.14.8/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   {% block extra_head %}{% endblock %}
 </head>
-<body class="min-h-full bg-slate-50 text-slate-900">
-  <header class="border-b border-slate-200 bg-white">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
-    <a href="{% url 'home' %}" class="text-xl font-bold text-sky-700">{{ SITE_NAME }}</a>
-    <nav class="flex flex-wrap items-center gap-3 text-sm font-medium">
-      <a href="{% url 'listings:search' %}" class="hover:text-sky-700">{% trans "Annonces" %}</a>
-      {% if user.is_authenticated %}
-        <a href="{% url 'profiles:me' %}" class="hover:text-sky-700">{% trans "Mon profil" %}</a>
-        <a href="{% url 'listings:mine' %}" class="hover:text-sky-700">{% trans "Mes annonces" %}</a>
-        <a href="{% url 'messaging:inbox' %}" class="relative hover:text-sky-700">
-          {% trans "Messages" %}
-          {% if unread_message_count %}
-            <span id="nav-unread-badge" class="ml-1 rounded-full bg-red-500 px-1.5 text-xs text-white">{{ unread_message_count }}</span>
-          {% endif %}
-        </a>
-        <a href="{% url 'account_logout' %}" class="hover:text-sky-700">{% trans "Déconnexion" %}</a>
-      {% else %}
-        <a href="{% url 'account_login' %}" class="hover:text-sky-700">{% trans "Connexion" %}</a>
-        <a href="{% url 'account_signup' %}" class="rounded-lg bg-sky-600 px-3 py-1.5 text-white hover:bg-sky-700">{% trans "Inscription" %}</a>
-      {% endif %}
-    </nav>
-  </div>
+<body class="min-h-full bg-sand font-sans text-ocean-deep antialiased">
+  <header class="sticky top-0 z-50 border-b border-lagoon/10 bg-white/90 backdrop-blur-md shadow-soft" x-data="{ mobileOpen: false }">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <a href="{% url 'home' %}" class="flex items-center gap-2 font-display text-lg font-semibold text-ocean">
+        <img src="{% static 'img/logo-sails.svg' %}" alt="" class="h-9 w-9" width="36" height="36">
+        {{ SITE_NAME }}
+      </a>
+
+      <nav class="hidden items-center gap-1 md:flex">
+        <a href="{% url 'listings:search' %}" class="btn-ghost">{% trans "Annonces" %}</a>
+        <a href="{% url 'profiles:directory' %}" class="btn-ghost">{% trans "Équipiers" %}</a>
+        <a href="{% url 'listings:faq' %}" class="btn-ghost">{% trans "FAQ" %}</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'messaging:inbox' %}" class="btn-ghost relative">
+            {% trans "Messages" %}
+            {% if unread_message_count %}
+              <span class="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-coral px-1 text-xs font-bold text-white">{{ unread_message_count }}</span>
+            {% endif %}
+          </a>
+          <a href="{% url 'listings:mine' %}" class="btn-ghost">{% trans "Mes annonces" %}</a>
+          <a href="{% url 'listings:create' %}" class="btn-coral ml-1">{% trans "Publier" %}</a>
+          <a href="{% url 'profiles:me' %}" class="ml-2 flex items-center gap-2 rounded-full border border-lagoon/20 bg-sand py-1 pl-1 pr-3 text-sm font-semibold text-ocean hover:bg-lagoon-pale/50">
+            {% if nav_profile_photo_url %}
+              <img src="{{ nav_profile_photo_url }}" alt="" class="h-8 w-8 rounded-full object-cover">
+            {% else %}
+              <span class="flex h-8 w-8 items-center justify-center rounded-full bg-lagoon text-xs text-white">{% trans "Toi" %}</span>
+            {% endif %}
+            {% trans "Profil" %}
+          </a>
+        {% else %}
+          <a href="{% url 'account_login' %}" class="btn-ghost">{% trans "Connexion" %}</a>
+          <a href="{% url 'account_signup' %}" class="btn-primary ml-1">{% trans "Inscription" %}</a>
+        {% endif %}
+      </nav>
+
+      <button type="button" class="rounded-lg p-2 text-ocean md:hidden" @click="mobileOpen = !mobileOpen" aria-label="Menu">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div x-show="mobileOpen" x-cloak class="border-t border-lagoon/10 bg-white px-4 py-3 md:hidden">
+      <div class="flex flex-col gap-2 text-sm font-semibold">
+        <a href="{% url 'listings:search' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Annonces" %}</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'listings:create' %}" class="btn-coral text-center">{% trans "Publier une annonce" %}</a>
+          <a href="{% url 'profiles:me' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Mon profil" %}</a>
+          <a href="{% url 'messaging:inbox' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Messages" %}</a>
+          <a href="{% url 'account_logout' %}" class="rounded-lg px-3 py-2 text-coral">{% trans "Déconnexion" %}</a>
+        {% else %}
+          <a href="{% url 'account_login' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Connexion" %}</a>
+          <a href="{% url 'account_signup' %}" class="btn-primary text-center">{% trans "Inscription" %}</a>
+        {% endif %}
+      </div>
+    </div>
   </header>
 
   {% if messages %}
-  <div class="mx-auto max-w-6xl px-4 pt-4">
+  <div class="mx-auto max-w-6xl space-y-2 px-4 pt-4">
     {% for message in messages %}
-      <div class="mb-2 rounded-lg border px-4 py-2 text-sm {% if message.tags == 'error' %}border-red-200 bg-red-50{% else %}border-sky-200 bg-sky-50{% endif %}">
+      <div class="px-4 py-3 text-sm font-medium
+        {% if message.tags == 'error' %}toast-error
+        {% elif message.tags == 'success' %}toast-success
+        {% else %}toast-info{% endif %}">
         {{ message }}
       </div>
     {% endfor %}
@@ -50,33 +113,45 @@
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="mt-12 border-t border-slate-200 bg-white py-8 text-center text-sm text-slate-600">
-    <p>{% trans "Trouvez votre équipage. Traversez l'océan." %}</p>
-    <p class="mt-2">
-      <a href="{% url 'billing:pricing' %}" class="text-sky-700">{% trans "Tarifs" %}</a> ·
-      <a href="{% url 'listings:faq' %}" class="text-sky-700">{% trans "FAQ / Sécurité" %}</a> ·
-      <a href="{% url 'cgu' %}" class="text-sky-700">{% trans "CGU" %}</a>
-    </p>
-    <form action="{% url 'set_language' %}" method="post" class="mt-3 flex justify-center gap-2 text-xs">
-      {% csrf_token %}
-      <span class="text-slate-500">{% trans "Langue" %} :</span>
-      {% get_current_language as CURRENT_LANG %}
-      {% get_available_languages as LANGUAGES %}
-      {% for lang_code, lang_name in LANGUAGES %}
-        <button
-          type="submit"
-          name="language"
-          value="{{ lang_code }}"
-          class="{% if lang_code == CURRENT_LANG %}font-semibold text-sky-800{% else %}text-sky-600 hover:underline{% endif %}"
-        >{{ lang_name }}</button>
-        {% if not forloop.last %}<span class="text-slate-300">·</span>{% endif %}
-      {% endfor %}
-      <input type="hidden" name="next" value="{{ request.get_full_path }}">
-    </form>
+  <div class="wave-separator mt-12" aria-hidden="true"></div>
+  <footer class="bg-ocean-deep px-4 pb-10 pt-4 text-sand">
+    <div class="mx-auto grid max-w-6xl gap-8 text-sm sm:grid-cols-3">
+      <div>
+        <p class="font-display text-lg font-semibold text-white">{{ SITE_NAME }}</p>
+        <p class="mt-2 text-teal-100/90">{% trans "Trouve ton équipage. Traverse l'océan." %}</p>
+      </div>
+      <div>
+        <p class="font-semibold text-sun">{% trans "Produit" %}</p>
+        <ul class="mt-2 space-y-1 text-teal-100/90">
+          <li><a href="{% url 'listings:search' %}" class="hover:text-white">{% trans "Annonces" %}</a></li>
+          <li><a href="{% url 'billing:pricing' %}" class="hover:text-white">{% trans "Tarifs" %}</a></li>
+          <li><a href="{% url 'listings:faq' %}" class="hover:text-white">{% trans "FAQ / Sécurité" %}</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-semibold text-sun">{% trans "Légal" %}</p>
+        <ul class="mt-2 space-y-1 text-teal-100/90">
+          <li><a href="{% url 'cgu' %}" class="hover:text-white">{% trans "CGU" %}</a></li>
+        </ul>
+        <form action="{% url 'set_language' %}" method="post" class="mt-4 flex flex-wrap gap-2">
+          {% csrf_token %}
+          {% get_current_language as CURRENT_LANG %}
+          {% get_available_languages as LANGUAGES %}
+          {% for lang_code, lang_name in LANGUAGES %}
+            <button type="submit" name="language" value="{{ lang_code }}"
+              class="rounded-full px-2 py-0.5 text-xs {% if lang_code == CURRENT_LANG %}bg-lagoon text-white{% else %}bg-ocean text-teal-100 hover:bg-teal-800{% endif %}">{{ lang_name }}</button>
+          {% endfor %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        </form>
+      </div>
+    </div>
+    <p class="mx-auto mt-8 max-w-6xl text-center text-xs text-teal-200/70">SAS CLOUDY · AGPL</p>
   </footer>
+
   {% block extra_js %}{% endblock %}
   {% if user.is_authenticated %}
   <div hx-get="{% url 'messaging:unread_count' %}" hx-trigger="every 30s" hx-swap="outerHTML" id="nav-unread-poll"></div>
   {% endif %}
+  <style>[x-cloak]{display:none!important}</style>
 </body>
 </html>

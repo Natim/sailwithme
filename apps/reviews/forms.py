@@ -2,8 +2,9 @@ from django import forms
 
 from .models import Review
 
-REVIEW_INPUT = "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
-REVIEW_RATING = "w-20 rounded-lg border border-slate-300 px-2 py-1 text-sm"
+from apps.core.forms_ui import INPUT_CLASS as REVIEW_INPUT
+
+REVIEW_RATING = "input w-20 max-w-full"
 
 
 class ReviewForm(forms.ModelForm):

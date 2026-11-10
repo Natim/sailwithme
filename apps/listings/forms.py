@@ -6,7 +6,7 @@ from apps.profiles.models import SkillLevel
 from .iso_weeks import SEASON_SHORTCUTS
 from .models import Listing, ListingApplication, ListingKind, SearchAlert
 
-LISTING_INPUT = "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+from apps.core.forms_ui import INPUT_CLASS as LISTING_INPUT
 
 
 class ListingForm(forms.ModelForm):
@@ -119,7 +119,7 @@ class ListingForm(forms.ModelForm):
             cleaned["arrival_point"] = self.instance.arrival_point
         if not cleaned.get("departure_point") or not cleaned.get("arrival_point"):
             raise forms.ValidationError(
-                "Cliquez sur la carte pour placer le départ puis l'arrivée avant de publier."
+                "Clique sur la carte pour placer le départ puis l'arrivée avant de publier."
             )
         return cleaned
 
@@ -138,34 +138,34 @@ class ListingSearchForm(forms.Form):
         label="Mots-clés",
         required=False,
         widget=forms.TextInput(
-            attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2", "placeholder": "Route, escale…"}
+            attrs={"class": LISTING_INPUT, "placeholder": "Route, escale…"}
         ),
     )
     kind = forms.ChoiceField(
         label="Type",
         required=False,
         choices=[("", "Tous")] + list(ListingKind.choices),
-        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     programme_type = forms.ChoiceField(
         label="Programme",
         required=False,
         choices=[("", "Tous")],
-        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     departure_port = forms.ModelChoiceField(
         label="Départ (escale)",
         queryset=None,
         required=False,
         empty_label="— Tous —",
-        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     arrival_port = forms.ModelChoiceField(
         label="Arrivée (escale)",
         queryset=None,
         required=False,
         empty_label="— Tous —",
-        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     departure_lat = forms.FloatField(required=False, widget=forms.HiddenInput())
     departure_lng = forms.FloatField(required=False, widget=forms.HiddenInput())
@@ -175,7 +175,7 @@ class ListingSearchForm(forms.Form):
         initial=150,
         min_value=10,
         max_value=2000,
-        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.NumberInput(attrs={"class": LISTING_INPUT}),
     )
     arrival_lat = forms.FloatField(required=False, widget=forms.HiddenInput())
     arrival_lng = forms.FloatField(required=False, widget=forms.HiddenInput())
@@ -185,28 +185,28 @@ class ListingSearchForm(forms.Form):
         initial=150,
         min_value=10,
         max_value=2000,
-        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.NumberInput(attrs={"class": LISTING_INPUT}),
     )
     year = forms.IntegerField(
         label="Année",
         required=False,
         min_value=2024,
         max_value=2035,
-        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.NumberInput(attrs={"class": LISTING_INPUT}),
     )
     week_from = forms.IntegerField(
         label="Semaine de",
         required=False,
         min_value=1,
         max_value=53,
-        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.NumberInput(attrs={"class": LISTING_INPUT}),
     )
     week_to = forms.IntegerField(
         label="Semaine à",
         required=False,
         min_value=1,
         max_value=53,
-        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.NumberInput(attrs={"class": LISTING_INPUT}),
     )
     sort = forms.ChoiceField(
         label="Tri",
@@ -216,7 +216,7 @@ class ListingSearchForm(forms.Form):
             ("relevance", "Pertinence"),
             ("date", "Date de départ"),
         ],
-        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+        widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
 
     def __init__(self, *args, **kwargs):
@@ -256,7 +256,7 @@ class ApplicationForm(forms.ModelForm):
                 attrs={
                     "rows": 4,
                     "class": LISTING_INPUT,
-                    "placeholder": "Présentez-vous en quelques lignes…",
+                    "placeholder": "Présente-toi en quelques lignes…",
                 }
             )
         }

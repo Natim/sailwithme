@@ -2,36 +2,32 @@
 {% load i18n %}
 
 {% block content %}
-<div class="grid md:grid-cols-3 gap-4 h-[70vh]">
-  <aside class="overflow-y-auto border rounded-xl bg-white p-2">
+<h1 class="font-display text-2xl font-bold text-ocean">{% trans "Messages" %}</h1>
+<div class="mt-6 grid h-[70vh] gap-4 md:grid-cols-3">
+  <aside class="card overflow-y-auto p-2">
     {% for part in participations %}
-      <a href="?c={{ part.conversation_id }}" class="block rounded px-3 py-2 hover:bg-sky-50 {% if active_conversation and active_conversation.pk == part.conversation_id %}bg-sky-100{% endif %}">
+      <a href="?c={{ part.conversation_id }}" class="block rounded-xl px-3 py-2 text-sm font-semibold transition {% if active_conversation and active_conversation.pk == part.conversation_id %}bg-lagoon-pale text-ocean{% else %}hover:bg-sand{% endif %}">
         {{ part.conversation.title|default:part.conversation.pk }}
       </a>
     {% empty %}
       <p class="p-2 text-sm text-slate-500">{% trans "Aucune conversation." %}</p>
     {% endfor %}
   </aside>
-  <section class="md:col-span-2 flex flex-col border rounded-xl bg-white">
+  <section class="card flex flex-col md:col-span-2 p-0 overflow-hidden">
     {% if active_conversation %}
-      <div
-        id="thread"
-        class="flex-1 overflow-y-auto p-4 space-y-2"
+      <div id="thread" class="flex-1 space-y-3 overflow-y-auto p-4"
         hx-get="{% url 'messaging:poll' active_conversation.pk %}?after={{ thread_messages.last.id|default:0 }}"
-        hx-trigger="every 5s"
-        hx-swap="beforeend"
-      >
-        {% for message in thread_messages %}
-          {% include "messaging/partials/message.html" %}
-        {% endfor %}
+        hx-trigger="every 5s" hx-swap="beforeend">
+        {% for message in thread_messages %}{% include "messaging/partials/message.html" %}{% endfor %}
       </div>
-      <form hx-post="{% url 'messaging:send' active_conversation.pk %}" hx-target="#thread" hx-swap="beforeend" class="border-t p-3 flex gap-2">
+      <form hx-post="{% url 'messaging:send' active_conversation.pk %}" hx-target="#thread" hx-swap="beforeend"
+        class="flex gap-2 border-t border-lagoon/10 bg-sand p-3">
         {% csrf_token %}
-        <input type="text" name="body" class="flex-1 rounded border p-2" placeholder="{% trans 'Votre message' %}" required>
-        <button type="submit" class="rounded bg-sky-600 px-4 text-white">{% trans "Envoyer" %}</button>
+        <input type="text" name="body" class="input flex-1" placeholder="{% trans 'Ton message…' %}" required>
+        <button type="submit" class="btn-coral shrink-0">{% trans "Envoyer" %}</button>
       </form>
     {% else %}
-      <p class="p-6 text-slate-500">{% trans "Sélectionnez une conversation." %}</p>
+      <p class="p-6 text-slate-500">{% trans "Sélectionne une conversation." %}</p>
     {% endif %}
   </section>
 </div>

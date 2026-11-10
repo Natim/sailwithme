@@ -1,8 +1,16 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
-<h1 class="text-3xl font-bold">{{ route_page.title }}</h1>
-<p class="mt-2 text-slate-600">{{ route_page.meta_description }}</p>
-<div class="mt-6 prose">{{ route_page.body|linebreaks }}</div>
-{% include "listings/partials/results.html" with results=listings %}
+<header class="rounded-4xl bg-gradient-to-r from-lagoon/20 to-sun-pale p-8">
+  <h1 class="font-display text-3xl font-bold text-ocean">{{ route_page.title }}</h1>
+  <p class="mt-2 text-slate-700">{{ route_page.meta_description }}</p>
+</header>
+{% if route_page.body %}
+<div class="card prose mt-6 max-w-none text-slate-700">{{ route_page.body|linebreaks }}</div>
+{% endif %}
+<section class="mt-8">
+  <h2 class="section-title">{% trans "Annonces sur cette route" %}</h2>
+  <div class="mt-4">{% include "listings/partials/results.html" with results=listings %}</div>
+</section>
 {% endblock %}

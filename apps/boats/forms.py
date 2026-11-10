@@ -2,7 +2,7 @@ from django import forms
 
 from .models import Boat, BoatPhoto
 
-BOAT_INPUT = "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+from apps.core.forms_ui import INPUT_CLASS as BOAT_INPUT
 
 EQUIPMENT_CHOICES = [
     ("watermaker", "Dessalinisateur"),

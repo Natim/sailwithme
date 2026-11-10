@@ -85,7 +85,7 @@ def listing_create(request):
 def listing_apply(request, pk):
     listing = get_object_or_404(Listing, pk=pk, status=ListingStatus.PUBLISHED)
     if listing.author_id == request.user.id:
-        messages.error(request, "Vous ne pouvez pas postuler à votre propre annonce.")
+        messages.error(request, "Tu ne peux pas postuler à ta propre annonce.")
         return redirect("listings:detail", pk=pk)
     if not user_can_initiate_contact(request.user) and listing.kind == ListingKind.CREW_WANTED:
         messages.error(request, "Un Crew Pass est requis pour postuler (voir Tarifs).")
@@ -98,7 +98,7 @@ def listing_apply(request, pk):
             defaults={"message": form.cleaned_data["message"]},
         )
         if not created:
-            messages.warning(request, "Vous avez déjà postulé.")
+            messages.warning(request, "Tu as déjà postulé.")
         else:
             messages.success(request, "Candidature envoyée.")
             from apps.messaging.services import start_conversation
