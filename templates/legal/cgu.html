@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Conditions générales d'utilisation" %} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<article class="mx-auto max-w-3xl space-y-8 rounded-xl border bg-white p-8 shadow-sm prose prose-slate">
+  <h1 class="text-3xl font-bold text-sky-900">{% trans "Conditions générales d'utilisation" %}</h1>
+  <p class="text-sm text-slate-500">{% trans "Dernière mise à jour" %} : {% now "Y-m-d" %}</p>
+
+  <section>
+    <h2>{% trans "Mentions légales" %}</h2>
+    <p>
+      {% blocktrans %}
+      Conformément à l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique,
+      les utilisateurs du service {{ SITE_NAME }} sont informés de l'identité des intervenants :
+      {% endblocktrans %}
+    </p>
+    <p>
+      {% blocktrans %}
+      Le site et l'application {{ SITE_NAME }} sont édités par la société <strong>SAS CLOUDY</strong>,
+      prestataire des services décrits dans les présentes conditions.
+      {% endblocktrans %}
+    </p>
+    <address class="not-italic text-sm leading-relaxed">
+      SAS CLOUDY<br>
+      22 rue du Temple de Blosne<br>
+      35136 Saint-Jacques-de-la-Lande — France<br>
+      SIRET : 920 374 477 00015 — TVA : FR13 920 374 477<br>
+      {% trans "Email" %} : contact@cloudy.fr
+    </address>
+    <p>
+      {% trans "Responsable de la publication" %} : SAS CLOUDY<br>
+      {% trans "Webmaster" %} : SAS CLOUDY
+    </p>
+  </section>
+
+  <section>
+    <h2>{% trans "Objet du service" %}</h2>
+    <p>
+      {% blocktrans %}
+      {{ SITE_NAME }} est une plateforme de mise en relation entre skippers et équipiers pour des navigations
+      de longue distance. SAS CLOUDY fournit un hébergement technique, des outils de recherche, de messagerie et
+      d'évaluation entre utilisateurs. SAS CLOUDY n'est pas armateur, transporteur maritime, agence de voyage
+      ni intermédiaire commercial pour le transport de passagers.
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section>
+    <h2>{% trans "Participation aux frais et réglementation" %}</h2>
+    <p>
+      {% blocktrans %}
+      Toute participation aux frais de bord annoncée sur la plateforme doit rester strictement non lucrative et
+      correspondre au partage réel des dépenses du bord (avitaillement, escales, etc.). Aucun enrichissement du
+      skipper ou de l'équipage au titre du transport ne doit en résulter. Les utilisateurs restent seuls responsables
+      du respect de la réglementation applicable (notamment transport maritime de passagers, assurance, permis et
+      qualifications). SAS CLOUDY ne contrôle pas les navigations et décline toute responsabilité en cas de manquement
+      réglementaire entre les parties.
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section>
+    <h2>{% trans "Comptes et contenus" %}</h2>
+    <ul>
+      <li>{% trans "L'utilisateur est responsable des informations publiées sur son profil, ses annonces et ses messages." %}</li>
+      <li>{% trans "SAS CLOUDY peut suspendre ou supprimer un compte en cas de fraude, harcèlement, contenu illicite ou violation des présentes conditions." %}</li>
+      <li>{% trans "Les avis publiés après navigation reflètent l'opinion des utilisateurs et n'engagent pas SAS CLOUDY." %}</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>{% trans "Offres payantes" %}</h2>
+    <p>
+      {% blocktrans %}
+      Les tarifs (Crew Pass, Skipper+, vérification d'identité) sont indiqués sur la page Tarifs.
+      Le paiement est traité par un prestataire tiers (Stripe). Les conditions de remboursement applicables
+      sont celles communiquées au moment de l'achat. SAS CLOUDY se réserve le droit de modifier ses tarifs
+      pour les souscriptions futures.
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section>
+    <h2>{% trans "Données personnelles" %}</h2>
+    <p>
+      {% blocktrans %}
+      Les données collectées sont nécessaires au fonctionnement du service (compte, profil, annonces, messagerie).
+      Pour toute demande relative à vos données, contactez SAS CLOUDY à contact@cloudy.fr.
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section>
+    <h2>{% trans "Limitation de responsabilité" %}</h2>
+    <p>
+      {% blocktrans %}
+      Le service est fourni « en l'état ». SAS CLOUDY ne garantit pas la conclusion d'un embarquement ni la sécurité
+      des navigations organisées entre utilisateurs. Chaque skipper et chaque équipier demeure seul responsable des
+      vérifications préalables (compétences, assurance, équipement, contrat d'embarquement).
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section>
+    <h2>{% trans "Propriété intellectuelle" %}</h2>
+    <p>
+      {% blocktrans %}
+      Le nom « Sails with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété
+      de SAS CLOUDY ou de ses ayants droit.
+      Le code source de l'application est publié sous la
+      <strong>GNU Affero General Public License version 3</strong> (voir fichier LICENSE du dépôt).
+      Cette licence ne couvre pas le nom « Sails with Me », les logos ni la charte graphique.
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section>
+    <h2>{% trans "Droit applicable" %}</h2>
+    <p>
+      {% blocktrans %}
+      Les présentes conditions sont soumises au droit français. En cas de litige, et à défaut de résolution amiable,
+      les tribunaux compétents du ressort de SAS CLOUDY seront seuls compétents, sauf disposition impérative contraire.
+      {% endblocktrans %}
+    </p>
+  </section>
+</article>
+{% endblock %}

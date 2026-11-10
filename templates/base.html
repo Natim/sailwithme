@@ -52,7 +52,11 @@
 
   <footer class="mt-12 border-t border-slate-200 bg-white py-8 text-center text-sm text-slate-600">
     <p>{% trans "Trouvez votre équipage. Traversez l'océan." %}</p>
-    <p class="mt-2"><a href="{% url 'billing:pricing' %}" class="text-sky-700">{% trans "Tarifs" %}</a> · <a href="{% url 'listings:faq' %}" class="text-sky-700">{% trans "FAQ / Sécurité" %}</a></p>
+    <p class="mt-2">
+      <a href="{% url 'billing:pricing' %}" class="text-sky-700">{% trans "Tarifs" %}</a> ·
+      <a href="{% url 'listings:faq' %}" class="text-sky-700">{% trans "FAQ / Sécurité" %}</a> ·
+      <a href="{% url 'cgu' %}" class="text-sky-700">{% trans "CGU" %}</a>
+    </p>
   </footer>
   {% block extra_js %}{% endblock %}
   {% if user.is_authenticated %}

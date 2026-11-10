@@ -20,3 +20,11 @@ python manage.py runserver
 ## Stack
 
 Django 5, PostGIS, HTMX, Tailwind (CDN), django-allauth, django-q2.
+
+## Licence
+
+Le code source est publié sous la **GNU Affero General Public License v3.0** ([LICENSE](LICENSE)). Copyright SAS CLOUDY.
+
+Si vous exploitez une version modifiée accessible sur le réseau, l’AGPL impose d’offrir aux utilisateurs le code source correspondant à cette version.
+
+L’AGPL ne couvre pas le nom **Sails with Me**, les logos ni la charte graphique du site, qui restent la propriété de SAS CLOUDY. Les conditions d’utilisation du service sont accessibles à l’URL `/legal/cgu/` du site déployé.
