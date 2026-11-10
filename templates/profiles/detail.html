@@ -28,6 +28,20 @@
       <div><dt class="font-bold text-ocean">{% trans "Port d'attache" %}</dt><dd>{{ profile.home_port|default:"—" }}</dd></div>
       <div><dt class="font-bold text-ocean">{% trans "Milles" %}</dt><dd>{{ profile.nautical_miles }}</dd></div>
       <div><dt class="font-bold text-ocean">{% trans "Traversées" %}</dt><dd>{{ profile.ocean_crossings }}</dd></div>
+      <div class="sm:col-span-2">
+        <dt class="font-bold text-ocean">{% trans "Compétences" %}</dt>
+        <dd class="mt-1">
+          {% if profile.skill_labels %}
+            <span class="flex flex-wrap gap-2">
+              {% for label in profile.skill_labels %}
+                <span class="chip">{{ label }}</span>
+              {% endfor %}
+            </span>
+          {% else %}
+            —
+          {% endif %}
+        </dd>
+      </div>
     </dl>
     {% if profile.languages %}<p class="mt-4 flex flex-wrap gap-2">{% for lang in profile.languages %}<span class="chip">{{ lang }}</span>{% endfor %}</p>{% endif %}
   </section>

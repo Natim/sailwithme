@@ -84,6 +84,12 @@ class Profile(UUIDModel):
             return full
         return f"Marin-{self.public_id.hex[:8]}"
 
+    def skill_labels(self):
+        from apps.profiles.forms import SKILL_CHOICES
+
+        labels = dict(SKILL_CHOICES)
+        return [labels.get(code, code) for code in (self.skills or []) if code]
+
     def completeness_score(self) -> int:
         fields = [
             self.bio,
