@@ -1,0 +1,27 @@
+{% load i18n %}
+<div>
+  <label class="block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  {% if field.field.widget.input_type == "checkbox" %}
+    <div class="mt-2 flex items-center gap-2">
+      <input
+        type="checkbox"
+        name="{{ field.html_name }}"
+        id="{{ field.id_for_label }}"
+        {% if field.value %}checked{% endif %}
+        class="h-4 w-4 rounded border-slate-300 text-sky-600"
+      >
+      <span class="text-sm text-slate-600">{{ field.help_text }}</span>
+    </div>
+  {% else %}
+    <input
+      type="{% if field.name == 'login' %}email{% else %}{{ field.field.widget.input_type|default:'text' }}{% endif %}"
+      name="{{ field.html_name }}"
+      id="{{ field.id_for_label }}"
+      {% if field.value != None and field.field.widget.input_type != "password" %}value="{{ field.value }}"{% endif %}
+      {% if field.field.required %}required{% endif %}
+      class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+      autocomplete="{% if field.name == 'login' %}username{% elif field.name == 'password' %}current-password{% elif 'password' in field.name %}new-password{% elif field.name == 'email' %}email{% endif %}"
+    >
+  {% endif %}
+  {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+</div>
