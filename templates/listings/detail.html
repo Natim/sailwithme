@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static profile_extras %}
 
 {% block content %}
 <div class="grid gap-8 lg:grid-cols-3">
@@ -22,7 +22,7 @@
         {% if listing.author.profile.photo %}
           <img src="{{ listing.author.profile.photo.url }}" alt="" class="h-14 w-14 rounded-full object-cover ring-2 ring-lagoon-pale">
         {% endif %}
-        <span class="font-semibold text-ocean">{{ listing.author.get_full_name|default:listing.author.email }}</span>
+        <span class="font-semibold text-ocean">{{ listing.author|public_name }}</span>
       </a>
       <p class="mt-1 text-sm text-slate-600">{{ listing.author.profile.get_skill_level_display }}</p>
     </div>
@@ -45,7 +45,7 @@
   <ul class="mt-4 space-y-3">
     {% for app in listing.applications.all %}
       <li class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-100 bg-sand/50 px-4 py-3">
-        <span class="text-sm font-medium">{{ app.applicant.email }} — {{ app.get_status_display }}</span>
+        <span class="text-sm font-medium">{{ app.applicant|public_name }} — {{ app.get_status_display }}</span>
         {% if app.status == 'pending' %}
           <span class="flex gap-2 text-sm">
             <a href="{% url 'listings:application_decide' app.pk 'accept' %}" class="font-semibold text-lagoon">{% trans "Accepter" %}</a>
@@ -63,14 +63,7 @@
 
 {% block extra_js %}
 {% include "includes/map_tile_config.html" %}
+{% if listing_route_json %}{{ listing_route_json|json_script:"listing-route-data" }}{% endif %}
 <script src="{% static 'js/map-basemap.js' %}"></script>
-<script>
-  const dep = [{{ listing.departure_point.y }}, {{ listing.departure_point.x }}];
-  const arr = [{{ listing.arrival_point.y }}, {{ listing.arrival_point.x }}];
-  const m = L.map('listing-detail-map', { scrollWheelZoom: false }).setView(dep, 4);
-  addSailsWithMeBasemap(m);
-  L.marker(dep).addTo(m); L.marker(arr).addTo(m);
-  L.polyline([dep, arr], { color: '#0d9488', weight: 3, dashArray: '6 8' }).addTo(m);
-  m.fitBounds([dep, arr], { padding: [20, 20] });
-</script>
+<script src="{% static 'js/listing-detail-map.js' %}"></script>
 {% endblock %}

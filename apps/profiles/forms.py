@@ -34,8 +34,11 @@ LANGUAGE_CHOICES = [
 class ProfileBasicsForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ["role", "bio", "nationality", "home_port", "skill_level", "availability_notes"]
+        fields = ["pseudo", "role", "bio", "nationality", "home_port", "skill_level", "availability_notes"]
         widgets = {
+            "pseudo": forms.TextInput(
+                attrs={"class": INPUT_CLASS, "placeholder": "Capitaine_Aurore", "maxlength": "32"}
+            ),
             "bio": forms.Textarea(attrs={"rows": 4, "class": INPUT_CLASS, "placeholder": "Quelques mots sur toi…"}),
             "role": forms.Select(attrs={"class": INPUT_CLASS}),
             "nationality": forms.TextInput(attrs={"class": INPUT_CLASS, "placeholder": "France"}),
@@ -48,12 +51,27 @@ class ProfileBasicsForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["pseudo"].label = "Pseudo public"
+        self.fields["pseudo"].help_text = "Affiché sur les annonces et avis. Laisse vide pour un identifiant Marin-xxxxxxxx."
         self.fields["role"].label = "Rôle"
         self.fields["bio"].label = "Présentation"
         self.fields["nationality"].label = "Nationalité"
         self.fields["home_port"].label = "Port d'attache"
         self.fields["skill_level"].label = "Niveau"
         self.fields["availability_notes"].label = "Disponibilités"
+
+    def clean_pseudo(self):
+        pseudo = (self.cleaned_data.get("pseudo") or "").strip()
+        if not pseudo:
+            return ""
+        if len(pseudo) < 2:
+            raise forms.ValidationError("Le pseudo doit contenir au moins 2 caractères.")
+        qs = Profile.objects.filter(pseudo__iexact=pseudo)
+        if self.instance.pk:
+            qs = qs.exclude(pk=self.instance.pk)
+        if qs.exists():
+            raise forms.ValidationError("Ce pseudo est déjà pris.")
+        return pseudo
 
 
 class ProfileExperienceForm(forms.ModelForm):

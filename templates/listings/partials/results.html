@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n profile_extras %}
 <ul class="space-y-4">
   {% for listing in results %}
     <li class="card transition hover:-translate-y-0.5 hover:shadow-lift">
@@ -19,7 +19,7 @@
           {% if listing.author.profile.photo %}
             <img src="{{ listing.author.profile.photo.url }}" alt="" class="h-10 w-10 rounded-full object-cover ring-2 ring-lagoon-pale">
           {% endif %}
-          <span>{{ listing.author.get_full_name|default:listing.author.email }}</span>
+          <span>{{ listing.author|public_name }}</span>
         </div>
       </div>
     </li>

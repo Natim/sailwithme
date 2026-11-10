@@ -57,6 +57,16 @@ class ListingDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        listing = self.object
+        dep = listing.departure_point
+        arr = listing.arrival_point
+        if dep and arr:
+            ctx["listing_route_json"] = json.dumps(
+                {
+                    "departure": [dep.y, dep.x],
+                    "arrival": [arr.y, arr.x],
+                }
+            )
         if self.request.user.is_authenticated:
             ctx["application_form"] = ApplicationForm()
         return ctx

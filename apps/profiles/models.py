@@ -37,6 +37,11 @@ class Profile(models.Model):
         related_name="profile",
     )
     public_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    pseudo = models.CharField(
+        max_length=32,
+        blank=True,
+        help_text="Nom affiché publiquement (annonces, avis, annuaire).",
+    )
     role = models.CharField(max_length=16, choices=ProfileRole.choices, default=ProfileRole.CREW)
     photo = models.ImageField(upload_to=profile_photo_upload_to, blank=True)
     bio = models.TextField(blank=True)
@@ -68,6 +73,14 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse("profiles:detail", kwargs={"pk": self.user_id})
+
+    def public_name(self) -> str:
+        if self.pseudo and self.pseudo.strip():
+            return self.pseudo.strip()
+        full = (self.user.get_full_name() or "").strip()
+        if full:
+            return full
+        return f"Marin-{self.public_id.hex[:8]}"
 
     def completeness_score(self) -> int:
         fields = [

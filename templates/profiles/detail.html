@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n profile_extras %}
 
-{% block title %}{{ profile.user.get_full_name|default:profile.user.email }}{% endblock %}
+{% block title %}{{ profile.public_name }}{% endblock %}
 
 {% block content %}
 <div class="overflow-hidden rounded-4xl bg-gradient-to-r from-lagoon to-ocean px-6 py-8 text-white">
@@ -12,7 +12,7 @@
       <span class="flex h-28 w-28 items-center justify-center rounded-full border-4 border-white bg-lagoon-light text-3xl font-bold">?</span>
     {% endif %}
     <div>
-      <h1 class="font-display text-3xl font-bold">{{ profile.user.get_full_name|default:profile.user.email }}</h1>
+      <h1 class="font-display text-3xl font-bold">{{ profile.public_name }}</h1>
       <p class="text-teal-50">{{ profile.get_role_display }} · {{ profile.get_skill_level_display }}</p>
       {% if profile.user.identity_verified %}<span class="mt-1 inline-block rounded-full bg-sun px-2 py-0.5 text-xs font-bold text-ocean-deep">{% trans "Identité vérifiée" %}</span>{% endif %}
     </div>
@@ -56,7 +56,7 @@
   <ul class="mt-4 space-y-4">
     {% for review in reviews %}
       <li class="border-b border-sand-dark pb-4 last:border-0">
-        <p class="font-semibold text-ocean">{{ review.rating_overall }}/5 — {{ review.author.email }}</p>
+        <p class="font-semibold text-ocean">{{ review.rating_overall }}/5 — {{ review.author|public_name }}</p>
         <p class="text-sm text-slate-700">{{ review.comment }}</p>
       </li>
     {% endfor %}
