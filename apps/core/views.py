@@ -18,6 +18,7 @@ class HomeView(TemplateView):
                     v["week_from"],
                     v["week_to"],
                     show_year=False,
+                    full_months=True,
                 ),
             }
             for k, v in SEASON_SHORTCUTS.items()

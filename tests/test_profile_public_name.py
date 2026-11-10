@@ -1,7 +1,6 @@
 import pytest
 
 from apps.accounts.models import User
-from apps.profiles.models import Profile
 from apps.profiles.templatetags.profile_extras import public_name
 
 

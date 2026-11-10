@@ -1,9 +1,9 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from .models import Review
-
 from apps.core.forms_ui import INPUT_CLASS as REVIEW_INPUT
+
+from .models import Review
 
 REVIEW_RATING = "input w-20 max-w-full"
 

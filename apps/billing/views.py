@@ -1,10 +1,9 @@
-
 from django.conf import settings
 from django.contrib import messages
-from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect, render
+from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
@@ -54,11 +53,7 @@ def checkout(request, plan):
                     "currency": "eur",
                     "unit_amount": price_map[plan],
                     "product_data": {"name": dict(MembershipPlan.choices)[plan]},
-                    **(
-                        {"recurring": {"interval": "month"}}
-                        if plan == MembershipPlan.SKIPPER_PLUS
-                        else {}
-                    ),
+                    **({"recurring": {"interval": "month"}} if plan == MembershipPlan.SKIPPER_PLUS else {}),
                 },
                 "quantity": 1,
             }
@@ -81,9 +76,7 @@ def stripe_webhook(request):
     payload = request.body
     sig = request.META.get("HTTP_STRIPE_SIGNATURE", "")
     try:
-        event = stripe.Webhook.construct_event(
-            payload, sig, settings.STRIPE_WEBHOOK_SECRET
-        )
+        event = stripe.Webhook.construct_event(payload, sig, settings.STRIPE_WEBHOOK_SECRET)
     except (ValueError, stripe.error.SignatureVerificationError):
         return HttpResponseBadRequest()
 

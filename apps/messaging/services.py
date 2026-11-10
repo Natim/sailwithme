@@ -19,11 +19,7 @@ def start_conversation(user_a, user_b, listing=None, voyage=None, first_message:
 
     conv = None
     if listing and not voyage:
-        conv = (
-            Conversation.objects.filter(listing=listing, is_group=False)
-            .prefetch_related("participants")
-            .first()
-        )
+        conv = Conversation.objects.filter(listing=listing, is_group=False).prefetch_related("participants").first()
         if conv:
             part_ids = set(conv.participants.values_list("user_id", flat=True))
             if user_a.id in part_ids and user_b.id in part_ids:

@@ -1,7 +1,7 @@
 from django.contrib import messages
-from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 
 from apps.listings.models import Voyage
 

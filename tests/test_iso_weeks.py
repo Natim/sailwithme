@@ -1,4 +1,3 @@
-
 from apps.listings.iso_weeks import (
     iso_week_range_to_dates,
     period_months_from_weeks,
@@ -28,3 +27,19 @@ def test_period_months_season_shortcut_style():
     label = period_months_from_weeks(2026, 44, 52, show_year=False)
     assert "2026" not in label
     assert "–" in label or label  # single month or range
+
+
+def test_popular_route_months_are_written_in_full():
+    from django.utils import translation
+
+    with translation.override("fr"):
+        label = period_months_from_weeks(2026, 44, 52, show_year=False, full_months=True)
+    assert label == "octobre–décembre"
+
+    with translation.override("en"):
+        label = period_months_from_weeks(2026, 44, 52, show_year=False, full_months=True)
+    assert label == "October–December"
+
+    with translation.override("fr"):
+        abbreviated = period_months_from_weeks(2026, 44, 52, show_year=False)
+    assert abbreviated != "octobre–décembre"

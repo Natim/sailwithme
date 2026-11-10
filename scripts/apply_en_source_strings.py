@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Replace French gettext msgids with English source strings (longest-first)."""
+
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]

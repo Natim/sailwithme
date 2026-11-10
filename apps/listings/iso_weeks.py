@@ -14,20 +14,27 @@ def iso_week_range_to_dates(year: int, week_from: int, week_to: int) -> tuple[da
     return date_from, date_to
 
 
-def weeks_overlap(
-    y1: int, wf1: int, wt1: int, y2: int, wf2: int, wt2: int
-) -> bool:
+def weeks_overlap(y1: int, wf1: int, wt1: int, y2: int, wf2: int, wt2: int) -> bool:
     a_start, a_end = iso_week_range_to_dates(y1, wf1, wt1)
     b_start, b_end = iso_week_range_to_dates(y2, wf2, wt2)
     return a_start <= b_end and b_start <= a_end
 
 
 def period_months_label(
-    date_from: date, date_to: date, *, show_year: bool = True
+    date_from: date,
+    date_to: date,
+    *,
+    show_year: bool = True,
+    full_months: bool = False,
 ) -> str:
-    """Human period e.g. « nov.–déc. 2026 » or « nov. 2026 – janv. 2027 » (locale-aware)."""
-    m_start = date_format(date_from, "M")
-    m_end = date_format(date_to, "M")
+    """Human period, locale-aware.
+
+    Abbreviated: « nov.–déc. 2026 » or « nov. 2026 – janv. 2027 ».
+    Full months (popular routes): « novembre–décembre ».
+    """
+    month_fmt = "F" if full_months else "M"
+    m_start = date_format(date_from, month_fmt)
+    m_end = date_format(date_to, month_fmt)
     y_start = date_from.year
     y_end = date_to.year
 
@@ -51,9 +58,10 @@ def period_months_from_weeks(
     week_to: int,
     *,
     show_year: bool = True,
+    full_months: bool = False,
 ) -> str:
     date_from, date_to = iso_week_range_to_dates(year, week_from, week_to)
-    return period_months_label(date_from, date_to, show_year=show_year)
+    return period_months_label(date_from, date_to, show_year=show_year, full_months=full_months)
 
 
 SEASON_SHORTCUTS = {

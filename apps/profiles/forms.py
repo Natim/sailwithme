@@ -2,6 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from apps.core.forms_ui import INPUT_CLASS
+from apps.core.language_choices import LANGUAGE_CHOICES
 
 from .models import Profile
 
@@ -23,8 +24,6 @@ SKILL_CHOICES = [
     ("photo", _("Photo / video")),
 ]
 
-from apps.core.language_choices import LANGUAGE_CHOICES
-
 
 class ProfileBasicsForm(forms.ModelForm):
     class Meta:
@@ -34,9 +33,7 @@ class ProfileBasicsForm(forms.ModelForm):
             "pseudo": forms.TextInput(
                 attrs={"class": INPUT_CLASS, "placeholder": "Capitaine_Aurore", "maxlength": "32"}
             ),
-            "bio": forms.Textarea(
-                attrs={"rows": 4, "class": INPUT_CLASS, "placeholder": _("A few words about you…")}
-            ),
+            "bio": forms.Textarea(attrs={"rows": 4, "class": INPUT_CLASS, "placeholder": _("A few words about you…")}),
             "role": forms.Select(attrs={"class": INPUT_CLASS}),
             "nationality": forms.TextInput(attrs={"class": INPUT_CLASS, "placeholder": "France"}),
             "home_port": forms.TextInput(attrs={"class": INPUT_CLASS, "placeholder": "Lorient"}),

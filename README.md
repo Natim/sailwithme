@@ -8,6 +8,7 @@ Plateforme pour mettre en relation skippers et équipiers sur des navigations au
 
 ```bash
 pip install -e ".[dev]"
+pre-commit install   # Ruff check + format on each commit (same as CI)
 cp .env.example .env
 docker compose up -d db redis
 python manage.py migrate

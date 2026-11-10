@@ -1,13 +1,13 @@
 import json
 
 from django.contrib import messages
-from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView, TemplateView
 
 from apps.billing.services import user_can_initiate_contact

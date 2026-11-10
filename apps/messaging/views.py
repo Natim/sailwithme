@@ -1,11 +1,11 @@
 import uuid
 
 from django.contrib import messages
-from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 from apps.billing.services import user_can_initiate_contact
 

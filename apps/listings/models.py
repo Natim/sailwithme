@@ -137,9 +137,7 @@ class Listing(UUIDModel):
 
     def save(self, *args, **kwargs):
         if self.year and self.week_from and self.week_to:
-            self.date_from, self.date_to = iso_week_range_to_dates(
-                self.year, self.week_from, self.week_to
-            )
+            self.date_from, self.date_to = iso_week_range_to_dates(self.year, self.week_from, self.week_to)
         super().save(*args, **kwargs)
 
     @property

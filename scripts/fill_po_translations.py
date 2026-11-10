@@ -14,9 +14,7 @@ from deep_translator import MyMemoryTranslator
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_PATH = ROOT / "locale" / ".translation_cache.json"
-FR_MSGID_TO_EN: dict[str, str] = json.loads(
-    (ROOT / "scripts" / "fr_msgid_to_en.json").read_text(encoding="utf-8")
-)
+FR_MSGID_TO_EN: dict[str, str] = json.loads((ROOT / "scripts" / "fr_msgid_to_en.json").read_text(encoding="utf-8"))
 
 _raw = json.loads((ROOT / "scripts" / "fr_to_en_msgids.json").read_text(encoding="utf-8"))
 EN_TO_FR: dict[str, str] = {en: fr for fr, en in _raw.items()}
@@ -44,8 +42,7 @@ MYMEMORY = {
 }
 
 FRENCH_RE = re.compile(
-    r"[àâäéèêëïîôùûüçÀÂÄÉÈÊËÏÎÔÙÛÜÇ]|"
-    r"\b(conformément|les utilisateurs|tu acceptes|tu es sur le point)\b",
+    r"[àâäéèêëïîôùûüçÀÂÄÉÈÊËÏÎÔÙÛÜÇ]|" r"\b(conformément|les utilisateurs|tu acceptes|tu es sur le point)\b",
     re.I,
 )
 

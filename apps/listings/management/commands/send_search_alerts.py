@@ -24,14 +24,10 @@ class Command(BaseCommand):
                 qs = qs.filter(programme_type=alert.programme_type)
             if alert.departure_lat is not None and alert.departure_lng is not None:
                 pt = Point(alert.departure_lng, alert.departure_lat, srid=4326)
-                qs = qs.filter(
-                    departure_point__distance_lte=(pt, D(m=nm_to_meters(alert.departure_radius_nm)))
-                )
+                qs = qs.filter(departure_point__distance_lte=(pt, D(m=nm_to_meters(alert.departure_radius_nm))))
             if alert.arrival_lat is not None and alert.arrival_lng is not None:
                 pt = Point(alert.arrival_lng, alert.arrival_lat, srid=4326)
-                qs = qs.filter(
-                    arrival_point__distance_lte=(pt, D(m=nm_to_meters(alert.arrival_radius_nm)))
-                )
+                qs = qs.filter(arrival_point__distance_lte=(pt, D(m=nm_to_meters(alert.arrival_radius_nm))))
             matches = []
             for listing in qs:
                 if alert.year and alert.week_from and alert.week_to:

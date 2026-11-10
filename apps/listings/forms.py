@@ -2,13 +2,12 @@ from django import forms
 from django.contrib.gis.geos import Point
 from django.utils.translation import gettext_lazy as _
 
+from apps.core.forms_ui import INPUT_CLASS as LISTING_INPUT
 from apps.core.language_choices import LANGUAGE_CHOICES
 from apps.profiles.models import SkillLevel
 
 from .iso_weeks import SEASON_SHORTCUTS
 from .models import Listing, ListingApplication, ListingKind, SearchAlert
-
-from apps.core.forms_ui import INPUT_CLASS as LISTING_INPUT
 
 
 class ListingForm(forms.ModelForm):
@@ -131,9 +130,7 @@ class ListingForm(forms.ModelForm):
         elif self.instance.pk and self.instance.arrival_point:
             cleaned["arrival_point"] = self.instance.arrival_point
         if not cleaned.get("departure_point") or not cleaned.get("arrival_point"):
-            raise forms.ValidationError(
-                _("Click the map to set departure then arrival before publishing.")
-            )
+            raise forms.ValidationError(_("Click the map to set departure then arrival before publishing."))
         return cleaned
 
     def save(self, commit=True):
@@ -151,9 +148,7 @@ class ListingSearchForm(forms.Form):
     q = forms.CharField(
         label=_("Keywords"),
         required=False,
-        widget=forms.TextInput(
-            attrs={"class": LISTING_INPUT, "placeholder": _("Route, port…")}
-        ),
+        widget=forms.TextInput(attrs={"class": LISTING_INPUT, "placeholder": _("Route, port…")}),
     )
     kind = forms.ChoiceField(
         label=_("Type"),
@@ -255,9 +250,7 @@ class ListingSearchForm(forms.Form):
         wf = cleaned.get("week_from")
         wt = cleaned.get("week_to")
         if any(x is not None for x in (year, wf, wt)) and not all(x is not None for x in (year, wf, wt)):
-            raise forms.ValidationError(
-                _("To filter by date, enter the year and both weeks (from / to).")
-            )
+            raise forms.ValidationError(_("To filter by date, enter the year and both weeks (from / to)."))
         return cleaned
 
 
