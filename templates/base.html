@@ -75,7 +75,7 @@
           <a href="{% url 'account_login' %}" class="btn-ghost">{% trans "Log in" %}</a>
           <a href="{% url 'account_signup' %}" class="btn-primary ml-1">{% trans "Sign up" %}</a>
         {% endif %}
-        <div class="ml-2 hidden border-l border-lagoon/20 pl-2 md:block">
+        <div class="ml-1 hidden text-ocean md:block">
           {% include "includes/language_switcher.html" %}
         </div>
       </nav>
@@ -143,8 +143,8 @@
         <ul class="mt-2 space-y-1 text-teal-100/90">
           <li><a href="{% url 'cgu' %}" class="hover:text-white">{% trans "Terms of use" %}</a></li>
         </ul>
-        <div class="mt-4 [&_button:not(.bg-lagoon)]:bg-ocean [&_button:not(.bg-lagoon)]:text-teal-100">
-          {% include "includes/language_switcher.html" %}
+        <div class="mt-4 text-teal-100/80">
+          {% include "includes/language_switcher.html" with dropup=True %}
         </div>
       </div>
     </div>

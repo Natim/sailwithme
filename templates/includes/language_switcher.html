@@ -1,14 +1,29 @@
 {% load i18n %}
-<form action="{% url 'set_language' %}" method="post" class="flex flex-wrap items-center gap-1">
-  {% csrf_token %}
-  {% get_current_language as CURRENT_LANG %}
-  {% get_available_languages as LANG_LIST %}
-  {% for lang_code, lang_name in LANG_LIST %}
-    <button type="submit" name="language" value="{{ lang_code }}"
-      class="rounded-full px-2 py-0.5 text-xs font-semibold transition {% if lang_code == CURRENT_LANG %}bg-lagoon text-white{% else %}bg-sand-dark text-ocean hover:bg-lagoon-pale{% endif %}"
-      aria-current="{% if lang_code == CURRENT_LANG %}true{% else %}false{% endif %}">
-      {{ lang_name }}
-    </button>
-  {% endfor %}
-  <input type="hidden" name="next" value="{{ request.get_full_path }}">
-</form>
+{% get_current_language as CURRENT_LANG %}
+{% get_available_languages as LANG_LIST %}
+<div class="relative" x-data="{ open: false }" @click.outside="open = false" @keydown.escape.window="open = false">
+  <button type="button"
+    class="inline-flex items-center gap-0.5 rounded-md px-1.5 py-1 text-xs font-semibold uppercase tracking-wide text-current/70 transition hover:text-current"
+    @click="open = !open"
+    :aria-expanded="open"
+    aria-haspopup="true"
+    aria-label="{% trans 'Language' %}">
+    {{ CURRENT_LANG }}
+    <svg class="h-3 w-3 opacity-70" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+    </svg>
+  </button>
+  <form x-show="open" x-cloak x-transition
+    action="{% url 'set_language' %}" method="post"
+    class="absolute right-0 z-50 min-w-[10rem] overflow-hidden rounded-xl border border-slate-200 bg-white py-1 text-ocean shadow-soft {% if dropup %}bottom-full mb-1{% else %}top-full mt-1{% endif %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+    {% for lang_code, lang_name in LANG_LIST %}
+      <button type="submit" name="language" value="{{ lang_code }}"
+        class="flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left text-sm hover:bg-sand {% if lang_code == CURRENT_LANG %}font-bold text-lagoon{% else %}font-medium{% endif %}">
+        <span>{{ lang_name }}</span>
+        <span class="text-[0.65rem] font-semibold uppercase tracking-wide text-slate-400">{{ lang_code }}</span>
+      </button>
+    {% endfor %}
+  </form>
+</div>
