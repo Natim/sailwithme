@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block content %}
 <h1 class="text-2xl font-bold mb-4">{% trans "Nouvelle annonce" %}</h1>
@@ -17,9 +17,10 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{% static 'js/map-basemap.js' %}"></script>
 <script>
   const map = L.map('listing-map').setView([28.1, -15.4], 4);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' }).addTo(map);
+  addSailsWithMeBasemap(map);
   let clickStep = 0;
   map.on('click', e => {
     if (clickStep === 0) {

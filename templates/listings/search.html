@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Recherche d'annonces" %}{% endblock %}
 
@@ -34,10 +34,11 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{% static 'js/map-basemap.js' %}"></script>
 <script>
   const mapData = {{ map_data_json|safe }};
   const map = L.map('map').setView([20, -20], 3);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM' }).addTo(map);
+  addSailsWithMeBasemap(map);
   mapData.forEach(item => {
     L.marker(item.departure).addTo(map).bindPopup(`<a href="${item.url}">${item.title}</a>`);
     L.marker(item.arrival).addTo(map);
