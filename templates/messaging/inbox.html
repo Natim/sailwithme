@@ -7,7 +7,7 @@
   <aside class="card overflow-y-auto p-2">
     {% for part in participations %}
       <a href="?c={{ part.conversation_id }}" class="block rounded-xl px-3 py-2 text-sm font-semibold transition {% if active_conversation and active_conversation.pk == part.conversation_id %}bg-lagoon-pale text-ocean{% else %}hover:bg-sand{% endif %}">
-        {{ part.conversation.title|default:part.conversation.pk }}
+        {{ part.conversation.title|default:_("Conversation") }}
       </a>
     {% empty %}
       <p class="p-2 text-sm text-slate-500">{% trans "Aucune conversation." %}</p>
@@ -16,8 +16,8 @@
   <section class="card flex flex-col md:col-span-2 p-0 overflow-hidden">
     {% if active_conversation %}
       <div id="thread" class="flex-1 space-y-3 overflow-y-auto p-4"
-        hx-get="{% url 'messaging:poll' active_conversation.pk %}?after={{ thread_messages.last.id|default:0 }}"
-        hx-trigger="every 5s" hx-swap="beforeend">
+        hx-get="{% url 'messaging:poll' active_conversation.pk %}"
+        hx-trigger="every 5s" hx-swap="innerHTML">
         {% for message in thread_messages %}{% include "messaging/partials/message.html" %}{% endfor %}
       </div>
       <form hx-post="{% url 'messaging:send' active_conversation.pk %}" hx-target="#thread" hx-swap="beforeend"

@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, TemplateView
@@ -55,6 +56,12 @@ class ListingDetailView(DetailView):
     template_name = "listings/detail.html"
     context_object_name = "listing"
 
+    def get_queryset(self):
+        visible = Q(status__in=[ListingStatus.PUBLISHED, ListingStatus.FULL, ListingStatus.EXPIRED])
+        if self.request.user.is_authenticated:
+            visible |= Q(author=self.request.user)
+        return Listing.objects.filter(visible).select_related("author", "author__profile", "boat")
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         listing = self.object
@@ -87,7 +94,38 @@ def listing_create(request):
         listing.save()
         messages.success(request, "Annonce publiée.")
         return redirect("listings:detail", pk=listing.pk)
-    return render(request, "listings/form.html", {"form": form})
+    return render(request, "listings/form.html", {"form": form, "listing": None})
+
+
+@login_required
+def listing_edit(request, pk):
+    listing = get_object_or_404(Listing, pk=pk, author=request.user)
+    form = ListingForm(request.user, request.POST or None, instance=listing)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Annonce mise à jour.")
+        return redirect("listings:detail", pk=listing.pk)
+    return render(request, "listings/form.html", {"form": form, "listing": listing})
+
+
+@login_required
+def listing_delete(request, pk):
+    listing = get_object_or_404(Listing, pk=pk, author=request.user)
+    has_applications = listing.applications.exists()
+    if request.method == "POST":
+        if has_applications:
+            listing.status = ListingStatus.WITHDRAWN
+            listing.save(update_fields=["status", "updated_at"])
+            messages.success(request, "Annonce retirée (des candidatures existent, elles sont conservées).")
+        else:
+            listing.delete()
+            messages.success(request, "Annonce supprimée.")
+        return redirect("listings:mine")
+    return render(
+        request,
+        "listings/confirm_delete.html",
+        {"listing": listing, "has_applications": has_applications},
+    )
 
 
 @login_required

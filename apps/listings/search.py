@@ -76,7 +76,7 @@ def listings_for_map(listings: list[Listing]) -> list[dict]:
     for listing in listings:
         out.append(
             {
-                "id": listing.pk,
+                "id": str(listing.pk),
                 "title": listing.title,
                 "departure": [
                     float(listing.departure_point.y),

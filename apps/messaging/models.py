@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.db import models
 
+from apps.core.models import UUIDModel
 
-class Conversation(models.Model):
+
+class Conversation(UUIDModel):
     listing = models.ForeignKey(
         "listings.Listing",
         null=True,
@@ -32,7 +34,7 @@ class Conversation(models.Model):
         return self.participants.exclude(user=user).first()
 
 
-class ConversationParticipant(models.Model):
+class ConversationParticipant(UUIDModel):
     conversation = models.ForeignKey(
         Conversation,
         on_delete=models.CASCADE,
@@ -49,7 +51,7 @@ class ConversationParticipant(models.Model):
         unique_together = [("conversation", "user")]
 
 
-class Message(models.Model):
+class Message(UUIDModel):
     conversation = models.ForeignKey(
         Conversation,
         on_delete=models.CASCADE,
@@ -67,7 +69,7 @@ class Message(models.Model):
         ordering = ["created_at"]
 
 
-class UserBlock(models.Model):
+class UserBlock(UUIDModel):
     blocker = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -84,7 +86,7 @@ class UserBlock(models.Model):
         unique_together = [("blocker", "blocked")]
 
 
-class AbuseReport(models.Model):
+class AbuseReport(UUIDModel):
     reporter = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

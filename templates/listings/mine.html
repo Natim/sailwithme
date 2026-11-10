@@ -10,7 +10,13 @@
   {% for listing in object_list %}
     <li class="card flex flex-wrap items-center justify-between gap-2">
       <a href="{% url 'listings:detail' listing.pk %}" class="font-display font-semibold text-ocean hover:text-lagoon">{{ listing.title }}</a>
-      <span class="{% if listing.status == 'published' %}badge-lagoon{% else %}chip{% endif %}">{{ listing.get_status_display }}</span>
+      <div class="flex flex-wrap items-center gap-2 text-sm">
+        <span class="{% if listing.status == 'published' %}badge-lagoon{% else %}chip{% endif %}">{{ listing.get_status_display }}</span>
+        <a href="{% url 'listings:edit' listing.pk %}" class="font-semibold text-lagoon hover:underline">{% trans "Modifier" %}</a>
+        {% if listing.status != 'withdrawn' %}
+          <a href="{% url 'listings:delete' listing.pk %}" class="font-semibold text-coral hover:underline">{% trans "Supprimer" %}</a>
+        {% endif %}
+      </div>
     </li>
   {% empty %}
     <li class="card border-dashed text-center text-slate-500">{% trans "Tu n'as pas encore publié d'annonce." %}</li>

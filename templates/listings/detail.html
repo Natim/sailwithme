@@ -4,10 +4,21 @@
 {% block content %}
 <div class="grid gap-8 lg:grid-cols-3">
   <article class="card lg:col-span-2 border-lagoon/10">
-    <span class="badge-lagoon">{{ listing.get_kind_display }}</span>
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <span class="badge-lagoon">{{ listing.get_kind_display }}</span>
+      {% if user.is_authenticated and listing.author_id == user.id %}
+        <div class="flex flex-wrap items-center gap-2">
+          {% if listing.status != 'published' %}<span class="chip">{{ listing.get_status_display }}</span>{% endif %}
+          <a href="{% url 'listings:edit' listing.pk %}" class="btn-ghost text-sm">{% trans "Modifier" %}</a>
+          {% if listing.status != 'withdrawn' %}
+            <a href="{% url 'listings:delete' listing.pk %}" class="btn-ghost text-sm text-coral">{% trans "Supprimer" %}</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
     <h1 class="font-display mt-2 text-3xl font-bold text-ocean">{{ listing.title }}</h1>
     <p class="mt-2 text-lg font-medium text-slate-700">{{ listing.departure_name }} → {{ listing.arrival_name }}</p>
-    <p class="text-sm text-slate-500">S{{ listing.week_from }}–S{{ listing.week_to }} {{ listing.year }} · {{ listing.get_programme_type_display }}</p>
+    <p class="text-sm text-slate-500">{{ listing.period_months_display }} · {{ listing.get_programme_type_display }}</p>
     <div id="listing-detail-map" class="mt-4 h-48 rounded-2xl border border-lagoon/20"></div>
     <p class="mt-6 whitespace-pre-line text-slate-700">{{ listing.description }}</p>
     {% if listing.daily_contribution_eur %}

@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import DetailView, ListView
 
 from apps.accounts.models import User
+from apps.billing.services import membership_summary_for_user
 
 from .forms import ProfileBasicsForm, ProfileExperienceForm, ProfilePreferencesForm
 from .models import Profile
@@ -52,6 +53,7 @@ def profile_me(request):
             "basics_form": ProfileBasicsForm(instance=profile),
             "experience_form": ProfileExperienceForm(instance=profile),
             "preferences_form": ProfilePreferencesForm(instance=profile),
+            "membership": membership_summary_for_user(request.user),
         },
     )
 

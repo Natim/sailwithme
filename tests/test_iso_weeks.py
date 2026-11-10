@@ -1,5 +1,9 @@
 
-from apps.listings.iso_weeks import iso_week_range_to_dates, weeks_overlap
+from apps.listings.iso_weeks import (
+    iso_week_range_to_dates,
+    period_months_from_weeks,
+    weeks_overlap,
+)
 
 
 def test_iso_week_range():
@@ -12,3 +16,15 @@ def test_iso_week_range():
 def test_weeks_overlap_adjacent():
     assert weeks_overlap(2026, 44, 46, 2026, 45, 48)
     assert not weeks_overlap(2026, 10, 12, 2026, 20, 22)
+
+
+def test_period_months_no_iso_week_prefix():
+    label = period_months_from_weeks(2026, 44, 52, show_year=True)
+    assert "S" not in label
+    assert "2026" in label
+
+
+def test_period_months_season_shortcut_style():
+    label = period_months_from_weeks(2026, 44, 52, show_year=False)
+    assert "2026" not in label
+    assert "–" in label or label  # single month or range

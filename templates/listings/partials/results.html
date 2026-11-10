@@ -10,7 +10,7 @@
             {{ listing.departure_name }} → {{ listing.arrival_name }}
           </p>
           <p class="mt-1 text-xs text-slate-500">
-            S{{ listing.week_from }}–S{{ listing.week_to }} {{ listing.year }} · {{ listing.get_programme_type_display }}
+            {{ listing.period_months_display }} · {{ listing.get_programme_type_display }}
             {% if listing.berths_available %} · {{ listing.berths_available }} {% trans "couchettes" %}{% endif %}
             {% if listing.daily_contribution_eur %} · ~{{ listing.daily_contribution_eur }} €/{% trans "jour" %}{% endif %}
           </p>

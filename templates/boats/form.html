@@ -2,9 +2,14 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">{% if boat %}{% trans "Modifier" %}{% else %}{% trans "Nouveau bateau" %}{% endif %}</h1>
-<form method="post" class="max-w-xl space-y-4 rounded-xl border bg-white p-6">
+<h1 class="font-display text-3xl font-bold text-ocean">
+  {% if boat %}{% trans "Modifier le bateau" %}{% else %}{% trans "Nouveau bateau" %}{% endif %}
+</h1>
+<form method="post" class="card mt-6 max-w-xl space-y-4 border-lagoon/10">
   {% csrf_token %}
+  {% if form.non_field_errors %}
+    <ul class="text-sm text-red-600">{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}</ul>
+  {% endif %}
   <div class="space-y-4">{% include "includes/form_fields.html" %}</div>
   <button type="submit" class="btn-primary">{% trans "Enregistrer" %}</button>
 </form>

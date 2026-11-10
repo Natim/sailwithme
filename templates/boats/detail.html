@@ -7,18 +7,22 @@
   <p class="mt-2 flex flex-wrap gap-2">
     <span class="chip">{{ boat.get_boat_type_display }}</span>
     {% if boat.length_ft %}<span class="chip">{{ boat.length_ft }} ft</span>{% endif %}
-    <span class="chip">{{ boat.berths }} {% trans "couchettes" %}</span>
+    <span class="chip">{{ boat.berths }} {% trans "places à bord" %}</span>
     {% if boat.flag %}<span class="chip">{{ boat.flag }}</span>{% endif %}
   </p>
+  {% if boat.model_name %}<p class="mt-2 text-sm text-slate-600">{{ boat.model_name }}{% if boat.year_built %} · {{ boat.year_built }}{% endif %}</p>{% endif %}
   <p class="mt-4 text-slate-700">{{ boat.description }}</p>
   {% if boat.owner == user %}
-    <a href="{% url 'boats:edit' boat.pk %}" class="btn-ghost mt-4 inline-flex">{% trans "Modifier" %}</a>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <a href="{% url 'boats:edit' boat.pk %}" class="btn-ghost">{% trans "Modifier" %}</a>
+      <a href="{% url 'boats:delete' boat.pk %}" class="btn-ghost text-coral">{% trans "Supprimer" %}</a>
+    </div>
   {% endif %}
 </div>
 <div id="gallery" class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
   {% include "boats/partials/gallery.html" %}
 </div>
 {% if boat.owner == user %}
-<div class="mt-4" hx-get="{% url 'boats:add_photo' boat.pk %}" hx-trigger="revealed" hx-swap="innerHTML"></div>
+<div class="card mt-4 border-dashed border-lagoon/20" hx-get="{% url 'boats:add_photo' boat.pk %}" hx-trigger="revealed" hx-swap="innerHTML"></div>
 {% endif %}
 {% endblock %}

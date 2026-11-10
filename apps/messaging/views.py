@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -17,7 +19,10 @@ def inbox(request):
         .select_related("conversation", "conversation__listing")
         .order_by("-conversation__updated_at")
     )
-    active_id = request.GET.get("c")
+    try:
+        active_id = uuid.UUID(request.GET.get("c", ""))
+    except ValueError:
+        active_id = None
     active_conv = None
     thread_messages = []
     if active_id:
@@ -43,7 +48,7 @@ def send_message(request, conversation_id):
     if not conversation.participants.filter(user=request.user).exists():
         return HttpResponse(status=403)
     if request.method != "POST":
-        return redirect("messaging:inbox", **{"c": conversation_id})
+        return redirect(f"/messages/?c={conversation_id}")
     body = request.POST.get("body", "").strip()
     if not body:
         return redirect(f"/messages/?c={conversation_id}")
@@ -65,8 +70,7 @@ def poll_messages(request, conversation_id):
     conversation = get_object_or_404(Conversation, pk=conversation_id)
     if not conversation.participants.filter(user=request.user).exists():
         return HttpResponse(status=403)
-    after_id = int(request.GET.get("after", 0))
-    qs = conversation.messages.filter(pk__gt=after_id).select_related("author")
+    qs = conversation.messages.select_related("author")
     mark_conversation_read(conversation, request.user)
     return render(
         request,

@@ -1,10 +1,12 @@
+import uuid
+
 from django.db import models, transaction
 from django.utils import timezone
 
 from .models import Conversation, ConversationParticipant, Message, UserBlock
 
 
-def users_blocked(a_id: int, b_id: int) -> bool:
+def users_blocked(a_id: uuid.UUID, b_id: uuid.UUID) -> bool:
     return UserBlock.objects.filter(
         models.Q(blocker_id=a_id, blocked_id=b_id) | models.Q(blocker_id=b_id, blocked_id=a_id)
     ).exists()

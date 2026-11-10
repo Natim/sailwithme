@@ -4,10 +4,12 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
-from .iso_weeks import iso_week_range_to_dates
+from apps.core.models import UUIDModel
+
+from .iso_weeks import iso_week_range_to_dates, period_months_label
 
 
-class Port(models.Model):
+class Port(UUIDModel):
     slug = models.SlugField(unique=True)
     name = models.CharField(max_length=128)
     country = models.CharField(max_length=64, blank=True)
@@ -47,9 +49,10 @@ class ListingStatus(models.TextChoices):
     PUBLISHED = "published", "Publiée"
     FULL = "full", "Complète"
     EXPIRED = "expired", "Expirée"
+    WITHDRAWN = "withdrawn", "Retirée"
 
 
-class Listing(models.Model):
+class Listing(UUIDModel):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -124,6 +127,13 @@ class Listing(models.Model):
     def get_absolute_url(self):
         return reverse("listings:detail", kwargs={"pk": self.pk})
 
+    def period_months_display(self) -> str:
+        if self.date_from and self.date_to:
+            return period_months_label(self.date_from, self.date_to)
+        from .iso_weeks import period_months_from_weeks
+
+        return period_months_from_weeks(self.year, self.week_from, self.week_to)
+
     def save(self, *args, **kwargs):
         if self.year and self.week_from and self.week_to:
             self.date_from, self.date_to = iso_week_range_to_dates(
@@ -143,7 +153,7 @@ class ApplicationStatus(models.TextChoices):
     WITHDRAWN = "withdrawn", "Retirée"
 
 
-class ListingApplication(models.Model):
+class ListingApplication(UUIDModel):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="applications")
     applicant = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -163,7 +173,7 @@ class ListingApplication(models.Model):
         ordering = ["-created_at"]
 
 
-class Voyage(models.Model):
+class Voyage(UUIDModel):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="voyages")
     skipper = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -185,7 +195,7 @@ class Voyage(models.Model):
         return self.title or f"Voyage #{self.pk}"
 
 
-class SearchAlert(models.Model):
+class SearchAlert(UUIDModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -207,7 +217,7 @@ class SearchAlert(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-class RoutePage(models.Model):
+class RoutePage(UUIDModel):
     slug = models.SlugField(unique=True)
     title = models.CharField(max_length=200)
     meta_description = models.TextField(blank=True)

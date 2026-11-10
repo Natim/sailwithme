@@ -75,7 +75,7 @@
     {% for s in season_shortcuts %}
       <a href="{% url 'listings:search' %}?programme_type={{ s.key }}" class="card block transition hover:-translate-y-0.5 hover:shadow-lift">
         <span class="badge-lagoon">{{ s.label }}</span>
-        <p class="mt-2 text-sm text-slate-600">S{{ s.week_from }}–S{{ s.week_to }}</p>
+        <p class="mt-2 text-sm text-slate-600">{{ s.months_display }}</p>
       </a>
     {% endfor %}
     {% for route in route_pages %}

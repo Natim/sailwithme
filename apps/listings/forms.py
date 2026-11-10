@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.gis.geos import Point
 
+from apps.core.language_choices import LANGUAGE_CHOICES
 from apps.profiles.models import SkillLevel
 
 from .iso_weeks import SEASON_SHORTCUTS
@@ -19,6 +20,12 @@ class ListingForm(forms.ModelForm):
         required=False,
         choices=[("", "—")] + [(k, v["label"]) for k, v in SEASON_SHORTCUTS.items()],
         widget=forms.Select(attrs={"class": LISTING_INPUT}),
+    )
+    languages_on_board = forms.MultipleChoiceField(
+        label="Langues à bord",
+        choices=LANGUAGE_CHOICES,
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
     )
 
     class Meta:
@@ -93,9 +100,14 @@ class ListingForm(forms.ModelForm):
             attrs={"class": LISTING_INPUT},
             choices=[("", "—")] + list(SkillLevel.choices),
         )
-        self.fields["languages_on_board"].required = False
-        if "languages_on_board" in self.fields:
-            self.fields["languages_on_board"].help_text = "Codes langue séparés par des virgules (ex. fr, en)."
+        if self.instance.pk:
+            self.fields["languages_on_board"].initial = self.instance.languages_on_board or []
+            if self.instance.departure_point:
+                self.fields["departure_lat"].initial = float(self.instance.departure_point.y)
+                self.fields["departure_lng"].initial = float(self.instance.departure_point.x)
+            if self.instance.arrival_point:
+                self.fields["arrival_lat"].initial = float(self.instance.arrival_point.y)
+                self.fields["arrival_lng"].initial = float(self.instance.arrival_point.x)
 
     def clean(self):
         cleaned = super().clean()
@@ -128,6 +140,7 @@ class ListingForm(forms.ModelForm):
         obj.author = self.user
         obj.departure_point = self.cleaned_data.get("departure_point")
         obj.arrival_point = self.cleaned_data.get("arrival_point")
+        obj.languages_on_board = self.cleaned_data.get("languages_on_board", [])
         if commit:
             obj.save()
         return obj

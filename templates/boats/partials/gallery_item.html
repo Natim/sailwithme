@@ -1,0 +1,18 @@
+{% load i18n %}
+<div id="boat-photo-{{ photo.pk }}" class="group relative overflow-hidden rounded-2xl border border-lagoon/20">
+  <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" class="h-32 w-full object-cover">
+  {% if boat.owner == user %}
+    <form
+      method="post"
+      action="{% url 'boats:delete_photo' photo.pk %}"
+      class="absolute right-1 top-1"
+      hx-post="{% url 'boats:delete_photo' photo.pk %}"
+      hx-target="#boat-photo-{{ photo.pk }}"
+      hx-swap="outerHTML"
+    >
+      {% csrf_token %}
+      <button type="submit" class="rounded-lg bg-white/90 px-2 py-0.5 text-xs font-semibold text-coral shadow hover:bg-white">{% trans "Supprimer" %}</button>
+    </form>
+  {% endif %}
+  {% if photo.caption %}<p class="bg-sand/90 px-2 py-1 text-xs text-slate-600">{{ photo.caption }}</p>{% endif %}
+</div>

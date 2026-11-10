@@ -22,13 +22,7 @@ SKILL_CHOICES = [
     ("photo", "Photo / vidéo"),
 ]
 
-LANGUAGE_CHOICES = [
-    ("fr", "Français"),
-    ("en", "English"),
-    ("es", "Español"),
-    ("de", "Deutsch"),
-    ("pt", "Português"),
-]
+from apps.core.language_choices import LANGUAGE_CHOICES
 
 
 class ProfileBasicsForm(forms.ModelForm):

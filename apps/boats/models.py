@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 
+from apps.core.models import UUIDModel
+
 
 class BoatType(models.TextChoices):
     MONOHULL = "monohull", "Monocoque"
@@ -9,7 +11,7 @@ class BoatType(models.TextChoices):
     OTHER = "other", "Autre"
 
 
-class Boat(models.Model):
+class Boat(UUIDModel):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -33,7 +35,7 @@ class Boat(models.Model):
         return self.name
 
 
-class BoatPhoto(models.Model):
+class BoatPhoto(UUIDModel):
     boat = models.ForeignKey(Boat, on_delete=models.CASCADE, related_name="photos")
     image = models.ImageField(upload_to="boats/")
     caption = models.CharField(max_length=255, blank=True)

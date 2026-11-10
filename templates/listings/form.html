@@ -2,7 +2,7 @@
 {% load i18n static %}
 
 {% block content %}
-<h1 class="font-display text-3xl font-bold text-ocean">{% trans "Nouvelle annonce" %}</h1>
+<h1 class="font-display text-3xl font-bold text-ocean">{% if listing %}{% trans "Modifier l'annonce" %}{% else %}{% trans "Nouvelle annonce" %}{% endif %}</h1>
 <p class="mt-1 text-sm text-slate-600">{% trans "Route · Dates · Équipage · Détails" %}</p>
 
 <form method="post" class="card mt-6 max-w-3xl border-lagoon/10" id="listing-form">
@@ -30,7 +30,10 @@
   <div class="mt-8 space-y-4">
     {% include "includes/form_fields.html" with skip_coord_hidden=True %}
   </div>
-  <button type="submit" class="btn-primary mt-8">{% trans "Publier" %}</button>
+  <div class="mt-8 flex flex-wrap gap-3">
+    <button type="submit" class="btn-primary">{% if listing %}{% trans "Enregistrer" %}{% else %}{% trans "Publier" %}{% endif %}</button>
+    {% if listing %}<a href="{% url 'listings:detail' listing.pk %}" class="btn-ghost">{% trans "Annuler" %}</a>{% endif %}
+  </div>
 </form>
 {% endblock %}
 

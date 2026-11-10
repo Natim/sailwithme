@@ -31,6 +31,36 @@
   </div>
 </header>
 
+<section class="card mb-6 border-lagoon/10">
+  <div class="flex flex-wrap items-start justify-between gap-4">
+    <div>
+      <h2 class="font-display text-lg font-semibold text-ocean">{% trans "Mon abonnement" %}</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li class="flex items-center gap-2">
+          {% if membership.crew_pass_active %}<span class="badge-lagoon">{% trans "Actif" %}</span>{% else %}<span class="chip">{% trans "Inactif" %}</span>{% endif %}
+          <span class="font-semibold text-ocean">Crew Pass</span>
+          {% if membership.crew_pass_detail %}<span class="text-slate-600">— {{ membership.crew_pass_detail }}</span>{% endif %}
+        </li>
+        <li class="flex items-center gap-2">
+          {% if membership.skipper_plus_active %}<span class="badge-lagoon">{% trans "Actif" %}</span>{% else %}<span class="chip">{% trans "Inactif" %}</span>{% endif %}
+          <span class="font-semibold text-ocean">Skipper+</span>
+          {% if membership.skipper_plus_detail %}<span class="text-slate-600">— {{ membership.skipper_plus_detail }}</span>{% endif %}
+        </li>
+        <li class="flex items-center gap-2">
+          {% if membership.identity_verified %}<span class="badge-lagoon">{% trans "Vérifiée" %}</span>{% else %}<span class="chip">{% trans "Non vérifiée" %}</span>{% endif %}
+          <span class="font-semibold text-ocean">{% trans "Identité" %}</span>
+        </li>
+      </ul>
+      <p class="mt-3 text-xs text-slate-500">
+        {% if membership.can_initiate_contact %}{% trans "Tu peux contacter les autres membres et postuler aux annonces." %}{% else %}{% trans "Un Crew Pass est nécessaire pour contacter les membres et postuler." %}{% endif %}
+      </p>
+    </div>
+    {% if not membership.crew_pass_active or not membership.skipper_plus_active %}
+      <a href="{% url 'billing:pricing' %}" class="btn-secondary shrink-0">{% trans "Voir les offres" %}</a>
+    {% endif %}
+  </div>
+</section>
+
 <div class="grid gap-6 lg:grid-cols-3 lg:items-stretch">
   <section id="section-basics" class="min-h-0" hx-get="{% url 'profiles:edit_section' 'basics' %}" hx-trigger="load" hx-swap="innerHTML">
     {% include "profiles/partials/basics_form.html" with form=basics_form %}

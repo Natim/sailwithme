@@ -2,8 +2,10 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
+from apps.core.models import UUIDModel
 
-class Review(models.Model):
+
+class Review(UUIDModel):
     voyage = models.ForeignKey(
         "listings.Voyage",
         on_delete=models.CASCADE,

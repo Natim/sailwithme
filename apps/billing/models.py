@@ -2,6 +2,8 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
+from apps.core.models import UUIDModel
+
 
 class MembershipPlan(models.TextChoices):
     CREW_SEASON = "crew_season", "Crew Pass — saison"
@@ -10,7 +12,7 @@ class MembershipPlan(models.TextChoices):
     IDENTITY = "identity", "Identité vérifiée"
 
 
-class Membership(models.Model):
+class Membership(UUIDModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

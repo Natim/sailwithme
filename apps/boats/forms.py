@@ -1,8 +1,11 @@
+from pathlib import Path
+
 from django import forms
 
-from .models import Boat, BoatPhoto
-
 from apps.core.forms_ui import INPUT_CLASS as BOAT_INPUT
+from apps.profiles.models import ALLOWED_PROFILE_PHOTO_SUFFIXES
+
+from .models import Boat, BoatPhoto
 
 EQUIPMENT_CHOICES = [
     ("watermaker", "Dessalinisateur"),
@@ -30,6 +33,7 @@ class BoatForm(forms.ModelForm):
             "year_built",
             "flag",
             "berths",
+            "equipment",
             "description",
         ]
         widgets = {
@@ -39,7 +43,7 @@ class BoatForm(forms.ModelForm):
             "length_ft": forms.NumberInput(attrs={"class": BOAT_INPUT, "step": "0.1"}),
             "year_built": forms.NumberInput(attrs={"class": BOAT_INPUT}),
             "flag": forms.TextInput(attrs={"class": BOAT_INPUT}),
-            "berths": forms.NumberInput(attrs={"class": BOAT_INPUT}),
+            "berths": forms.NumberInput(attrs={"class": BOAT_INPUT, "min": 1}),
             "description": forms.Textarea(attrs={"rows": 4, "class": BOAT_INPUT}),
         }
 
@@ -52,7 +56,7 @@ class BoatForm(forms.ModelForm):
             "length_ft": "Longueur (pieds)",
             "year_built": "Année de construction",
             "flag": "Pavillon",
-            "berths": "Couchettes",
+            "berths": "Nombre de places à bord (couchettes)",
             "equipment": "Équipement",
             "description": "Description",
         }
@@ -75,6 +79,9 @@ class BoatPhotoForm(forms.ModelForm):
         model = BoatPhoto
         fields = ["image", "caption", "sort_order"]
         widgets = {
+            "image": forms.FileInput(
+                attrs={"class": BOAT_INPUT, "accept": "image/jpeg,image/png,image/webp,image/gif"}
+            ),
             "caption": forms.TextInput(attrs={"class": BOAT_INPUT}),
             "sort_order": forms.NumberInput(attrs={"class": BOAT_INPUT}),
         }
@@ -84,3 +91,14 @@ class BoatPhotoForm(forms.ModelForm):
         self.fields["image"].label = "Photo"
         self.fields["caption"].label = "Légende"
         self.fields["sort_order"].label = "Ordre d'affichage"
+
+    def clean_image(self):
+        image = self.cleaned_data.get("image")
+        if not image:
+            return image
+        suffix = Path(image.name).suffix.lower()
+        if suffix == ".jpeg":
+            suffix = ".jpg"
+        if suffix not in ALLOWED_PROFILE_PHOTO_SUFFIXES:
+            raise forms.ValidationError("Format accepté : JPG, PNG, WebP ou GIF.")
+        return image

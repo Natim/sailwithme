@@ -5,6 +5,8 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
+from apps.core.models import UUIDModel
+
 ALLOWED_PROFILE_PHOTO_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 
 
@@ -30,7 +32,7 @@ class SkillLevel(models.TextChoices):
     PRO_SKIPPER = "pro_skipper", "Skipper professionnel"
 
 
-class Profile(models.Model):
+class Profile(UUIDModel):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
