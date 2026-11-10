@@ -117,6 +117,10 @@ class ListingForm(forms.ModelForm):
             cleaned["arrival_point"] = Point(alng, alat, srid=4326)
         elif self.instance.pk and self.instance.arrival_point:
             cleaned["arrival_point"] = self.instance.arrival_point
+        if not cleaned.get("departure_point") or not cleaned.get("arrival_point"):
+            raise forms.ValidationError(
+                "Cliquez sur la carte pour placer le départ puis l'arrivée avant de publier."
+            )
         return cleaned
 
     def save(self, commit=True):

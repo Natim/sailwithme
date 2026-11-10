@@ -5,11 +5,32 @@
 <h1 class="text-2xl font-bold mb-4">{% trans "Nouvelle annonce" %}</h1>
 <form method="post" class="max-w-2xl space-y-4 rounded-xl border bg-white p-6" id="listing-form">
   {% csrf_token %}
+  {% if form.non_field_errors %}
+    <ul class="text-sm text-red-600">{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}</ul>
+  {% endif %}
   <div class="space-y-4">
-    {% include "includes/form_fields.html" %}
+    {% include "includes/form_fields.html" with skip_coord_hidden=True %}
   </div>
-  <p class="text-sm text-slate-600">{% trans "Cliquez sur la carte pour départ (1er clic) et arrivée (2e clic)." %}</p>
-  <div id="listing-map" class="h-64 rounded border"></div>
+  <div class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+    <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
+      <p id="listing-map-hint" class="text-sm font-medium text-slate-700">
+        {% trans "1er clic : départ · 2e clic : arrivée" %}
+      </p>
+      <button type="button" id="listing-map-reset" class="text-xs font-medium text-sky-700 hover:underline">
+        {% trans "Effacer la route" %}
+      </button>
+    </div>
+    <div id="listing-coords" class="hidden" aria-hidden="true">
+      {{ form.departure_lat }}
+      {{ form.departure_lng }}
+      {{ form.arrival_lat }}
+      {{ form.arrival_lng }}
+    </div>
+    {% if form.departure_lat.errors or form.arrival_lat.errors %}
+      <p class="mb-2 text-xs text-red-600">{% trans "Indiquez le départ et l'arrivée sur la carte." %}</p>
+    {% endif %}
+    <div id="listing-map" class="z-0 h-72 w-full rounded-lg border border-slate-300 bg-white"></div>
+  </div>
   <button type="submit" class="rounded-lg bg-sky-600 px-4 py-2 text-white">{% trans "Publier" %}</button>
 </form>
 {% endblock %}
@@ -17,23 +38,8 @@
 {% block extra_js %}
 {% include "includes/map_tile_config.html" %}
 <script src="{% static 'js/map-basemap.js' %}"></script>
+<script src="{% static 'js/listing-map-picker.js' %}"></script>
 <script>
-  const map = L.map('listing-map').setView([28.1, -15.4], 4);
-  addSailsWithMeBasemap(map);
-  let clickStep = 0;
-  const depLat = document.getElementById('id_departure_lat');
-  const depLng = document.getElementById('id_departure_lng');
-  const arrLat = document.getElementById('id_arrival_lat');
-  const arrLng = document.getElementById('id_arrival_lng');
-  map.on('click', e => {
-    if (clickStep === 0) {
-      if (depLat) depLat.value = e.latlng.lat;
-      if (depLng) depLng.value = e.latlng.lng;
-      clickStep = 1;
-    } else {
-      if (arrLat) arrLat.value = e.latlng.lat;
-      if (arrLng) arrLng.value = e.latlng.lng;
-    }
-  });
+  document.addEventListener("DOMContentLoaded", () => initListingMapPicker("listing-map"));
 </script>
 {% endblock %}

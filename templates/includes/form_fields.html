@@ -1,6 +1,12 @@
 {% for field in form %}
   {% if field.is_hidden %}
-    {{ field }}
+    {% if skip_coord_hidden %}
+      {% if field.name != 'departure_lat' and field.name != 'departure_lng' and field.name != 'arrival_lat' and field.name != 'arrival_lng' %}
+        {{ field }}
+      {% endif %}
+    {% else %}
+      {{ field }}
+    {% endif %}
   {% elif field.field.widget.allow_multiple_selected %}
     <div>
       <span class="mb-2 block text-sm font-medium text-slate-700">{{ field.label }}</span>
