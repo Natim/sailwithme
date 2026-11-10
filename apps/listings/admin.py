@@ -1,11 +1,14 @@
 from django.contrib import admin
 from django.contrib.gis.admin import GISModelAdmin
 
+from apps.core.widgets import ConfiguredOSMWidget
+
 from .models import Listing, ListingApplication, Port, RoutePage, SearchAlert, Voyage
 
 
 @admin.register(Port)
 class PortAdmin(GISModelAdmin):
+    gis_widget = ConfiguredOSMWidget
     list_display = ("name", "country", "slug")
     search_fields = ("name", "slug")
 
