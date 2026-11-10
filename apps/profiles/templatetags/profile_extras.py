@@ -7,7 +7,7 @@ register = template.Library()
 def public_name(user):
     if user is None:
         return ""
-    profile = getattr(user, "profile", None)
-    if profile is None:
-        return "Marin"
-    return profile.public_name()
+    if not hasattr(user, "profile"):
+        full = (user.get_full_name() or "").strip()
+        return full or "Marin"
+    return user.profile.public_name()

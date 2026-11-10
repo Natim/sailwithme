@@ -78,8 +78,14 @@ def listings_for_map(listings: list[Listing]) -> list[dict]:
             {
                 "id": listing.pk,
                 "title": listing.title,
-                "departure": [listing.departure_point.y, listing.departure_point.x],
-                "arrival": [listing.arrival_point.y, listing.arrival_point.x],
+                "departure": [
+                    float(listing.departure_point.y),
+                    float(listing.departure_point.x),
+                ],
+                "arrival": [
+                    float(listing.arrival_point.y),
+                    float(listing.arrival_point.x),
+                ],
                 "url": listing.get_absolute_url(),
             }
         )

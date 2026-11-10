@@ -63,7 +63,7 @@
 
 {% block extra_js %}
 {% include "includes/map_tile_config.html" %}
-{% if listing_route_json %}{{ listing_route_json|json_script:"listing-route-data" }}{% endif %}
+{% if listing_route %}{{ listing_route|json_script:"listing-route-data" }}{% endif %}
 <script src="{% static 'js/map-basemap.js' %}"></script>
 <script src="{% static 'js/listing-detail-map.js' %}"></script>
 {% endblock %}

@@ -61,12 +61,11 @@ class ListingDetailView(DetailView):
         dep = listing.departure_point
         arr = listing.arrival_point
         if dep and arr:
-            ctx["listing_route_json"] = json.dumps(
-                {
-                    "departure": [dep.y, dep.x],
-                    "arrival": [arr.y, arr.x],
-                }
-            )
+            # PostGIS may expose y/x as Decimal; json_script handles dict + float, not json.dumps(Decimal).
+            ctx["listing_route"] = {
+                "departure": [float(dep.y), float(dep.x)],
+                "arrival": [float(arr.y), float(arr.x)],
+            }
         if self.request.user.is_authenticated:
             ctx["application_form"] = ApplicationForm()
         return ctx
