@@ -1,6 +1,7 @@
 import uuid
 
 from django.contrib import messages
+from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -55,7 +56,7 @@ def send_message(request, conversation_id):
     other = conversation.other_participant(request.user)
     if other and conversation.listing is None and conversation.voyage is None:
         if not user_can_initiate_contact(request.user):
-            messages.error(request, "Un Crew Pass est requis pour démarrer une conversation.")
+            messages.error(request, _("A Crew Pass is required to start a conversation."))
             return redirect("billing:pricing")
     msg = Message.objects.create(conversation=conversation, author=request.user, body=body)
     conversation.updated_at = timezone.now()
@@ -94,7 +95,7 @@ def unread_count(request):
 @login_required
 def block_user(request, user_id):
     UserBlock.objects.get_or_create(blocker=request.user, blocked_id=user_id)
-    messages.success(request, "Utilisateur bloqué.")
+    messages.success(request, _("User blocked."))
     return redirect("messaging:inbox")
 
 
@@ -106,5 +107,5 @@ def report_user(request, user_id):
             reported_user_id=user_id,
             reason=request.POST.get("reason", ""),
         )
-        messages.success(request, "Signalement envoyé.")
+        messages.success(request, _("Report sent."))
     return redirect("messaging:inbox")

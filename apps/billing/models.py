@@ -2,14 +2,16 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
+from django.utils.translation import gettext_lazy as _
+
 from apps.core.models import UUIDModel
 
 
 class MembershipPlan(models.TextChoices):
-    CREW_SEASON = "crew_season", "Crew Pass — saison"
-    CREW_LIFETIME = "crew_lifetime", "Crew Pass — à vie"
-    SKIPPER_PLUS = "skipper_plus", "Skipper+"
-    IDENTITY = "identity", "Identité vérifiée"
+    CREW_SEASON = "crew_season", _("Crew Pass — season")
+    CREW_LIFETIME = "crew_lifetime", _("Crew Pass — lifetime")
+    SKIPPER_PLUS = "skipper_plus", _("Skipper+")
+    IDENTITY = "identity", _("Identity verified")
 
 
 class Membership(UUIDModel):

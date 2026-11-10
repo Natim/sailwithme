@@ -1,6 +1,6 @@
 {% load i18n %}
-{% trans "Expérience" as section_title %}
-{% trans "Milles, traversées, certifications et compétences." as section_hint %}
+{% trans "Experience" as section_title %}
+{% trans "Miles, crossings, certifications, and skills." as section_hint %}
 {% include "profiles/partials/section_shell_start.html" with section_title=section_title section_hint=section_hint %}
   <form
     hx-post="{% url 'profiles:edit_section' 'experience' %}"
@@ -30,6 +30,6 @@
       </div>
     </div>
     <button type="submit" class="btn-primary mt-6 w-full sm:w-auto">
-      {% trans "Enregistrer" %}
+      {% trans "Save" %}
     </button>
 {% include "profiles/partials/section_shell_end.html" %}

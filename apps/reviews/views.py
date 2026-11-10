@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -18,16 +19,16 @@ def _user_on_voyage(voyage: Voyage, user) -> bool:
 def write_review(request, voyage_id, subject_id):
     voyage = get_object_or_404(Voyage, pk=voyage_id, reviews_open=True)
     if not _user_on_voyage(voyage, request.user):
-        messages.error(request, "Tu n'as pas participé à ce voyage.")
+        messages.error(request, _("You did not take part in this voyage."))
         return redirect("profiles:detail", pk=subject_id)
     if request.user.id == subject_id:
-        messages.error(request, "Tu ne peux pas t'évaluer toi-même.")
+        messages.error(request, _("You cannot review yourself."))
         return redirect("profiles:detail", pk=subject_id)
     if not _user_on_voyage(voyage, voyage.skipper if subject_id == voyage.skipper_id else None):
         pass
     subject_participant = voyage.skipper_id == subject_id or voyage.crew.filter(pk=subject_id).exists()
     if not subject_participant:
-        messages.error(request, "Cette personne n'était pas sur le voyage.")
+        messages.error(request, _("This person was not on the voyage."))
         return redirect("profiles:detail", pk=subject_id)
 
     existing = Review.objects.filter(
@@ -36,7 +37,7 @@ def write_review(request, voyage_id, subject_id):
         subject_id=subject_id,
     ).first()
     if existing:
-        messages.info(request, "Tu as déjà laissé un avis pour ce voyage.")
+        messages.info(request, _("You already left a review for this voyage."))
         return redirect("profiles:detail", pk=subject_id)
 
     if request.method == "POST":
@@ -48,7 +49,7 @@ def write_review(request, voyage_id, subject_id):
             review.subject_id = subject_id
             review.save()
             review.try_publish()
-            messages.success(request, "Merci pour ton avis.")
+            messages.success(request, _("Thanks for your review."))
             return redirect("profiles:detail", pk=subject_id)
     else:
         form = ReviewForm()
@@ -65,5 +66,5 @@ def respond_review(request, review_id):
     if request.method == "POST":
         review.response = request.POST.get("response", "")
         review.save()
-        messages.success(request, "Réponse publiée.")
+        messages.success(request, _("Reply published."))
     return redirect("profiles:detail", pk=request.user.id)

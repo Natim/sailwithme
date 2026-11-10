@@ -1,6 +1,6 @@
 {% load i18n %}
-{% trans "Préférences" as section_title %}
-{% trans "Langues, confort à bord et photo visible sur le profil public." as section_hint %}
+{% trans "Preferences" as section_title %}
+{% trans "Languages, on-board comfort, and photo on your public profile." as section_hint %}
 {% include "profiles/partials/section_shell_start.html" with section_title=section_title section_hint=section_hint %}
   <form
     hx-post="{% url 'profiles:edit_section' 'preferences' %}"
@@ -13,26 +13,26 @@
     <div class="flex-1 space-y-4">
       {% include "profiles/partials/fields.html" with form=form exclude_field="photo" %}
       <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
-        <label class="mb-2 block text-sm font-medium text-slate-700" for="{{ form.photo.id_for_label }}">{% trans "Photo de profil" %}</label>
+        <label class="mb-2 block text-sm font-medium text-slate-700" for="{{ form.photo.id_for_label }}">{% trans "Profile photo" %}</label>
         <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
           {% if form.instance.photo %}
             <img
               src="{{ form.instance.photo.url }}"
-              alt="{% trans 'Photo de profil' %}"
+              alt="{% trans 'Profile photo' %}"
               class="h-24 w-24 shrink-0 rounded-full border-2 border-white object-cover shadow-md ring-1 ring-slate-200"
             >
             <div class="min-w-0 flex-1">
-              <p class="text-sm text-slate-600">{% trans "Photo enregistrée sur ton profil." %}</p>
+              <p class="text-sm text-slate-600">{% trans "Photo saved to your profile." %}</p>
               <label class="mt-2 flex items-center gap-2 text-sm text-slate-700">
                 <input type="checkbox" name="photo-clear" id="id_photo-clear" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
-                {% trans "Supprimer la photo" %}
+                {% trans "Remove photo" %}
               </label>
             </div>
           {% else %}
             <div class="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border border-dashed border-slate-300 bg-white text-xs text-slate-400">
-              {% trans "Aucune" %}
+              {% trans "None" %}
             </div>
-            <p class="text-sm text-slate-500">{% trans "Ajoute une photo pour personnaliser ton profil public." %}</p>
+            <p class="text-sm text-slate-500">{% trans "Add a photo to personalize your public profile." %}</p>
           {% endif %}
         </div>
         <input
@@ -46,6 +46,6 @@
       </div>
     </div>
     <button type="submit" class="btn-primary mt-6 w-full sm:w-auto">
-      {% trans "Enregistrer" %}
+      {% trans "Save" %}
     </button>
 {% include "profiles/partials/section_shell_end.html" %}

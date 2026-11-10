@@ -1,13 +1,13 @@
 {% extends "account/base_entrance.html" %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Connexion" %}{% endblock %}
+{% block head_title %}{% trans "Log in" %}{% endblock %}
 
 {% block account_content %}
-<h1 class="text-2xl font-bold text-sky-900">{% trans "Connexion" %}</h1>
+<h1 class="text-2xl font-bold text-sky-900">{% trans "Log in" %}</h1>
 <p class="mt-2 text-sm text-slate-600">
-  {% trans "Pas encore de compte ?" %}
-  <a href="{% url 'account_signup' %}" class="text-sky-700 font-medium hover:underline">{% trans "S'inscrire" %}</a>
+  {% trans "No account yet?" %}
+  <a href="{% url 'account_signup' %}" class="text-sky-700 font-medium hover:underline">{% trans "Sign up" %}</a>
 </p>
 
 {% if form.non_field_errors %}
@@ -23,11 +23,11 @@
   {% endfor %}
   {{ redirect_field }}
   <button type="submit" class="w-full rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700">
-    {% trans "Se connecter" %}
+    {% trans "Log in" %}
   </button>
 </form>
 
 <p class="mt-4 text-center text-sm">
-  <a href="{% url 'account_reset_password' %}" class="text-sky-700 hover:underline">{% trans "Mot de passe oublié ?" %}</a>
+  <a href="{% url 'account_reset_password' %}" class="text-sky-700 hover:underline">{% trans "Forgot your password?" %}</a>
 </p>
 {% endblock %}

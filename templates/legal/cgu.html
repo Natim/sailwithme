@@ -1,15 +1,21 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Conditions générales d'utilisation" %} — {{ SITE_NAME }}{% endblock %}
+{% block title %}{% trans "Terms of use" %} — {{ SITE_NAME }}{% endblock %}
 
 {% block content %}
 <article class="mx-auto max-w-3xl space-y-8 rounded-xl border bg-white p-8 shadow-sm prose prose-slate">
-  <h1 class="text-3xl font-bold text-sky-900">{% trans "Conditions générales d'utilisation" %}</h1>
-  <p class="text-sm text-slate-500">{% trans "Dernière mise à jour" %} : {% now "Y-m-d" %}</p>
+  <h1 class="text-3xl font-bold text-sky-900">{% trans "Terms of use" %}</h1>
+  <p class="text-sm text-slate-500">{% trans "Last updated" %} : {% now "Y-m-d" %}</p>
+  {% get_current_language as LANG %}
+  {% if LANG != "fr" %}
+    <p class="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+      {% trans "This translation is for information only; the French version is authoritative." %}
+    </p>
+  {% endif %}
 
   <section>
-    <h2>{% trans "Mentions légales" %}</h2>
+    <h2>{% trans "Legal notice" %}</h2>
     <p>
       {% blocktrans %}
       Conformément à l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique,
@@ -30,13 +36,13 @@
       {% trans "Email" %} : contact@cloudy.fr
     </address>
     <p>
-      {% trans "Responsable de la publication" %} : SAS CLOUDY<br>
+      {% trans "Publisher" %} : SAS CLOUDY<br>
       {% trans "Webmaster" %} : SAS CLOUDY
     </p>
   </section>
 
   <section>
-    <h2>{% trans "Objet du service" %}</h2>
+    <h2>{% trans "Purpose of the service" %}</h2>
     <p>
       {% blocktrans %}
       {{ SITE_NAME }} est une plateforme de mise en relation entre skippers et équipiers pour des navigations
@@ -48,7 +54,7 @@
   </section>
 
   <section>
-    <h2>{% trans "Participation aux frais et réglementation" %}</h2>
+    <h2>{% trans "Cost sharing and regulations" %}</h2>
     <p>
       {% blocktrans %}
       Toute participation aux frais de bord annoncée sur la plateforme doit rester strictement non lucrative et
@@ -62,16 +68,16 @@
   </section>
 
   <section>
-    <h2>{% trans "Comptes et contenus" %}</h2>
+    <h2>{% trans "Accounts and content" %}</h2>
     <ul>
-      <li>{% trans "L'utilisateur est responsable des informations publiées sur son profil, ses annonces et ses messages." %}</li>
-      <li>{% trans "SAS CLOUDY peut suspendre ou supprimer un compte en cas de fraude, harcèlement, contenu illicite ou violation des présentes conditions." %}</li>
-      <li>{% trans "Les avis publiés après navigation reflètent l'opinion des utilisateurs et n'engagent pas SAS CLOUDY." %}</li>
+      <li>{% trans "You are responsible for information on your profile, listings, and messages." %}</li>
+      <li>{% trans "SAS CLOUDY may suspend or delete an account in case of fraud, harassment, illegal content, or breach of these terms." %}</li>
+      <li>{% trans "Post-sail reviews reflect users' opinions and do not bind SAS CLOUDY." %}</li>
     </ul>
   </section>
 
   <section>
-    <h2>{% trans "Offres payantes" %}</h2>
+    <h2>{% trans "Paid plans" %}</h2>
     <p>
       {% blocktrans %}
       Les tarifs (Crew Pass, Skipper+, vérification d'identité) sont indiqués sur la page Tarifs.
@@ -83,7 +89,7 @@
   </section>
 
   <section>
-    <h2>{% trans "Données personnelles" %}</h2>
+    <h2>{% trans "Personal data" %}</h2>
     <p>
       {% blocktrans %}
       Les données collectées sont nécessaires au fonctionnement du service (compte, profil, annonces, messagerie).
@@ -93,7 +99,7 @@
   </section>
 
   <section>
-    <h2>{% trans "Limitation de responsabilité" %}</h2>
+    <h2>{% trans "Limitation of liability" %}</h2>
     <p>
       {% blocktrans %}
       Le service est fourni « en l'état ». SAS CLOUDY ne garantit pas la conclusion d'un embarquement ni la sécurité
@@ -104,7 +110,7 @@
   </section>
 
   <section>
-    <h2>{% trans "Propriété intellectuelle" %}</h2>
+    <h2>{% trans "Intellectual property" %}</h2>
     <p>
       {% blocktrans %}
       Le nom « Sails with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété
@@ -117,7 +123,7 @@
   </section>
 
   <section>
-    <h2>{% trans "Droit applicable" %}</h2>
+    <h2>{% trans "Applicable law" %}</h2>
     <p>
       {% blocktrans %}
       Les présentes conditions sont soumises au droit français. En cas de litige, et à défaut de résolution amiable,

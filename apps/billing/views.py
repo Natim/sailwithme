@@ -1,6 +1,7 @@
 
 from django.conf import settings
 from django.contrib import messages
+from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import redirect, render
@@ -24,7 +25,7 @@ def pricing(request):
 def checkout(request, plan):
     allowed = {c[0] for c in MembershipPlan.choices}
     if plan not in allowed:
-        messages.error(request, "Offre inconnue.")
+        messages.error(request, _("Unknown plan."))
         return redirect("billing:pricing")
 
     price_map = {
@@ -36,7 +37,7 @@ def checkout(request, plan):
 
     if not settings.STRIPE_SECRET_KEY or stripe is None:
         activate_membership(request.user, plan)
-        messages.success(request, "Abonnement activé (mode démo sans Stripe).")
+        messages.success(request, _("Subscription activated (demo mode without Stripe)."))
         return redirect("billing:success")
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -67,7 +68,7 @@ def checkout(request, plan):
 
 
 def checkout_success(request):
-    messages.success(request, "Paiement confirmé — merci !")
+    messages.success(request, _("Payment confirmed — thank you!"))
     return render(request, "billing/success.html")
 
 

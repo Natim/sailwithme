@@ -1,14 +1,16 @@
 from django.conf import settings
 from django.db import models
 
+from django.utils.translation import gettext_lazy as _
+
 from apps.core.models import UUIDModel
 
 
 class BoatType(models.TextChoices):
-    MONOHULL = "monohull", "Monocoque"
-    CATAMARAN = "catamaran", "Catamaran"
-    TRIMARAN = "trimaran", "Trimaran"
-    OTHER = "other", "Autre"
+    MONOHULL = "monohull", _("Monohull")
+    CATAMARAN = "catamaran", _("Catamaran")
+    TRIMARAN = "trimaran", _("Trimaran")
+    OTHER = "other", _("Other")
 
 
 class Boat(UUIDModel):

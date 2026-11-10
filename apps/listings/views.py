@@ -1,6 +1,7 @@
 import json
 
 from django.contrib import messages
+from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
@@ -25,6 +26,16 @@ from .models import (
 from .search import listings_for_map, search_listings
 
 
+def listing_map_i18n():
+    return {
+        "hintStart": _("First click: departure · second click: arrival"),
+        "hintDeparture": _("Departure set. Click for arrival."),
+        "hintEdit": _("Route set. Click the map to change departure, then arrival."),
+        "departure": _("Departure"),
+        "arrival": _("Arrival"),
+    }
+
+
 def listing_search(request):
     form = ListingSearchForm(request.GET)
     results = []
@@ -32,7 +43,7 @@ def listing_search(request):
     if form.is_valid():
         results = search_listings(form.cleaned_data)
     elif form.is_bound:
-        messages.error(request, "Corriguez les critères de recherche.")
+        messages.error(request, _("Fix your search criteria."))
     map_data = listings_for_map(results)
     alert_coords = {}
     if form.is_valid():
@@ -92,9 +103,13 @@ def listing_create(request):
         listing = form.save()
         listing.status = ListingStatus.PUBLISHED
         listing.save()
-        messages.success(request, "Annonce publiée.")
+        messages.success(request, _("Listing published."))
         return redirect("listings:detail", pk=listing.pk)
-    return render(request, "listings/form.html", {"form": form, "listing": None})
+    return render(
+        request,
+        "listings/form.html",
+        {"form": form, "listing": None, "listing_map_i18n": listing_map_i18n()},
+    )
 
 
 @login_required
@@ -103,9 +118,13 @@ def listing_edit(request, pk):
     form = ListingForm(request.user, request.POST or None, instance=listing)
     if request.method == "POST" and form.is_valid():
         form.save()
-        messages.success(request, "Annonce mise à jour.")
+        messages.success(request, _("Listing updated."))
         return redirect("listings:detail", pk=listing.pk)
-    return render(request, "listings/form.html", {"form": form, "listing": listing})
+    return render(
+        request,
+        "listings/form.html",
+        {"form": form, "listing": listing, "listing_map_i18n": listing_map_i18n()},
+    )
 
 
 @login_required
@@ -116,10 +135,10 @@ def listing_delete(request, pk):
         if has_applications:
             listing.status = ListingStatus.WITHDRAWN
             listing.save(update_fields=["status", "updated_at"])
-            messages.success(request, "Annonce retirée (des candidatures existent, elles sont conservées).")
+            messages.success(request, _("Listing withdrawn (applications exist and are kept)."))
         else:
             listing.delete()
-            messages.success(request, "Annonce supprimée.")
+            messages.success(request, _("Listing deleted."))
         return redirect("listings:mine")
     return render(
         request,
@@ -132,10 +151,10 @@ def listing_delete(request, pk):
 def listing_apply(request, pk):
     listing = get_object_or_404(Listing, pk=pk, status=ListingStatus.PUBLISHED)
     if listing.author_id == request.user.id:
-        messages.error(request, "Tu ne peux pas postuler à ta propre annonce.")
+        messages.error(request, _("You cannot apply to your own listing."))
         return redirect("listings:detail", pk=pk)
     if not user_can_initiate_contact(request.user) and listing.kind == ListingKind.CREW_WANTED:
-        messages.error(request, "Un Crew Pass est requis pour postuler (voir Tarifs).")
+        messages.error(request, _("A Crew Pass is required to apply (see Pricing)."))
         return redirect("billing:pricing")
     form = ApplicationForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
@@ -145,9 +164,9 @@ def listing_apply(request, pk):
             defaults={"message": form.cleaned_data["message"]},
         )
         if not created:
-            messages.warning(request, "Tu as déjà postulé.")
+            messages.warning(request, _("You already applied."))
         else:
-            messages.success(request, "Candidature envoyée.")
+            messages.success(request, _("Application sent."))
             from apps.messaging.services import start_conversation
 
             start_conversation(request.user, listing.author, listing=listing, first_message=app.message)
@@ -172,11 +191,11 @@ def application_decide(request, app_id, action):
                 defaults={"title": application.listing.title},
             )
             voyage.crew.add(application.applicant)
-        messages.success(request, "Candidature acceptée — voyage créé.")
+        messages.success(request, _("Application accepted — voyage created."))
     elif action == "reject":
         application.status = ApplicationStatus.REJECTED
         application.save()
-        messages.info(request, "Candidature refusée.")
+        messages.info(request, _("Application declined."))
     return redirect("listings:detail", pk=application.listing_id)
 
 
@@ -185,7 +204,7 @@ def save_search_alert(request):
     if request.method != "POST":
         return redirect("listings:search")
     if not user_can_initiate_contact(request.user):
-        messages.error(request, "Les alertes nécessitent un Crew Pass.")
+        messages.error(request, _("Alerts require a Crew Pass."))
         return redirect("billing:pricing")
     search_form = ListingSearchForm(request.POST)
     if search_form.is_valid():
@@ -205,9 +224,9 @@ def save_search_alert(request):
             week_from=cd.get("week_from"),
             week_to=cd.get("week_to"),
         )
-        messages.success(request, "Alerte enregistrée.")
+        messages.success(request, _("Alert saved."))
     else:
-        messages.error(request, "Impossible d'enregistrer l'alerte : critères invalides.")
+        messages.error(request, _("Could not save alert: invalid criteria."))
     query = request.POST.urlencode()
     url = reverse("listings:search")
     if query:

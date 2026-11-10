@@ -2,33 +2,33 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="font-display text-3xl font-bold text-ocean">{% trans "FAQ & sécurité" %}</h1>
+<h1 class="font-display text-3xl font-bold text-ocean">{% trans "FAQ & safety" %}</h1>
 <div class="mt-8 space-y-3" x-data="{ open: 'safety' }">
   <div class="card">
     <button type="button" class="flex w-full justify-between font-display font-semibold text-ocean" @click="open = open === 'safety' ? '' : 'safety'">
-      {% trans "Participation aux frais" %}
+      {% trans "Cost sharing" %}
       <span x-text="open === 'safety' ? '−' : '+'"></span>
     </button>
     <p x-show="open === 'safety'" x-cloak class="mt-3 text-sm text-slate-700">
-      {% trans "La participation aux frais de bord doit rester strictement non lucrative. Sails with Me n'est pas un transport commercial de passagers." %}
+      {% trans "On-board cost sharing must remain strictly non-commercial. Sails with Me is not commercial passenger transport." %}
     </p>
   </div>
   <div class="card">
     <button type="button" class="flex w-full justify-between font-display font-semibold text-ocean" @click="open = open === 'prep' ? '' : 'prep'">
-      {% trans "Avant le départ" %}
+      {% trans "Before departure" %}
       <span x-text="open === 'prep' ? '−' : '+'"></span>
     </button>
     <p x-show="open === 'prep'" x-cloak class="mt-3 text-sm text-slate-700">
-      {% trans "Contrat d'embarquement, assurance, équipement de sécurité, permis et certifications adaptés au programme." %}
+      {% trans "Boarding agreement, insurance, safety gear, and licenses suited to the programme." %}
     </p>
   </div>
   <div class="card">
     <button type="button" class="flex w-full justify-between font-display font-semibold text-ocean" @click="open = open === 'trust' ? '' : 'trust'">
-      {% trans "Confiance" %}
+      {% trans "Trust" %}
       <span x-text="open === 'trust' ? '−' : '+'"></span>
     </button>
     <p x-show="open === 'trust'" x-cloak class="mt-3 text-sm text-slate-700">
-      {% trans "Échange via la messagerie, vérifie les profils et lis les avis après navigation." %}
+      {% trans "Chat on the platform, check profiles, and read reviews after sailing." %}
     </p>
   </div>
 </div>

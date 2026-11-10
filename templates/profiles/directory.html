@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load i18n profile_extras %}
 
-{% block title %}{% trans "Annuaire équipiers" %}{% endblock %}
+{% block title %}{% trans "Crew directory" %}{% endblock %}
 
 {% block content %}
-<h1 class="font-display text-3xl font-bold text-ocean">{% trans "Annuaire des équipiers" %}</h1>
-<p class="mt-2 text-slate-600">{% trans "Profils visibles (Crew Pass)." %}</p>
+<h1 class="font-display text-3xl font-bold text-ocean">{% trans "Crew directory" %}</h1>
+<p class="mt-2 text-slate-600">{% trans "Visible profiles (Crew Pass)." %}</p>
 <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
   {% for profile in object_list %}
     <a href="{% url 'profiles:detail' profile.user_id %}" class="card flex items-center gap-3 transition hover:-translate-y-0.5 hover:shadow-lift">
@@ -18,7 +18,7 @@
       </div>
     </a>
   {% empty %}
-    <p class="text-slate-500">{% trans "Aucun profil visible." %}</p>
+    <p class="text-slate-500">{% trans "No visible profile." %}</p>
   {% endfor %}
 </div>
 {% endblock %}

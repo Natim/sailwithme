@@ -1,17 +1,17 @@
 {% extends "account/base_entrance.html" %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Inscription" %}{% endblock %}
+{% block head_title %}{% trans "Sign up" %}{% endblock %}
 
 {% block account_content %}
-<h1 class="text-2xl font-bold text-sky-900">{% trans "Inscription" %}</h1>
+<h1 class="text-2xl font-bold text-sky-900">{% trans "Sign up" %}</h1>
 <p class="mt-2 text-sm text-slate-600">
   {% url 'cgu' as cgu_url %}
   {% blocktrans %}En créant un compte, tu acceptes les <a href="{{ cgu_url }}" class="text-lagoon hover:underline" target="_blank" rel="noopener">conditions générales d'utilisation</a> de {{ SITE_NAME }}, édité par SAS CLOUDY.{% endblocktrans %}
 </p>
 <p class="mt-2 text-sm text-slate-600">
-  {% trans "Déjà inscrit ?" %}
-  <a href="{% url 'account_login' %}" class="text-sky-700 font-medium hover:underline">{% trans "Connexion" %}</a>
+  {% trans "Already registered?" %}
+  <a href="{% url 'account_login' %}" class="text-sky-700 font-medium hover:underline">{% trans "Log in" %}</a>
 </p>
 
 {% if form.non_field_errors %}
@@ -27,7 +27,7 @@
   {% endfor %}
   {{ redirect_field }}
   <button type="submit" class="w-full rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700">
-    {% trans "S'inscrire" %}
+    {% trans "Sign up" %}
   </button>
 </form>
 {% endblock %}

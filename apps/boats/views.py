@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.utils.translation import gettext as _
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
@@ -30,7 +31,7 @@ def boat_create(request):
             boat = form.save(commit=False)
             boat.owner = request.user
             boat.save()
-            messages.success(request, "Bateau enregistré.")
+            messages.success(request, _("Boat saved."))
             return redirect("boats:detail", pk=boat.pk)
     else:
         form = BoatForm()
@@ -44,7 +45,7 @@ def boat_edit(request, pk):
         form = BoatForm(request.POST, instance=boat)
         if form.is_valid():
             form.save()
-            messages.success(request, "Bateau mis à jour.")
+            messages.success(request, _("Boat updated."))
             return redirect("boats:detail", pk=boat.pk)
     else:
         form = BoatForm(instance=boat)
@@ -56,7 +57,7 @@ def boat_delete(request, pk):
     boat = get_object_or_404(Boat, pk=pk, owner=request.user)
     if request.method == "POST":
         boat.delete()
-        messages.success(request, "Bateau supprimé.")
+        messages.success(request, _("Boat deleted."))
         return redirect("boats:list")
     return render(request, "boats/confirm_delete.html", {"boat": boat})
 
@@ -76,7 +77,7 @@ def boat_add_photo(request, pk):
                     "boats/partials/gallery_item.html",
                     {"boat": boat, "photo": photo},
                 )
-            messages.success(request, "Photo ajoutée.")
+            messages.success(request, _("Photo added."))
             return redirect("boats:detail", pk=boat.pk)
         if request.headers.get("HX-Request"):
             return render(
@@ -99,5 +100,5 @@ def boat_photo_delete(request, photo_pk):
     photo.delete()
     if request.headers.get("HX-Request"):
         return HttpResponse("")
-    messages.success(request, "Photo supprimée.")
+    messages.success(request, _("Photo deleted."))
     return redirect("boats:detail", pk=boat_pk)

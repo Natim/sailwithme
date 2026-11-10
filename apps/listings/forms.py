@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.gis.geos import Point
+from django.utils.translation import gettext_lazy as _
 
 from apps.core.language_choices import LANGUAGE_CHOICES
 from apps.profiles.models import SkillLevel
@@ -16,13 +17,13 @@ class ListingForm(forms.ModelForm):
     arrival_lat = forms.FloatField(required=False, widget=forms.HiddenInput())
     arrival_lng = forms.FloatField(required=False, widget=forms.HiddenInput())
     season_shortcut = forms.ChoiceField(
-        label="Raccourci saison",
+        label=_("Season shortcut"),
         required=False,
         choices=[("", "—")] + [(k, v["label"]) for k, v in SEASON_SHORTCUTS.items()],
         widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     languages_on_board = forms.MultipleChoiceField(
-        label="Langues à bord",
+        label=_("Languages on board"),
         choices=LANGUAGE_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple,
@@ -72,25 +73,25 @@ class ListingForm(forms.ModelForm):
         self.user = user
         self.fields["boat"].queryset = user.boats.all()
         self.fields["boat"].required = False
-        self.fields["boat"].empty_label = "— Aucun —"
+        self.fields["boat"].empty_label = _("— None —")
         labels = {
-            "kind": "Type d'annonce",
-            "title": "Titre",
-            "description": "Description",
-            "programme_type": "Programme",
-            "boat": "Bateau",
-            "departure_name": "Nom du départ",
-            "arrival_name": "Nom de l'arrivée",
-            "year": "Année",
-            "week_from": "Semaine de début (ISO)",
-            "week_to": "Semaine de fin (ISO)",
-            "duration_days": "Durée (jours)",
-            "berths_available": "Couchettes disponibles",
-            "daily_contribution_eur": "Participation journalière (€)",
-            "min_skill_level": "Niveau minimum",
-            "languages_on_board": "Langues à bord",
-            "requirements": "Prérequis",
-            "flexibility_nm": "Souplesse sur la route (mn)",
+            "kind": _("Listing type"),
+            "title": _("Title"),
+            "description": _("Description"),
+            "programme_type": _("Programme"),
+            "boat": _("Boat"),
+            "departure_name": _("Departure name"),
+            "arrival_name": _("Arrival name"),
+            "year": _("Year"),
+            "week_from": _("Start week (ISO)"),
+            "week_to": _("End week (ISO)"),
+            "duration_days": _("Duration (days)"),
+            "berths_available": _("Berths available"),
+            "daily_contribution_eur": _("Daily contribution (€)"),
+            "min_skill_level": _("Minimum level"),
+            "languages_on_board": _("Languages on board"),
+            "requirements": _("Requirements"),
+            "flexibility_nm": _("Route flexibility (nm)"),
         }
         for name, label in labels.items():
             if name in self.fields:
@@ -131,7 +132,7 @@ class ListingForm(forms.ModelForm):
             cleaned["arrival_point"] = self.instance.arrival_point
         if not cleaned.get("departure_point") or not cleaned.get("arrival_point"):
             raise forms.ValidationError(
-                "Clique sur la carte pour placer le départ puis l'arrivée avant de publier."
+                _("Click the map to set departure then arrival before publishing.")
             )
         return cleaned
 
@@ -148,42 +149,42 @@ class ListingForm(forms.ModelForm):
 
 class ListingSearchForm(forms.Form):
     q = forms.CharField(
-        label="Mots-clés",
+        label=_("Keywords"),
         required=False,
         widget=forms.TextInput(
-            attrs={"class": LISTING_INPUT, "placeholder": "Route, escale…"}
+            attrs={"class": LISTING_INPUT, "placeholder": _("Route, port…")}
         ),
     )
     kind = forms.ChoiceField(
-        label="Type",
+        label=_("Type"),
         required=False,
-        choices=[("", "Tous")] + list(ListingKind.choices),
+        choices=[("", _("All"))] + list(ListingKind.choices),
         widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     programme_type = forms.ChoiceField(
-        label="Programme",
+        label=_("Programme"),
         required=False,
-        choices=[("", "Tous")],
+        choices=[("", _("All"))],
         widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     departure_port = forms.ModelChoiceField(
-        label="Départ (escale)",
+        label=_("Departure (port)"),
         queryset=None,
         required=False,
-        empty_label="— Tous —",
+        empty_label=_("— Any —"),
         widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     arrival_port = forms.ModelChoiceField(
-        label="Arrivée (escale)",
+        label=_("Arrival (port)"),
         queryset=None,
         required=False,
-        empty_label="— Tous —",
+        empty_label=_("— Any —"),
         widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     departure_lat = forms.FloatField(required=False, widget=forms.HiddenInput())
     departure_lng = forms.FloatField(required=False, widget=forms.HiddenInput())
     departure_radius_nm = forms.IntegerField(
-        label="Rayon départ (mn)",
+        label=_("Departure radius (nm)"),
         required=False,
         initial=150,
         min_value=10,
@@ -193,7 +194,7 @@ class ListingSearchForm(forms.Form):
     arrival_lat = forms.FloatField(required=False, widget=forms.HiddenInput())
     arrival_lng = forms.FloatField(required=False, widget=forms.HiddenInput())
     arrival_radius_nm = forms.IntegerField(
-        label="Rayon arrivée (mn)",
+        label=_("Arrival radius (nm)"),
         required=False,
         initial=150,
         min_value=10,
@@ -201,33 +202,33 @@ class ListingSearchForm(forms.Form):
         widget=forms.NumberInput(attrs={"class": LISTING_INPUT}),
     )
     year = forms.IntegerField(
-        label="Année",
+        label=_("Year"),
         required=False,
         min_value=2024,
         max_value=2035,
         widget=forms.NumberInput(attrs={"class": LISTING_INPUT}),
     )
     week_from = forms.IntegerField(
-        label="Semaine de",
+        label=_("Week from"),
         required=False,
         min_value=1,
         max_value=53,
         widget=forms.NumberInput(attrs={"class": LISTING_INPUT}),
     )
     week_to = forms.IntegerField(
-        label="Semaine à",
+        label=_("Week to"),
         required=False,
         min_value=1,
         max_value=53,
         widget=forms.NumberInput(attrs={"class": LISTING_INPUT}),
     )
     sort = forms.ChoiceField(
-        label="Tri",
+        label=_("Sort"),
         required=False,
         initial="relevance",
         choices=[
-            ("relevance", "Pertinence"),
-            ("date", "Date de départ"),
+            ("relevance", _("Relevance")),
+            ("date", _("Departure date")),
         ],
         widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
@@ -238,7 +239,7 @@ class ListingSearchForm(forms.Form):
 
         self.fields["departure_port"].queryset = Port.objects.all()
         self.fields["arrival_port"].queryset = Port.objects.all()
-        self.fields["programme_type"].choices = [("", "Tous")] + list(ProgrammeType.choices)
+        self.fields["programme_type"].choices = [("", _("All"))] + list(ProgrammeType.choices)
 
     def clean(self):
         cleaned = super().clean()
@@ -255,7 +256,7 @@ class ListingSearchForm(forms.Form):
         wt = cleaned.get("week_to")
         if any(x is not None for x in (year, wf, wt)) and not all(x is not None for x in (year, wf, wt)):
             raise forms.ValidationError(
-                "Pour filtrer par dates, renseignez l'année et les deux semaines (de / à)."
+                _("To filter by date, enter the year and both weeks (from / to).")
             )
         return cleaned
 
@@ -269,14 +270,14 @@ class ApplicationForm(forms.ModelForm):
                 attrs={
                     "rows": 4,
                     "class": LISTING_INPUT,
-                    "placeholder": "Présente-toi en quelques lignes…",
+                    "placeholder": _("Introduce yourself in a few lines…"),
                 }
             )
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["message"].label = "Message au skipper"
+        self.fields["message"].label = _("Message to the skipper")
 
 
 class SearchAlertForm(forms.ModelForm):

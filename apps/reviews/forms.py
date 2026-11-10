@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from .models import Review
 
@@ -32,13 +33,13 @@ class ReviewForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         labels = {
-            "rating_overall": "Note globale (1–5)",
-            "rating_seamanship": "Savoir-faire marin",
-            "rating_reliability": "Fiabilité",
-            "rating_atmosphere": "Ambiance",
-            "rating_safety": "Sécurité",
-            "rating_commitment": "Engagement",
-            "comment": "Commentaire",
+            "rating_overall": _("Overall rating (1–5)"),
+            "rating_seamanship": _("Seamanship"),
+            "rating_reliability": _("Reliability"),
+            "rating_atmosphere": _("Atmosphere"),
+            "rating_safety": _("Safety"),
+            "rating_commitment": _("Commitment"),
+            "comment": _("Comment"),
         }
         for name, label in labels.items():
             self.fields[name].label = label

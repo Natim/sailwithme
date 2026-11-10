@@ -10,7 +10,7 @@
 <div class="card prose mt-6 max-w-none text-slate-700">{{ route_page.body|linebreaks }}</div>
 {% endif %}
 <section class="mt-8">
-  <h2 class="section-title">{% trans "Annonces sur cette route" %}</h2>
+  <h2 class="section-title">{% trans "Listings on this route" %}</h2>
   <div class="mt-4">{% include "listings/partials/results.html" with results=listings %}</div>
 </section>
 {% endblock %}

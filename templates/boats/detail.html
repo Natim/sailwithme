@@ -7,15 +7,15 @@
   <p class="mt-2 flex flex-wrap gap-2">
     <span class="chip">{{ boat.get_boat_type_display }}</span>
     {% if boat.length_ft %}<span class="chip">{{ boat.length_ft }} ft</span>{% endif %}
-    <span class="chip">{{ boat.berths }} {% trans "places à bord" %}</span>
+    <span class="chip">{{ boat.berths }} {% trans "berths on board" %}</span>
     {% if boat.flag %}<span class="chip">{{ boat.flag }}</span>{% endif %}
   </p>
   {% if boat.model_name %}<p class="mt-2 text-sm text-slate-600">{{ boat.model_name }}{% if boat.year_built %} · {{ boat.year_built }}{% endif %}</p>{% endif %}
   <p class="mt-4 text-slate-700">{{ boat.description }}</p>
   {% if boat.owner == user %}
     <div class="mt-4 flex flex-wrap gap-2">
-      <a href="{% url 'boats:edit' boat.pk %}" class="btn-ghost">{% trans "Modifier" %}</a>
-      <a href="{% url 'boats:delete' boat.pk %}" class="btn-ghost text-coral">{% trans "Supprimer" %}</a>
+      <a href="{% url 'boats:edit' boat.pk %}" class="btn-ghost">{% trans "Edit" %}</a>
+      <a href="{% url 'boats:delete' boat.pk %}" class="btn-ghost text-coral">{% trans "Delete" %}</a>
     </div>
   {% endif %}
 </div>

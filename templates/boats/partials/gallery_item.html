@@ -11,7 +11,7 @@
       hx-swap="outerHTML"
     >
       {% csrf_token %}
-      <button type="submit" class="rounded-lg bg-white/90 px-2 py-0.5 text-xs font-semibold text-coral shadow hover:bg-white">{% trans "Supprimer" %}</button>
+      <button type="submit" class="rounded-lg bg-white/90 px-2 py-0.5 text-xs font-semibold text-coral shadow hover:bg-white">{% trans "Delete" %}</button>
     </form>
   {% endif %}
   {% if photo.caption %}<p class="bg-sand/90 px-2 py-1 text-xs text-slate-600">{{ photo.caption }}</p>{% endif %}

@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from apps.core.forms_ui import INPUT_CLASS
 
@@ -7,19 +8,19 @@ from .models import Profile
 CHECKBOX_CLASS = "rounded border-slate-300 text-teal-600 focus:ring-teal-500"
 
 CERTIFICATION_CHOICES = [
-    ("permis_mer", "Permis mer / Yachtmaster"),
+    ("permis_mer", _("Yachtmaster / offshore license")),
     ("stcw", "STCW"),
-    ("psc1", "PSC1 / premiers secours"),
-    ("vhf", "VHF / SRC"),
+    ("psc1", _("First aid / PSC1")),
+    ("vhf", _("VHF / SRC")),
 ]
 
 SKILL_CHOICES = [
-    ("cooking", "Cuisine"),
-    ("mechanics", "Mécanique"),
-    ("electronics", "Électronique"),
-    ("medical", "Premiers secours"),
-    ("celestial", "Navigation astro"),
-    ("photo", "Photo / vidéo"),
+    ("cooking", _("Cooking")),
+    ("mechanics", _("Mechanics")),
+    ("electronics", _("Electronics")),
+    ("medical", _("First aid")),
+    ("celestial", _("Celestial navigation")),
+    ("photo", _("Photo / video")),
 ]
 
 from apps.core.language_choices import LANGUAGE_CHOICES
@@ -33,38 +34,46 @@ class ProfileBasicsForm(forms.ModelForm):
             "pseudo": forms.TextInput(
                 attrs={"class": INPUT_CLASS, "placeholder": "Capitaine_Aurore", "maxlength": "32"}
             ),
-            "bio": forms.Textarea(attrs={"rows": 4, "class": INPUT_CLASS, "placeholder": "Quelques mots sur toi…"}),
+            "bio": forms.Textarea(
+                attrs={"rows": 4, "class": INPUT_CLASS, "placeholder": _("A few words about you…")}
+            ),
             "role": forms.Select(attrs={"class": INPUT_CLASS}),
             "nationality": forms.TextInput(attrs={"class": INPUT_CLASS, "placeholder": "France"}),
             "home_port": forms.TextInput(attrs={"class": INPUT_CLASS, "placeholder": "Lorient"}),
             "skill_level": forms.Select(attrs={"class": INPUT_CLASS}),
             "availability_notes": forms.Textarea(
-                attrs={"rows": 3, "class": INPUT_CLASS, "placeholder": "Disponibilités, fenêtres de croisière…"}
+                attrs={
+                    "rows": 3,
+                    "class": INPUT_CLASS,
+                    "placeholder": _("Availability, cruising windows…"),
+                }
             ),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["pseudo"].label = "Pseudo public"
-        self.fields["pseudo"].help_text = "Affiché sur les annonces et avis. Laisse vide pour un identifiant Marin-xxxxxxxx."
-        self.fields["role"].label = "Rôle"
-        self.fields["bio"].label = "Présentation"
-        self.fields["nationality"].label = "Nationalité"
-        self.fields["home_port"].label = "Port d'attache"
-        self.fields["skill_level"].label = "Niveau"
-        self.fields["availability_notes"].label = "Disponibilités"
+        self.fields["pseudo"].label = _("Public nickname")
+        self.fields["pseudo"].help_text = _(
+            "Shown on listings and reviews. Leave blank for a Marin-xxxxxxxx identifier."
+        )
+        self.fields["role"].label = _("Role")
+        self.fields["bio"].label = _("Bio")
+        self.fields["nationality"].label = _("Nationality")
+        self.fields["home_port"].label = _("Home port")
+        self.fields["skill_level"].label = _("Level")
+        self.fields["availability_notes"].label = _("Availability")
 
     def clean_pseudo(self):
         pseudo = (self.cleaned_data.get("pseudo") or "").strip()
         if not pseudo:
             return ""
         if len(pseudo) < 2:
-            raise forms.ValidationError("Le pseudo doit contenir au moins 2 caractères.")
+            raise forms.ValidationError(_("Username must be at least 2 characters."))
         qs = Profile.objects.filter(pseudo__iexact=pseudo)
         if self.instance.pk:
             qs = qs.exclude(pk=self.instance.pk)
         if qs.exists():
-            raise forms.ValidationError("Ce pseudo est déjà pris.")
+            raise forms.ValidationError(_("This username is already taken."))
         return pseudo
 
 
@@ -78,13 +87,13 @@ class ProfileExperienceForm(forms.ModelForm):
         }
 
     certifications = forms.MultipleChoiceField(
-        label="Certifications",
+        label=_("Certifications"),
         choices=CERTIFICATION_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple,
     )
     skills = forms.MultipleChoiceField(
-        label="Compétences",
+        label=_("Skills"),
         choices=SKILL_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple,
@@ -92,8 +101,8 @@ class ProfileExperienceForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["nautical_miles"].label = "Milles nautiques"
-        self.fields["ocean_crossings"].label = "Traversées océaniques"
+        self.fields["nautical_miles"].label = _("Nautical miles")
+        self.fields["ocean_crossings"].label = _("Ocean crossings")
         if self.instance.pk:
             self.fields["certifications"].initial = self.instance.certifications or []
             self.fields["skills"].initial = self.instance.skills or []
@@ -109,7 +118,7 @@ class ProfileExperienceForm(forms.ModelForm):
 
 class ProfilePreferencesForm(forms.ModelForm):
     languages = forms.MultipleChoiceField(
-        label="Langues parlées",
+        label=_("Languages spoken"),
         choices=LANGUAGE_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple,
@@ -135,10 +144,10 @@ class ProfilePreferencesForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["non_smoker"].label = "Non-fumeur"
-        self.fields["pets_ok"].label = "Animaux acceptés"
-        self.fields["vegetarian_friendly"].label = "Végétarien bienvenu"
-        self.fields["crew_directory_visible"].label = "Visible dans l'annuaire équipiers"
+        self.fields["non_smoker"].label = _("Non-smoker")
+        self.fields["pets_ok"].label = _("Pets welcome")
+        self.fields["vegetarian_friendly"].label = _("Vegetarians welcome")
+        self.fields["crew_directory_visible"].label = _("Visible in the crew directory")
         if self.instance.pk:
             self.fields["languages"].initial = self.instance.languages or []
 

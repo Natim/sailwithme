@@ -14,22 +14,22 @@
     <div>
       <h1 class="font-display text-3xl font-bold">{{ profile.public_name }}</h1>
       <p class="text-teal-50">{{ profile.get_role_display }} · {{ profile.get_skill_level_display }}</p>
-      {% if profile.user.identity_verified %}<span class="mt-1 inline-block rounded-full bg-sun px-2 py-0.5 text-xs font-bold text-ocean-deep">{% trans "Identité vérifiée" %}</span>{% endif %}
+      {% if profile.user.identity_verified %}<span class="mt-1 inline-block rounded-full bg-sun px-2 py-0.5 text-xs font-bold text-ocean-deep">{% trans "Identity verified" %}</span>{% endif %}
     </div>
   </div>
 </div>
 
 <div class="mt-8 grid gap-8 md:grid-cols-3">
   <section class="card md:col-span-2">
-    <p class="text-sm text-slate-500">{% trans "Profil complété à" %} {{ profile.completeness_score }}%</p>
+    <p class="text-sm text-slate-500">{% trans "Profile completed at" %} {{ profile.completeness_score }}%</p>
     <p class="mt-4 whitespace-pre-line text-slate-700">{{ profile.bio|default:"—" }}</p>
     <dl class="mt-6 grid gap-3 text-sm sm:grid-cols-2">
-      <div><dt class="font-bold text-ocean">{% trans "Nationalité" %}</dt><dd>{{ profile.nationality|default:"—" }}</dd></div>
-      <div><dt class="font-bold text-ocean">{% trans "Port d'attache" %}</dt><dd>{{ profile.home_port|default:"—" }}</dd></div>
+      <div><dt class="font-bold text-ocean">{% trans "Nationality" %}</dt><dd>{{ profile.nationality|default:"—" }}</dd></div>
+      <div><dt class="font-bold text-ocean">{% trans "Home port" %}</dt><dd>{{ profile.home_port|default:"—" }}</dd></div>
       <div><dt class="font-bold text-ocean">{% trans "Milles" %}</dt><dd>{{ profile.nautical_miles }}</dd></div>
-      <div><dt class="font-bold text-ocean">{% trans "Traversées" %}</dt><dd>{{ profile.ocean_crossings }}</dd></div>
+      <div><dt class="font-bold text-ocean">{% trans "Crossings" %}</dt><dd>{{ profile.ocean_crossings }}</dd></div>
       <div class="sm:col-span-2">
-        <dt class="font-bold text-ocean">{% trans "Compétences" %}</dt>
+        <dt class="font-bold text-ocean">{% trans "Skills" %}</dt>
         <dd class="mt-1">
           {% if profile.skill_labels %}
             <span class="flex flex-wrap gap-2">
@@ -48,12 +48,12 @@
   <aside class="space-y-4">
     {% if avg_rating %}
     <div class="card text-center">
-      <h2 class="font-display font-semibold text-ocean">{% trans "Avis" %}</h2>
+      <h2 class="font-display font-semibold text-ocean">{% trans "Reviews" %}</h2>
       <p class="font-display mt-2 text-4xl font-bold text-lagoon">{{ avg_rating|floatformat:1 }} ★</p>
     </div>
     {% endif %}
     <div class="card">
-      <h2 class="font-display font-semibold text-ocean">{% trans "Bateaux" %}</h2>
+      <h2 class="font-display font-semibold text-ocean">{% trans "Boats" %}</h2>
       <ul class="mt-2 space-y-1 text-sm">
         {% for boat in profile.user.boats.all %}
           <li><a href="{% url 'boats:detail' boat.pk %}" class="font-semibold text-lagoon">{{ boat.name }}</a></li>
@@ -66,7 +66,7 @@
 </div>
 {% if reviews %}
 <section class="card mt-8">
-  <h2 class="section-title">{% trans "Avis après navigation" %}</h2>
+  <h2 class="section-title">{% trans "Reviews after sailing" %}</h2>
   <ul class="mt-4 space-y-4">
     {% for review in reviews %}
       <li class="border-b border-sand-dark pb-4 last:border-0">

@@ -1,0 +1,1501 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 12:52+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: apps/billing/models.py:11 apps/billing/services.py:66
+msgid "Crew Pass — season"
+msgstr ""
+
+#: apps/billing/models.py:12 apps/billing/services.py:47
+msgid "Crew Pass — lifetime"
+msgstr ""
+
+#: apps/billing/models.py:13
+msgid "Skipper+"
+msgstr ""
+
+#: apps/billing/models.py:14 templates/billing/pricing.html:27
+msgid "Identity verified"
+msgstr ""
+
+#: apps/billing/services.py:33
+msgid "Staff access"
+msgstr ""
+
+#: apps/billing/services.py:62
+#, python-format
+msgid "Crew Pass — season active until %(date)s"
+msgstr ""
+
+#: apps/billing/services.py:80
+#, python-format
+msgid "Renewal expected on %(date)s"
+msgstr ""
+
+#: apps/billing/services.py:84
+msgid "Monthly subscription active"
+msgstr ""
+
+#: apps/billing/services.py:88
+msgid "Skipper role: contact without Crew Pass"
+msgstr ""
+
+#: apps/billing/views.py:28
+msgid "Unknown plan."
+msgstr ""
+
+#: apps/billing/views.py:40
+msgid "Subscription activated (demo mode without Stripe)."
+msgstr ""
+
+#: apps/billing/views.py:71
+msgid "Payment confirmed — thank you!"
+msgstr ""
+
+#: apps/boats/forms.py:12
+msgid "Watermaker"
+msgstr ""
+
+#: apps/boats/forms.py:14
+msgid "Starlink / internet"
+msgstr ""
+
+#: apps/boats/forms.py:15
+msgid "Autopilot"
+msgstr ""
+
+#: apps/boats/forms.py:16
+msgid "Dodger"
+msgstr ""
+
+#: apps/boats/forms.py:54
+msgid "Boat name"
+msgstr ""
+
+#: apps/boats/forms.py:55 apps/listings/forms.py:159
+msgid "Type"
+msgstr ""
+
+#: apps/boats/forms.py:56
+msgid "Model"
+msgstr ""
+
+#: apps/boats/forms.py:57
+msgid "Length (ft)"
+msgstr ""
+
+#: apps/boats/forms.py:58
+msgid "Year built"
+msgstr ""
+
+#: apps/boats/forms.py:59
+msgid "Flag"
+msgstr ""
+
+#: apps/boats/forms.py:60
+msgid "Berths on board"
+msgstr ""
+
+#: apps/boats/forms.py:61
+msgid "Equipment"
+msgstr ""
+
+#: apps/boats/forms.py:62 apps/listings/forms.py:80
+msgid "Description"
+msgstr ""
+
+#: apps/boats/forms.py:92
+msgid "Photo"
+msgstr ""
+
+#: apps/boats/forms.py:93
+msgid "Caption"
+msgstr ""
+
+#: apps/boats/forms.py:94
+msgid "Display order"
+msgstr ""
+
+#: apps/boats/forms.py:104
+msgid "Accepted formats: JPG, PNG, WebP, or GIF."
+msgstr ""
+
+#: apps/boats/models.py:10
+msgid "Monohull"
+msgstr ""
+
+#: apps/boats/models.py:11
+msgid "Catamaran"
+msgstr ""
+
+#: apps/boats/models.py:12
+msgid "Trimaran"
+msgstr ""
+
+#: apps/boats/models.py:13
+msgid "Other"
+msgstr ""
+
+#: apps/boats/views.py:34
+msgid "Boat saved."
+msgstr ""
+
+#: apps/boats/views.py:48
+msgid "Boat updated."
+msgstr ""
+
+#: apps/boats/views.py:60
+msgid "Boat deleted."
+msgstr ""
+
+#: apps/boats/views.py:80
+msgid "Photo added."
+msgstr ""
+
+#: apps/boats/views.py:103
+msgid "Photo deleted."
+msgstr ""
+
+#: apps/listings/forms.py:20
+msgid "Season shortcut"
+msgstr ""
+
+#: apps/listings/forms.py:26 apps/listings/forms.py:92
+msgid "Languages on board"
+msgstr ""
+
+#: apps/listings/forms.py:76
+msgid "— None —"
+msgstr ""
+
+#: apps/listings/forms.py:78
+msgid "Listing type"
+msgstr ""
+
+#: apps/listings/forms.py:79
+msgid "Title"
+msgstr ""
+
+#: apps/listings/forms.py:81 apps/listings/forms.py:165
+#: templates/core/home.html:35
+msgid "Programme"
+msgstr ""
+
+#: apps/listings/forms.py:82
+msgid "Boat"
+msgstr ""
+
+#: apps/listings/forms.py:83
+msgid "Departure name"
+msgstr ""
+
+#: apps/listings/forms.py:84
+msgid "Arrival name"
+msgstr ""
+
+#: apps/listings/forms.py:85 apps/listings/forms.py:205
+#: templates/core/home.html:44
+msgid "Year"
+msgstr ""
+
+#: apps/listings/forms.py:86
+msgid "Start week (ISO)"
+msgstr ""
+
+#: apps/listings/forms.py:87
+msgid "End week (ISO)"
+msgstr ""
+
+#: apps/listings/forms.py:88
+msgid "Duration (days)"
+msgstr ""
+
+#: apps/listings/forms.py:89
+msgid "Berths available"
+msgstr ""
+
+#: apps/listings/forms.py:90
+msgid "Daily contribution (€)"
+msgstr ""
+
+#: apps/listings/forms.py:91
+msgid "Minimum level"
+msgstr ""
+
+#: apps/listings/forms.py:93
+msgid "Requirements"
+msgstr ""
+
+#: apps/listings/forms.py:94
+msgid "Route flexibility (nm)"
+msgstr ""
+
+#: apps/listings/forms.py:135
+msgid "Click the map to set departure then arrival before publishing."
+msgstr ""
+
+#: apps/listings/forms.py:152
+msgid "Keywords"
+msgstr ""
+
+#: apps/listings/forms.py:155
+msgid "Route, port…"
+msgstr ""
+
+#: apps/listings/forms.py:161 apps/listings/forms.py:167
+#: apps/listings/forms.py:242 templates/core/home.html:37
+msgid "All"
+msgstr ""
+
+#: apps/listings/forms.py:171
+msgid "Departure (port)"
+msgstr ""
+
+#: apps/listings/forms.py:174 apps/listings/forms.py:181
+#: templates/core/home.html:28
+msgid "— Any —"
+msgstr ""
+
+#: apps/listings/forms.py:178
+msgid "Arrival (port)"
+msgstr ""
+
+#: apps/listings/forms.py:187
+msgid "Departure radius (nm)"
+msgstr ""
+
+#: apps/listings/forms.py:197
+msgid "Arrival radius (nm)"
+msgstr ""
+
+#: apps/listings/forms.py:212
+msgid "Week from"
+msgstr ""
+
+#: apps/listings/forms.py:219
+msgid "Week to"
+msgstr ""
+
+#: apps/listings/forms.py:226
+msgid "Sort"
+msgstr ""
+
+#: apps/listings/forms.py:230
+msgid "Relevance"
+msgstr ""
+
+#: apps/listings/forms.py:231
+msgid "Departure date"
+msgstr ""
+
+#: apps/listings/forms.py:259
+msgid "To filter by date, enter the year and both weeks (from / to)."
+msgstr ""
+
+#: apps/listings/forms.py:273
+msgid "Introduce yourself in a few lines…"
+msgstr ""
+
+#: apps/listings/forms.py:280
+msgid "Message to the skipper"
+msgstr ""
+
+#: apps/listings/iso_weeks.py:60
+msgid "Transatlantic (Nov.–Dec.)"
+msgstr ""
+
+#: apps/listings/iso_weeks.py:61
+msgid "Pacific Puddle Jump (Mar.–May)"
+msgstr ""
+
+#: apps/listings/iso_weeks.py:62
+msgid "Mediterranean (May–Oct.)"
+msgstr ""
+
+#: apps/listings/models.py:35
+msgid "Looking for crew"
+msgstr ""
+
+#: apps/listings/models.py:36
+msgid "Looking for a berth"
+msgstr ""
+
+#: apps/listings/models.py:40 templates/core/home.html:38
+msgid "Transatlantic"
+msgstr ""
+
+#: apps/listings/models.py:41 templates/core/home.html:39
+msgid "Transpacific"
+msgstr ""
+
+#: apps/listings/models.py:42 templates/core/home.html:40
+msgid "Mediterranean"
+msgstr ""
+
+#: apps/listings/models.py:43
+msgid "Delivery"
+msgstr ""
+
+#: apps/listings/models.py:44
+msgid "Coastal"
+msgstr ""
+
+#: apps/listings/models.py:45
+msgid "Full season"
+msgstr ""
+
+#: apps/listings/models.py:49
+msgid "Draft"
+msgstr ""
+
+#: apps/listings/models.py:50
+msgid "Published"
+msgstr ""
+
+#: apps/listings/models.py:51
+msgid "Complete"
+msgstr ""
+
+#: apps/listings/models.py:52
+msgid "Expired"
+msgstr ""
+
+#: apps/listings/models.py:53 apps/listings/models.py:154
+msgid "Withdrawn"
+msgstr ""
+
+#: apps/listings/models.py:151
+msgid "Pending"
+msgstr ""
+
+#: apps/listings/models.py:152
+msgid "Accepted"
+msgstr ""
+
+#: apps/listings/models.py:153
+msgid "Declined"
+msgstr ""
+
+#: apps/listings/views.py:31 templates/listings/form.html:22
+msgid "First click: departure · second click: arrival"
+msgstr ""
+
+#: apps/listings/views.py:32
+msgid "Departure set. Click for arrival."
+msgstr ""
+
+#: apps/listings/views.py:33
+msgid "Route set. Click the map to change departure, then arrival."
+msgstr ""
+
+#: apps/listings/views.py:34 templates/core/home.html:26
+msgid "Departure"
+msgstr ""
+
+#: apps/listings/views.py:35
+msgid "Arrival"
+msgstr ""
+
+#: apps/listings/views.py:46
+msgid "Fix your search criteria."
+msgstr ""
+
+#: apps/listings/views.py:106
+msgid "Listing published."
+msgstr ""
+
+#: apps/listings/views.py:121
+msgid "Listing updated."
+msgstr ""
+
+#: apps/listings/views.py:138
+msgid "Listing withdrawn (applications exist and are kept)."
+msgstr ""
+
+#: apps/listings/views.py:141
+msgid "Listing deleted."
+msgstr ""
+
+#: apps/listings/views.py:154
+msgid "You cannot apply to your own listing."
+msgstr ""
+
+#: apps/listings/views.py:157
+msgid "A Crew Pass is required to apply (see Pricing)."
+msgstr ""
+
+#: apps/listings/views.py:167
+msgid "You already applied."
+msgstr ""
+
+#: apps/listings/views.py:169
+msgid "Application sent."
+msgstr ""
+
+#: apps/listings/views.py:194
+msgid "Application accepted — voyage created."
+msgstr ""
+
+#: apps/listings/views.py:198
+msgid "Application declined."
+msgstr ""
+
+#: apps/listings/views.py:207
+msgid "Alerts require a Crew Pass."
+msgstr ""
+
+#: apps/listings/views.py:227
+msgid "Alert saved."
+msgstr ""
+
+#: apps/listings/views.py:229
+msgid "Could not save alert: invalid criteria."
+msgstr ""
+
+#: apps/messaging/views.py:59
+msgid "A Crew Pass is required to start a conversation."
+msgstr ""
+
+#: apps/messaging/views.py:98
+msgid "User blocked."
+msgstr ""
+
+#: apps/messaging/views.py:110
+msgid "Report sent."
+msgstr ""
+
+#: apps/profiles/forms.py:11
+msgid "Yachtmaster / offshore license"
+msgstr ""
+
+#: apps/profiles/forms.py:13
+msgid "First aid / PSC1"
+msgstr ""
+
+#: apps/profiles/forms.py:14
+msgid "VHF / SRC"
+msgstr ""
+
+#: apps/profiles/forms.py:18
+msgid "Cooking"
+msgstr ""
+
+#: apps/profiles/forms.py:19
+msgid "Mechanics"
+msgstr ""
+
+#: apps/profiles/forms.py:20
+msgid "Electronics"
+msgstr ""
+
+#: apps/profiles/forms.py:21
+msgid "First aid"
+msgstr ""
+
+#: apps/profiles/forms.py:22
+msgid "Celestial navigation"
+msgstr ""
+
+#: apps/profiles/forms.py:23
+msgid "Photo / video"
+msgstr ""
+
+#: apps/profiles/forms.py:38
+msgid "A few words about you…"
+msgstr ""
+
+#: apps/profiles/forms.py:48
+msgid "Availability, cruising windows…"
+msgstr ""
+
+#: apps/profiles/forms.py:55
+msgid "Public nickname"
+msgstr ""
+
+#: apps/profiles/forms.py:57
+msgid ""
+"Shown on listings and reviews. Leave blank for a Marin-xxxxxxxx identifier."
+msgstr ""
+
+#: apps/profiles/forms.py:59
+msgid "Role"
+msgstr ""
+
+#: apps/profiles/forms.py:60
+msgid "Bio"
+msgstr ""
+
+#: apps/profiles/forms.py:61
+msgid "Nationality"
+msgstr ""
+
+#: apps/profiles/forms.py:62
+msgid "Home port"
+msgstr ""
+
+#: apps/profiles/forms.py:63
+msgid "Level"
+msgstr ""
+
+#: apps/profiles/forms.py:64
+msgid "Availability"
+msgstr ""
+
+#: apps/profiles/forms.py:71
+msgid "Username must be at least 2 characters."
+msgstr ""
+
+#: apps/profiles/forms.py:76
+msgid "This username is already taken."
+msgstr ""
+
+#: apps/profiles/forms.py:90
+msgid "Certifications"
+msgstr ""
+
+#: apps/profiles/forms.py:96
+msgid "Skills"
+msgstr ""
+
+#: apps/profiles/forms.py:104
+msgid "Nautical miles"
+msgstr ""
+
+#: apps/profiles/forms.py:105
+msgid "Ocean crossings"
+msgstr ""
+
+#: apps/profiles/forms.py:121
+msgid "Languages spoken"
+msgstr ""
+
+#: apps/profiles/forms.py:147
+msgid "Non-smoker"
+msgstr ""
+
+#: apps/profiles/forms.py:148
+msgid "Pets welcome"
+msgstr ""
+
+#: apps/profiles/forms.py:149
+msgid "Vegetarians welcome"
+msgstr ""
+
+#: apps/profiles/forms.py:150
+msgid "Visible in the crew directory"
+msgstr ""
+
+#: apps/reviews/forms.py:36
+msgid "Overall rating (1–5)"
+msgstr ""
+
+#: apps/reviews/forms.py:37
+msgid "Seamanship"
+msgstr ""
+
+#: apps/reviews/forms.py:38
+msgid "Reliability"
+msgstr ""
+
+#: apps/reviews/forms.py:39
+msgid "Atmosphere"
+msgstr ""
+
+#: apps/reviews/forms.py:40
+msgid "Safety"
+msgstr ""
+
+#: apps/reviews/forms.py:41
+msgid "Commitment"
+msgstr ""
+
+#: apps/reviews/forms.py:42
+msgid "Comment"
+msgstr ""
+
+#: apps/reviews/views.py:22
+msgid "You did not take part in this voyage."
+msgstr ""
+
+#: apps/reviews/views.py:25
+msgid "You cannot review yourself."
+msgstr ""
+
+#: apps/reviews/views.py:31
+msgid "This person was not on the voyage."
+msgstr ""
+
+#: apps/reviews/views.py:40
+msgid "You already left a review for this voyage."
+msgstr ""
+
+#: apps/reviews/views.py:52
+msgid "Thanks for your review."
+msgstr ""
+
+#: apps/reviews/views.py:69
+msgid "Reply published."
+msgstr ""
+
+#: templates/account/base_entrance.html:5
+msgid "Compte"
+msgstr ""
+
+#: templates/account/base_entrance.html:12
+msgid "Join the crew"
+msgstr ""
+
+#: templates/account/base_entrance.html:13
+msgid "Offshore, ocean crossings, deliveries: find your berth."
+msgstr ""
+
+#: templates/account/login.html:4 templates/account/login.html:7
+#: templates/account/login.html:26 templates/account/signup.html:14
+#: templates/base.html:75 templates/base.html:98
+msgid "Log in"
+msgstr ""
+
+#: templates/account/login.html:9
+msgid "No account yet?"
+msgstr ""
+
+#: templates/account/login.html:10 templates/account/signup.html:4
+#: templates/account/signup.html:7 templates/account/signup.html:30
+#: templates/base.html:76 templates/base.html:99
+msgid "Sign up"
+msgstr ""
+
+#: templates/account/login.html:31
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/account/signup.html:10
+#, python-format
+msgid ""
+"En créant un compte, tu acceptes les <a href=\"%(cgu_url)s\" class=\"text-"
+"lagoon hover:underline\" target=\"_blank\" rel=\"noopener\">conditions "
+"générales d'utilisation</a> de %(SITE_NAME)s, édité par SAS CLOUDY."
+msgstr ""
+
+#: templates/account/signup.html:13
+msgid "Already registered?"
+msgstr ""
+
+#: templates/base.html:53 templates/base.html:89 templates/base.html:136
+#: templates/listings/search.html:7
+msgid "Listings"
+msgstr ""
+
+#: templates/base.html:54
+msgid "Crew members"
+msgstr ""
+
+#: templates/base.html:55
+msgid "FAQ"
+msgstr ""
+
+#: templates/base.html:58 templates/base.html:95
+#: templates/messaging/inbox.html:5
+msgid "Messages"
+msgstr ""
+
+#: templates/base.html:63 templates/base.html:92 templates/listings/mine.html:6
+msgid "My listings"
+msgstr ""
+
+#: templates/base.html:64 templates/base.html:93 templates/boats/list.html:6
+msgid "My boats"
+msgstr ""
+
+#: templates/base.html:65 templates/listings/form.html:34
+#: templates/reviews/form.html:57
+msgid "Post"
+msgstr ""
+
+#: templates/base.html:70
+msgid "You"
+msgstr ""
+
+#: templates/base.html:72
+msgid "Profile"
+msgstr ""
+
+#: templates/base.html:91 templates/listings/partials/results.html:30
+msgid "Post a listing"
+msgstr ""
+
+#: templates/base.html:94 templates/profiles/edit.html:4
+#: templates/profiles/edit.html:10
+msgid "My profile"
+msgstr ""
+
+#: templates/base.html:96
+msgid "Log out"
+msgstr ""
+
+#: templates/base.html:102
+msgid "Language"
+msgstr ""
+
+#: templates/base.html:131 templates/core/home.html:10
+msgid "Find your crew. Cross the ocean."
+msgstr ""
+
+#: templates/base.html:134
+msgid "Product"
+msgstr ""
+
+#: templates/base.html:137 templates/billing/pricing.html:5
+msgid "Pricing"
+msgstr ""
+
+#: templates/base.html:138
+msgid "FAQ / Safety"
+msgstr ""
+
+#: templates/base.html:142
+msgid "Legal"
+msgstr ""
+
+#: templates/base.html:144 templates/legal/cgu.html:4
+#: templates/legal/cgu.html:8
+msgid "Terms of use"
+msgstr ""
+
+#: templates/billing/pricing.html:6
+msgid "No commission on on-board cost sharing."
+msgstr ""
+
+#: templates/billing/pricing.html:9 templates/listings/detail.html:31
+msgid "Skipper"
+msgstr ""
+
+#: templates/billing/pricing.html:11
+msgid "Unlimited listings and applications."
+msgstr ""
+
+#: templates/billing/pricing.html:12
+msgid "month"
+msgstr ""
+
+#: templates/billing/pricing.html:15
+msgid "Popular"
+msgstr ""
+
+#: templates/billing/pricing.html:18
+msgid "One season — apply, alerts, and directory."
+msgstr ""
+
+#: templates/billing/pricing.html:19
+msgid "Activate"
+msgstr ""
+
+#: templates/billing/pricing.html:22
+msgid "lifetime"
+msgstr ""
+
+#: templates/billing/pricing.html:24
+msgid "Lifetime"
+msgstr ""
+
+#: templates/billing/pricing.html:29
+msgid "Verify"
+msgstr ""
+
+#: templates/billing/pricing.html:32
+msgid "Shared on-board amounts must remain non-commercial."
+msgstr ""
+
+#: templates/billing/success.html:7
+msgid "Thanks!"
+msgstr ""
+
+#: templates/billing/success.html:8
+msgid "Your subscription is active — time to cast off."
+msgstr ""
+
+#: templates/billing/success.html:9 templates/core/home.html:15
+msgid "Browse listings"
+msgstr ""
+
+#: templates/boats/confirm_delete.html:6
+msgid "Delete this boat?"
+msgstr ""
+
+#: templates/boats/confirm_delete.html:8
+#, python-format
+msgid "Tu es sur le point de supprimer « %(name)s »."
+msgstr ""
+
+#: templates/boats/confirm_delete.html:12
+msgid "Linked listings will not be deleted, but will no longer show this boat."
+msgstr ""
+
+#: templates/boats/confirm_delete.html:17
+msgid "Confirm deletion"
+msgstr ""
+
+#: templates/boats/confirm_delete.html:18
+#: templates/listings/confirm_delete.html:20 templates/listings/form.html:35
+msgid "Cancel"
+msgstr ""
+
+#: templates/boats/detail.html:10 templates/boats/list.html:15
+msgid "berths on board"
+msgstr ""
+
+#: templates/boats/detail.html:17 templates/listings/detail.html:12
+#: templates/listings/mine.html:15
+msgid "Edit"
+msgstr ""
+
+#: templates/boats/detail.html:18 templates/boats/partials/gallery_item.html:14
+#: templates/listings/detail.html:14 templates/listings/mine.html:17
+msgid "Delete"
+msgstr ""
+
+#: templates/boats/form.html:6
+msgid "Edit boat"
+msgstr ""
+
+#: templates/boats/form.html:6
+msgid "New boat"
+msgstr ""
+
+#: templates/boats/form.html:14 templates/listings/form.html:34
+#: templates/profiles/partials/basics_form.html:16
+#: templates/profiles/partials/experience_form.html:33
+#: templates/profiles/partials/preferences_form.html:49
+msgid "Save"
+msgstr ""
+
+#: templates/boats/list.html:7
+msgid "Add"
+msgstr ""
+
+#: templates/boats/list.html:19
+msgid "You have not added a boat yet."
+msgstr ""
+
+#: templates/boats/partials/photo_form.html:12
+msgid "Add photo"
+msgstr ""
+
+#: templates/core/home.html:4
+msgid "Offshore passage"
+msgstr ""
+
+#: templates/core/home.html:9
+msgid "Offshore & ocean crossings"
+msgstr ""
+
+#: templates/core/home.html:12
+msgid ""
+"Skippers with boats, crew without: weekly geo listings, messaging, and post-"
+"sail reviews."
+msgstr ""
+
+#: templates/core/home.html:16
+msgid "Create an account"
+msgstr ""
+
+#: templates/core/home.html:23
+msgid "Where do you want to sail?"
+msgstr ""
+
+#: templates/core/home.html:48 templates/listings/search.html:26
+msgid "Search"
+msgstr ""
+
+#: templates/core/home.html:52
+msgid "How it works"
+msgstr ""
+
+#: templates/core/home.html:56
+msgid "Find your route"
+msgstr ""
+
+#: templates/core/home.html:57
+msgid "Filter by port, programme, and ISO weeks."
+msgstr ""
+
+#: templates/core/home.html:61
+msgid "Chat with the skipper"
+msgstr ""
+
+#: templates/core/home.html:62
+msgid "Built-in messaging to prepare the crew."
+msgstr ""
+
+#: templates/core/home.html:66
+msgid "Cast off"
+msgstr ""
+
+#: templates/core/home.html:67
+msgid "Cross-reviews after the passage build trust."
+msgstr ""
+
+#: templates/core/home.html:73
+msgid "Popular routes"
+msgstr ""
+
+#: templates/core/home.html:91
+msgid "Sail with confidence"
+msgstr ""
+
+#: templates/core/home.html:93
+msgid "Cross-reviews after each confirmed passage"
+msgstr ""
+
+#: templates/core/home.html:94
+msgid "Verifiable identity (Crew Pass)"
+msgstr ""
+
+#: templates/core/home.html:95
+msgid "Report from messaging"
+msgstr ""
+
+#: templates/core/home.html:96
+msgid "Cost sharing: transparency on listings"
+msgstr ""
+
+#: templates/core/home.html:98 templates/listings/faq.html:5
+msgid "FAQ & safety"
+msgstr ""
+
+#: templates/legal/cgu.html:9
+msgid "Last updated"
+msgstr ""
+
+#: templates/legal/cgu.html:13
+msgid ""
+"This translation is for information only; the French version is "
+"authoritative."
+msgstr ""
+
+#: templates/legal/cgu.html:18
+msgid "Legal notice"
+msgstr ""
+
+#: templates/legal/cgu.html:20
+#, python-format
+msgid ""
+"\n"
+"      Conformément à l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour "
+"la confiance dans l'économie numérique,\n"
+"      les utilisateurs du service %(SITE_NAME)s sont informés de l'identité "
+"des intervenants :\n"
+"      "
+msgstr ""
+
+#: templates/legal/cgu.html:26
+#, python-format
+msgid ""
+"\n"
+"      Le site et l'application %(SITE_NAME)s sont édités par la société "
+"<strong>SAS CLOUDY</strong>,\n"
+"      prestataire des services décrits dans les présentes conditions.\n"
+"      "
+msgstr ""
+
+#: templates/legal/cgu.html:36
+msgid "Email"
+msgstr ""
+
+#: templates/legal/cgu.html:39
+msgid "Publisher"
+msgstr ""
+
+#: templates/legal/cgu.html:40
+msgid "Webmaster"
+msgstr ""
+
+#: templates/legal/cgu.html:45
+msgid "Purpose of the service"
+msgstr ""
+
+#: templates/legal/cgu.html:47
+#, python-format
+msgid ""
+"\n"
+"      %(SITE_NAME)s est une plateforme de mise en relation entre skippers et "
+"équipiers pour des navigations\n"
+"      de longue distance. SAS CLOUDY fournit un hébergement technique, des "
+"outils de recherche, de messagerie et\n"
+"      d'évaluation entre utilisateurs. SAS CLOUDY n'est pas armateur, "
+"transporteur maritime, agence de voyage\n"
+"      ni intermédiaire commercial pour le transport de passagers.\n"
+"      "
+msgstr ""
+
+#: templates/legal/cgu.html:57
+msgid "Cost sharing and regulations"
+msgstr ""
+
+#: templates/legal/cgu.html:59
+msgid ""
+"\n"
+"      Toute participation aux frais de bord annoncée sur la plateforme doit "
+"rester strictement non lucrative et\n"
+"      correspondre au partage réel des dépenses du bord (avitaillement, "
+"escales, etc.). Aucun enrichissement du\n"
+"      skipper ou de l'équipage au titre du transport ne doit en résulter. "
+"Les utilisateurs restent seuls responsables\n"
+"      du respect de la réglementation applicable (notamment transport "
+"maritime de passagers, assurance, permis et\n"
+"      qualifications). SAS CLOUDY ne contrôle pas les navigations et décline "
+"toute responsabilité en cas de manquement\n"
+"      réglementaire entre les parties.\n"
+"      "
+msgstr ""
+
+#: templates/legal/cgu.html:71
+msgid "Accounts and content"
+msgstr ""
+
+#: templates/legal/cgu.html:73
+msgid ""
+"You are responsible for information on your profile, listings, and messages."
+msgstr ""
+
+#: templates/legal/cgu.html:74
+msgid ""
+"SAS CLOUDY may suspend or delete an account in case of fraud, harassment, "
+"illegal content, or breach of these terms."
+msgstr ""
+
+#: templates/legal/cgu.html:75
+msgid "Post-sail reviews reflect users' opinions and do not bind SAS CLOUDY."
+msgstr ""
+
+#: templates/legal/cgu.html:80
+msgid "Paid plans"
+msgstr ""
+
+#: templates/legal/cgu.html:82
+msgid ""
+"\n"
+"      Les tarifs (Crew Pass, Skipper+, vérification d'identité) sont "
+"indiqués sur la page Tarifs.\n"
+"      Le paiement est traité par un prestataire tiers (Stripe). Les "
+"conditions de remboursement applicables\n"
+"      sont celles communiquées au moment de l'achat. SAS CLOUDY se réserve "
+"le droit de modifier ses tarifs\n"
+"      pour les souscriptions futures.\n"
+"      "
+msgstr ""
+
+#: templates/legal/cgu.html:92
+msgid "Personal data"
+msgstr ""
+
+#: templates/legal/cgu.html:94
+msgid ""
+"\n"
+"      Les données collectées sont nécessaires au fonctionnement du service "
+"(compte, profil, annonces, messagerie).\n"
+"      Pour toute demande relative à vos données, contactez SAS CLOUDY à "
+"contact@cloudy.fr.\n"
+"      "
+msgstr ""
+
+#: templates/legal/cgu.html:102
+msgid "Limitation of liability"
+msgstr ""
+
+#: templates/legal/cgu.html:104
+msgid ""
+"\n"
+"      Le service est fourni « en l'état ». SAS CLOUDY ne garantit pas la "
+"conclusion d'un embarquement ni la sécurité\n"
+"      des navigations organisées entre utilisateurs. Chaque skipper et "
+"chaque équipier demeure seul responsable des\n"
+"      vérifications préalables (compétences, assurance, équipement, contrat "
+"d'embarquement).\n"
+"      "
+msgstr ""
+
+#: templates/legal/cgu.html:113
+msgid "Intellectual property"
+msgstr ""
+
+#: templates/legal/cgu.html:115
+msgid ""
+"\n"
+"      Le nom « Sails with Me », la charte graphique du site (hors code) et "
+"les contenus éditoriaux sont la propriété\n"
+"      de SAS CLOUDY ou de ses ayants droit.\n"
+"      Le code source de l'application est publié sous la\n"
+"      <strong>GNU Affero General Public License version 3</strong> (voir "
+"fichier LICENSE du dépôt).\n"
+"      Cette licence ne couvre pas le nom « Sails with Me », les logos ni la "
+"charte graphique.\n"
+"      "
+msgstr ""
+
+#: templates/legal/cgu.html:126
+msgid "Applicable law"
+msgstr ""
+
+#: templates/legal/cgu.html:128
+msgid ""
+"\n"
+"      Les présentes conditions sont soumises au droit français. En cas de "
+"litige, et à défaut de résolution amiable,\n"
+"      les tribunaux compétents du ressort de SAS CLOUDY seront seuls "
+"compétents, sauf disposition impérative contraire.\n"
+"      "
+msgstr ""
+
+#: templates/listings/confirm_delete.html:6
+msgid "Delete this listing?"
+msgstr ""
+
+#: templates/listings/confirm_delete.html:10
+msgid ""
+"Applications exist: the listing will be withdrawn (hidden from search), but "
+"applications and conversations are kept."
+msgstr ""
+
+#: templates/listings/confirm_delete.html:13
+msgid "No applications: the listing will be permanently deleted."
+msgstr ""
+
+#: templates/listings/confirm_delete.html:18
+msgid "Withdraw listing"
+msgstr ""
+
+#: templates/listings/confirm_delete.html:18
+msgid "Delete permanently"
+msgstr ""
+
+#: templates/listings/detail.html:25
+msgid "Indicative contribution"
+msgstr ""
+
+#: templates/listings/detail.html:25
+#: templates/listings/partials/results.html:15
+msgid "day"
+msgstr ""
+
+#: templates/listings/detail.html:25
+msgid "non-commercial"
+msgstr ""
+
+#: templates/listings/detail.html:42
+msgid "Apply"
+msgstr ""
+
+#: templates/listings/detail.html:46 templates/messaging/inbox.html:27
+msgid "Send"
+msgstr ""
+
+#: templates/listings/detail.html:55
+msgid "Applications"
+msgstr ""
+
+#: templates/listings/detail.html:62
+msgid "Accept"
+msgstr ""
+
+#: templates/listings/detail.html:63
+msgid "Decline"
+msgstr ""
+
+#: templates/listings/detail.html:68
+msgid "No applications yet."
+msgstr ""
+
+#: templates/listings/faq.html:9
+msgid "Cost sharing"
+msgstr ""
+
+#: templates/listings/faq.html:13
+msgid ""
+"On-board cost sharing must remain strictly non-commercial. Sails with Me is "
+"not commercial passenger transport."
+msgstr ""
+
+#: templates/listings/faq.html:18
+msgid "Before departure"
+msgstr ""
+
+#: templates/listings/faq.html:22
+msgid ""
+"Boarding agreement, insurance, safety gear, and licenses suited to the "
+"programme."
+msgstr ""
+
+#: templates/listings/faq.html:27
+msgid "Trust"
+msgstr ""
+
+#: templates/listings/faq.html:31
+msgid "Chat on the platform, check profiles, and read reviews after sailing."
+msgstr ""
+
+#: templates/listings/form.html:5
+msgid "Edit listing"
+msgstr ""
+
+#: templates/listings/form.html:5
+msgid "New listing"
+msgstr ""
+
+#: templates/listings/form.html:6
+msgid "Route · Dates · Crew · Details"
+msgstr ""
+
+#: templates/listings/form.html:14
+msgid "1. Route"
+msgstr ""
+
+#: templates/listings/form.html:15
+msgid "2. Dates"
+msgstr ""
+
+#: templates/listings/form.html:16
+msgid "3. Crew"
+msgstr ""
+
+#: templates/listings/form.html:17
+msgid "4. Details"
+msgstr ""
+
+#: templates/listings/form.html:19
+msgid "Route on the map"
+msgstr ""
+
+#: templates/listings/form.html:23
+msgid "Clear route"
+msgstr ""
+
+#: templates/listings/mine.html:7
+msgid "Create"
+msgstr ""
+
+#: templates/listings/mine.html:22
+msgid "You have not posted a listing yet."
+msgstr ""
+
+#: templates/listings/partials/results.html:14
+msgid "berths"
+msgstr ""
+
+#: templates/listings/partials/results.html:28
+msgid "No listings match these criteria."
+msgstr ""
+
+#: templates/listings/route_page.html:13
+msgid "Listings on this route"
+msgstr ""
+
+#: templates/listings/search.html:4
+msgid "Listing search"
+msgstr ""
+
+#: templates/listings/search.html:8
+msgid ""
+"Filter by port, programme, and ISO weeks — with no filter, everyone is "
+"listed."
+msgstr ""
+
+#: templates/listings/search.html:27
+msgid "Reset"
+msgstr ""
+
+#: templates/listings/search.html:29
+msgid "result(s)"
+msgstr ""
+
+#: templates/listings/search.html:37
+msgid "Alerte annonces"
+msgstr ""
+
+#: templates/listings/search.html:38
+msgid "Save as alert"
+msgstr ""
+
+#: templates/messaging/inbox.html:10
+msgid "Conversation"
+msgstr ""
+
+#: templates/messaging/inbox.html:13
+msgid "No conversations yet."
+msgstr ""
+
+#: templates/messaging/inbox.html:26
+msgid "Ton message…"
+msgstr ""
+
+#: templates/messaging/inbox.html:30
+msgid "Select a conversation."
+msgstr ""
+
+#: templates/profiles/detail.html:17
+msgid "Identité vérifiée"
+msgstr ""
+
+#: templates/profiles/detail.html:24
+msgid "Profil complété à"
+msgstr ""
+
+#: templates/profiles/detail.html:27
+msgid "Nationalité"
+msgstr ""
+
+#: templates/profiles/detail.html:28
+msgid "Port d'attache"
+msgstr ""
+
+#: templates/profiles/detail.html:29
+msgid "Milles"
+msgstr ""
+
+#: templates/profiles/detail.html:30
+msgid "Traversées"
+msgstr ""
+
+#: templates/profiles/detail.html:32
+msgid "Compétences"
+msgstr ""
+
+#: templates/profiles/detail.html:51
+msgid "Avis"
+msgstr ""
+
+#: templates/profiles/detail.html:56
+msgid "Bateaux"
+msgstr ""
+
+#: templates/profiles/detail.html:69
+msgid "Avis après navigation"
+msgstr ""
+
+#: templates/profiles/directory.html:4 templates/profiles/directory.html:7
+msgid "Crew directory"
+msgstr ""
+
+#: templates/profiles/directory.html:8
+msgid "Visible profiles (Crew Pass)."
+msgstr ""
+
+#: templates/profiles/directory.html:21
+msgid "No visible profile."
+msgstr ""
+
+#: templates/profiles/edit.html:12
+msgid "Complete all three sections — each block saves separately."
+msgstr ""
+
+#: templates/profiles/edit.html:25
+msgid "Profile completion"
+msgstr ""
+
+#: templates/profiles/edit.html:37
+msgid "My subscription"
+msgstr ""
+
+#: templates/profiles/edit.html:40 templates/profiles/edit.html:45
+msgid "Active"
+msgstr ""
+
+#: templates/profiles/edit.html:40 templates/profiles/edit.html:45
+msgid "Inactive"
+msgstr ""
+
+#: templates/profiles/edit.html:50
+msgid "Verified"
+msgstr ""
+
+#: templates/profiles/edit.html:50
+msgid "Not verified"
+msgstr ""
+
+#: templates/profiles/edit.html:51
+msgid "Identity"
+msgstr ""
+
+#: templates/profiles/edit.html:55
+msgid "You can contact other members and apply to listings."
+msgstr ""
+
+#: templates/profiles/edit.html:55
+msgid "A Crew Pass is required to contact members and apply."
+msgstr ""
+
+#: templates/profiles/edit.html:59
+msgid "View plans"
+msgstr ""
+
+#: templates/profiles/edit.html:78
+msgid "View public profile"
+msgstr ""
+
+#: templates/profiles/partials/basics_form.html:2
+msgid "General"
+msgstr ""
+
+#: templates/profiles/partials/basics_form.html:3
+msgid "Bio, role, and availability."
+msgstr ""
+
+#: templates/profiles/partials/experience_form.html:2
+msgid "Experience"
+msgstr ""
+
+#: templates/profiles/partials/experience_form.html:3
+msgid "Miles, crossings, certifications, and skills."
+msgstr ""
+
+#: templates/profiles/partials/preferences_form.html:2
+msgid "Preferences"
+msgstr ""
+
+#: templates/profiles/partials/preferences_form.html:3
+msgid "Languages, on-board comfort, and photo on your public profile."
+msgstr ""
+
+#: templates/profiles/partials/preferences_form.html:16
+#: templates/profiles/partials/preferences_form.html:21
+msgid "Profile photo"
+msgstr ""
+
+#: templates/profiles/partials/preferences_form.html:25
+msgid "Photo saved to your profile."
+msgstr ""
+
+#: templates/profiles/partials/preferences_form.html:28
+msgid "Remove photo"
+msgstr ""
+
+#: templates/profiles/partials/preferences_form.html:33
+msgid "None"
+msgstr ""
+
+#: templates/profiles/partials/preferences_form.html:35
+msgid "Add a photo to personalize your public profile."
+msgstr ""
+
+#: templates/profiles/partials/section_shell_start.html:5
+msgid "Saved."
+msgstr ""
+
+#: templates/reviews/form.html:5
+msgid "Leave a review"
+msgstr ""

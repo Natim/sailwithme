@@ -2,8 +2,8 @@
 {% load i18n static %}
 
 {% block content %}
-<h1 class="font-display text-3xl font-bold text-ocean">{% if listing %}{% trans "Modifier l'annonce" %}{% else %}{% trans "Nouvelle annonce" %}{% endif %}</h1>
-<p class="mt-1 text-sm text-slate-600">{% trans "Route · Dates · Équipage · Détails" %}</p>
+<h1 class="font-display text-3xl font-bold text-ocean">{% if listing %}{% trans "Edit listing" %}{% else %}{% trans "New listing" %}{% endif %}</h1>
+<p class="mt-1 text-sm text-slate-600">{% trans "Route · Dates · Crew · Details" %}</p>
 
 <form method="post" class="card mt-6 max-w-3xl border-lagoon/10" id="listing-form">
   {% csrf_token %}
@@ -13,14 +13,14 @@
   <div class="mb-6 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wide text-ocean/50">
     <span class="chip">{% trans "1. Route" %}</span>
     <span class="chip">{% trans "2. Dates" %}</span>
-    <span class="chip">{% trans "3. Équipage" %}</span>
-    <span class="chip">{% trans "4. Détails" %}</span>
+    <span class="chip">{% trans "3. Crew" %}</span>
+    <span class="chip">{% trans "4. Details" %}</span>
   </div>
-  <h2 class="section-title">{% trans "Itinéraire sur la carte" %}</h2>
+  <h2 class="section-title">{% trans "Route on the map" %}</h2>
   <div class="mt-4 rounded-2xl border border-lagoon/20 bg-sand p-4">
     <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
-      <p id="listing-map-hint" class="text-sm font-semibold text-ocean">{% trans "1er clic : départ · 2e clic : arrivée" %}</p>
-      <button type="button" id="listing-map-reset" class="text-xs font-semibold text-lagoon hover:underline">{% trans "Effacer la route" %}</button>
+      <p id="listing-map-hint" class="text-sm font-semibold text-ocean">{% trans "First click: departure · second click: arrival" %}</p>
+      <button type="button" id="listing-map-reset" class="text-xs font-semibold text-lagoon hover:underline">{% trans "Clear route" %}</button>
     </div>
     <div id="listing-coords" class="hidden" aria-hidden="true">
       {{ form.departure_lat }}{{ form.departure_lng }}{{ form.arrival_lat }}{{ form.arrival_lng }}
@@ -31,14 +31,15 @@
     {% include "includes/form_fields.html" with skip_coord_hidden=True %}
   </div>
   <div class="mt-8 flex flex-wrap gap-3">
-    <button type="submit" class="btn-primary">{% if listing %}{% trans "Enregistrer" %}{% else %}{% trans "Publier" %}{% endif %}</button>
-    {% if listing %}<a href="{% url 'listings:detail' listing.pk %}" class="btn-ghost">{% trans "Annuler" %}</a>{% endif %}
+    <button type="submit" class="btn-primary">{% if listing %}{% trans "Save" %}{% else %}{% trans "Post" %}{% endif %}</button>
+    {% if listing %}<a href="{% url 'listings:detail' listing.pk %}" class="btn-ghost">{% trans "Cancel" %}</a>{% endif %}
   </div>
 </form>
 {% endblock %}
 
 {% block extra_js %}
 {% include "includes/map_tile_config.html" %}
+{{ listing_map_i18n|json_script:"listing-map-i18n" }}
 <script src="{% static 'js/map-basemap.js' %}"></script>
 <script src="{% static 'js/listing-map-picker.js' %}"></script>
 <script>document.addEventListener("DOMContentLoaded", () => initListingMapPicker("listing-map"));</script>

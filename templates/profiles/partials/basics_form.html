@@ -1,6 +1,6 @@
 {% load i18n %}
-{% trans "Général" as section_title %}
-{% trans "Présentation, rôle et disponibilités." as section_hint %}
+{% trans "General" as section_title %}
+{% trans "Bio, role, and availability." as section_hint %}
 {% include "profiles/partials/section_shell_start.html" with section_title=section_title section_hint=section_hint %}
   <form
     hx-post="{% url 'profiles:edit_section' 'basics' %}"
@@ -13,6 +13,6 @@
       {% include "profiles/partials/fields.html" with form=form exclude_field="" %}
     </div>
     <button type="submit" class="btn-primary mt-6 w-full sm:w-auto">
-      {% trans "Enregistrer" %}
+      {% trans "Save" %}
     </button>
 {% include "profiles/partials/section_shell_end.html" %}

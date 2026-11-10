@@ -3,6 +3,7 @@ from typing import Any
 
 from django.utils import timezone
 from django.utils.formats import date_format
+from django.utils.translation import gettext as _
 
 from apps.profiles.models import ProfileRole
 
@@ -29,7 +30,7 @@ def membership_summary_for_user(user) -> dict[str, Any]:
     if user.is_staff:
         summary["staff_bypass"] = True
         summary["crew_pass_active"] = True
-        summary["crew_pass_detail"] = "Accès staff"
+        summary["crew_pass_detail"] = _("Staff access")
         return summary
 
     lifetime = (
@@ -43,7 +44,7 @@ def membership_summary_for_user(user) -> dict[str, Any]:
     )
     if lifetime and lifetime.is_current():
         summary["crew_pass_active"] = True
-        summary["crew_pass_detail"] = "Crew Pass à vie"
+        summary["crew_pass_detail"] = _("Crew Pass — lifetime")
 
     if not summary["crew_pass_active"]:
         season = (
@@ -58,11 +59,11 @@ def membership_summary_for_user(user) -> dict[str, Any]:
         if season and season.is_current():
             summary["crew_pass_active"] = True
             if season.valid_until:
-                summary["crew_pass_detail"] = (
-                    f"Crew Pass saison — actif jusqu’au {date_format(season.valid_until, 'SHORT_DATE_FORMAT')}"
-                )
+                summary["crew_pass_detail"] = _("Crew Pass — season active until %(date)s") % {
+                    "date": date_format(season.valid_until, "SHORT_DATE_FORMAT")
+                }
             else:
-                summary["crew_pass_detail"] = "Crew Pass saison"
+                summary["crew_pass_detail"] = _("Crew Pass — season")
 
     skipper = (
         Membership.objects.filter(
@@ -76,15 +77,15 @@ def membership_summary_for_user(user) -> dict[str, Any]:
     if skipper and skipper.is_current():
         summary["skipper_plus_active"] = True
         if skipper.valid_until:
-            summary["skipper_plus_detail"] = (
-                f"Renouvellement prévu le {date_format(skipper.valid_until, 'SHORT_DATE_FORMAT')}"
-            )
+            summary["skipper_plus_detail"] = _("Renewal expected on %(date)s") % {
+                "date": date_format(skipper.valid_until, "SHORT_DATE_FORMAT")
+            }
         else:
-            summary["skipper_plus_detail"] = "Abonnement mensuel actif"
+            summary["skipper_plus_detail"] = _("Monthly subscription active")
 
     profile = getattr(user, "profile", None)
     if profile and profile.role == ProfileRole.SKIPPER and not summary["crew_pass_active"]:
-        summary["crew_pass_detail"] = "Rôle skipper : contact sans Crew Pass"
+        summary["crew_pass_detail"] = _("Skipper role: contact without Crew Pass")
 
     return summary
 

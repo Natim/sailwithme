@@ -3,8 +3,8 @@
 
 {% block content %}
 <div class="flex flex-wrap items-center justify-between gap-4">
-  <h1 class="font-display text-2xl font-bold text-ocean">{% trans "Mes bateaux" %}</h1>
-  <a href="{% url 'boats:create' %}" class="btn-coral">{% trans "Ajouter" %}</a>
+  <h1 class="font-display text-2xl font-bold text-ocean">{% trans "My boats" %}</h1>
+  <a href="{% url 'boats:create' %}" class="btn-coral">{% trans "Add" %}</a>
 </div>
 <ul class="mt-6 grid gap-3 sm:grid-cols-2">
   {% for boat in object_list %}
@@ -12,11 +12,11 @@
       <a href="{% url 'boats:detail' boat.pk %}" class="font-display text-lg font-semibold text-ocean hover:text-lagoon">{{ boat.name }}</a>
       <p class="mt-1 text-sm text-slate-600">
         {{ boat.get_boat_type_display }}{% if boat.length_ft %} · {{ boat.length_ft }} ft{% endif %}
-        · {{ boat.berths }} {% trans "places à bord" %}
+        · {{ boat.berths }} {% trans "berths on board" %}
       </p>
     </li>
   {% empty %}
-    <li class="card border-dashed text-slate-500">{% trans "Tu n'as pas encore enregistré de bateau." %}</li>
+    <li class="card border-dashed text-slate-500">{% trans "You have not added a boat yet." %}</li>
   {% endfor %}
 </ul>
 {% endblock %}

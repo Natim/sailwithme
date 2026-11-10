@@ -10,7 +10,7 @@
         {{ part.conversation.title|default:_("Conversation") }}
       </a>
     {% empty %}
-      <p class="p-2 text-sm text-slate-500">{% trans "Aucune conversation." %}</p>
+      <p class="p-2 text-sm text-slate-500">{% trans "No conversations yet." %}</p>
     {% endfor %}
   </aside>
   <section class="card flex flex-col md:col-span-2 p-0 overflow-hidden">
@@ -24,10 +24,10 @@
         class="flex gap-2 border-t border-lagoon/10 bg-sand p-3">
         {% csrf_token %}
         <input type="text" name="body" class="input flex-1" placeholder="{% trans 'Ton message…' %}" required>
-        <button type="submit" class="btn-coral shrink-0">{% trans "Envoyer" %}</button>
+        <button type="submit" class="btn-coral shrink-0">{% trans "Send" %}</button>
       </form>
     {% else %}
-      <p class="p-6 text-slate-500">{% trans "Sélectionne une conversation." %}</p>
+      <p class="p-6 text-slate-500">{% trans "Select a conversation." %}</p>
     {% endif %}
   </section>
 </div>

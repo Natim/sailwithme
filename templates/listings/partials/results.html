@@ -11,8 +11,8 @@
           </p>
           <p class="mt-1 text-xs text-slate-500">
             {{ listing.period_months_display }} · {{ listing.get_programme_type_display }}
-            {% if listing.berths_available %} · {{ listing.berths_available }} {% trans "couchettes" %}{% endif %}
-            {% if listing.daily_contribution_eur %} · ~{{ listing.daily_contribution_eur }} €/{% trans "jour" %}{% endif %}
+            {% if listing.berths_available %} · {{ listing.berths_available }} {% trans "berths" %}{% endif %}
+            {% if listing.daily_contribution_eur %} · ~{{ listing.daily_contribution_eur }} €/{% trans "day" %}{% endif %}
           </p>
         </div>
         <div class="flex items-center gap-2 text-sm text-slate-600">
@@ -25,9 +25,9 @@
     </li>
   {% empty %}
     <li class="card border-dashed text-center text-slate-600">
-      {% trans "Aucune annonce pour ces critères." %}
+      {% trans "No listings match these criteria." %}
       {% if user.is_authenticated %}
-        <a href="{% url 'listings:create' %}" class="btn-coral mt-4 inline-flex">{% trans "Publier une annonce" %}</a>
+        <a href="{% url 'listings:create' %}" class="btn-coral mt-4 inline-flex">{% trans "Post a listing" %}</a>
       {% endif %}
     </li>
   {% endfor %}

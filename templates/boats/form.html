@@ -3,7 +3,7 @@
 
 {% block content %}
 <h1 class="font-display text-3xl font-bold text-ocean">
-  {% if boat %}{% trans "Modifier le bateau" %}{% else %}{% trans "Nouveau bateau" %}{% endif %}
+  {% if boat %}{% trans "Edit boat" %}{% else %}{% trans "New boat" %}{% endif %}
 </h1>
 <form method="post" class="card mt-6 max-w-xl space-y-4 border-lagoon/10">
   {% csrf_token %}
@@ -11,6 +11,6 @@
     <ul class="text-sm text-red-600">{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}</ul>
   {% endif %}
   <div class="space-y-4">{% include "includes/form_fields.html" %}</div>
-  <button type="submit" class="btn-primary">{% trans "Enregistrer" %}</button>
+  <button type="submit" class="btn-primary">{% trans "Save" %}</button>
 </form>
 {% endblock %}

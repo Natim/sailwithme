@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from apps.core.forms_ui import INPUT_CLASS as BOAT_INPUT
 from apps.profiles.models import ALLOWED_PROFILE_PHOTO_SUFFIXES
@@ -8,11 +9,11 @@ from apps.profiles.models import ALLOWED_PROFILE_PHOTO_SUFFIXES
 from .models import Boat, BoatPhoto
 
 EQUIPMENT_CHOICES = [
-    ("watermaker", "Dessalinisateur"),
+    ("watermaker", _("Watermaker")),
     ("ais", "AIS"),
-    ("starlink", "Starlink / internet"),
-    ("autopilot", "Pilote automatique"),
-    ("dodger", "Capote de descente"),
+    ("starlink", _("Starlink / internet")),
+    ("autopilot", _("Autopilot")),
+    ("dodger", _("Dodger")),
 ]
 
 
@@ -50,15 +51,15 @@ class BoatForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         labels = {
-            "name": "Nom du bateau",
-            "boat_type": "Type",
-            "model_name": "Modèle",
-            "length_ft": "Longueur (pieds)",
-            "year_built": "Année de construction",
-            "flag": "Pavillon",
-            "berths": "Nombre de places à bord (couchettes)",
-            "equipment": "Équipement",
-            "description": "Description",
+            "name": _("Boat name"),
+            "boat_type": _("Type"),
+            "model_name": _("Model"),
+            "length_ft": _("Length (ft)"),
+            "year_built": _("Year built"),
+            "flag": _("Flag"),
+            "berths": _("Berths on board"),
+            "equipment": _("Equipment"),
+            "description": _("Description"),
         }
         for name, label in labels.items():
             if name in self.fields:
@@ -88,9 +89,9 @@ class BoatPhotoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["image"].label = "Photo"
-        self.fields["caption"].label = "Légende"
-        self.fields["sort_order"].label = "Ordre d'affichage"
+        self.fields["image"].label = _("Photo")
+        self.fields["caption"].label = _("Caption")
+        self.fields["sort_order"].label = _("Display order")
 
     def clean_image(self):
         image = self.cleaned_data.get("image")
@@ -100,5 +101,5 @@ class BoatPhotoForm(forms.ModelForm):
         if suffix == ".jpeg":
             suffix = ".jpg"
         if suffix not in ALLOWED_PROFILE_PHOTO_SUFFIXES:
-            raise forms.ValidationError("Format accepté : JPG, PNG, WebP ou GIF.")
+            raise forms.ValidationError(_("Accepted formats: JPG, PNG, WebP, or GIF."))
         return image

@@ -4,6 +4,7 @@ from pathlib import Path
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import UUIDModel
 
@@ -20,16 +21,16 @@ def profile_photo_upload_to(instance: "Profile", filename: str) -> str:
 
 
 class ProfileRole(models.TextChoices):
-    SKIPPER = "skipper", "Skipper"
-    CREW = "crew", "Équipier"
-    BOTH = "both", "Les deux"
+    SKIPPER = "skipper", _("Skipper")
+    CREW = "crew", _("Crew member")
+    BOTH = "both", _("Both")
 
 
 class SkillLevel(models.TextChoices):
-    BEGINNER = "beginner", "Débutant"
-    COASTAL = "coastal", "Côtier"
-    OFFSHORE = "offshore", "Hauturier"
-    PRO_SKIPPER = "pro_skipper", "Skipper professionnel"
+    BEGINNER = "beginner", _("Beginner")
+    COASTAL = "coastal", _("Coastal")
+    OFFSHORE = "offshore", _("Offshore sailor")
+    PRO_SKIPPER = "pro_skipper", _("Professional skipper")
 
 
 class Profile(UUIDModel):
@@ -42,7 +43,7 @@ class Profile(UUIDModel):
     pseudo = models.CharField(
         max_length=32,
         blank=True,
-        help_text="Nom affiché publiquement (annonces, avis, annuaire).",
+        help_text=_("Shown publicly on listings, reviews, and the crew directory."),
     )
     role = models.CharField(max_length=16, choices=ProfileRole.choices, default=ProfileRole.CREW)
     photo = models.ImageField(upload_to=profile_photo_upload_to, blank=True)

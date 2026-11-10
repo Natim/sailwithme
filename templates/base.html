@@ -50,8 +50,8 @@
       </a>
 
       <nav class="hidden items-center gap-1 md:flex">
-        <a href="{% url 'listings:search' %}" class="btn-ghost">{% trans "Annonces" %}</a>
-        <a href="{% url 'profiles:directory' %}" class="btn-ghost">{% trans "Équipiers" %}</a>
+        <a href="{% url 'listings:search' %}" class="btn-ghost">{% trans "Listings" %}</a>
+        <a href="{% url 'profiles:directory' %}" class="btn-ghost">{% trans "Crew members" %}</a>
         <a href="{% url 'listings:faq' %}" class="btn-ghost">{% trans "FAQ" %}</a>
         {% if user.is_authenticated %}
           <a href="{% url 'messaging:inbox' %}" class="btn-ghost relative">
@@ -60,21 +60,24 @@
               <span class="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-coral px-1 text-xs font-bold text-white">{{ unread_message_count }}</span>
             {% endif %}
           </a>
-          <a href="{% url 'listings:mine' %}" class="btn-ghost">{% trans "Mes annonces" %}</a>
-          <a href="{% url 'boats:list' %}" class="btn-ghost">{% trans "Mes bateaux" %}</a>
-          <a href="{% url 'listings:create' %}" class="btn-coral ml-1">{% trans "Publier" %}</a>
+          <a href="{% url 'listings:mine' %}" class="btn-ghost">{% trans "My listings" %}</a>
+          <a href="{% url 'boats:list' %}" class="btn-ghost">{% trans "My boats" %}</a>
+          <a href="{% url 'listings:create' %}" class="btn-coral ml-1">{% trans "Post" %}</a>
           <a href="{% url 'profiles:me' %}" class="ml-2 flex items-center gap-2 rounded-full border border-lagoon/20 bg-sand py-1 pl-1 pr-3 text-sm font-semibold text-ocean hover:bg-lagoon-pale/50">
             {% if nav_profile_photo_url %}
               <img src="{{ nav_profile_photo_url }}" alt="" class="h-8 w-8 rounded-full object-cover">
             {% else %}
-              <span class="flex h-8 w-8 items-center justify-center rounded-full bg-lagoon text-xs text-white">{% trans "Toi" %}</span>
+              <span class="flex h-8 w-8 items-center justify-center rounded-full bg-lagoon text-xs text-white">{% trans "You" %}</span>
             {% endif %}
-            {% trans "Profil" %}
+            {% trans "Profile" %}
           </a>
         {% else %}
-          <a href="{% url 'account_login' %}" class="btn-ghost">{% trans "Connexion" %}</a>
-          <a href="{% url 'account_signup' %}" class="btn-primary ml-1">{% trans "Inscription" %}</a>
+          <a href="{% url 'account_login' %}" class="btn-ghost">{% trans "Log in" %}</a>
+          <a href="{% url 'account_signup' %}" class="btn-primary ml-1">{% trans "Sign up" %}</a>
         {% endif %}
+        <div class="ml-2 hidden border-l border-lagoon/20 pl-2 md:block">
+          {% include "includes/language_switcher.html" %}
+        </div>
       </nav>
 
       <button type="button" class="rounded-lg p-2 text-ocean md:hidden" @click="mobileOpen = !mobileOpen" aria-label="Menu">
@@ -83,18 +86,22 @@
     </div>
     <div x-show="mobileOpen" x-cloak class="border-t border-lagoon/10 bg-white px-4 py-3 md:hidden">
       <div class="flex flex-col gap-2 text-sm font-semibold">
-        <a href="{% url 'listings:search' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Annonces" %}</a>
+        <a href="{% url 'listings:search' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Listings" %}</a>
         {% if user.is_authenticated %}
-          <a href="{% url 'listings:create' %}" class="btn-coral text-center">{% trans "Publier une annonce" %}</a>
-          <a href="{% url 'listings:mine' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Mes annonces" %}</a>
-          <a href="{% url 'boats:list' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Mes bateaux" %}</a>
-          <a href="{% url 'profiles:me' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Mon profil" %}</a>
+          <a href="{% url 'listings:create' %}" class="btn-coral text-center">{% trans "Post a listing" %}</a>
+          <a href="{% url 'listings:mine' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "My listings" %}</a>
+          <a href="{% url 'boats:list' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "My boats" %}</a>
+          <a href="{% url 'profiles:me' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "My profile" %}</a>
           <a href="{% url 'messaging:inbox' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Messages" %}</a>
-          <a href="{% url 'account_logout' %}" class="rounded-lg px-3 py-2 text-coral">{% trans "Déconnexion" %}</a>
+          <a href="{% url 'account_logout' %}" class="rounded-lg px-3 py-2 text-coral">{% trans "Log out" %}</a>
         {% else %}
-          <a href="{% url 'account_login' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Connexion" %}</a>
-          <a href="{% url 'account_signup' %}" class="btn-primary text-center">{% trans "Inscription" %}</a>
+          <a href="{% url 'account_login' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Log in" %}</a>
+          <a href="{% url 'account_signup' %}" class="btn-primary text-center">{% trans "Sign up" %}</a>
         {% endif %}
+        <div class="mt-2 border-t border-lagoon/10 pt-3">
+          <p class="mb-1 px-3 text-xs font-semibold uppercase text-slate-500">{% trans "Language" %}</p>
+          <div class="px-3">{% include "includes/language_switcher.html" %}</div>
+        </div>
       </div>
     </div>
   </header>
@@ -121,31 +128,24 @@
     <div class="mx-auto grid max-w-6xl gap-8 text-sm sm:grid-cols-3">
       <div>
         <p class="font-display text-lg font-semibold text-white">{{ SITE_NAME }}</p>
-        <p class="mt-2 text-teal-100/90">{% trans "Trouve ton équipage. Traverse l'océan." %}</p>
+        <p class="mt-2 text-teal-100/90">{% trans "Find your crew. Cross the ocean." %}</p>
       </div>
       <div>
-        <p class="font-semibold text-sun">{% trans "Produit" %}</p>
+        <p class="font-semibold text-sun">{% trans "Product" %}</p>
         <ul class="mt-2 space-y-1 text-teal-100/90">
-          <li><a href="{% url 'listings:search' %}" class="hover:text-white">{% trans "Annonces" %}</a></li>
-          <li><a href="{% url 'billing:pricing' %}" class="hover:text-white">{% trans "Tarifs" %}</a></li>
-          <li><a href="{% url 'listings:faq' %}" class="hover:text-white">{% trans "FAQ / Sécurité" %}</a></li>
+          <li><a href="{% url 'listings:search' %}" class="hover:text-white">{% trans "Listings" %}</a></li>
+          <li><a href="{% url 'billing:pricing' %}" class="hover:text-white">{% trans "Pricing" %}</a></li>
+          <li><a href="{% url 'listings:faq' %}" class="hover:text-white">{% trans "FAQ / Safety" %}</a></li>
         </ul>
       </div>
       <div>
-        <p class="font-semibold text-sun">{% trans "Légal" %}</p>
+        <p class="font-semibold text-sun">{% trans "Legal" %}</p>
         <ul class="mt-2 space-y-1 text-teal-100/90">
-          <li><a href="{% url 'cgu' %}" class="hover:text-white">{% trans "CGU" %}</a></li>
+          <li><a href="{% url 'cgu' %}" class="hover:text-white">{% trans "Terms of use" %}</a></li>
         </ul>
-        <form action="{% url 'set_language' %}" method="post" class="mt-4 flex flex-wrap gap-2">
-          {% csrf_token %}
-          {% get_current_language as CURRENT_LANG %}
-          {% get_available_languages as LANGUAGES %}
-          {% for lang_code, lang_name in LANGUAGES %}
-            <button type="submit" name="language" value="{{ lang_code }}"
-              class="rounded-full px-2 py-0.5 text-xs {% if lang_code == CURRENT_LANG %}bg-lagoon text-white{% else %}bg-ocean text-teal-100 hover:bg-teal-800{% endif %}">{{ lang_name }}</button>
-          {% endfor %}
-          <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        </form>
+        <div class="mt-4 [&_button:not(.bg-lagoon)]:bg-ocean [&_button:not(.bg-lagoon)]:text-teal-100">
+          {% include "includes/language_switcher.html" %}
+        </div>
       </div>
     </div>
     <p class="mx-auto mt-8 max-w-6xl text-center text-xs text-teal-200/70">SAS CLOUDY · AGPL</p>

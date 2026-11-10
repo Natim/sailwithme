@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.utils.formats import date_format
+from django.utils.translation import gettext_lazy as _
 
 
 def iso_week_range_to_dates(year: int, week_from: int, week_to: int) -> tuple[date, date]:
@@ -56,7 +57,7 @@ def period_months_from_weeks(
 
 
 SEASON_SHORTCUTS = {
-    "transatlantic": {"label": "Transatlantique (nov.–déc.)", "week_from": 44, "week_to": 52},
-    "pacific_puddle": {"label": "Pacific Puddle Jump (mar.–mai)", "week_from": 10, "week_to": 22},
-    "mediterranean": {"label": "Méditerranée (mai–oct.)", "week_from": 18, "week_to": 42},
+    "transatlantic": {"label": _("Transatlantic (Nov.–Dec.)"), "week_from": 44, "week_to": 52},
+    "pacific_puddle": {"label": _("Pacific Puddle Jump (Mar.–May)"), "week_from": 10, "week_to": 22},
+    "mediterranean": {"label": _("Mediterranean (May–Oct.)"), "week_from": 18, "week_to": 42},
 }

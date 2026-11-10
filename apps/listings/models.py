@@ -3,6 +3,7 @@ from django.contrib.gis.db import models as gis_models
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from apps.core.models import UUIDModel
 
@@ -31,25 +32,25 @@ class Port(UUIDModel):
 
 
 class ListingKind(models.TextChoices):
-    CREW_WANTED = "crew_wanted", "Cherche équipiers"
-    BERTH_WANTED = "berth_wanted", "Cherche embarquement"
+    CREW_WANTED = "crew_wanted", _("Looking for crew")
+    BERTH_WANTED = "berth_wanted", _("Looking for a berth")
 
 
 class ProgrammeType(models.TextChoices):
-    TRANSATLANTIC = "transatlantic", "Transatlantique"
-    TRANSPACIFIC = "transpacific", "Transpacifique"
-    MEDITERRANEAN = "mediterranean", "Méditerranée"
-    DELIVERY = "delivery", "Convoyage"
-    COASTAL = "coastal", "Côtier"
-    SEASON = "season", "Saison complète"
+    TRANSATLANTIC = "transatlantic", _("Transatlantic")
+    TRANSPACIFIC = "transpacific", _("Transpacific")
+    MEDITERRANEAN = "mediterranean", _("Mediterranean")
+    DELIVERY = "delivery", _("Delivery")
+    COASTAL = "coastal", _("Coastal")
+    SEASON = "season", _("Full season")
 
 
 class ListingStatus(models.TextChoices):
-    DRAFT = "draft", "Brouillon"
-    PUBLISHED = "published", "Publiée"
-    FULL = "full", "Complète"
-    EXPIRED = "expired", "Expirée"
-    WITHDRAWN = "withdrawn", "Retirée"
+    DRAFT = "draft", _("Draft")
+    PUBLISHED = "published", _("Published")
+    FULL = "full", _("Complete")
+    EXPIRED = "expired", _("Expired")
+    WITHDRAWN = "withdrawn", _("Withdrawn")
 
 
 class Listing(UUIDModel):
@@ -147,10 +148,10 @@ class Listing(UUIDModel):
 
 
 class ApplicationStatus(models.TextChoices):
-    PENDING = "pending", "En attente"
-    ACCEPTED = "accepted", "Acceptée"
-    REJECTED = "rejected", "Refusée"
-    WITHDRAWN = "withdrawn", "Retirée"
+    PENDING = "pending", _("Pending")
+    ACCEPTED = "accepted", _("Accepted")
+    REJECTED = "rejected", _("Declined")
+    WITHDRAWN = "withdrawn", _("Withdrawn")
 
 
 class ListingApplication(UUIDModel):

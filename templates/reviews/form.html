@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<h1 class="font-display text-2xl font-bold text-ocean">{% trans "Laisser un avis" %}</h1>
+<h1 class="font-display text-2xl font-bold text-ocean">{% trans "Leave a review" %}</h1>
 <form method="post" class="card mt-6 max-w-lg space-y-5"
   x-data="{ rating_overall: 0, rating_seamanship: 0, rating_reliability: 0, rating_atmosphere: 0, rating_safety: 0, rating_commitment: 0 }">
   {% csrf_token %}
@@ -54,6 +54,6 @@
     <label class="text-sm font-bold text-ocean" for="{{ form.comment.id_for_label }}">{{ form.comment.label }}</label>
     {{ form.comment }}
   </div>
-  <button type="submit" class="btn-primary">{% trans "Publier" %}</button>
+  <button type="submit" class="btn-primary">{% trans "Post" %}</button>
 </form>
 {% endblock %}
