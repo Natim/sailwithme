@@ -1,9 +1,18 @@
-<div class="rounded-xl border bg-white p-6 shadow-sm">
-  <h2 class="font-semibold mb-4">{% load i18n %}{% trans "Général" %}</h2>
-  {% if saved %}<p class="mb-2 text-sm text-green-700">{% trans "Enregistré." %}</p>{% endif %}
-  <form hx-post="{% url 'profiles:edit_section' 'basics' %}" hx-target="closest div" hx-swap="outerHTML" class="space-y-3">
+{% load i18n %}
+{% trans "Général" as section_title %}
+{% trans "Présentation, rôle et disponibilités." as section_hint %}
+{% include "profiles/partials/section_shell_start.html" with section_title=section_title section_hint=section_hint %}
+  <form
+    hx-post="{% url 'profiles:edit_section' 'basics' %}"
+    hx-target="closest div.flex"
+    hx-swap="outerHTML"
+    class="mt-4 flex flex-1 flex-col"
+  >
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Enregistrer" %}</button>
-  </form>
-</div>
+    <div class="flex-1 space-y-4">
+      {% include "profiles/partials/fields.html" with form=form exclude_field="" %}
+    </div>
+    <button type="submit" class="mt-6 w-full rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700 sm:w-auto">
+      {% trans "Enregistrer" %}
+    </button>
+{% include "profiles/partials/section_shell_end.html" %}

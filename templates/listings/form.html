@@ -5,14 +5,12 @@
 <h1 class="text-2xl font-bold mb-4">{% trans "Nouvelle annonce" %}</h1>
 <form method="post" class="max-w-2xl space-y-4 rounded-xl border bg-white p-6" id="listing-form">
   {% csrf_token %}
-  {{ form.as_p }}
+  <div class="space-y-4">
+    {% include "includes/form_fields.html" %}
+  </div>
   <p class="text-sm text-slate-600">{% trans "Cliquez sur la carte pour départ (1er clic) et arrivée (2e clic)." %}</p>
   <div id="listing-map" class="h-64 rounded border"></div>
-  <input type="hidden" name="departure_lat" id="departure_lat">
-  <input type="hidden" name="departure_lng" id="departure_lng">
-  <input type="hidden" name="arrival_lat" id="arrival_lat">
-  <input type="hidden" name="arrival_lng" id="arrival_lng">
-  <button type="submit" class="rounded bg-sky-600 px-4 py-2 text-white">{% trans "Publier" %}</button>
+  <button type="submit" class="rounded-lg bg-sky-600 px-4 py-2 text-white">{% trans "Publier" %}</button>
 </form>
 {% endblock %}
 
@@ -23,14 +21,18 @@
   const map = L.map('listing-map').setView([28.1, -15.4], 4);
   addSailsWithMeBasemap(map);
   let clickStep = 0;
+  const depLat = document.getElementById('id_departure_lat');
+  const depLng = document.getElementById('id_departure_lng');
+  const arrLat = document.getElementById('id_arrival_lat');
+  const arrLng = document.getElementById('id_arrival_lng');
   map.on('click', e => {
     if (clickStep === 0) {
-      document.getElementById('departure_lat').value = e.latlng.lat;
-      document.getElementById('departure_lng').value = e.latlng.lng;
+      if (depLat) depLat.value = e.latlng.lat;
+      if (depLng) depLng.value = e.latlng.lng;
       clickStep = 1;
     } else {
-      document.getElementById('arrival_lat').value = e.latlng.lat;
-      document.getElementById('arrival_lng').value = e.latlng.lng;
+      if (arrLat) arrLat.value = e.latlng.lat;
+      if (arrLng) arrLng.value = e.latlng.lng;
     }
   });
 </script>

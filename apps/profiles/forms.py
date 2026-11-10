@@ -2,10 +2,16 @@ from django import forms
 
 from .models import Profile
 
+INPUT_CLASS = (
+    "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-900 "
+    "shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+)
+CHECKBOX_CLASS = "rounded border-slate-300 text-sky-600 focus:ring-sky-500"
+
 CERTIFICATION_CHOICES = [
     ("permis_mer", "Permis mer / Yachtmaster"),
     ("stcw", "STCW"),
-    ("psc1", "PSC1 / First aid"),
+    ("psc1", "PSC1 / premiers secours"),
     ("vhf", "VHF / SRC"),
 ]
 
@@ -32,13 +38,24 @@ class ProfileBasicsForm(forms.ModelForm):
         model = Profile
         fields = ["role", "bio", "nationality", "home_port", "skill_level", "availability_notes"]
         widgets = {
-            "bio": forms.Textarea(attrs={"rows": 4, "class": "w-full rounded border p-2"}),
-            "role": forms.Select(attrs={"class": "w-full rounded border p-2"}),
-            "nationality": forms.TextInput(attrs={"class": "w-full rounded border p-2"}),
-            "home_port": forms.TextInput(attrs={"class": "w-full rounded border p-2"}),
-            "skill_level": forms.Select(attrs={"class": "w-full rounded border p-2"}),
-            "availability_notes": forms.Textarea(attrs={"rows": 3, "class": "w-full rounded border p-2"}),
+            "bio": forms.Textarea(attrs={"rows": 4, "class": INPUT_CLASS, "placeholder": "Quelques mots sur vous…"}),
+            "role": forms.Select(attrs={"class": INPUT_CLASS}),
+            "nationality": forms.TextInput(attrs={"class": INPUT_CLASS, "placeholder": "France"}),
+            "home_port": forms.TextInput(attrs={"class": INPUT_CLASS, "placeholder": "Lorient"}),
+            "skill_level": forms.Select(attrs={"class": INPUT_CLASS}),
+            "availability_notes": forms.Textarea(
+                attrs={"rows": 3, "class": INPUT_CLASS, "placeholder": "Disponibilités, fenêtres de croisière…"}
+            ),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["role"].label = "Rôle"
+        self.fields["bio"].label = "Présentation"
+        self.fields["nationality"].label = "Nationalité"
+        self.fields["home_port"].label = "Port d'attache"
+        self.fields["skill_level"].label = "Niveau"
+        self.fields["availability_notes"].label = "Disponibilités"
 
 
 class ProfileExperienceForm(forms.ModelForm):
@@ -46,16 +63,18 @@ class ProfileExperienceForm(forms.ModelForm):
         model = Profile
         fields = ["nautical_miles", "ocean_crossings", "certifications", "skills"]
         widgets = {
-            "nautical_miles": forms.NumberInput(attrs={"class": "w-full rounded border p-2"}),
-            "ocean_crossings": forms.NumberInput(attrs={"class": "w-full rounded border p-2"}),
+            "nautical_miles": forms.NumberInput(attrs={"class": INPUT_CLASS, "min": 0}),
+            "ocean_crossings": forms.NumberInput(attrs={"class": INPUT_CLASS, "min": 0}),
         }
 
     certifications = forms.MultipleChoiceField(
+        label="Certifications",
         choices=CERTIFICATION_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple,
     )
     skills = forms.MultipleChoiceField(
+        label="Compétences",
         choices=SKILL_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple,
@@ -63,6 +82,8 @@ class ProfileExperienceForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["nautical_miles"].label = "Milles nautiques"
+        self.fields["ocean_crossings"].label = "Traversées océaniques"
         if self.instance.pk:
             self.fields["certifications"].initial = self.instance.certifications or []
             self.fields["skills"].initial = self.instance.skills or []
@@ -78,6 +99,7 @@ class ProfileExperienceForm(forms.ModelForm):
 
 class ProfilePreferencesForm(forms.ModelForm):
     languages = forms.MultipleChoiceField(
+        label="Langues parlées",
         choices=LANGUAGE_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple,
@@ -93,10 +115,20 @@ class ProfilePreferencesForm(forms.ModelForm):
             "crew_directory_visible",
             "photo",
         ]
-        widgets = {"photo": forms.ClearableFileInput(attrs={"class": "w-full"})}
+        widgets = {
+            "non_smoker": forms.CheckboxInput(attrs={"class": CHECKBOX_CLASS}),
+            "pets_ok": forms.CheckboxInput(attrs={"class": CHECKBOX_CLASS}),
+            "vegetarian_friendly": forms.CheckboxInput(attrs={"class": CHECKBOX_CLASS}),
+            "crew_directory_visible": forms.CheckboxInput(attrs={"class": CHECKBOX_CLASS}),
+            "photo": forms.FileInput(attrs={"class": "sr-only"}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["non_smoker"].label = "Non-fumeur"
+        self.fields["pets_ok"].label = "Animaux acceptés"
+        self.fields["vegetarian_friendly"].label = "Végétarien bienvenu"
+        self.fields["crew_directory_visible"].label = "Visible dans l'annuaire équipiers"
         if self.instance.pk:
             self.fields["languages"].initial = self.instance.languages or []
 

@@ -1,5 +1,5 @@
 <form hx-post="{% url 'boats:add_photo' boat.pk %}" hx-target="#gallery" hx-swap="beforeend" enctype="multipart/form-data" class="mt-2 flex gap-2 items-end">
   {% csrf_token %}
-  {{ form.as_p }}
+  <div class="flex flex-wrap gap-2 items-end">{% include "includes/form_fields.html" %}</div>
   <button type="submit" class="rounded bg-sky-600 px-3 py-1 text-white text-sm">{% load i18n %}{% trans "Ajouter photo" %}</button>
 </form>

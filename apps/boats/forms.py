@@ -2,6 +2,8 @@ from django import forms
 
 from .models import Boat, BoatPhoto
 
+BOAT_INPUT = "w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
+
 EQUIPMENT_CHOICES = [
     ("watermaker", "Dessalinisateur"),
     ("ais", "AIS"),
@@ -31,18 +33,32 @@ class BoatForm(forms.ModelForm):
             "description",
         ]
         widgets = {
-            "name": forms.TextInput(attrs={"class": "w-full rounded border p-2"}),
-            "boat_type": forms.Select(attrs={"class": "w-full rounded border p-2"}),
-            "model_name": forms.TextInput(attrs={"class": "w-full rounded border p-2"}),
-            "length_ft": forms.NumberInput(attrs={"class": "w-full rounded border p-2"}),
-            "year_built": forms.NumberInput(attrs={"class": "w-full rounded border p-2"}),
-            "flag": forms.TextInput(attrs={"class": "w-full rounded border p-2"}),
-            "berths": forms.NumberInput(attrs={"class": "w-full rounded border p-2"}),
-            "description": forms.Textarea(attrs={"rows": 4, "class": "w-full rounded border p-2"}),
+            "name": forms.TextInput(attrs={"class": BOAT_INPUT}),
+            "boat_type": forms.Select(attrs={"class": BOAT_INPUT}),
+            "model_name": forms.TextInput(attrs={"class": BOAT_INPUT}),
+            "length_ft": forms.NumberInput(attrs={"class": BOAT_INPUT, "step": "0.1"}),
+            "year_built": forms.NumberInput(attrs={"class": BOAT_INPUT}),
+            "flag": forms.TextInput(attrs={"class": BOAT_INPUT}),
+            "berths": forms.NumberInput(attrs={"class": BOAT_INPUT}),
+            "description": forms.Textarea(attrs={"rows": 4, "class": BOAT_INPUT}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        labels = {
+            "name": "Nom du bateau",
+            "boat_type": "Type",
+            "model_name": "Modèle",
+            "length_ft": "Longueur (pieds)",
+            "year_built": "Année de construction",
+            "flag": "Pavillon",
+            "berths": "Couchettes",
+            "equipment": "Équipement",
+            "description": "Description",
+        }
+        for name, label in labels.items():
+            if name in self.fields:
+                self.fields[name].label = label
         if self.instance.pk:
             self.fields["equipment"].initial = self.instance.equipment or []
 
@@ -58,3 +74,13 @@ class BoatPhotoForm(forms.ModelForm):
     class Meta:
         model = BoatPhoto
         fields = ["image", "caption", "sort_order"]
+        widgets = {
+            "caption": forms.TextInput(attrs={"class": BOAT_INPUT}),
+            "sort_order": forms.NumberInput(attrs={"class": BOAT_INPUT}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["image"].label = "Photo"
+        self.fields["caption"].label = "Légende"
+        self.fields["sort_order"].label = "Ordre d'affichage"

@@ -105,6 +105,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_FORMS = {
+    "login": "apps.accounts.forms.FrenchLoginForm",
+    "signup": "apps.accounts.forms.FrenchSignupForm",
+}
 ACCOUNT_LOGOUT_ON_GET = False
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_UNIQUE_EMAIL = True

@@ -1,42 +1,51 @@
-<div class="rounded-xl border bg-white p-6 shadow-sm">
-  <h2 class="font-semibold mb-4">{% load i18n %}{% trans "Préférences" %}</h2>
-  {% if saved %}<p class="mb-2 text-sm text-green-700">{% trans "Enregistré." %}</p>{% endif %}
-  <form hx-post="{% url 'profiles:edit_section' 'preferences' %}" hx-target="closest div" hx-swap="outerHTML" class="space-y-4" enctype="multipart/form-data">
+{% load i18n %}
+{% trans "Préférences" as section_title %}
+{% trans "Langues, confort à bord et photo visible sur le profil public." as section_hint %}
+{% include "profiles/partials/section_shell_start.html" with section_title=section_title section_hint=section_hint %}
+  <form
+    hx-post="{% url 'profiles:edit_section' 'preferences' %}"
+    hx-target="closest div.flex"
+    hx-swap="outerHTML"
+    class="mt-4 flex flex-1 flex-col"
+    enctype="multipart/form-data"
+  >
     {% csrf_token %}
-    {% for field in form %}
-      {% if field.name != "photo" %}
-        <div>
-          <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {{ field }}
-          {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+    <div class="flex-1 space-y-4">
+      {% include "profiles/partials/fields.html" with form=form exclude_field="photo" %}
+      <div class="rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <label class="mb-2 block text-sm font-medium text-slate-700" for="{{ form.photo.id_for_label }}">{% trans "Photo de profil" %}</label>
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
+          {% if form.instance.photo %}
+            <img
+              src="{{ form.instance.photo.url }}"
+              alt="{% trans 'Photo de profil' %}"
+              class="h-24 w-24 shrink-0 rounded-full border-2 border-white object-cover shadow-md ring-1 ring-slate-200"
+            >
+            <div class="min-w-0 flex-1">
+              <p class="text-sm text-slate-600">{% trans "Photo enregistrée sur votre profil." %}</p>
+              <label class="mt-2 flex items-center gap-2 text-sm text-slate-700">
+                <input type="checkbox" name="photo-clear" id="id_photo-clear" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
+                {% trans "Supprimer la photo" %}
+              </label>
+            </div>
+          {% else %}
+            <div class="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border border-dashed border-slate-300 bg-white text-xs text-slate-400">
+              {% trans "Aucune" %}
+            </div>
+            <p class="text-sm text-slate-500">{% trans "Ajoutez une photo pour personnaliser votre profil public." %}</p>
+          {% endif %}
         </div>
-      {% endif %}
-    {% endfor %}
-    <div class="border-t border-slate-100 pt-4">
-      <label class="mb-2 block text-sm font-medium text-slate-700" for="{{ form.photo.id_for_label }}">{% trans "Photo de profil" %}</label>
-      {% if form.instance.photo %}
-        <img
-          src="{{ form.instance.photo.url }}"
-          alt="{% trans 'Photo de profil' %}"
-          class="mb-3 h-28 w-28 rounded-full border border-slate-200 object-cover shadow-sm"
+        <input
+          type="file"
+          name="photo"
+          id="{{ form.photo.id_for_label }}"
+          accept="image/*"
+          class="mt-4 block w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-sky-100 file:px-3 file:py-2 file:text-sm file:font-medium file:text-sky-800 hover:file:bg-sky-200"
         >
-        <p class="mb-2 text-xs text-slate-500">{% trans "Photo enregistrée sur votre profil." %}</p>
-        <label class="mb-2 flex items-center gap-2 text-sm text-slate-700">
-          <input type="checkbox" name="photo-clear" id="id_photo-clear">
-          {% trans "Supprimer la photo" %}
-        </label>
-      {% else %}
-        <p class="mb-2 text-sm text-slate-500">{% trans "Aucune photo pour l'instant." %}</p>
-      {% endif %}
-      <input
-        type="file"
-        name="photo"
-        id="{{ form.photo.id_for_label }}"
-        accept="image/*"
-        class="block w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-sky-50 file:px-3 file:py-2 file:text-sm file:font-medium file:text-sky-800 hover:file:bg-sky-100"
-      >
-      {% for error in form.photo.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+        {% for error in form.photo.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+      </div>
     </div>
-    <button type="submit" class="rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Enregistrer" %}</button>
-  </form>
-</div>
+    <button type="submit" class="mt-6 w-full rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700 sm:w-auto">
+      {% trans "Enregistrer" %}
+    </button>
+{% include "profiles/partials/section_shell_end.html" %}

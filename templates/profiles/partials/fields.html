@@ -1,0 +1,27 @@
+{% load i18n %}
+{% for field in form %}
+  {% if field.name != exclude_field %}
+    {% if field.field.widget.allow_multiple_selected %}
+      <div>
+        <span class="mb-2 block text-sm font-medium text-slate-700">{{ field.label }}</span>
+        <div class="profile-checkboxes text-slate-800">
+          {{ field }}
+        </div>
+        {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+      </div>
+    {% elif field.field.widget.input_type == 'checkbox' %}
+      <label class="flex cursor-pointer items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-800 hover:border-sky-200 has-[:checked]:border-sky-300 has-[:checked]:bg-sky-50">
+        {{ field }}
+        <span class="font-medium">{{ field.label }}</span>
+      </label>
+      {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+    {% else %}
+      <div>
+        <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}<p class="mt-1 text-xs text-slate-500">{{ field.help_text }}</p>{% endif %}
+        {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endfor %}

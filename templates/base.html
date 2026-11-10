@@ -57,6 +57,22 @@
       <a href="{% url 'listings:faq' %}" class="text-sky-700">{% trans "FAQ / Sécurité" %}</a> ·
       <a href="{% url 'cgu' %}" class="text-sky-700">{% trans "CGU" %}</a>
     </p>
+    <form action="{% url 'set_language' %}" method="post" class="mt-3 flex justify-center gap-2 text-xs">
+      {% csrf_token %}
+      <span class="text-slate-500">{% trans "Langue" %} :</span>
+      {% get_current_language as CURRENT_LANG %}
+      {% get_available_languages as LANGUAGES %}
+      {% for lang_code, lang_name in LANGUAGES %}
+        <button
+          type="submit"
+          name="language"
+          value="{{ lang_code }}"
+          class="{% if lang_code == CURRENT_LANG %}font-semibold text-sky-800{% else %}text-sky-600 hover:underline{% endif %}"
+        >{{ lang_name }}</button>
+        {% if not forloop.last %}<span class="text-slate-300">·</span>{% endif %}
+      {% endfor %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}">
+    </form>
   </footer>
   {% block extra_js %}{% endblock %}
   {% if user.is_authenticated %}

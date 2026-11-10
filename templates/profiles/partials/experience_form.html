@@ -1,9 +1,35 @@
-<div class="rounded-xl border bg-white p-6 shadow-sm">
-  <h2 class="font-semibold mb-4">{% load i18n %}{% trans "Expérience" %}</h2>
-  {% if saved %}<p class="mb-2 text-sm text-green-700">{% trans "Enregistré." %}</p>{% endif %}
-  <form hx-post="{% url 'profiles:edit_section' 'experience' %}" hx-target="closest div" hx-swap="outerHTML" class="space-y-3">
+{% load i18n %}
+{% trans "Expérience" as section_title %}
+{% trans "Milles, traversées, certifications et compétences." as section_hint %}
+{% include "profiles/partials/section_shell_start.html" with section_title=section_title section_hint=section_hint %}
+  <form
+    hx-post="{% url 'profiles:edit_section' 'experience' %}"
+    hx-target="closest div.flex"
+    hx-swap="outerHTML"
+    class="mt-4 flex flex-1 flex-col"
+  >
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Enregistrer" %}</button>
-  </form>
-</div>
+    <div class="flex-1 space-y-4">
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ form.nautical_miles.id_for_label }}">{{ form.nautical_miles.label }}</label>
+          {{ form.nautical_miles }}
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ form.ocean_crossings.id_for_label }}">{{ form.ocean_crossings.label }}</label>
+          {{ form.ocean_crossings }}
+        </div>
+      </div>
+      <div>
+        <span class="mb-2 block text-sm font-medium text-slate-700">{{ form.certifications.label }}</span>
+        <div class="profile-checkboxes">{{ form.certifications }}</div>
+      </div>
+      <div>
+        <span class="mb-2 block text-sm font-medium text-slate-700">{{ form.skills.label }}</span>
+        <div class="profile-checkboxes">{{ form.skills }}</div>
+      </div>
+    </div>
+    <button type="submit" class="mt-6 w-full rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700 sm:w-auto">
+      {% trans "Enregistrer" %}
+    </button>
+{% include "profiles/partials/section_shell_end.html" %}

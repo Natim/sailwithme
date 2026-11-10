@@ -16,7 +16,7 @@
   <h2 class="font-semibold">{% trans "Postuler" %}</h2>
   <form method="post" action="{% url 'listings:apply' listing.pk %}">
     {% csrf_token %}
-    {{ application_form.as_p }}
+    <div class="space-y-3">{% include "includes/form_fields.html" with form=application_form %}</div>
     <button type="submit" class="mt-2 rounded bg-sky-600 px-4 py-2 text-white">{% trans "Envoyer" %}</button>
   </form>
 </section>
