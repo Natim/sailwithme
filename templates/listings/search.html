@@ -4,31 +4,57 @@
 {% block title %}{% trans "Recherche d'annonces" %}{% endblock %}
 
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">{% trans "Annonces" %}</h1>
-<form
-  id="search-form"
-  method="get"
-  hx-get="{% url 'listings:search' %}"
-  hx-target="#search-results"
-  hx-push-url="true"
-  class="grid gap-4 rounded-xl border bg-white p-4 md:grid-cols-4"
->
-  {{ form.as_p }}
-  <div class="md:col-span-4">
-    <button type="submit" class="rounded bg-sky-600 px-4 py-2 text-white">{% trans "Rechercher" %}</button>
+<h1 class="text-2xl font-bold mb-2">{% trans "Annonces" %}</h1>
+<p class="text-sm text-slate-600 mb-6">{% trans "Filtrez par escale, programme et semaines ISO. Sans filtre, toutes les annonces publiées sont listées." %}</p>
+
+<form method="get" action="{% url 'listings:search' %}" class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+  {% if form.non_field_errors %}
+    <ul class="mb-4 text-sm text-red-600">{% for e in form.non_field_errors %}<li>{{ e }}</li>{% endfor %}</ul>
+  {% endif %}
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {% for field in form.visible_fields %}
+      <div class="{% if field.name == 'q' %}sm:col-span-2 lg:col-span-4{% endif %}">
+        <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="mt-6 flex flex-wrap items-center gap-3">
+    <button type="submit" class="rounded-lg bg-sky-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-sky-700">
+      {% trans "Rechercher" %}
+    </button>
+    <a href="{% url 'listings:search' %}" class="text-sm text-slate-600 hover:text-sky-700">{% trans "Réinitialiser" %}</a>
+    <span class="text-sm text-slate-500">{{ result_count }} {% trans "résultat(s)" %}</span>
   </div>
 </form>
-<div id="map" class="mt-4 h-80 rounded-xl border"></div>
+
+<div id="map" class="mt-6 h-80 rounded-xl border border-slate-200"></div>
+
 <div id="search-results" class="mt-6">
   {% include "listings/partials/results.html" %}
 </div>
+
 {% if user.is_authenticated %}
-<form method="post" action="{% url 'listings:save_alert' %}" class="mt-4">
+<form method="post" action="{% url 'listings:save_alert' %}" class="mt-6 flex flex-wrap items-end gap-3">
   {% csrf_token %}
-  {% for field in form %}
-    {% if field.value %}<input type="hidden" name="{{ field.name }}" value="{{ field.value }}">{% endif %}
+  {% for field in form.hidden_fields %}
+    {% if field.value is not None and field.value != '' %}
+      <input type="hidden" name="{{ field.name }}" value="{{ field.value }}">
+    {% endif %}
   {% endfor %}
-  <button type="submit" class="rounded border px-4 py-2 text-sm">{% trans "Enregistrer cette recherche comme alerte" %}</button>
+  {% for field in form.visible_fields %}
+    {% if field.value is not None and field.value != '' %}
+      <input type="hidden" name="{{ field.name }}" value="{{ field.value }}">
+    {% endif %}
+  {% endfor %}
+  {% for key, val in alert_coords.items %}
+    <input type="hidden" name="{{ key }}" value="{{ val }}">
+  {% endfor %}
+  <input type="hidden" name="alert_name" value="{% trans 'Alerte annonces' %}">
+  <button type="submit" class="rounded-lg border border-slate-300 px-4 py-2 text-sm hover:border-sky-400">
+    {% trans "Enregistrer cette recherche comme alerte" %}
+  </button>
 </form>
 {% endif %}
 {% endblock %}
@@ -38,12 +64,25 @@
 <script src="{% static 'js/map-basemap.js' %}"></script>
 <script>
   const mapData = {{ map_data_json|safe }};
-  const map = L.map('map').setView([20, -20], 3);
+  const map = L.map('map').setView([28.1, -20], 4);
   addSailsWithMeBasemap(map);
-  mapData.forEach(item => {
-    L.marker(item.departure).addTo(map).bindPopup(`<a href="${item.url}">${item.title}</a>`);
-    L.marker(item.arrival).addTo(map);
-    L.polyline([item.departure, item.arrival], {dashArray: '6 8', color: '#0369a1'}).addTo(map);
-  });
+  const layer = L.layerGroup().addTo(map);
+  function drawRoutes(data) {
+    layer.clearLayers();
+    const bounds = [];
+    data.forEach(item => {
+      const dep = L.marker(item.departure).bindPopup(`<a href="${item.url}">${item.title}</a>`);
+      const arr = L.marker(item.arrival);
+      const line = L.polyline([item.departure, item.arrival], { dashArray: '6 8', color: '#0369a1' });
+      dep.addTo(layer);
+      arr.addTo(layer);
+      line.addTo(layer);
+      bounds.push(item.departure, item.arrival);
+    });
+    if (bounds.length) {
+      map.fitBounds(bounds, { padding: [24, 24], maxZoom: 6 });
+    }
+  }
+  drawRoutes(mapData);
 </script>
 {% endblock %}

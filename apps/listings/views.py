@@ -5,11 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.views.generic import DetailView, ListView, TemplateView
 
 from apps.billing.services import user_can_initiate_contact
 
-from .forms import ApplicationForm, ListingForm, ListingSearchForm, SearchAlertForm
+from .forms import ApplicationForm, ListingForm, ListingSearchForm
 from .models import (
     ApplicationStatus,
     Listing,
@@ -17,25 +18,35 @@ from .models import (
     ListingKind,
     ListingStatus,
     RoutePage,
+    SearchAlert,
     Voyage,
 )
 from .search import listings_for_map, search_listings
 
 
 def listing_search(request):
-    form = ListingSearchForm(request.GET or None)
+    form = ListingSearchForm(request.GET)
     results = []
     map_data = []
     if form.is_valid():
         results = search_listings(form.cleaned_data)
-        map_data = listings_for_map(results)
+    elif form.is_bound:
+        messages.error(request, "Corriguez les critères de recherche.")
+    map_data = listings_for_map(results)
+    alert_coords = {}
+    if form.is_valid():
+        cd = form.cleaned_data
+        for key in ("departure_lat", "departure_lng", "arrival_lat", "arrival_lng"):
+            val = cd.get(key)
+            if val is not None:
+                alert_coords[key] = val
     ctx = {
         "form": form,
         "results": results,
+        "result_count": len(results),
         "map_data_json": json.dumps(map_data),
+        "alert_coords": alert_coords,
     }
-    if request.headers.get("HX-Request"):
-        return render(request, "listings/partials/results.html", ctx)
     return render(request, "listings/search.html", ctx)
 
 
@@ -129,13 +140,32 @@ def save_search_alert(request):
     if not user_can_initiate_contact(request.user):
         messages.error(request, "Les alertes nécessitent un Crew Pass.")
         return redirect("billing:pricing")
-    form = SearchAlertForm(request.POST)
-    if form.is_valid():
-        alert = form.save(commit=False)
-        alert.user = request.user
-        alert.save()
+    search_form = ListingSearchForm(request.POST)
+    if search_form.is_valid():
+        cd = search_form.cleaned_data
+        SearchAlert.objects.create(
+            user=request.user,
+            name=request.POST.get("alert_name", "").strip() or "Ma recherche",
+            kind=cd.get("kind") or "",
+            programme_type=cd.get("programme_type") or "",
+            departure_lat=cd.get("departure_lat"),
+            departure_lng=cd.get("departure_lng"),
+            departure_radius_nm=cd.get("departure_radius_nm") or 150,
+            arrival_lat=cd.get("arrival_lat"),
+            arrival_lng=cd.get("arrival_lng"),
+            arrival_radius_nm=cd.get("arrival_radius_nm") or 150,
+            year=cd.get("year"),
+            week_from=cd.get("week_from"),
+            week_to=cd.get("week_to"),
+        )
         messages.success(request, "Alerte enregistrée.")
-    return redirect("listings:search")
+    else:
+        messages.error(request, "Impossible d'enregistrer l'alerte : critères invalides.")
+    query = request.POST.urlencode()
+    url = reverse("listings:search")
+    if query:
+        url = f"{url}?{query}"
+    return redirect(url)
 
 
 class RouteSEOPageView(DetailView):

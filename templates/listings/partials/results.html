@@ -6,6 +6,12 @@
       <p class="text-sm">S{{ listing.week_from }}–S{{ listing.week_to }} {{ listing.year }} · {{ listing.get_kind_display }}</p>
     </li>
   {% empty %}
-    <li class="text-slate-600">{% load i18n %}{% trans "Aucune annonce." %}</li>
+    <li class="rounded-lg border border-dashed border-slate-300 bg-white p-6 text-center text-slate-600">
+      {% load i18n %}
+      {% trans "Aucune annonce pour ces critères." %}
+      {% if user.is_authenticated %}
+        <a href="{% url 'listings:create' %}" class="mt-2 block text-sky-700 hover:underline">{% trans "Publier une annonce" %}</a>
+      {% endif %}
+    </li>
   {% endfor %}
 </ul>

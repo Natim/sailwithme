@@ -1,9 +1,42 @@
 <div class="rounded-xl border bg-white p-6 shadow-sm">
   <h2 class="font-semibold mb-4">{% load i18n %}{% trans "Préférences" %}</h2>
   {% if saved %}<p class="mb-2 text-sm text-green-700">{% trans "Enregistré." %}</p>{% endif %}
-  <form hx-post="{% url 'profiles:edit_section' 'preferences' %}" hx-target="closest div" hx-swap="outerHTML" class="space-y-3" enctype="multipart/form-data">
+  <form hx-post="{% url 'profiles:edit_section' 'preferences' %}" hx-target="closest div" hx-swap="outerHTML" class="space-y-4" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+      {% if field.name != "photo" %}
+        <div>
+          <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+        </div>
+      {% endif %}
+    {% endfor %}
+    <div class="border-t border-slate-100 pt-4">
+      <label class="mb-2 block text-sm font-medium text-slate-700" for="{{ form.photo.id_for_label }}">{% trans "Photo de profil" %}</label>
+      {% if form.instance.photo %}
+        <img
+          src="{{ form.instance.photo.url }}"
+          alt="{% trans 'Photo de profil' %}"
+          class="mb-3 h-28 w-28 rounded-full border border-slate-200 object-cover shadow-sm"
+        >
+        <p class="mb-2 text-xs text-slate-500">{% trans "Photo enregistrée sur votre profil." %}</p>
+        <label class="mb-2 flex items-center gap-2 text-sm text-slate-700">
+          <input type="checkbox" name="photo-clear" id="id_photo-clear">
+          {% trans "Supprimer la photo" %}
+        </label>
+      {% else %}
+        <p class="mb-2 text-sm text-slate-500">{% trans "Aucune photo pour l'instant." %}</p>
+      {% endif %}
+      <input
+        type="file"
+        name="photo"
+        id="{{ form.photo.id_for_label }}"
+        accept="image/*"
+        class="block w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-sky-50 file:px-3 file:py-2 file:text-sm file:font-medium file:text-sky-800 hover:file:bg-sky-100"
+      >
+      {% for error in form.photo.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+    </div>
     <button type="submit" class="rounded bg-sky-600 px-4 py-2 text-white text-sm">{% trans "Enregistrer" %}</button>
   </form>
 </div>

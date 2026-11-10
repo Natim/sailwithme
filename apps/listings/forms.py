@@ -80,53 +80,117 @@ class ListingForm(forms.ModelForm):
 
 
 class ListingSearchForm(forms.Form):
-    q = forms.CharField(required=False, widget=forms.TextInput(attrs={"class": "rounded border p-2"}))
+    q = forms.CharField(
+        label="Mots-clés",
+        required=False,
+        widget=forms.TextInput(
+            attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2", "placeholder": "Route, escale…"}
+        ),
+    )
     kind = forms.ChoiceField(
+        label="Type",
         required=False,
         choices=[("", "Tous")] + list(ListingKind.choices),
+        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
     )
-    programme_type = forms.ChoiceField(required=False, choices=[("", "Tous")])
+    programme_type = forms.ChoiceField(
+        label="Programme",
+        required=False,
+        choices=[("", "Tous")],
+        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+    )
+    departure_port = forms.ModelChoiceField(
+        label="Départ (escale)",
+        queryset=None,
+        required=False,
+        empty_label="— Tous —",
+        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+    )
+    arrival_port = forms.ModelChoiceField(
+        label="Arrivée (escale)",
+        queryset=None,
+        required=False,
+        empty_label="— Tous —",
+        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+    )
     departure_lat = forms.FloatField(required=False, widget=forms.HiddenInput())
     departure_lng = forms.FloatField(required=False, widget=forms.HiddenInput())
     departure_radius_nm = forms.IntegerField(
+        label="Rayon départ (mn)",
         required=False,
         initial=150,
-        widget=forms.NumberInput(attrs={"class": "w-24 rounded border p-2"}),
+        min_value=10,
+        max_value=2000,
+        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
     )
     arrival_lat = forms.FloatField(required=False, widget=forms.HiddenInput())
     arrival_lng = forms.FloatField(required=False, widget=forms.HiddenInput())
     arrival_radius_nm = forms.IntegerField(
+        label="Rayon arrivée (mn)",
         required=False,
         initial=150,
-        widget=forms.NumberInput(attrs={"class": "w-24 rounded border p-2"}),
+        min_value=10,
+        max_value=2000,
+        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
     )
-    year = forms.IntegerField(required=False, widget=forms.NumberInput(attrs={"class": "w-24 rounded border p-2"}))
+    year = forms.IntegerField(
+        label="Année",
+        required=False,
+        min_value=2024,
+        max_value=2035,
+        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
+    )
     week_from = forms.IntegerField(
+        label="Semaine de",
         required=False,
         min_value=1,
         max_value=53,
-        widget=forms.NumberInput(attrs={"class": "w-20 rounded border p-2"}),
+        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
     )
     week_to = forms.IntegerField(
+        label="Semaine à",
         required=False,
         min_value=1,
         max_value=53,
-        widget=forms.NumberInput(attrs={"class": "w-20 rounded border p-2"}),
+        widget=forms.NumberInput(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
     )
     sort = forms.ChoiceField(
+        label="Tri",
         required=False,
+        initial="relevance",
         choices=[
             ("relevance", "Pertinence"),
             ("date", "Date de départ"),
         ],
-        widget=forms.Select(attrs={"class": "rounded border p-2"}),
+        widget=forms.Select(attrs={"class": "w-full rounded-lg border border-slate-300 px-3 py-2"}),
     )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        from .models import ProgrammeType
+        from .models import Port, ProgrammeType
 
+        self.fields["departure_port"].queryset = Port.objects.all()
+        self.fields["arrival_port"].queryset = Port.objects.all()
         self.fields["programme_type"].choices = [("", "Tous")] + list(ProgrammeType.choices)
+
+    def clean(self):
+        cleaned = super().clean()
+        dep_port = cleaned.get("departure_port")
+        arr_port = cleaned.get("arrival_port")
+        if dep_port and dep_port.location:
+            cleaned["departure_lat"] = dep_port.location.y
+            cleaned["departure_lng"] = dep_port.location.x
+        if arr_port and arr_port.location:
+            cleaned["arrival_lat"] = arr_port.location.y
+            cleaned["arrival_lng"] = arr_port.location.x
+        year = cleaned.get("year")
+        wf = cleaned.get("week_from")
+        wt = cleaned.get("week_to")
+        if any(x is not None for x in (year, wf, wt)) and not all(x is not None for x in (year, wf, wt)):
+            raise forms.ValidationError(
+                "Pour filtrer par dates, renseignez l'année et les deux semaines (de / à)."
+            )
+        return cleaned
 
 
 class ApplicationForm(forms.ModelForm):

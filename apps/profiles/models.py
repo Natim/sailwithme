@@ -1,6 +1,20 @@
+import uuid
+from pathlib import Path
+
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+
+ALLOWED_PROFILE_PHOTO_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+
+
+def profile_photo_upload_to(instance: "Profile", filename: str) -> str:
+    suffix = Path(filename).suffix.lower()
+    if suffix == ".jpeg":
+        suffix = ".jpg"
+    if suffix not in ALLOWED_PROFILE_PHOTO_SUFFIXES:
+        suffix = ".jpg"
+    return f"profiles/{instance.public_id}{suffix}"
 
 
 class ProfileRole(models.TextChoices):
@@ -22,8 +36,9 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         related_name="profile",
     )
+    public_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     role = models.CharField(max_length=16, choices=ProfileRole.choices, default=ProfileRole.CREW)
-    photo = models.ImageField(upload_to="profiles/", blank=True)
+    photo = models.ImageField(upload_to=profile_photo_upload_to, blank=True)
     bio = models.TextField(blank=True)
     nationality = models.CharField(max_length=64, blank=True)
     languages = models.JSONField(default=list, blank=True)
