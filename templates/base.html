@@ -71,6 +71,10 @@
             {% endif %}
             {% trans "Profile" %}
           </a>
+          <form method="post" action="{% url 'account_logout' %}" class="ml-1">
+            {% csrf_token %}
+            <button type="submit" class="btn-ghost cursor-pointer border-0 bg-transparent text-coral">{% trans "Log out" %}</button>
+          </form>
         {% else %}
           <a href="{% url 'account_login' %}" class="btn-ghost">{% trans "Log in" %}</a>
           <a href="{% url 'account_signup' %}" class="btn-primary ml-1">{% trans "Sign up" %}</a>
@@ -93,7 +97,10 @@
           <a href="{% url 'boats:list' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "My boats" %}</a>
           <a href="{% url 'profiles:me' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "My profile" %}</a>
           <a href="{% url 'messaging:inbox' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Messages" %}</a>
-          <a href="{% url 'account_logout' %}" class="rounded-lg px-3 py-2 text-coral">{% trans "Log out" %}</a>
+          <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="w-full cursor-pointer rounded-lg border-0 bg-transparent px-3 py-2 text-left font-semibold text-coral">{% trans "Log out" %}</button>
+          </form>
         {% else %}
           <a href="{% url 'account_login' %}" class="rounded-lg px-3 py-2 hover:bg-sand">{% trans "Log in" %}</a>
           <a href="{% url 'account_signup' %}" class="btn-primary text-center">{% trans "Sign up" %}</a>

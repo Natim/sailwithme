@@ -20,6 +20,20 @@ def test_signup_page_renders(client: Client):
 
 
 @pytest.mark.django_db
+def test_authenticated_nav_can_log_out(client: Client, user):
+    client.force_login(user)
+    response = client.get("/")
+    assert response.status_code == 200
+    assert b'action="/accounts/logout/"' in response.content
+    logged_out = client.post("/accounts/logout/")
+    assert logged_out.status_code == 302
+    assert logged_out.url == "/"
+    follow = client.get("/")
+    assert b'action="/accounts/logout/"' not in follow.content
+    assert b"Log in" in follow.content
+
+
+@pytest.mark.django_db
 def test_signup_creates_user(client: Client):
     response = client.post(
         "/accounts/signup/",
