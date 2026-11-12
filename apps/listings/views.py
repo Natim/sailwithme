@@ -185,7 +185,7 @@ def application_decide(request, app_id, action):
         application.status = ApplicationStatus.ACCEPTED
         application.save()
         with transaction.atomic():
-            voyage, _ = Voyage.objects.get_or_create(
+            voyage, _created = Voyage.objects.get_or_create(
                 listing=application.listing,
                 skipper=application.listing.author,
                 defaults={"title": application.listing.title},

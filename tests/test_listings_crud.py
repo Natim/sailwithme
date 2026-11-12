@@ -5,11 +5,13 @@ from django.contrib.gis.geos import Point
 
 from apps.accounts.models import User
 from apps.listings.models import (
+    ApplicationStatus,
     Listing,
     ListingApplication,
     ListingKind,
     ListingStatus,
     ProgrammeType,
+    Voyage,
 )
 
 
@@ -80,6 +82,32 @@ def test_withdrawn_listing_hidden_from_others(client, user, other_user):
     assert client.get(f"/listings/{listing.pk}/").status_code == 404
     client.force_login(user)
     assert client.get(f"/listings/{listing.pk}/").status_code == 200
+
+
+@pytest.mark.django_db
+def test_reject_application(client, user, other_user):
+    listing = make_listing(user)
+    application = ListingApplication.objects.create(listing=listing, applicant=other_user, message="Hello")
+    client.force_login(user)
+    response = client.get(f"/listings/applications/{application.pk}/reject/", follow=True)
+    assert response.status_code == 200
+    application.refresh_from_db()
+    assert application.status == ApplicationStatus.REJECTED
+    assert b"Application declined." in response.content
+
+
+@pytest.mark.django_db
+def test_accept_application_creates_voyage(client, user, other_user):
+    listing = make_listing(user)
+    application = ListingApplication.objects.create(listing=listing, applicant=other_user, message="Hello")
+    client.force_login(user)
+    response = client.get(f"/listings/applications/{application.pk}/accept/", follow=True)
+    assert response.status_code == 200
+    application.refresh_from_db()
+    assert application.status == ApplicationStatus.ACCEPTED
+    voyage = Voyage.objects.get(listing=listing)
+    assert other_user in voyage.crew.all()
+    assert b"Application accepted" in response.content
 
 
 @pytest.mark.django_db

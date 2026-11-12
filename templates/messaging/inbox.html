@@ -21,6 +21,7 @@
         {% for message in thread_messages %}{% include "messaging/partials/message.html" %}{% endfor %}
       </div>
       <form hx-post="{% url 'messaging:send' active_conversation.pk %}" hx-target="#thread" hx-swap="beforeend"
+        hx-on::after-request="if (event.detail.successful) this.reset()"
         class="flex gap-2 border-t border-lagoon/10 bg-sand p-3">
         {% csrf_token %}
         <input type="text" name="body" class="input flex-1" placeholder="{% trans 'Ton message…' %}" required>
