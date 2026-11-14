@@ -13,6 +13,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("", HomeView.as_view(), name="home"),
     path("legal/cgu/", TemplateView.as_view(template_name="legal/cgu.html"), name="cgu"),
+    path("cloudy/", TemplateView.as_view(template_name="core/cloudy.html"), name="cloudy"),
     path("profiles/", include("apps.profiles.urls")),
     path("boats/", include("apps.boats.urls")),
     path("listings/", include("apps.listings.urls")),

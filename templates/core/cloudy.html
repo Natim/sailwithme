@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Cloudy, the online pilot logbook" %} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<article class="mx-auto max-w-3xl space-y-6">
+  <h1 class="font-display text-3xl font-bold text-ocean">{% trans "Cloudy, the online pilot logbook" %}</h1>
+  <p class="text-slate-700">
+    {% blocktrans trimmed %}
+    Sail with Me and Cloudy are both published by SAS CLOUDY. Cloudy, on cloudy.fr, keeps an electronic copy of a pilot logbook: the line for the day, the totals, and a logbook you can open again when you need it.
+    {% endblocktrans %}
+  </p>
+
+  <section class="space-y-3">
+    <h2 class="font-display text-xl font-semibold text-ocean">{% trans "After the flight" %}</h2>
+    <p class="text-slate-700">
+      {% blocktrans trimmed %}
+      Back on the ground, you open the logbook on cloudy.fr and enter the flight as on paper: date, aircraft, flight time, and function on board. The totals update from the lines you enter.
+      {% endblocktrans %}
+    </p>
+    <p class="text-slate-700">{% trans "The same account covers several activities. Cloudy has a logbook for each:" %}</p>
+    <ul class="list-disc space-y-1 pl-5 text-slate-700">
+      <li>{% trans "aeroplane, in DGAC or FCL 1.080 format" %}</li>
+      <li>{% trans "glider" %}</li>
+      <li>{% trans "helicopter" %}</li>
+      <li>{% trans "microlight, in FFPLUM format" %}</li>
+      <li>{% trans "balloon" %}</li>
+      <li>{% trans "parachute" %}</li>
+    </ul>
+  </section>
+
+  <section class="space-y-3">
+    <h2 class="font-display text-xl font-semibold text-ocean">{% trans "What you get" %}</h2>
+    <ul class="list-disc space-y-1 pl-5 text-slate-700">
+      <li>{% trans "Hour totals calculated from the flights you enter." %}</li>
+      <li>{% trans "A PDF export in the DGAC or FCL 1.080 layout, plus XLS and CSV, and sending the logbook by email." %}</li>
+      <li>{% trans "Cloudy Alerts: an email several weeks before a licence or rating expires, once the profile is filled in." %}</li>
+      <li>{% trans "Statistics drawn from your flights." %}</li>
+      <li>{% trans "Photos, annotated charts, and navigation documents attached to a flight." %}</li>
+      <li>{% trans "Import of a logbook already kept elsewhere, from Excel, CSV, or another file." %}</li>
+    </ul>
+  </section>
+
+  <section class="space-y-3">
+    <h2 class="font-display text-xl font-semibold text-ocean">{% trans "Two plans" %}</h2>
+    <p class="text-slate-700">
+      {% blocktrans trimmed %}
+      Signing up on cloudy.fr is free. The free plan includes one logbook of your choice, import of an existing logbook, hour totals, and 10 MB of storage.
+      {% endblocktrans %}
+    </p>
+    <p class="text-slate-700">
+      {% blocktrans trimmed %}
+      First Class is €2.99 per month, or €35 per year. It opens unlimited logbooks, email reminders, detailed statistics, exports, and unlimited storage.
+      {% endblocktrans %}
+    </p>
+    <p class="text-slate-700">
+      {% trans "A question about an import or your logbook:" %}
+      <a href="mailto:support@cloudy.fr" class="font-semibold text-lagoon hover:underline">support@cloudy.fr</a>
+    </p>
+    <p>
+      <a href="https://www.cloudy.fr/" rel="noopener noreferrer" class="btn-primary inline-flex">{% trans "Open Cloudy" %}</a>
+    </p>
+  </section>
+</article>
+{% endblock %}

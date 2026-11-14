@@ -1642,3 +1642,77 @@ msgstr "Ajouter un compte"
 
 msgid "Back to my profile"
 msgstr "Retour à mon profil"
+
+#: templates/base.html
+msgid "Cloudy logbook"
+msgstr "Carnet Cloudy"
+
+#: templates/core/cloudy.html
+msgid "Cloudy, the online pilot logbook"
+msgstr "Cloudy, le carnet de vol en ligne"
+
+msgid "Sail with Me and Cloudy are both published by SAS CLOUDY. Cloudy, on cloudy.fr, keeps an electronic copy of a pilot logbook: the line for the day, the totals, and a logbook you can open again when you need it."
+msgstr "Sail with Me et Cloudy sont tous deux édités par SAS CLOUDY. Cloudy, sur cloudy.fr, conserve une copie électronique du carnet de vol : la ligne du jour, les totaux, et un carnet que tu peux rouvrir quand tu en as besoin."
+
+msgid "After the flight"
+msgstr "Après le vol"
+
+msgid "Back on the ground, you open the logbook on cloudy.fr and enter the flight as on paper: date, aircraft, flight time, and function on board. The totals update from the lines you enter."
+msgstr "De retour au sol, tu ouvres le carnet sur cloudy.fr et tu inscris le vol comme sur le papier : date, machine, temps de vol et fonction à bord. Les totaux se mettent à jour à partir des lignes saisies."
+
+msgid "The same account covers several activities. Cloudy has a logbook for each:"
+msgstr "Le même compte couvre plusieurs activités. Cloudy propose un carnet pour chacune :"
+
+msgid "aeroplane, in DGAC or FCL 1.080 format"
+msgstr "avion, au format DGAC ou FCL 1.080"
+
+msgid "glider"
+msgstr "planeur"
+
+msgid "helicopter"
+msgstr "hélicoptère"
+
+msgid "microlight, in FFPLUM format"
+msgstr "ULM, au format FFPLUM"
+
+msgid "balloon"
+msgstr "ballon"
+
+msgid "parachute"
+msgstr "parachute"
+
+msgid "What you get"
+msgstr "Ce que tu y retrouves"
+
+msgid "Hour totals calculated from the flights you enter."
+msgstr "Les totaux d'heures, calculés à partir des vols saisis."
+
+msgid "A PDF export in the DGAC or FCL 1.080 layout, plus XLS and CSV, and sending the logbook by email."
+msgstr "Un export PDF à la présentation DGAC ou FCL 1.080, ainsi que les formats XLS et CSV, et l'envoi du carnet par e-mail."
+
+msgid "Cloudy Alerts: an email several weeks before a licence or rating expires, once the profile is filled in."
+msgstr "Cloudy Alertes : un e-mail plusieurs semaines avant l'expiration d'une licence ou d'une qualification, une fois le profil renseigné."
+
+msgid "Statistics drawn from your flights."
+msgstr "Des statistiques tirées de tes vols."
+
+msgid "Photos, annotated charts, and navigation documents attached to a flight."
+msgstr "Les photos, cartes annotées et documents de navigation joints à un vol."
+
+msgid "Import of a logbook already kept elsewhere, from Excel, CSV, or another file."
+msgstr "L'import d'un carnet déjà tenu ailleurs, depuis Excel, CSV ou un autre fichier."
+
+msgid "Two plans"
+msgstr "Deux formules"
+
+msgid "Signing up on cloudy.fr is free. The free plan includes one logbook of your choice, import of an existing logbook, hour totals, and 10 MB of storage."
+msgstr "L'inscription sur cloudy.fr est gratuite. La formule gratuite comprend un carnet au choix, l'import d'un carnet existant, le calcul des totaux et 10 Mo de stockage."
+
+msgid "First Class is €2.99 per month, or €35 per year. It opens unlimited logbooks, email reminders, detailed statistics, exports, and unlimited storage."
+msgstr "La formule First Class est à 2,99 € par mois, soit 35 € par an. Elle ouvre un nombre illimité de carnets, les rappels par e-mail, les statistiques détaillées, les exports et un espace de stockage illimité."
+
+msgid "A question about an import or your logbook:"
+msgstr "Une question sur un import ou sur ton carnet :"
+
+msgid "Open Cloudy"
+msgstr "Ouvrir Cloudy"
