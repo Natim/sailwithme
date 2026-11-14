@@ -85,7 +85,7 @@ class ListingDetailView(DetailView):
                 "arrival": [float(arr.y), float(arr.x)],
             }
         if self.request.user.is_authenticated:
-            ctx["application_form"] = ApplicationForm()
+            ctx["application_form"] = ApplicationForm(listing=listing)
         return ctx
 
 
@@ -156,7 +156,7 @@ def listing_apply(request, pk):
     if not user_can_initiate_contact(request.user) and listing.kind == ListingKind.CREW_WANTED:
         messages.error(request, _("A Crew Pass is required to apply (see Pricing)."))
         return redirect("billing:pricing")
-    form = ApplicationForm(request.POST or None)
+    form = ApplicationForm(request.POST or None, listing=listing)
     if request.method == "POST" and form.is_valid():
         app, created = ListingApplication.objects.get_or_create(
             listing=listing,
@@ -195,12 +195,21 @@ def application_decide(request, app_id, action):
         application.status = ApplicationStatus.ACCEPTED
         application.save()
         with transaction.atomic():
-            voyage, _created = Voyage.objects.get_or_create(
-                listing=application.listing,
-                skipper=application.listing.author,
-                defaults={"title": application.listing.title},
+            listing = application.listing
+            if listing.kind == ListingKind.BERTH_WANTED:
+                skipper_user = application.applicant
+                crew_user = listing.author
+            else:
+                skipper_user = listing.author
+                crew_user = application.applicant
+            voyage, created = Voyage.objects.get_or_create(
+                listing=listing,
+                defaults={"skipper": skipper_user, "title": listing.title},
             )
-            voyage.crew.add(application.applicant)
+            if not created and voyage.skipper_id != skipper_user.id:
+                voyage.skipper = skipper_user
+                voyage.save(update_fields=["skipper"])
+            voyage.crew.add(crew_user)
         messages.success(request, _("Application accepted — voyage created."))
     elif action == "reject":
         application.status = ApplicationStatus.REJECTED

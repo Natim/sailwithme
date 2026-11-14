@@ -4,10 +4,16 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.core.forms_ui import INPUT_CLASS as LISTING_INPUT
 from apps.core.language_choices import LANGUAGE_CHOICES
-from apps.profiles.models import SkillLevel
+from apps.profiles.models import ProfileRole, SkillLevel
 
 from .iso_weeks import SEASON_SHORTCUTS
 from .models import Listing, ListingApplication, ListingKind, SearchAlert
+
+LISTING_KIND_SEARCH_CHOICES = [
+    ("", _("All")),
+    (ListingKind.CREW_WANTED, _("Skippers looking for crew")),
+    (ListingKind.BERTH_WANTED, _("Crew looking for a berth")),
+]
 
 
 class ListingForm(forms.ModelForm):
@@ -52,7 +58,7 @@ class ListingForm(forms.ModelForm):
         widgets = {
             "description": forms.Textarea(attrs={"rows": 5, "class": LISTING_INPUT}),
             "title": forms.TextInput(attrs={"class": LISTING_INPUT}),
-            "kind": forms.Select(attrs={"class": LISTING_INPUT}),
+            "kind": forms.Select(attrs={"class": f"{LISTING_INPUT} sr-only", "aria-hidden": "true"}),
             "programme_type": forms.Select(attrs={"class": LISTING_INPUT}),
             "boat": forms.Select(attrs={"class": LISTING_INPUT}),
             "departure_name": forms.TextInput(attrs={"class": LISTING_INPUT}),
@@ -86,10 +92,10 @@ class ListingForm(forms.ModelForm):
             "week_to": _("End week (ISO)"),
             "duration_days": _("Duration (days)"),
             "berths_available": _("Berths available"),
-            "daily_contribution_eur": _("Daily contribution (€)"),
-            "min_skill_level": _("Minimum level"),
+            "daily_contribution_eur": _("Daily contribution requested (€)"),
+            "min_skill_level": _("Minimum level required"),
             "languages_on_board": _("Languages on board"),
-            "requirements": _("Requirements"),
+            "requirements": _("Requirements for crew"),
             "flexibility_nm": _("Route flexibility (nm)"),
         }
         for name, label in labels.items():
@@ -100,6 +106,16 @@ class ListingForm(forms.ModelForm):
             attrs={"class": LISTING_INPUT},
             choices=[("", "—")] + list(SkillLevel.choices),
         )
+        self.label_daily_contribution_berth = _("Contribution I can offer (€/day)")
+        self.label_languages_berth = _("Languages I speak")
+        self.label_requirements_berth = _("What I'm looking for on board")
+        if not self.instance.pk and not self.is_bound:
+            profile = getattr(user, "profile", None)
+            if profile:
+                if profile.role == ProfileRole.SKIPPER:
+                    self.fields["kind"].initial = ListingKind.CREW_WANTED
+                elif profile.role == ProfileRole.CREW:
+                    self.fields["kind"].initial = ListingKind.BERTH_WANTED
         if self.instance.pk:
             self.fields["languages_on_board"].initial = self.instance.languages_on_board or []
             if self.instance.departure_point:
@@ -131,6 +147,11 @@ class ListingForm(forms.ModelForm):
             cleaned["arrival_point"] = self.instance.arrival_point
         if not cleaned.get("departure_point") or not cleaned.get("arrival_point"):
             raise forms.ValidationError(_("Click the map to set departure then arrival before publishing."))
+        kind = cleaned.get("kind")
+        if kind == ListingKind.BERTH_WANTED:
+            cleaned["boat"] = None
+            cleaned["min_skill_level"] = ""
+            cleaned["berths_available"] = 1
         return cleaned
 
     def save(self, commit=True):
@@ -153,7 +174,7 @@ class ListingSearchForm(forms.Form):
     kind = forms.ChoiceField(
         label=_("Type"),
         required=False,
-        choices=[("", _("All"))] + list(ListingKind.choices),
+        choices=LISTING_KIND_SEARCH_CHOICES,
         widget=forms.Select(attrs={"class": LISTING_INPUT}),
     )
     programme_type = forms.ChoiceField(
@@ -259,18 +280,20 @@ class ApplicationForm(forms.ModelForm):
         model = ListingApplication
         fields = ["message"]
         widgets = {
-            "message": forms.Textarea(
-                attrs={
-                    "rows": 4,
-                    "class": LISTING_INPUT,
-                    "placeholder": _("Introduce yourself in a few lines…"),
-                }
-            )
+            "message": forms.Textarea(attrs={"rows": 4, "class": LISTING_INPUT}),
         }
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, listing=None, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["message"].label = _("Message to the skipper")
+        self.listing = listing
+        if listing and listing.kind == ListingKind.BERTH_WANTED:
+            self.fields["message"].label = _("Message to the crew member")
+            self.fields["message"].widget.attrs["placeholder"] = _(
+                "Describe your boat, experience, and what you can offer…"
+            )
+        else:
+            self.fields["message"].label = _("Message to the skipper")
+            self.fields["message"].widget.attrs["placeholder"] = _("Introduce yourself in a few lines…")
 
 
 class SearchAlertForm(forms.ModelForm):

@@ -11,7 +11,7 @@
           </p>
           <p class="mt-1 text-xs text-slate-500">
             {{ listing.period_months_display }} · {{ listing.get_programme_type_display }}
-            {% if listing.berths_available %} · {{ listing.berths_available }} {% trans "berths" %}{% endif %}
+            {% if listing.kind == 'crew_wanted' and listing.berths_available %} · {{ listing.berths_available }} {% trans "berths" %}{% endif %}
             {% if listing.daily_contribution_eur %} · ~{{ listing.daily_contribution_eur }} €/{% trans "day" %}{% endif %}
           </p>
         </div>

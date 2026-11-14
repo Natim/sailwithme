@@ -117,3 +117,43 @@ def test_edit_form_prefills_route_coords(client, user):
     response = client.get(f"/listings/{listing.pk}/edit/")
     assert response.status_code == 200
     assert b'value="28.1' in response.content
+
+
+@pytest.mark.django_db
+def test_create_berth_wanted_listing_strips_skipper_fields(client, user):
+    client.force_login(user)
+    data = {
+        "kind": ListingKind.BERTH_WANTED,
+        "title": "Cherche place",
+        "description": "Disponible pour transat.",
+        "programme_type": ProgrammeType.TRANSATLANTIC,
+        "departure_name": "Las Palmas",
+        "arrival_name": "Le Marin",
+        "departure_lat": 28.1,
+        "departure_lng": -15.4,
+        "arrival_lat": 14.5,
+        "arrival_lng": -61.0,
+        "year": 2026,
+        "week_from": 46,
+        "week_to": 50,
+        "flexibility_nm": 50,
+    }
+    response = client.post("/listings/new/", data)
+    assert response.status_code == 302
+    listing = Listing.objects.get(title="Cherche place")
+    assert listing.kind == ListingKind.BERTH_WANTED
+    assert listing.boat_id is None
+    assert listing.min_skill_level == ""
+    assert listing.berths_available == 1
+
+
+@pytest.mark.django_db
+def test_accept_application_berth_wanted_inverts_voyage_roles(client, user, other_user):
+    listing = make_listing(user, kind=ListingKind.BERTH_WANTED)
+    application = ListingApplication.objects.create(listing=listing, applicant=other_user, message="Bateau prêt")
+    client.force_login(user)
+    response = client.get(f"/listings/applications/{application.pk}/accept/", follow=True)
+    assert response.status_code == 200
+    voyage = Voyage.objects.get(listing=listing)
+    assert voyage.skipper_id == other_user.id
+    assert user in voyage.crew.all()

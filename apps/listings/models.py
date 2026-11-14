@@ -32,7 +32,7 @@ class Port(UUIDModel):
 
 
 class ListingKind(models.TextChoices):
-    CREW_WANTED = "crew_wanted", _("Looking for crew")
+    CREW_WANTED = "crew_wanted", _("I have a boat — looking for crew")
     BERTH_WANTED = "berth_wanted", _("Looking for a berth")
 
 
