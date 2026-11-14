@@ -1554,3 +1554,78 @@ msgstr "Saved."
 #: templates/reviews/form.html:5
 msgid "Leave a review"
 msgstr "Leave a review"
+
+msgid "Continue with Google"
+msgstr "Continue with Google"
+
+msgid "Continue with Facebook"
+msgstr "Continue with Facebook"
+
+#, python-format
+msgid "Continue with %(name)s"
+msgstr "Continue with %(name)s"
+
+msgid "or"
+msgstr "or"
+
+#, python-format
+msgid "Continue with %(provider)s"
+msgstr "Continue with %(provider)s"
+
+#, python-format
+msgid "This links %(provider)s to your account."
+msgstr "This links %(provider)s to your account."
+
+#, python-format
+msgid "You are about to continue with %(provider)s."
+msgstr "You are about to continue with %(provider)s."
+
+msgid "Continue"
+msgstr "Continue"
+
+msgid "Complete your account"
+msgstr "Complete your account"
+
+#, python-format
+msgid "One last step to use your %(provider)s account."
+msgstr "One last step to use your %(provider)s account."
+
+#, python-format
+msgid "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Log in</a> and link it from your profile."
+msgstr "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Log in</a> and link it from your profile."
+
+msgid "Sign-in failed"
+msgstr "Sign-in failed"
+
+msgid "We could not sign you in with that account. Try again, or use your email."
+msgstr "We could not sign you in with that account. Try again, or use your email."
+
+msgid "Back to log in"
+msgstr "Back to log in"
+
+msgid "Sign-in cancelled"
+msgstr "Sign-in cancelled"
+
+msgid "You cancelled the sign-in. You can try again from the login page."
+msgstr "You cancelled the sign-in. You can try again from the login page."
+
+msgid "Google and Facebook sign-in"
+msgstr "Google and Facebook sign-in"
+
+msgid "Link an account to sign in without a password, or remove one you no longer use."
+msgstr "Link an account to sign in without a password, or remove one you no longer use."
+
+msgid "Linked accounts"
+msgstr "Linked accounts"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "No Google or Facebook account is linked yet."
+msgstr "No Google or Facebook account is linked yet."
+
+msgid "Add an account"
+msgstr "Add an account"
+
+msgid "Back to my profile"
+msgstr "Back to my profile"

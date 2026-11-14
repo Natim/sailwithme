@@ -1,0 +1,32 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Complete your account" %}{% endblock %}
+
+{% block account_content %}
+<h1 class="text-2xl font-bold text-sky-900">{% trans "Complete your account" %}</h1>
+<p class="mt-2 text-sm text-slate-600">
+  {% blocktrans with provider=account.get_provider.name %}One last step to use your {{ provider }} account.{% endblocktrans %}
+</p>
+<p class="mt-2 text-sm text-slate-600">
+  {% url 'account_login' as login_url %}
+  {% blocktrans %}Already registered with this email? <a href="{{ login_url }}" class="font-medium text-sky-700 hover:underline">Log in</a> and link it from your profile.{% endblocktrans %}
+</p>
+
+{% if form.non_field_errors %}
+  <ul class="mt-4 text-sm text-red-600">
+    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+  </ul>
+{% endif %}
+
+<form method="post" action="{% url 'socialaccount_signup' %}" class="mt-6 space-y-4">
+  {% csrf_token %}
+  {% for field in form.visible_fields %}
+    {% include "account/_form_field.html" with field=field %}
+  {% endfor %}
+  {{ redirect_field }}
+  <button type="submit" class="w-full cursor-pointer rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-700">
+    {% trans "Sign up" %}
+  </button>
+</form>
+{% endblock %}

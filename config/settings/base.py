@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.facebook",
     "django_q",
     "apps.core",
     "apps.accounts",
@@ -117,6 +118,43 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
+ACCOUNT_ADAPTER = "apps.accounts.adapter.SailWithMeAccountAdapter"
+
+EMAIL_BCC: list[str] = []
+
+
+def _configured_social_apps(client_id: str, secret: str) -> list[dict[str, str]]:
+    if not client_id or not secret:
+        return []
+    return [{"client_id": client_id, "secret": secret}]
+
+
+_google_apps = _configured_social_apps(
+    env("GOOGLE_CLIENT_ID", default=""),
+    env("GOOGLE_CLIENT_SECRET", default=""),
+)
+_facebook_apps = _configured_social_apps(
+    env("FACEBOOK_CLIENT_ID", default=""),
+    env("FACEBOOK_CLIENT_SECRET", default=""),
+)
+
+# Buttons stay hidden until both id and secret are set.
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": ["profile", "email"],
+        "AUTH_PARAMS": {"access_type": "online"},
+        "OAUTH_PKCE_ENABLED": True,
+        "FETCH_USERINFO": True,
+        **({"APPS": _google_apps} if _google_apps else {}),
+    },
+    "facebook": {
+        "METHOD": "oauth2",
+        "SCOPE": ["email", "public_profile"],
+        "FIELDS": ["id", "email", "name", "first_name", "last_name"],
+        "VERSION": "v23.0",
+        **({"APPS": _facebook_apps} if _facebook_apps else {}),
+    },
+}
 
 EMAIL_BACKEND = env(
     "EMAIL_BACKEND",

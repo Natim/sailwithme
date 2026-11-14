@@ -170,6 +170,16 @@ def listing_apply(request, pk):
             from apps.messaging.services import start_conversation
 
             start_conversation(request.user, listing.author, listing=listing, first_message=app.message)
+            from .emails import notify_author_of_application
+
+            listing_url = request.build_absolute_uri(listing.get_absolute_url())
+            notify_author_of_application(
+                author=listing.author,
+                listing=listing,
+                applicant=request.user,
+                message=app.message,
+                listing_url=listing_url,
+            )
         return redirect("listings:detail", pk=pk)
     return redirect("listings:detail", pk=pk)
 

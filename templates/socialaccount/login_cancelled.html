@@ -1,0 +1,14 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign-in cancelled" %}{% endblock %}
+
+{% block account_content %}
+<h1 class="text-2xl font-bold text-sky-900">{% trans "Sign-in cancelled" %}</h1>
+<p class="mt-2 text-sm text-slate-600">
+  {% trans "You cancelled the sign-in. You can try again from the login page." %}
+</p>
+<p class="mt-6">
+  <a href="{% url 'account_login' %}" class="font-medium text-sky-700 hover:underline">{% trans "Back to log in" %}</a>
+</p>
+{% endblock %}

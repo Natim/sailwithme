@@ -1,0 +1,14 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign-in failed" %}{% endblock %}
+
+{% block account_content %}
+<h1 class="text-2xl font-bold text-sky-900">{% trans "Sign-in failed" %}</h1>
+<p class="mt-2 text-sm text-slate-600">
+  {% trans "We could not sign you in with that account. Try again, or use your email." %}
+</p>
+<p class="mt-6">
+  <a href="{% url 'account_login' %}" class="font-medium text-sky-700 hover:underline">{% trans "Back to log in" %}</a>
+</p>
+{% endblock %}

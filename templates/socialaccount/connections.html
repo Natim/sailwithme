@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Google and Facebook sign-in" %} — {{ SITE_NAME }}{% endblock %}
+
+{% block content %}
+<div class="mx-auto max-w-lg">
+  <h1 class="font-display text-2xl font-bold text-ocean">{% trans "Google and Facebook sign-in" %}</h1>
+  <p class="mt-2 text-sm text-slate-600">
+    {% trans "Link an account to sign in without a password, or remove one you no longer use." %}
+  </p>
+
+  <section class="card mt-6">
+    <h2 class="font-display text-lg font-semibold text-ocean">{% trans "Linked accounts" %}</h2>
+    {% if form.accounts %}
+      <form method="post" action="{% url 'socialaccount_connections' %}" class="mt-4 space-y-3">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <ul class="text-sm text-red-600">
+            {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+        <ul class="space-y-2">
+          {% for account in form.accounts %}
+            <li>
+              <label class="flex items-center gap-3 rounded-lg border border-slate-200 px-3 py-2">
+                <input type="radio" name="account" value="{{ account.pk }}" required class="h-4 w-4 text-sky-600">
+                <span>
+                  <span class="font-semibold text-ocean">{{ account.provider|title }}</span>
+                  {% if account.extra_data.email %}
+                    <span class="block text-sm text-slate-600">{{ account.extra_data.email }}</span>
+                  {% elif account.extra_data.name %}
+                    <span class="block text-sm text-slate-600">{{ account.extra_data.name }}</span>
+                  {% endif %}
+                </span>
+              </label>
+            </li>
+          {% endfor %}
+        </ul>
+        <button type="submit" class="cursor-pointer rounded-lg border border-coral px-4 py-2 text-sm font-semibold text-coral hover:bg-orange-50">
+          {% trans "Remove" %}
+        </button>
+      </form>
+    {% else %}
+      <p class="mt-3 text-sm text-slate-600">{% trans "No Google or Facebook account is linked yet." %}</p>
+    {% endif %}
+  </section>
+
+  <section class="card mt-6">
+    <h2 class="font-display text-lg font-semibold text-ocean">{% trans "Add an account" %}</h2>
+    <div class="mt-4">
+      {% include "account/social_providers.html" with process="connect" %}
+    </div>
+  </section>
+
+  <p class="mt-6 text-sm">
+    <a href="{% url 'profiles:me' %}" class="font-medium text-sky-700 hover:underline">{% trans "Back to my profile" %}</a>
+  </p>
+</div>
+{% endblock %}

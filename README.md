@@ -22,6 +22,17 @@ python manage.py runserver
 
 Django 5, PostGIS, HTMX, Tailwind (CDN), django-allauth, django-q2.
 
+## Connexion Google et Facebook
+
+Les boutons n’apparaissent que lorsque les identifiants sont renseignés (voir `.env.example`).
+
+URI de redirection à déclarer chez le fournisseur :
+
+- Google : `https://<domaine>/accounts/google/login/callback/`
+- Facebook : `https://<domaine>/accounts/facebook/login/callback/` (permissions `email` et `public_profile`)
+
+Pour relier un compte déjà créé avec la même adresse e-mail, la personne se connecte avec son mot de passe, puis ajoute Google ou Facebook depuis son profil (« Connexion Google et Facebook »).
+
 ## Licence
 
 Le code source est publié sous la **GNU Affero General Public License v3.0** ([LICENSE](LICENSE)). Copyright SAS CLOUDY.

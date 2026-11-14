@@ -1571,3 +1571,78 @@ msgstr "Guardado."
 #: templates/reviews/form.html:5
 msgid "Leave a review"
 msgstr "Dejar un comentario"
+
+msgid "Continue with Google"
+msgstr "Continuar con Google"
+
+msgid "Continue with Facebook"
+msgstr "Continuar con Facebook"
+
+#, python-format
+msgid "Continue with %(name)s"
+msgstr "Continuar con %(name)s"
+
+msgid "or"
+msgstr "o"
+
+#, python-format
+msgid "Continue with %(provider)s"
+msgstr "Continuar con %(provider)s"
+
+#, python-format
+msgid "This links %(provider)s to your account."
+msgstr "Esto vincula %(provider)s a tu cuenta."
+
+#, python-format
+msgid "You are about to continue with %(provider)s."
+msgstr "Vas a continuar con %(provider)s."
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Complete your account"
+msgstr "Completa tu cuenta"
+
+#, python-format
+msgid "One last step to use your %(provider)s account."
+msgstr "Último paso para usar tu cuenta de %(provider)s."
+
+#, python-format
+msgid "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Log in</a> and link it from your profile."
+msgstr "¿Ya tienes una cuenta con este correo? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Inicia sesión</a> y vínculala desde tu perfil."
+
+msgid "Sign-in failed"
+msgstr "No se pudo iniciar sesión"
+
+msgid "We could not sign you in with that account. Try again, or use your email."
+msgstr "No pudimos iniciar sesión con esa cuenta. Inténtalo de nuevo o usa tu correo."
+
+msgid "Back to log in"
+msgstr "Volver al inicio de sesión"
+
+msgid "Sign-in cancelled"
+msgstr "Inicio de sesión cancelado"
+
+msgid "You cancelled the sign-in. You can try again from the login page."
+msgstr "Cancelaste el inicio de sesión. Puedes intentarlo de nuevo desde la página de acceso."
+
+msgid "Google and Facebook sign-in"
+msgstr "Acceso con Google y Facebook"
+
+msgid "Link an account to sign in without a password, or remove one you no longer use."
+msgstr "Vincula una cuenta para entrar sin contraseña, o quita una que ya no uses."
+
+msgid "Linked accounts"
+msgstr "Cuentas vinculadas"
+
+msgid "Remove"
+msgstr "Quitar"
+
+msgid "No Google or Facebook account is linked yet."
+msgstr "Todavía no hay ninguna cuenta de Google o Facebook vinculada."
+
+msgid "Add an account"
+msgstr "Añadir una cuenta"
+
+msgid "Back to my profile"
+msgstr "Volver a mi perfil"

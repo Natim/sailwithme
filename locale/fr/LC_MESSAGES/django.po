@@ -1567,3 +1567,78 @@ msgstr "Enregistré."
 #: templates/reviews/form.html:5
 msgid "Leave a review"
 msgstr "Laisser un avis"
+
+msgid "Continue with Google"
+msgstr "Continuer avec Google"
+
+msgid "Continue with Facebook"
+msgstr "Continuer avec Facebook"
+
+#, python-format
+msgid "Continue with %(name)s"
+msgstr "Continuer avec %(name)s"
+
+msgid "or"
+msgstr "ou"
+
+#, python-format
+msgid "Continue with %(provider)s"
+msgstr "Continuer avec %(provider)s"
+
+#, python-format
+msgid "This links %(provider)s to your account."
+msgstr "Cela relie %(provider)s à ton compte."
+
+#, python-format
+msgid "You are about to continue with %(provider)s."
+msgstr "Tu vas continuer avec %(provider)s."
+
+msgid "Continue"
+msgstr "Continuer"
+
+msgid "Complete your account"
+msgstr "Complète ton compte"
+
+#, python-format
+msgid "One last step to use your %(provider)s account."
+msgstr "Dernière étape pour utiliser ton compte %(provider)s."
+
+#, python-format
+msgid "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Log in</a> and link it from your profile."
+msgstr "Déjà un compte avec cet e-mail ? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Connecte-toi</a> et relie-le depuis ton profil."
+
+msgid "Sign-in failed"
+msgstr "Connexion impossible"
+
+msgid "We could not sign you in with that account. Try again, or use your email."
+msgstr "La connexion avec ce compte a échoué. Réessaie, ou utilise ton e-mail."
+
+msgid "Back to log in"
+msgstr "Retour à la connexion"
+
+msgid "Sign-in cancelled"
+msgstr "Connexion annulée"
+
+msgid "You cancelled the sign-in. You can try again from the login page."
+msgstr "Tu as annulé la connexion. Tu peux réessayer depuis la page de connexion."
+
+msgid "Google and Facebook sign-in"
+msgstr "Connexion Google et Facebook"
+
+msgid "Link an account to sign in without a password, or remove one you no longer use."
+msgstr "Relie un compte pour te connecter sans mot de passe, ou retire celui que tu n'utilises plus."
+
+msgid "Linked accounts"
+msgstr "Comptes reliés"
+
+msgid "Remove"
+msgstr "Retirer"
+
+msgid "No Google or Facebook account is linked yet."
+msgstr "Aucun compte Google ou Facebook n'est relié."
+
+msgid "Add an account"
+msgstr "Ajouter un compte"
+
+msgid "Back to my profile"
+msgstr "Retour à mon profil"

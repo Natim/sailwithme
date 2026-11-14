@@ -1561,3 +1561,78 @@ msgstr "Gespeichert."
 #: templates/reviews/form.html:5
 msgid "Leave a review"
 msgstr "Bewertung abgeben"
+
+msgid "Continue with Google"
+msgstr "Weiter mit Google"
+
+msgid "Continue with Facebook"
+msgstr "Weiter mit Facebook"
+
+#, python-format
+msgid "Continue with %(name)s"
+msgstr "Weiter mit %(name)s"
+
+msgid "or"
+msgstr "oder"
+
+#, python-format
+msgid "Continue with %(provider)s"
+msgstr "Weiter mit %(provider)s"
+
+#, python-format
+msgid "This links %(provider)s to your account."
+msgstr "Damit verknüpfst du %(provider)s mit deinem Konto."
+
+#, python-format
+msgid "You are about to continue with %(provider)s."
+msgstr "Du setzt mit %(provider)s fort."
+
+msgid "Continue"
+msgstr "Weiter"
+
+msgid "Complete your account"
+msgstr "Konto vervollständigen"
+
+#, python-format
+msgid "One last step to use your %(provider)s account."
+msgstr "Letzter Schritt, um dein %(provider)s-Konto zu nutzen."
+
+#, python-format
+msgid "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Log in</a> and link it from your profile."
+msgstr "Schon ein Konto mit dieser E-Mail? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Melde dich an</a> und verknüpfe es in deinem Profil."
+
+msgid "Sign-in failed"
+msgstr "Anmeldung fehlgeschlagen"
+
+msgid "We could not sign you in with that account. Try again, or use your email."
+msgstr "Die Anmeldung mit diesem Konto hat nicht geklappt. Versuch es erneut oder nutze deine E-Mail."
+
+msgid "Back to log in"
+msgstr "Zurück zur Anmeldung"
+
+msgid "Sign-in cancelled"
+msgstr "Anmeldung abgebrochen"
+
+msgid "You cancelled the sign-in. You can try again from the login page."
+msgstr "Du hast die Anmeldung abgebrochen. Du kannst es auf der Anmeldeseite erneut versuchen."
+
+msgid "Google and Facebook sign-in"
+msgstr "Anmeldung mit Google und Facebook"
+
+msgid "Link an account to sign in without a password, or remove one you no longer use."
+msgstr "Verknüpfe ein Konto, um dich ohne Passwort anzumelden, oder entferne eines, das du nicht mehr nutzt."
+
+msgid "Linked accounts"
+msgstr "Verknüpfte Konten"
+
+msgid "Remove"
+msgstr "Entfernen"
+
+msgid "No Google or Facebook account is linked yet."
+msgstr "Noch kein Google- oder Facebook-Konto verknüpft."
+
+msgid "Add an account"
+msgstr "Konto hinzufügen"
+
+msgid "Back to my profile"
+msgstr "Zurück zu meinem Profil"

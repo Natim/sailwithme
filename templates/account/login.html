@@ -10,6 +10,8 @@
   <a href="{% url 'account_signup' %}" class="text-sky-700 font-medium hover:underline">{% trans "Sign up" %}</a>
 </p>
 
+{% include "account/social_providers.html" with process="login" show_divider=True %}
+
 {% if form.non_field_errors %}
   <ul class="mt-4 text-sm text-red-600">
     {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
