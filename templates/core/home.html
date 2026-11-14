@@ -13,7 +13,11 @@
     </p>
     <div class="mt-8 flex flex-wrap gap-3">
       <a href="{% url 'listings:search' %}" class="rounded-full bg-white px-6 py-3 font-bold text-ocean shadow-lg hover:bg-sand">{% trans "Browse listings" %}</a>
-      <a href="{% url 'account_signup' %}" class="rounded-full border-2 border-white/50 px-6 py-3 font-bold hover:bg-white/10">{% trans "Create an account" %}</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'listings:create' %}" class="rounded-full border-2 border-white/50 px-6 py-3 font-bold hover:bg-white/10">{% trans "Post a listing" %}</a>
+      {% else %}
+        <a href="{% url 'account_signup' %}" class="rounded-full border-2 border-white/50 px-6 py-3 font-bold hover:bg-white/10">{% trans "Create an account" %}</a>
+      {% endif %}
     </div>
   </div>
   <div class="absolute -bottom-6 -right-6 h-40 w-40 rounded-full bg-sun/20 blur-2xl" aria-hidden="true"></div>
