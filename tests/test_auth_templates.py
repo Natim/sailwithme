@@ -1,4 +1,5 @@
 import pytest
+from allauth.account.models import EmailAddress, EmailConfirmationHMAC
 from django.test import Client, override_settings
 
 from apps.accounts.models import User
@@ -117,3 +118,18 @@ def test_social_connections_require_login(client: Client):
     response = client.get("/accounts/3rdparty/")
     assert response.status_code == 302
     assert "/accounts/login/" in response.url
+
+
+@pytest.mark.django_db
+def test_email_confirm_shows_coral_button(client: Client, user):
+    email_address = EmailAddress.objects.create(
+        user=user,
+        email=user.email,
+        verified=False,
+        primary=True,
+    )
+    confirmation = EmailConfirmationHMAC.create(email_address)
+    response = client.get(f"/accounts/confirm-email/{confirmation.key}/")
+    assert response.status_code == 200
+    assert b"btn-coral" in response.content
+    assert b'type="submit"' in response.content
