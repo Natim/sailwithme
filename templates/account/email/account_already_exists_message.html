@@ -1,0 +1,13 @@
+{% extends "email/base.html" %}
+{% load i18n %}
+{% block content %}
+<p style="margin:0 0 16px;">
+{% blocktrans %}You are receiving this email because you or someone else tried to signup for an account using email address:{% endblocktrans %}
+</p>
+<p style="margin:0 0 16px;font-weight:700;color:#0c4a6e;">{{ email }}</p>
+<p style="margin:0 0 16px;">
+{% blocktrans %}However, an account using that email address already exists. In case you have forgotten about this, please use the password forgotten procedure to recover your account:{% endblocktrans %}
+</p>
+{% trans "Reset password" as reset_label %}
+{% include "email/_button.html" with url=password_reset_url label=reset_label %}
+{% endblock %}

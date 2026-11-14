@@ -119,6 +119,7 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_ADAPTER = "apps.accounts.adapter.SailWithMeAccountAdapter"
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "Sail with Me — "
 
 EMAIL_BCC: list[str] = []
 

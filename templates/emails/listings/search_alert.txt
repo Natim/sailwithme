@@ -1,0 +1,4 @@
+{% load i18n %}{% blocktranslate count count=listing_count %}One new listing matches your saved alert:{% plural %}{{ count }} new listings match your saved alert:{% endblocktranslate %}
+{% for item in listings %}
+- {{ item.title }} ({{ item.route }}{% if item.weeks %}, {{ item.weeks }}{% endif %}): {{ item.url }}
+{% endfor %}

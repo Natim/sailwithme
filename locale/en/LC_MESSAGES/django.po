@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-10 12:17+0000\n"
+"POT-Creation-Date: 2026-11-14 21:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/billing/models.py:11 apps/billing/services.py:66
+#: apps/billing/models.py:10 apps/billing/services.py:66
 msgid "Crew Pass — season"
 msgstr "Crew Pass — season"
 
-#: apps/billing/models.py:12 apps/billing/services.py:47
+#: apps/billing/models.py:11 apps/billing/services.py:47
 msgid "Crew Pass — lifetime"
 msgstr "Crew Pass — lifetime"
 
-#: apps/billing/models.py:13
+#: apps/billing/models.py:12
 msgid "Skipper+"
 msgstr "Skipper+"
 
-#: apps/billing/models.py:14 templates/billing/pricing.html:27
+#: apps/billing/models.py:13 templates/billing/pricing.html:27
 #: templates/profiles/detail.html:17
 msgid "Identity verified"
 msgstr "Identity verified"
@@ -57,15 +57,15 @@ msgstr "Monthly subscription active"
 msgid "Skipper role: contact without Crew Pass"
 msgstr "Skipper role: contact without Crew Pass"
 
-#: apps/billing/views.py:28
+#: apps/billing/views.py:27
 msgid "Unknown plan."
 msgstr "Unknown plan."
 
-#: apps/billing/views.py:40
+#: apps/billing/views.py:39
 msgid "Subscription activated (demo mode without Stripe)."
 msgstr "Subscription activated (demo mode without Stripe)."
 
-#: apps/billing/views.py:71
+#: apps/billing/views.py:66
 msgid "Payment confirmed — thank you!"
 msgstr "Payment confirmed — thank you!"
 
@@ -89,7 +89,7 @@ msgstr "Dodger"
 msgid "Boat name"
 msgstr "Boat name"
 
-#: apps/boats/forms.py:55 apps/listings/forms.py:159
+#: apps/boats/forms.py:55 apps/listings/forms.py:181
 msgid "Type"
 msgstr "Type"
 
@@ -117,7 +117,7 @@ msgstr "Berths on board"
 msgid "Equipment"
 msgstr "Equipment"
 
-#: apps/boats/forms.py:62 apps/listings/forms.py:80
+#: apps/boats/forms.py:62 apps/listings/forms.py:85
 msgid "Description"
 msgstr "Description"
 
@@ -137,19 +137,19 @@ msgstr "Display order"
 msgid "Accepted formats: JPG, PNG, WebP, or GIF."
 msgstr "Accepted formats: JPG, PNG, WebP, or GIF."
 
-#: apps/boats/models.py:10
+#: apps/boats/models.py:9
 msgid "Monohull"
 msgstr "Monohull"
 
-#: apps/boats/models.py:11
+#: apps/boats/models.py:10
 msgid "Catamaran"
 msgstr "Catamaran"
 
-#: apps/boats/models.py:12
+#: apps/boats/models.py:11
 msgid "Trimaran"
 msgstr "Trimaran"
 
-#: apps/boats/models.py:13
+#: apps/boats/models.py:12
 msgid "Other"
 msgstr "Other"
 
@@ -173,167 +173,225 @@ msgstr "Photo added."
 msgid "Photo deleted."
 msgstr "Photo deleted."
 
-#: apps/listings/forms.py:20
+#: apps/listings/emails.py:20
+#, python-format
+msgid "Sail with Me — new application for « %(title)s »"
+msgstr "Sail with Me — new application for « %(title)s »"
+
+#: apps/listings/forms.py:13 apps/listings/forms.py:189
+#: apps/listings/forms.py:264 templates/core/home.html:37
+msgid "All"
+msgstr "All"
+
+#: apps/listings/forms.py:14
+#, fuzzy
+#| msgid "Looking for crew"
+msgid "Skippers looking for crew"
+msgstr "Looking for crew"
+
+#: apps/listings/forms.py:15
+#, fuzzy
+#| msgid "Looking for a berth"
+msgid "Crew looking for a berth"
+msgstr "Looking for a berth"
+
+#: apps/listings/forms.py:25
 msgid "Season shortcut"
 msgstr "Season shortcut"
 
-#: apps/listings/forms.py:26 apps/listings/forms.py:92
+#: apps/listings/forms.py:31 apps/listings/forms.py:97
 msgid "Languages on board"
 msgstr "Languages on board"
 
-#: apps/listings/forms.py:76
+#: apps/listings/forms.py:81
 msgid "— None —"
 msgstr "— None —"
 
-#: apps/listings/forms.py:78
+#: apps/listings/forms.py:83 templates/listings/form.html:16
 msgid "Listing type"
 msgstr "Listing type"
 
-#: apps/listings/forms.py:79
+#: apps/listings/forms.py:84
 msgid "Title"
 msgstr "Title"
 
-#: apps/listings/forms.py:81 apps/listings/forms.py:165
+#: apps/listings/forms.py:86 apps/listings/forms.py:187
 #: templates/core/home.html:35
 msgid "Programme"
 msgstr "Programme"
 
-#: apps/listings/forms.py:82
+#: apps/listings/forms.py:87
 msgid "Boat"
 msgstr "Boat"
 
-#: apps/listings/forms.py:83
+#: apps/listings/forms.py:88
 msgid "Departure name"
 msgstr "Departure name"
 
-#: apps/listings/forms.py:84
+#: apps/listings/forms.py:89
 msgid "Arrival name"
 msgstr "Arrival name"
 
-#: apps/listings/forms.py:85 apps/listings/forms.py:205
+#: apps/listings/forms.py:90 apps/listings/forms.py:227
 #: templates/core/home.html:44
 msgid "Year"
 msgstr "Year"
 
-#: apps/listings/forms.py:86
+#: apps/listings/forms.py:91
 msgid "Start week (ISO)"
 msgstr "Start week (ISO)"
 
-#: apps/listings/forms.py:87
+#: apps/listings/forms.py:92
 msgid "End week (ISO)"
 msgstr "End week (ISO)"
 
-#: apps/listings/forms.py:88
+#: apps/listings/forms.py:93
 msgid "Duration (days)"
 msgstr "Duration (days)"
 
-#: apps/listings/forms.py:89
+#: apps/listings/forms.py:94
 msgid "Berths available"
 msgstr "Berths available"
 
-#: apps/listings/forms.py:90
-msgid "Daily contribution (€)"
+#: apps/listings/forms.py:95
+#, fuzzy
+#| msgid "Daily contribution (€)"
+msgid "Daily contribution requested (€)"
 msgstr "Daily contribution (€)"
 
-#: apps/listings/forms.py:91
-msgid "Minimum level"
+#: apps/listings/forms.py:96
+#, fuzzy
+#| msgid "Minimum level"
+msgid "Minimum level required"
 msgstr "Minimum level"
 
-#: apps/listings/forms.py:93
-msgid "Requirements"
+#: apps/listings/forms.py:98
+#, fuzzy
+#| msgid "Requirements"
+msgid "Requirements for crew"
 msgstr "Requirements"
 
-#: apps/listings/forms.py:94
+#: apps/listings/forms.py:99
 msgid "Route flexibility (nm)"
 msgstr "Route flexibility (nm)"
 
-#: apps/listings/forms.py:135
+#: apps/listings/forms.py:109
+msgid "Contribution I can offer (€/day)"
+msgstr "Contribution I can offer (€/day)"
+
+#: apps/listings/forms.py:110
+#, fuzzy
+#| msgid "Languages spoken"
+msgid "Languages I speak"
+msgstr "Languages spoken"
+
+#: apps/listings/forms.py:111
+msgid "What I'm looking for on board"
+msgstr "What I'm looking for on board"
+
+#: apps/listings/forms.py:160
 msgid "Click the map to set departure then arrival before publishing."
 msgstr "Click the map to set departure then arrival before publishing."
 
-#: apps/listings/forms.py:152
+#: apps/listings/forms.py:176
 msgid "Keywords"
 msgstr "Keywords"
 
-#: apps/listings/forms.py:155
+#: apps/listings/forms.py:178
 msgid "Route, port…"
 msgstr "Route, port…"
 
-#: apps/listings/forms.py:161 apps/listings/forms.py:167
-#: apps/listings/forms.py:242 templates/core/home.html:37
-msgid "All"
-msgstr "All"
-
-#: apps/listings/forms.py:171
+#: apps/listings/forms.py:193
 msgid "Departure (port)"
 msgstr "Departure (port)"
 
-#: apps/listings/forms.py:174 apps/listings/forms.py:181
+#: apps/listings/forms.py:196 apps/listings/forms.py:203
 #: templates/core/home.html:28
 msgid "— Any —"
 msgstr "— Any —"
 
-#: apps/listings/forms.py:178
+#: apps/listings/forms.py:200
 msgid "Arrival (port)"
 msgstr "Arrival (port)"
 
-#: apps/listings/forms.py:187
+#: apps/listings/forms.py:209
 msgid "Departure radius (nm)"
 msgstr "Departure radius (nm)"
 
-#: apps/listings/forms.py:197
+#: apps/listings/forms.py:219
 msgid "Arrival radius (nm)"
 msgstr "Arrival radius (nm)"
 
-#: apps/listings/forms.py:212
+#: apps/listings/forms.py:234
 msgid "Week from"
 msgstr "Week from"
 
-#: apps/listings/forms.py:219
+#: apps/listings/forms.py:241
 msgid "Week to"
 msgstr "Week to"
 
-#: apps/listings/forms.py:226
+#: apps/listings/forms.py:248
 msgid "Sort"
 msgstr "Sort"
 
-#: apps/listings/forms.py:230
+#: apps/listings/forms.py:252
 msgid "Relevance"
 msgstr "Relevance"
 
-#: apps/listings/forms.py:231
+#: apps/listings/forms.py:253
 msgid "Departure date"
 msgstr "Departure date"
 
-#: apps/listings/forms.py:259
+#: apps/listings/forms.py:280
 msgid "To filter by date, enter the year and both weeks (from / to)."
 msgstr "To filter by date, enter the year and both weeks (from / to)."
 
-#: apps/listings/forms.py:273
-msgid "Introduce yourself in a few lines…"
-msgstr "Introduce yourself in a few lines…"
+#: apps/listings/forms.py:296
+#, fuzzy
+#| msgid "Message to the skipper"
+msgid "Message to the crew member"
+msgstr "Message to the skipper"
 
-#: apps/listings/forms.py:280
+#: apps/listings/forms.py:298
+msgid "Describe your boat, experience, and what you can offer…"
+msgstr "Describe your boat, experience, and what you can offer…"
+
+#: apps/listings/forms.py:301
 msgid "Message to the skipper"
 msgstr "Message to the skipper"
 
-#: apps/listings/iso_weeks.py:60
+#: apps/listings/forms.py:302
+msgid "Introduce yourself in a few lines…"
+msgstr "Introduce yourself in a few lines…"
+
+#: apps/listings/iso_weeks.py:68
 msgid "Transatlantic (Nov.–Dec.)"
 msgstr "Transatlantic (Nov.–Dec.)"
 
-#: apps/listings/iso_weeks.py:61
+#: apps/listings/iso_weeks.py:69
 msgid "Pacific Puddle Jump (Mar.–May)"
 msgstr "Pacific Puddle Jump (Mar.–May)"
 
-#: apps/listings/iso_weeks.py:62
+#: apps/listings/iso_weeks.py:70
 msgid "Mediterranean (May–Oct.)"
 msgstr "Mediterranean (May–Oct.)"
 
-#: apps/listings/models.py:35
-msgid "Looking for crew"
+#: apps/listings/management/commands/send_search_alerts.py:23
+#, python-format
+msgid "Weeks %(from)s–%(to)s, %(year)s"
+msgstr "Weeks %(from)s–%(to)s, %(year)s"
+
+#: apps/listings/management/commands/send_search_alerts.py:77
+msgid "Sail with Me — new listings for your alert"
+msgstr "Sail with Me — new listings for your alert"
+
+#: apps/listings/models.py:35 templates/listings/form.html:20
+#, fuzzy
+#| msgid "Looking for crew"
+msgid "I have a boat — looking for crew"
 msgstr "Looking for crew"
 
-#: apps/listings/models.py:36
+#: apps/listings/models.py:36 templates/listings/form.html:25
 msgid "Looking for a berth"
 msgstr "Looking for a berth"
 
@@ -377,23 +435,23 @@ msgstr "Complete"
 msgid "Expired"
 msgstr "Expired"
 
-#: apps/listings/models.py:53 apps/listings/models.py:154
+#: apps/listings/models.py:53 apps/listings/models.py:152
 msgid "Withdrawn"
 msgstr "Withdrawn"
 
-#: apps/listings/models.py:151
+#: apps/listings/models.py:149
 msgid "Pending"
 msgstr "Pending"
 
-#: apps/listings/models.py:152
+#: apps/listings/models.py:150
 msgid "Accepted"
 msgstr "Accepted"
 
-#: apps/listings/models.py:153
+#: apps/listings/models.py:151
 msgid "Declined"
 msgstr "Declined"
 
-#: apps/listings/views.py:31 templates/listings/form.html:22
+#: apps/listings/views.py:31 templates/listings/form.html:42
 msgid "First click: departure · second click: arrival"
 msgstr "First click: departure · second click: arrival"
 
@@ -449,23 +507,23 @@ msgstr "You already applied."
 msgid "Application sent."
 msgstr "Application sent."
 
-#: apps/listings/views.py:194
+#: apps/listings/views.py:213
 msgid "Application accepted — voyage created."
 msgstr "Application accepted — voyage created."
 
-#: apps/listings/views.py:198
+#: apps/listings/views.py:217
 msgid "Application declined."
 msgstr "Application declined."
 
-#: apps/listings/views.py:207
+#: apps/listings/views.py:226
 msgid "Alerts require a Crew Pass."
 msgstr "Alerts require a Crew Pass."
 
-#: apps/listings/views.py:227
+#: apps/listings/views.py:246
 msgid "Alert saved."
 msgstr "Alert saved."
 
-#: apps/listings/views.py:229
+#: apps/listings/views.py:248
 msgid "Could not save alert: invalid criteria."
 msgstr "Could not save alert: invalid criteria."
 
@@ -481,134 +539,134 @@ msgstr "User blocked."
 msgid "Report sent."
 msgstr "Report sent."
 
-#: apps/profiles/forms.py:11
+#: apps/profiles/forms.py:12
 msgid "Yachtmaster / offshore license"
 msgstr "Yachtmaster / offshore license"
 
-#: apps/profiles/forms.py:13
+#: apps/profiles/forms.py:14
 msgid "First aid / PSC1"
 msgstr "First aid / PSC1"
 
-#: apps/profiles/forms.py:14
+#: apps/profiles/forms.py:15
 msgid "VHF / SRC"
 msgstr "VHF / SRC"
 
-#: apps/profiles/forms.py:18
+#: apps/profiles/forms.py:19
 msgid "Cooking"
 msgstr "Cooking"
 
-#: apps/profiles/forms.py:19
+#: apps/profiles/forms.py:20
 msgid "Mechanics"
 msgstr "Mechanics"
 
-#: apps/profiles/forms.py:20
+#: apps/profiles/forms.py:21
 msgid "Electronics"
 msgstr "Electronics"
 
-#: apps/profiles/forms.py:21
+#: apps/profiles/forms.py:22
 msgid "First aid"
 msgstr "First aid"
 
-#: apps/profiles/forms.py:22
+#: apps/profiles/forms.py:23
 msgid "Celestial navigation"
 msgstr "Celestial navigation"
 
-#: apps/profiles/forms.py:23
+#: apps/profiles/forms.py:24
 msgid "Photo / video"
 msgstr "Photo / video"
 
-#: apps/profiles/forms.py:38
+#: apps/profiles/forms.py:36
 msgid "A few words about you…"
 msgstr "A few words about you…"
 
-#: apps/profiles/forms.py:48
+#: apps/profiles/forms.py:45
 msgid "Availability, cruising windows…"
 msgstr "Availability, cruising windows…"
 
-#: apps/profiles/forms.py:55
+#: apps/profiles/forms.py:52
 msgid "Public nickname"
 msgstr "Public nickname"
 
-#: apps/profiles/forms.py:57
+#: apps/profiles/forms.py:54
 msgid ""
 "Shown on listings and reviews. Leave blank for a Marin-xxxxxxxx identifier."
 msgstr ""
 "Shown on listings and reviews. Leave blank for a Marin-xxxxxxxx identifier."
 
-#: apps/profiles/forms.py:59
+#: apps/profiles/forms.py:56
 msgid "Role"
 msgstr "Role"
 
-#: apps/profiles/forms.py:60
+#: apps/profiles/forms.py:57
 msgid "Bio"
 msgstr "Bio"
 
-#: apps/profiles/forms.py:61 templates/profiles/detail.html:27
+#: apps/profiles/forms.py:58 templates/profiles/detail.html:27
 msgid "Nationality"
 msgstr "Nationality"
 
-#: apps/profiles/forms.py:62 templates/profiles/detail.html:28
+#: apps/profiles/forms.py:59 templates/profiles/detail.html:28
 msgid "Home port"
 msgstr "Home port"
 
-#: apps/profiles/forms.py:63
+#: apps/profiles/forms.py:60
 msgid "Level"
 msgstr "Level"
 
-#: apps/profiles/forms.py:64
+#: apps/profiles/forms.py:61
 msgid "Availability"
 msgstr "Availability"
 
-#: apps/profiles/forms.py:71
+#: apps/profiles/forms.py:68
 msgid "Username must be at least 2 characters."
 msgstr "Username must be at least 2 characters."
 
-#: apps/profiles/forms.py:76
+#: apps/profiles/forms.py:73
 msgid "This username is already taken."
 msgstr "This username is already taken."
 
-#: apps/profiles/forms.py:90
+#: apps/profiles/forms.py:87
 msgid "Certifications"
 msgstr "Certifications"
 
-#: apps/profiles/forms.py:96
+#: apps/profiles/forms.py:93 templates/profiles/detail.html:32
 msgid "Skills"
 msgstr "Skills"
 
-#: apps/profiles/forms.py:104
+#: apps/profiles/forms.py:101
 msgid "Nautical miles"
 msgstr "Nautical miles"
 
-#: apps/profiles/forms.py:105
+#: apps/profiles/forms.py:102
 msgid "Ocean crossings"
 msgstr "Ocean crossings"
 
-#: apps/profiles/forms.py:121
+#: apps/profiles/forms.py:118
 msgid "Languages spoken"
 msgstr "Languages spoken"
 
-#: apps/profiles/forms.py:147
+#: apps/profiles/forms.py:144
 msgid "Non-smoker"
 msgstr "Non-smoker"
 
-#: apps/profiles/forms.py:148
+#: apps/profiles/forms.py:145
 msgid "Pets welcome"
 msgstr "Pets welcome"
 
-#: apps/profiles/forms.py:149
+#: apps/profiles/forms.py:146
 msgid "Vegetarians welcome"
 msgstr "Vegetarians welcome"
 
-#: apps/profiles/forms.py:150
+#: apps/profiles/forms.py:147
 msgid "Visible in the crew directory"
 msgstr "Visible in the crew directory"
 
 #: apps/profiles/models.py:24 templates/billing/pricing.html:9
-#: templates/listings/detail.html:31
+#: templates/listings/detail.html:32
 msgid "Skipper"
 msgstr "Skipper"
 
-#: apps/profiles/models.py:25
+#: apps/profiles/models.py:25 templates/listings/detail.html:32
 msgid "Crew member"
 msgstr "Crew member"
 
@@ -696,9 +754,154 @@ msgstr "Join the crew"
 msgid "Offshore, ocean crossings, deliveries: find your berth."
 msgstr "Offshore, ocean crossings, deliveries: find your berth."
 
+#: templates/account/email/account_already_exists_message.html:5
+msgid ""
+"You are receiving this email because you or someone else tried to signup for"
+" an account using email address:"
+msgstr ""
+"You are receiving this email because you or someone else tried to signup for"
+" an account using email address:"
+
+#: templates/account/email/account_already_exists_message.html:9
+msgid ""
+"However, an account using that email address already exists. In case you "
+"have forgotten about this, please use the password forgotten procedure to "
+"recover your account:"
+msgstr ""
+"However, an account using that email address already exists. In case you "
+"have forgotten about this, please use the password forgotten procedure to "
+"recover your account:"
+
+#: templates/account/email/account_already_exists_message.html:11
+#: templates/account/email/password_reset_key_message.html:7
+msgid "Reset password"
+msgstr "Reset password"
+
+#: templates/account/email/email_confirmation_message.html:7
+#, python-format
+msgid ""
+"You're receiving this email because user %(user_display)s has given your "
+"email address to register an account on %(site_domain)s."
+msgstr ""
+"You're receiving this email because user %(user_display)s has given your "
+"email address to register an account on %(site_domain)s."
+
+#: templates/account/email/email_confirmation_message.html:10
+msgid ""
+"Your email verification code is listed below. Please enter it in your open "
+"browser window."
+msgstr ""
+"Your email verification code is listed below. Please enter it in your open "
+"browser window."
+
+#: templates/account/email/email_confirmation_message.html:13
+msgid "To confirm this is correct, use the button below."
+msgstr "To confirm this is correct, use the button below."
+
+#: templates/account/email/email_confirmation_message.html:14
+#, fuzzy
+#| msgid "Confirm deletion"
+msgid "Confirm email"
+msgstr "Confirm deletion"
+
+#: templates/account/email/password_reset_key_message.html:5
+msgid ""
+"You're receiving this email because you or someone else has requested a "
+"password reset for your user account. It can be safely ignored if you did "
+"not request a password reset."
+msgstr ""
+"You're receiving this email because you or someone else has requested a "
+"password reset for your user account. It can be safely ignored if you did "
+"not request a password reset."
+
+#: templates/account/email/password_reset_key_message.html:11
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr "In case you forgot, your username is %(username)s."
+
+#: templates/account/email/unknown_account_message.html:5
+#, python-format
+msgid ""
+"You are receiving this email because you, or someone else, tried to access "
+"an account with email %(email)s. However, we do not have any record of such "
+"an account in our database."
+msgstr ""
+"You are receiving this email because you, or someone else, tried to access "
+"an account with email %(email)s. However, we do not have any record of such "
+"an account in our database."
+
+#: templates/account/email/unknown_account_message.html:7
+msgid "This mail can be safely ignored if you did not initiate this action."
+msgstr "This mail can be safely ignored if you did not initiate this action."
+
+#: templates/account/email/unknown_account_message.html:8
+msgid "If it was you, you can sign up for an account using the button below."
+msgstr "If it was you, you can sign up for an account using the button below."
+
+#: templates/account/email/unknown_account_message.html:9
+#: templates/account/login.html:10 templates/account/signup.html:4
+#: templates/account/signup.html:7 templates/account/signup.html:32
+#: templates/base.html:80 templates/base.html:106
+#: templates/socialaccount/signup.html:29
+msgid "Sign up"
+msgstr "Sign up"
+
+#: templates/account/email_confirm.html:4
+#: templates/account/email_confirm.html:7
+msgid "Confirm Email Address"
+msgstr "Confirm Email Address"
+
+#: templates/account/email_confirm.html:13
+#, fuzzy, python-format
+#| msgid ""
+#| "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-"
+#| "medium text-sky-700 hover:underline\">Log in</a> and link it from your "
+#| "profile."
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\" class=\"font-medium text-"
+"sky-700 hover:underline\">%(email)s</a> is an email address for user "
+"%(user_display)s."
+msgstr ""
+"Already registered with this email? <a href=\"%(login_url)s\" class=\"font-"
+"medium text-sky-700 hover:underline\">Log in</a> and link it from your "
+"profile."
+
+#: templates/account/email_confirm.html:18
+#, fuzzy
+#| msgid "Confirm deletion"
+msgid "Confirm"
+msgstr "Confirm deletion"
+
+#: templates/account/email_confirm.html:23
+#, python-format
+msgid ""
+"Unable to confirm %(email)s because it is already confirmed by a different "
+"account."
+msgstr ""
+"Unable to confirm %(email)s because it is already confirmed by a different "
+"account."
+
+#: templates/account/email_confirm.html:29
+#, fuzzy, python-format
+#| msgid ""
+#| "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-"
+#| "medium text-sky-700 hover:underline\">Log in</a> and link it from your "
+#| "profile."
+msgid ""
+"This email confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\" class=\"font-medium text-sky-700 "
+"hover:underline\">issue a new email confirmation request</a>."
+msgstr ""
+"Already registered with this email? <a href=\"%(login_url)s\" class=\"font-"
+"medium text-sky-700 hover:underline\">Log in</a> and link it from your "
+"profile."
+
 #: templates/account/login.html:4 templates/account/login.html:7
-#: templates/account/login.html:26 templates/account/signup.html:14
-#: templates/base.html:75 templates/base.html:98
+#: templates/account/login.html:28
+#: templates/account/password_reset_from_key_done.html:11
+#: templates/account/signup.html:14 templates/account/signup_closed.html:11
+#: templates/account/verification_sent.html:13 templates/base.html:79
+#: templates/base.html:105
 msgid "Log in"
 msgstr "Log in"
 
@@ -706,15 +909,79 @@ msgstr "Log in"
 msgid "No account yet?"
 msgstr "No account yet?"
 
-#: templates/account/login.html:10 templates/account/signup.html:4
-#: templates/account/signup.html:7 templates/account/signup.html:30
-#: templates/base.html:76 templates/base.html:99
-msgid "Sign up"
-msgstr "Sign up"
-
-#: templates/account/login.html:31
+#: templates/account/login.html:33
 msgid "Forgot your password?"
 msgstr "Forgot your password?"
+
+#: templates/account/password_reset.html:4
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset_done.html:4
+#: templates/account/password_reset_done.html:7
+msgid "Password Reset"
+msgstr "Password Reset"
+
+#: templates/account/password_reset.html:14
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll send you "
+"an email allowing you to reset it."
+msgstr ""
+"Forgotten your password? Enter your email address below, and we'll send you "
+"an email allowing you to reset it."
+
+#: templates/account/password_reset.html:29
+msgid "Reset My Password"
+msgstr "Reset My Password"
+
+#: templates/account/password_reset.html:34
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr "Please contact us if you have any trouble resetting your password."
+
+#: templates/account/password_reset_done.html:14
+msgid ""
+"We have sent you an email. If you have not received it please check your "
+"spam folder. Otherwise contact us if you do not receive it in a few minutes."
+msgstr ""
+"We have sent you an email. If you have not received it please check your "
+"spam folder. Otherwise contact us if you do not receive it in a few minutes."
+
+#: templates/account/password_reset_done.html:19
+#: templates/socialaccount/authentication_error.html:12
+#: templates/socialaccount/login_cancelled.html:12
+msgid "Back to log in"
+msgstr "Back to log in"
+
+#: templates/account/password_reset_from_key.html:4
+#: templates/account/password_reset_from_key.html:14
+#: templates/account/password_reset_from_key.html:28
+#: templates/account/password_reset_from_key_done.html:4
+#: templates/account/password_reset_from_key_done.html:7
+msgid "Change Password"
+msgstr "Change Password"
+
+#: templates/account/password_reset_from_key.html:8
+msgid "Bad Token"
+msgstr "Bad Token"
+
+#: templates/account/password_reset_from_key.html:11
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a <a href=\"%(passwd_reset_url)s\" class=\"font-medium "
+"text-sky-700 hover:underline\">new password reset</a>."
+msgstr ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a <a href=\"%(passwd_reset_url)s\" class=\"font-medium "
+"text-sky-700 hover:underline\">new password reset</a>."
+
+#: templates/account/password_reset_from_key.html:39
+#: templates/boats/confirm_delete.html:18
+#: templates/listings/confirm_delete.html:20 templates/listings/form.html:55
+msgid "Cancel"
+msgstr "Cancel"
+
+#: templates/account/password_reset_from_key_done.html:8
+msgid "Your password is now changed."
+msgstr "Your password is now changed."
 
 #: templates/account/signup.html:10
 #, python-format
@@ -731,7 +998,59 @@ msgstr ""
 msgid "Already registered?"
 msgstr "Already registered?"
 
-#: templates/base.html:53 templates/base.html:89 templates/base.html:136
+#: templates/account/signup_closed.html:4
+#: templates/account/signup_closed.html:7
+msgid "Sign Up Closed"
+msgstr "Sign Up Closed"
+
+#: templates/account/signup_closed.html:8
+msgid "We are sorry, but the sign up is currently closed."
+msgstr "We are sorry, but the sign up is currently closed."
+
+#: templates/account/snippets/already_logged_in.html:4
+msgid "Note"
+msgstr "Note"
+
+#: templates/account/snippets/already_logged_in.html:5
+#, python-format
+msgid "You are already logged in as %(user_display)s."
+msgstr "You are already logged in as %(user_display)s."
+
+#: templates/account/social_providers.html:19
+msgid "Continue with Google"
+msgstr "Continue with Google"
+
+#: templates/account/social_providers.html:24
+msgid "Continue with Facebook"
+msgstr "Continue with Facebook"
+
+#: templates/account/social_providers.html:26
+#, python-format
+msgid "Continue with %(name)s"
+msgstr "Continue with %(name)s"
+
+#: templates/account/social_providers.html:37
+msgid "or"
+msgstr "or"
+
+#: templates/account/verification_sent.html:4
+#: templates/account/verification_sent.html:7
+msgid "Verify Your Email Address"
+msgstr "Verify Your Email Address"
+
+#: templates/account/verification_sent.html:9
+msgid ""
+"We have sent an email to you for verification. Follow the link provided to "
+"finalize the signup process. If you do not see the verification email in "
+"your main inbox, check your spam folder. Please contact us if you do not "
+"receive the verification email within a few minutes."
+msgstr ""
+"We have sent an email to you for verification. Follow the link provided to "
+"finalize the signup process. If you do not see the verification email in "
+"your main inbox, check your spam folder. Please contact us if you do not "
+"receive the verification email within a few minutes."
+
+#: templates/base.html:53 templates/base.html:93 templates/base.html:143
 #: templates/listings/search.html:7
 msgid "Listings"
 msgstr "Listings"
@@ -744,21 +1063,21 @@ msgstr "Crew members"
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/base.html:58 templates/base.html:95
+#: templates/base.html:58 templates/base.html:99
 #: templates/messaging/inbox.html:5
 msgid "Messages"
 msgstr "Messages"
 
-#: templates/base.html:63 templates/base.html:92
+#: templates/base.html:63 templates/base.html:96
 #: templates/listings/mine.html:6
 msgid "My listings"
 msgstr "My listings"
 
-#: templates/base.html:64 templates/base.html:93 templates/boats/list.html:6
+#: templates/base.html:64 templates/base.html:97 templates/boats/list.html:6
 msgid "My boats"
 msgstr "My boats"
 
-#: templates/base.html:65 templates/listings/form.html:34
+#: templates/base.html:65 templates/listings/form.html:54
 #: templates/reviews/form.html:57
 msgid "Post"
 msgstr "Post"
@@ -771,44 +1090,49 @@ msgstr "You"
 msgid "Profile"
 msgstr "Profile"
 
-#: templates/base.html:91 templates/listings/partials/results.html:30
+#: templates/base.html:76 templates/base.html:102
+msgid "Log out"
+msgstr "Log out"
+
+#: templates/base.html:95 templates/listings/partials/results.html:30
 msgid "Post a listing"
 msgstr "Post a listing"
 
-#: templates/base.html:94 templates/profiles/edit.html:4
+#: templates/base.html:98 templates/profiles/edit.html:4
 #: templates/profiles/edit.html:10
 msgid "My profile"
 msgstr "My profile"
 
-#: templates/base.html:96
-msgid "Log out"
-msgstr "Log out"
-
-#: templates/base.html:102
+#: templates/base.html:109 templates/includes/language_switcher.html:10
 msgid "Language"
 msgstr "Language"
 
-#: templates/base.html:131 templates/core/home.html:10
+#: templates/base.html:138 templates/core/home.html:10
+#: templates/email/base.html:39
 msgid "Find your crew. Cross the ocean."
 msgstr "Find your crew. Cross the ocean."
 
-#: templates/base.html:134
+#: templates/base.html:141
 msgid "Product"
 msgstr "Product"
 
-#: templates/base.html:137 templates/billing/pricing.html:5
+#: templates/base.html:144 templates/billing/pricing.html:5
 msgid "Pricing"
 msgstr "Pricing"
 
-#: templates/base.html:138
+#: templates/base.html:145
 msgid "FAQ / Safety"
 msgstr "FAQ / Safety"
 
-#: templates/base.html:142
+#: templates/base.html:146
+msgid "Cloudy logbook"
+msgstr "Cloudy logbook"
+
+#: templates/base.html:150
 msgid "Legal"
 msgstr "Legal"
 
-#: templates/base.html:144 templates/legal/cgu.html:4
+#: templates/base.html:152 templates/legal/cgu.html:4
 #: templates/legal/cgu.html:8
 msgid "Terms of use"
 msgstr "Terms of use"
@@ -862,6 +1186,7 @@ msgid "Your subscription is active — time to cast off."
 msgstr "Your subscription is active — time to cast off."
 
 #: templates/billing/success.html:9 templates/core/home.html:15
+#: templates/emails/listings/search_alert.html:21
 msgid "Browse listings"
 msgstr "Browse listings"
 
@@ -883,11 +1208,6 @@ msgstr ""
 #: templates/boats/confirm_delete.html:17
 msgid "Confirm deletion"
 msgstr "Confirm deletion"
-
-#: templates/boats/confirm_delete.html:18
-#: templates/listings/confirm_delete.html:20 templates/listings/form.html:35
-msgid "Cancel"
-msgstr "Cancel"
 
 #: templates/boats/detail.html:10 templates/boats/list.html:15
 msgid "berths on board"
@@ -912,7 +1232,7 @@ msgstr "Edit boat"
 msgid "New boat"
 msgstr "New boat"
 
-#: templates/boats/form.html:14 templates/listings/form.html:34
+#: templates/boats/form.html:14 templates/listings/form.html:54
 #: templates/profiles/partials/basics_form.html:16
 #: templates/profiles/partials/experience_form.html:33
 #: templates/profiles/partials/preferences_form.html:49
@@ -930,6 +1250,138 @@ msgstr "You have not added a boat yet."
 #: templates/boats/partials/photo_form.html:12
 msgid "Add photo"
 msgstr "Add photo"
+
+#: templates/core/cloudy.html:4 templates/core/cloudy.html:8
+msgid "Cloudy, the online pilot logbook"
+msgstr "Cloudy, the online pilot logbook"
+
+#: templates/core/cloudy.html:10
+msgid ""
+"Sail with Me and Cloudy are both published by SAS CLOUDY. Cloudy, on "
+"cloudy.fr, keeps an electronic copy of a pilot logbook: the line for the "
+"day, the totals, and a logbook you can open again when you need it."
+msgstr ""
+"Sail with Me and Cloudy are both published by SAS CLOUDY. Cloudy, on "
+"cloudy.fr, keeps an electronic copy of a pilot logbook: the line for the "
+"day, the totals, and a logbook you can open again when you need it."
+
+#: templates/core/cloudy.html:16
+msgid "After the flight"
+msgstr "After the flight"
+
+#: templates/core/cloudy.html:18
+msgid ""
+"Back on the ground, you open the logbook on cloudy.fr and enter the flight "
+"as on paper: date, aircraft, flight time, and function on board. The totals "
+"update from the lines you enter."
+msgstr ""
+"Back on the ground, you open the logbook on cloudy.fr and enter the flight "
+"as on paper: date, aircraft, flight time, and function on board. The totals "
+"update from the lines you enter."
+
+#: templates/core/cloudy.html:22
+msgid ""
+"The same account covers several activities. Cloudy has a logbook for each:"
+msgstr ""
+"The same account covers several activities. Cloudy has a logbook for each:"
+
+#: templates/core/cloudy.html:24
+msgid "aeroplane, in DGAC or FCL 1.080 format"
+msgstr "aeroplane, in DGAC or FCL 1.080 format"
+
+#: templates/core/cloudy.html:25
+msgid "glider"
+msgstr "glider"
+
+#: templates/core/cloudy.html:26
+msgid "helicopter"
+msgstr "helicopter"
+
+#: templates/core/cloudy.html:27
+msgid "microlight, in FFPLUM format"
+msgstr "microlight, in FFPLUM format"
+
+#: templates/core/cloudy.html:28
+msgid "balloon"
+msgstr "balloon"
+
+#: templates/core/cloudy.html:29
+msgid "parachute"
+msgstr "parachute"
+
+#: templates/core/cloudy.html:34
+msgid "What you get"
+msgstr "What you get"
+
+#: templates/core/cloudy.html:36
+msgid "Hour totals calculated from the flights you enter."
+msgstr "Hour totals calculated from the flights you enter."
+
+#: templates/core/cloudy.html:37
+msgid ""
+"A PDF export in the DGAC or FCL 1.080 layout, plus XLS and CSV, and sending "
+"the logbook by email."
+msgstr ""
+"A PDF export in the DGAC or FCL 1.080 layout, plus XLS and CSV, and sending "
+"the logbook by email."
+
+#: templates/core/cloudy.html:38
+msgid ""
+"Cloudy Alerts: an email several weeks before a licence or rating expires, "
+"once the profile is filled in."
+msgstr ""
+"Cloudy Alerts: an email several weeks before a licence or rating expires, "
+"once the profile is filled in."
+
+#: templates/core/cloudy.html:39
+msgid "Statistics drawn from your flights."
+msgstr "Statistics drawn from your flights."
+
+#: templates/core/cloudy.html:40
+msgid ""
+"Photos, annotated charts, and navigation documents attached to a flight."
+msgstr ""
+"Photos, annotated charts, and navigation documents attached to a flight."
+
+#: templates/core/cloudy.html:41
+msgid ""
+"Import of a logbook already kept elsewhere, from Excel, CSV, or another "
+"file."
+msgstr ""
+"Import of a logbook already kept elsewhere, from Excel, CSV, or another "
+"file."
+
+#: templates/core/cloudy.html:46
+#, fuzzy
+#| msgid "View plans"
+msgid "Two plans"
+msgstr "View plans"
+
+#: templates/core/cloudy.html:48
+msgid ""
+"Signing up on cloudy.fr is free. The free plan includes one logbook of your "
+"choice, import of an existing logbook, hour totals, and 10 MB of storage."
+msgstr ""
+"Signing up on cloudy.fr is free. The free plan includes one logbook of your "
+"choice, import of an existing logbook, hour totals, and 10 MB of storage."
+
+#: templates/core/cloudy.html:53
+msgid ""
+"First Class is €2.99 per month, or €35 per year. It opens unlimited "
+"logbooks, email reminders, detailed statistics, exports, and unlimited "
+"storage."
+msgstr ""
+"First Class is €2.99 per month, or €35 per year. It opens unlimited "
+"logbooks, email reminders, detailed statistics, exports, and unlimited "
+"storage."
+
+#: templates/core/cloudy.html:58
+msgid "A question about an import or your logbook:"
+msgstr "A question about an import or your logbook:"
+
+#: templates/core/cloudy.html:62
+msgid "Open Cloudy"
+msgstr "Open Cloudy"
 
 #: templates/core/home.html:4
 msgid "Offshore passage"
@@ -1014,6 +1466,57 @@ msgstr "Cost sharing: transparency on listings"
 #: templates/core/home.html:98 templates/listings/faq.html:5
 msgid "FAQ & safety"
 msgstr "FAQ & safety"
+
+#: templates/emails/listings/application_received.html:5
+#, python-format
+msgid ""
+"You received a new application on your listing « <strong "
+"style=\"color:#0c4a6e;\">%(title)s</strong> »."
+msgstr ""
+"You received a new application on your listing « <strong "
+"style=\"color:#0c4a6e;\">%(title)s</strong> »."
+
+#: templates/emails/listings/application_received.html:8
+#, python-format
+msgid "Applicant: <strong style=\"color:#0c4a6e;\">%(name)s</strong>"
+msgstr "Applicant: <strong style=\"color:#0c4a6e;\">%(name)s</strong>"
+
+#: templates/emails/listings/application_received.html:11
+#: templates/emails/listings/application_received.txt:6
+#, fuzzy
+#| msgid "Messages"
+msgid "Message:"
+msgstr "Messages"
+
+#: templates/emails/listings/application_received.html:14
+#, fuzzy
+#| msgid "New listing"
+msgid "View the listing"
+msgstr "New listing"
+
+#: templates/emails/listings/application_received.txt:1
+#, python-format
+msgid "You received a new application on your listing « %(title)s »."
+msgstr "You received a new application on your listing « %(title)s »."
+
+#: templates/emails/listings/application_received.txt:3
+#, fuzzy, python-format
+#| msgid "Applications"
+msgid "Applicant: %(name)s"
+msgstr "Applications"
+
+#: templates/emails/listings/application_received.txt:10
+#, python-format
+msgid "View the listing: %(url)s"
+msgstr "View the listing: %(url)s"
+
+#: templates/emails/listings/search_alert.html:5
+#: templates/emails/listings/search_alert.txt:1
+#, python-format
+msgid "One new listing matches your saved alert:"
+msgid_plural "%(count)s new listings match your saved alert:"
+msgstr[0] "One new listing matches your saved alert:"
+msgstr[1] "%(count)s new listings match your saved alert:"
 
 #: templates/legal/cgu.html:9
 msgid "Last updated"
@@ -1262,27 +1765,37 @@ msgstr "day"
 msgid "non-commercial"
 msgstr "non-commercial"
 
-#: templates/listings/detail.html:42
+#: templates/listings/detail.html:45
+msgid "Propose a berth"
+msgstr "Propose a berth"
+
+#: templates/listings/detail.html:45
 msgid "Apply"
 msgstr "Apply"
 
-#: templates/listings/detail.html:46 templates/messaging/inbox.html:27
-msgid "Send"
-msgstr "Send"
+#: templates/listings/detail.html:51
+msgid "Send proposal"
+msgstr "Send proposal"
 
-#: templates/listings/detail.html:55
+#: templates/listings/detail.html:51
+#, fuzzy
+#| msgid "Applications"
+msgid "Send application"
+msgstr "Applications"
+
+#: templates/listings/detail.html:61
 msgid "Applications"
 msgstr "Applications"
 
-#: templates/listings/detail.html:62
+#: templates/listings/detail.html:68
 msgid "Accept"
 msgstr "Accept"
 
-#: templates/listings/detail.html:63
+#: templates/listings/detail.html:69
 msgid "Decline"
 msgstr "Decline"
 
-#: templates/listings/detail.html:68
+#: templates/listings/detail.html:74
 msgid "No applications yet."
 msgstr "No applications yet."
 
@@ -1327,30 +1840,46 @@ msgid "New listing"
 msgstr "New listing"
 
 #: templates/listings/form.html:6
-msgid "Route · Dates · Crew · Details"
-msgstr "Route · Dates · Crew · Details"
+msgid "Choose your listing type, then route, dates, and details."
+msgstr "Choose your listing type, then route, dates, and details."
 
 #: templates/listings/form.html:14
+msgid "What are you offering?"
+msgstr "What are you offering?"
+
+#: templates/listings/form.html:15
+msgid "This sets which fields appear below."
+msgstr "This sets which fields appear below."
+
+#: templates/listings/form.html:21
+msgid "Berths, expected level, languages on board, contribution requested."
+msgstr "Berths, expected level, languages on board, contribution requested."
+
+#: templates/listings/form.html:26
+msgid "Your route and dates; skippers can offer you a place on board."
+msgstr "Your route and dates; skippers can offer you a place on board."
+
+#: templates/listings/form.html:34
 msgid "1. Route"
 msgstr "1. Route"
 
-#: templates/listings/form.html:15
+#: templates/listings/form.html:35
 msgid "2. Dates"
 msgstr "2. Dates"
 
-#: templates/listings/form.html:16
+#: templates/listings/form.html:36
 msgid "3. Crew"
 msgstr "3. Crew"
 
-#: templates/listings/form.html:17
+#: templates/listings/form.html:37
 msgid "4. Details"
 msgstr "4. Details"
 
-#: templates/listings/form.html:19
+#: templates/listings/form.html:39
 msgid "Route on the map"
 msgstr "Route on the map"
 
-#: templates/listings/form.html:23
+#: templates/listings/form.html:43
 msgid "Clear route"
 msgstr "Clear route"
 
@@ -1410,11 +1939,15 @@ msgstr "Conversation"
 msgid "No conversations yet."
 msgstr "No conversations yet."
 
-#: templates/messaging/inbox.html:26
+#: templates/messaging/inbox.html:27
 msgid "Ton message…"
 msgstr "Ton message…"
 
-#: templates/messaging/inbox.html:30
+#: templates/messaging/inbox.html:28
+msgid "Send"
+msgstr "Send"
+
+#: templates/messaging/inbox.html:31
 msgid "Select a conversation."
 msgstr "Select a conversation."
 
@@ -1430,15 +1963,15 @@ msgstr "Milles"
 msgid "Crossings"
 msgstr "Crossings"
 
-#: templates/profiles/detail.html:37
+#: templates/profiles/detail.html:51
 msgid "Reviews"
 msgstr "Reviews"
 
-#: templates/profiles/detail.html:42
+#: templates/profiles/detail.html:56
 msgid "Boats"
 msgstr "Boats"
 
-#: templates/profiles/detail.html:55
+#: templates/profiles/detail.html:69
 msgid "Reviews after sailing"
 msgstr "Reviews after sailing"
 
@@ -1502,6 +2035,11 @@ msgstr "View plans"
 msgid "View public profile"
 msgstr "View public profile"
 
+#: templates/profiles/edit.html:81 templates/socialaccount/connections.html:4
+#: templates/socialaccount/connections.html:8
+msgid "Google and Facebook sign-in"
+msgstr "Google and Facebook sign-in"
+
 #: templates/profiles/partials/basics_form.html:2
 msgid "General"
 msgstr "General"
@@ -1555,77 +2093,92 @@ msgstr "Saved."
 msgid "Leave a review"
 msgstr "Leave a review"
 
-msgid "Continue with Google"
-msgstr "Continue with Google"
+#: templates/socialaccount/authentication_error.html:4
+#: templates/socialaccount/authentication_error.html:7
+msgid "Sign-in failed"
+msgstr "Sign-in failed"
 
-msgid "Continue with Facebook"
-msgstr "Continue with Facebook"
+#: templates/socialaccount/authentication_error.html:9
+msgid ""
+"We could not sign you in with that account. Try again, or use your email."
+msgstr ""
+"We could not sign you in with that account. Try again, or use your email."
 
-#, python-format
-msgid "Continue with %(name)s"
-msgstr "Continue with %(name)s"
+#: templates/socialaccount/connections.html:10
+msgid ""
+"Link an account to sign in without a password, or remove one you no longer "
+"use."
+msgstr ""
+"Link an account to sign in without a password, or remove one you no longer "
+"use."
 
-msgid "or"
-msgstr "or"
+#: templates/socialaccount/connections.html:14
+msgid "Linked accounts"
+msgstr "Linked accounts"
 
+#: templates/socialaccount/connections.html:41
+msgid "Remove"
+msgstr "Remove"
+
+#: templates/socialaccount/connections.html:45
+msgid "No Google or Facebook account is linked yet."
+msgstr "No Google or Facebook account is linked yet."
+
+#: templates/socialaccount/connections.html:50
+msgid "Add an account"
+msgstr "Add an account"
+
+#: templates/socialaccount/connections.html:57
+msgid "Back to my profile"
+msgstr "Back to my profile"
+
+#: templates/socialaccount/login.html:4 templates/socialaccount/login.html:8
 #, python-format
 msgid "Continue with %(provider)s"
 msgstr "Continue with %(provider)s"
 
+#: templates/socialaccount/login.html:12
 #, python-format
 msgid "This links %(provider)s to your account."
 msgstr "This links %(provider)s to your account."
 
+#: templates/socialaccount/login.html:14
 #, python-format
 msgid "You are about to continue with %(provider)s."
 msgstr "You are about to continue with %(provider)s."
 
+#: templates/socialaccount/login.html:20
 msgid "Continue"
 msgstr "Continue"
 
+#: templates/socialaccount/login_cancelled.html:4
+#: templates/socialaccount/login_cancelled.html:7
+msgid "Sign-in cancelled"
+msgstr "Sign-in cancelled"
+
+#: templates/socialaccount/login_cancelled.html:9
+msgid "You cancelled the sign-in. You can try again from the login page."
+msgstr "You cancelled the sign-in. You can try again from the login page."
+
+#: templates/socialaccount/signup.html:4 templates/socialaccount/signup.html:7
 msgid "Complete your account"
 msgstr "Complete your account"
 
+#: templates/socialaccount/signup.html:9
 #, python-format
 msgid "One last step to use your %(provider)s account."
 msgstr "One last step to use your %(provider)s account."
 
+#: templates/socialaccount/signup.html:13
 #, python-format
-msgid "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Log in</a> and link it from your profile."
-msgstr "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-medium text-sky-700 hover:underline\">Log in</a> and link it from your profile."
+msgid ""
+"Already registered with this email? <a href=\"%(login_url)s\" class=\"font-"
+"medium text-sky-700 hover:underline\">Log in</a> and link it from your "
+"profile."
+msgstr ""
+"Already registered with this email? <a href=\"%(login_url)s\" class=\"font-"
+"medium text-sky-700 hover:underline\">Log in</a> and link it from your "
+"profile."
 
-msgid "Sign-in failed"
-msgstr "Sign-in failed"
-
-msgid "We could not sign you in with that account. Try again, or use your email."
-msgstr "We could not sign you in with that account. Try again, or use your email."
-
-msgid "Back to log in"
-msgstr "Back to log in"
-
-msgid "Sign-in cancelled"
-msgstr "Sign-in cancelled"
-
-msgid "You cancelled the sign-in. You can try again from the login page."
-msgstr "You cancelled the sign-in. You can try again from the login page."
-
-msgid "Google and Facebook sign-in"
-msgstr "Google and Facebook sign-in"
-
-msgid "Link an account to sign in without a password, or remove one you no longer use."
-msgstr "Link an account to sign in without a password, or remove one you no longer use."
-
-msgid "Linked accounts"
-msgstr "Linked accounts"
-
-msgid "Remove"
-msgstr "Remove"
-
-msgid "No Google or Facebook account is linked yet."
-msgstr "No Google or Facebook account is linked yet."
-
-msgid "Add an account"
-msgstr "Add an account"
-
-msgid "Back to my profile"
-msgstr "Back to my profile"
+#~ msgid "Route · Dates · Crew · Details"
+#~ msgstr "Route · Dates · Crew · Details"

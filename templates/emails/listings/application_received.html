@@ -1,0 +1,16 @@
+{% extends "email/base.html" %}
+{% load i18n %}
+{% block content %}
+<p style="margin:0 0 16px;">
+{% blocktranslate with title=listing.title %}You received a new application on your listing « {{ title }} ».{% endblocktranslate %}
+</p>
+<p style="margin:0 0 16px;">
+{% blocktranslate with name=applicant_name %}Applicant: {{ name }}{% endblocktranslate %}
+</p>
+{% if message_snippet %}
+<p style="margin:0 0 8px;font-weight:700;color:#0c4a6e;">{% trans "Message:" %}</p>
+<blockquote style="margin:0 0 16px;padding:16px;background-color:#fffbeb;border-left:4px solid #f97316;border-radius:0 12px 12px 0;font-size:14px;color:#334155;white-space:pre-wrap;">{{ message_snippet }}</blockquote>
+{% endif %}
+{% trans "View the listing" as view_label %}
+{% include "email/_button.html" with url=listing_url label=view_label %}
+{% endblock %}

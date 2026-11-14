@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-14 20:33+0000\n"
+"POT-Creation-Date: 2026-11-14 21:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,7 @@ msgstr "Capote de descente"
 msgid "Boat name"
 msgstr "Nom du bateau"
 
-#: apps/boats/forms.py:55 apps/listings/forms.py:175
+#: apps/boats/forms.py:55 apps/listings/forms.py:181
 msgid "Type"
 msgstr "Type"
 
@@ -173,35 +173,13 @@ msgstr "Photo ajoutée."
 msgid "Photo deleted."
 msgstr "Photo supprimée."
 
-#: apps/listings/emails.py:19
+#: apps/listings/emails.py:20
 #, python-format
 msgid "Sail with Me — new application for « %(title)s »"
 msgstr ""
 
-#: apps/listings/emails.py:21
-#, python-format
-msgid "You received a new application on your listing « %(title)s »."
-msgstr ""
-
-#: apps/listings/emails.py:23
-#, fuzzy, python-format
-#| msgid "Applications"
-msgid "Applicant: %(name)s"
-msgstr "Candidatures"
-
-#: apps/listings/emails.py:26
-#, fuzzy
-#| msgid "Messages"
-msgid "Message:"
-msgstr "Messages"
-
-#: apps/listings/emails.py:27
-#, python-format
-msgid "View the listing: %(url)s"
-msgstr ""
-
-#: apps/listings/forms.py:13 apps/listings/forms.py:183
-#: apps/listings/forms.py:258 templates/core/home.html:37
+#: apps/listings/forms.py:13 apps/listings/forms.py:189
+#: apps/listings/forms.py:264 templates/core/home.html:37
 msgid "All"
 msgstr "Tous"
 
@@ -233,7 +211,7 @@ msgstr "Type d'annonce"
 msgid "Title"
 msgstr "Titre"
 
-#: apps/listings/forms.py:86 apps/listings/forms.py:181
+#: apps/listings/forms.py:86 apps/listings/forms.py:187
 #: templates/core/home.html:35
 msgid "Programme"
 msgstr "Programme"
@@ -250,7 +228,7 @@ msgstr "Nom du départ"
 msgid "Arrival name"
 msgstr "Nom de l'arrivée"
 
-#: apps/listings/forms.py:90 apps/listings/forms.py:221
+#: apps/listings/forms.py:90 apps/listings/forms.py:227
 #: templates/core/home.html:44
 msgid "Year"
 msgstr "Année"
@@ -299,78 +277,78 @@ msgstr "Langues que je parle"
 msgid "What I'm looking for on board"
 msgstr "Ce que je recherche à bord"
 
-#: apps/listings/forms.py:149
+#: apps/listings/forms.py:160
 msgid "Click the map to set departure then arrival before publishing."
 msgstr ""
 "Clique sur la carte pour placer le départ puis l'arrivée avant de publier."
 
-#: apps/listings/forms.py:170
+#: apps/listings/forms.py:176
 msgid "Keywords"
 msgstr "Mots-clés"
 
-#: apps/listings/forms.py:172
+#: apps/listings/forms.py:178
 msgid "Route, port…"
 msgstr "Route, escale…"
 
-#: apps/listings/forms.py:187
+#: apps/listings/forms.py:193
 msgid "Departure (port)"
 msgstr "Départ (escale)"
 
-#: apps/listings/forms.py:190 apps/listings/forms.py:197
+#: apps/listings/forms.py:196 apps/listings/forms.py:203
 #: templates/core/home.html:28
 msgid "— Any —"
 msgstr "— Tous —"
 
-#: apps/listings/forms.py:194
+#: apps/listings/forms.py:200
 msgid "Arrival (port)"
 msgstr "Arrivée (escale)"
 
-#: apps/listings/forms.py:203
+#: apps/listings/forms.py:209
 msgid "Departure radius (nm)"
 msgstr "Rayon départ (mn)"
 
-#: apps/listings/forms.py:213
+#: apps/listings/forms.py:219
 msgid "Arrival radius (nm)"
 msgstr "Rayon arrivée (mn)"
 
-#: apps/listings/forms.py:228
+#: apps/listings/forms.py:234
 msgid "Week from"
 msgstr "Semaine de"
 
-#: apps/listings/forms.py:235
+#: apps/listings/forms.py:241
 msgid "Week to"
 msgstr "Semaine à"
 
-#: apps/listings/forms.py:242
+#: apps/listings/forms.py:248
 msgid "Sort"
 msgstr "Tri"
 
-#: apps/listings/forms.py:246
+#: apps/listings/forms.py:252
 msgid "Relevance"
 msgstr "Pertinence"
 
-#: apps/listings/forms.py:247
+#: apps/listings/forms.py:253
 msgid "Departure date"
 msgstr "Date de départ"
 
-#: apps/listings/forms.py:274
+#: apps/listings/forms.py:280
 msgid "To filter by date, enter the year and both weeks (from / to)."
 msgstr ""
 "Pour filtrer par dates, renseignez l'année et les deux semaines (de / à)."
 
-#: apps/listings/forms.py:290
+#: apps/listings/forms.py:296
 msgid "Message to the crew member"
 msgstr "Message à l'équipier·ère"
 
-#: apps/listings/forms.py:292
+#: apps/listings/forms.py:298
 msgid "Describe your boat, experience, and what you can offer…"
 msgstr "Décris ton bateau, ton expérience et ce que tu proposes…"
 
-#: apps/listings/forms.py:295
+#: apps/listings/forms.py:301
 msgid "Message to the skipper"
 msgstr "Message au skipper"
 
-#: apps/listings/forms.py:296
+#: apps/listings/forms.py:302
 msgid "Introduce yourself in a few lines…"
 msgstr "Présente-toi en quelques lignes…"
 
@@ -385,6 +363,15 @@ msgstr "Pacific Puddle Jump (mar.–mai)"
 #: apps/listings/iso_weeks.py:70
 msgid "Mediterranean (May–Oct.)"
 msgstr "Méditerranée (mai–oct.)"
+
+#: apps/listings/management/commands/send_search_alerts.py:23
+#, python-format
+msgid "Weeks %(from)s–%(to)s, %(year)s"
+msgstr "Semaines %(from)s–%(to)s, %(year)s"
+
+#: apps/listings/management/commands/send_search_alerts.py:77
+msgid "Sail with Me — new listings for your alert"
+msgstr "Sail with Me — nouvelles annonces pour ton alerte"
 
 #: apps/listings/models.py:35 templates/listings/form.html:20
 msgid "I have a boat — looking for crew"
@@ -755,6 +742,92 @@ msgstr "Rejoins l'équipage"
 msgid "Offshore, ocean crossings, deliveries: find your berth."
 msgstr "Long cours, transats, convoyages : trouve ta place à bord."
 
+#: templates/account/email/account_already_exists_message.html:5
+msgid ""
+"You are receiving this email because you or someone else tried to signup for"
+" an account using email address:"
+msgstr ""
+"Tu reçois cet e-mail parce que toi ou quelqu'un d'autre a tenté de créer un "
+"compte avec l'adresse :"
+
+#: templates/account/email/account_already_exists_message.html:9
+msgid ""
+"However, an account using that email address already exists. In case you "
+"have forgotten about this, please use the password forgotten procedure to "
+"recover your account:"
+msgstr ""
+
+#: templates/account/email/account_already_exists_message.html:11
+#: templates/account/email/password_reset_key_message.html:7
+msgid "Reset password"
+msgstr "Réinitialiser le mot de passe"
+
+#: templates/account/email/email_confirmation_message.html:7
+#, python-format
+msgid ""
+"You're receiving this email because user %(user_display)s has given your "
+"email address to register an account on %(site_domain)s."
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.html:10
+msgid ""
+"Your email verification code is listed below. Please enter it in your open "
+"browser window."
+msgstr ""
+"Ton code de vérification figure ci-dessous. Saisis-le dans la fenêtre de ton"
+" navigateur."
+
+#: templates/account/email/email_confirmation_message.html:13
+msgid "To confirm this is correct, use the button below."
+msgstr "Pour confirmer, utilise le bouton ci-dessous."
+
+#: templates/account/email/email_confirmation_message.html:14
+#| msgid "Confirm deletion"
+msgid "Confirm email"
+msgstr "Confirmer l'adresse e-mail"
+
+#: templates/account/email/password_reset_key_message.html:5
+msgid ""
+"You're receiving this email because you or someone else has requested a "
+"password reset for your user account. It can be safely ignored if you did "
+"not request a password reset."
+msgstr ""
+"Tu reçois cet e-mail parce que toi ou quelqu'un d'autre a demandé une "
+"réinitialisation du mot de passe. Tu peux l'ignorer si tu n'es pas à "
+"l'origine de cette demande."
+
+#: templates/account/email/password_reset_key_message.html:11
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr "Au cas où tu l'aurais oublié, ton identifiant est %(username)s."
+
+#: templates/account/email/unknown_account_message.html:5
+#, python-format
+msgid ""
+"You are receiving this email because you, or someone else, tried to access "
+"an account with email %(email)s. However, we do not have any record of such "
+"an account in our database."
+msgstr ""
+"Tu reçois cet e-mail parce que toi ou quelqu'un d'autre a tenté d'accéder à "
+"un compte avec l'adresse %(email)s, mais nous n'avons aucun compte "
+"correspondant."
+
+#: templates/account/email/unknown_account_message.html:7
+msgid "This mail can be safely ignored if you did not initiate this action."
+msgstr "Tu peux ignorer cet e-mail si tu n'as pas initié cette action."
+
+#: templates/account/email/unknown_account_message.html:8
+msgid "If it was you, you can sign up for an account using the button below."
+msgstr "Si c'était toi, tu peux créer un compte via le bouton ci-dessous."
+
+#: templates/account/email/unknown_account_message.html:9
+#: templates/account/login.html:10 templates/account/signup.html:4
+#: templates/account/signup.html:7 templates/account/signup.html:32
+#: templates/base.html:80 templates/base.html:106
+#: templates/socialaccount/signup.html:29
+msgid "Sign up"
+msgstr "S'inscrire"
+
 #: templates/account/email_confirm.html:4
 #: templates/account/email_confirm.html:7
 msgid "Confirm Email Address"
@@ -763,9 +836,9 @@ msgstr ""
 #: templates/account/email_confirm.html:13
 #, fuzzy, python-format
 #| msgid ""
-#| "Already registered with this email? <a href=\"%(login_url)s\" "
-#| "class=\"font-medium text-sky-700 hover:underline\">Log in</a> and link it "
-#| "from your profile."
+#| "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-"
+#| "medium text-sky-700 hover:underline\">Log in</a> and link it from your "
+#| "profile."
 msgid ""
 "Please confirm that <a href=\"mailto:%(email)s\" class=\"font-medium text-"
 "sky-700 hover:underline\">%(email)s</a> is an email address for user "
@@ -791,9 +864,9 @@ msgstr ""
 #: templates/account/email_confirm.html:29
 #, fuzzy, python-format
 #| msgid ""
-#| "Already registered with this email? <a href=\"%(login_url)s\" "
-#| "class=\"font-medium text-sky-700 hover:underline\">Log in</a> and link it "
-#| "from your profile."
+#| "Already registered with this email? <a href=\"%(login_url)s\" class=\"font-"
+#| "medium text-sky-700 hover:underline\">Log in</a> and link it from your "
+#| "profile."
 msgid ""
 "This email confirmation link expired or is invalid. Please <a "
 "href=\"%(email_url)s\" class=\"font-medium text-sky-700 "
@@ -815,13 +888,6 @@ msgstr "Se connecter"
 #: templates/account/login.html:9
 msgid "No account yet?"
 msgstr "Pas encore de compte ?"
-
-#: templates/account/login.html:10 templates/account/signup.html:4
-#: templates/account/signup.html:7 templates/account/signup.html:32
-#: templates/base.html:80 templates/base.html:106
-#: templates/socialaccount/signup.html:29
-msgid "Sign up"
-msgstr "S'inscrire"
 
 #: templates/account/login.html:33
 msgid "Forgot your password?"
@@ -971,7 +1037,8 @@ msgstr "FAQ"
 msgid "Messages"
 msgstr "Messages"
 
-#: templates/base.html:63 templates/base.html:96 templates/listings/mine.html:6
+#: templates/base.html:63 templates/base.html:96
+#: templates/listings/mine.html:6
 msgid "My listings"
 msgstr "Mes annonces"
 
@@ -1010,6 +1077,7 @@ msgid "Language"
 msgstr "Langue"
 
 #: templates/base.html:138 templates/core/home.html:10
+#: templates/email/base.html:39
 msgid "Find your crew. Cross the ocean."
 msgstr "Trouve ton équipage. Traverse l'océan."
 
@@ -1087,6 +1155,7 @@ msgid "Your subscription is active — time to cast off."
 msgstr "Ton abonnement est actif — à toi de larguer les amarres."
 
 #: templates/billing/success.html:9 templates/core/home.html:15
+#: templates/emails/listings/search_alert.html:21
 msgid "Browse listings"
 msgstr "Voir les annonces"
 
@@ -1100,7 +1169,8 @@ msgid "Tu es sur le point de supprimer « %(name)s »."
 msgstr "Tu es sur le point de supprimer « %(name)s »."
 
 #: templates/boats/confirm_delete.html:12
-msgid "Linked listings will not be deleted, but will no longer show this boat."
+msgid ""
+"Linked listings will not be deleted, but will no longer show this boat."
 msgstr ""
 "Les annonces liées à ce bateau ne seront pas supprimées, mais n'afficheront "
 "plus de bateau associé."
@@ -1118,7 +1188,8 @@ msgstr "places à bord"
 msgid "Edit"
 msgstr "Modifier"
 
-#: templates/boats/detail.html:18 templates/boats/partials/gallery_item.html:14
+#: templates/boats/detail.html:18
+#: templates/boats/partials/gallery_item.html:14
 #: templates/listings/detail.html:14 templates/listings/mine.html:17
 msgid "Delete"
 msgstr "Supprimer"
@@ -1222,8 +1293,8 @@ msgid ""
 "A PDF export in the DGAC or FCL 1.080 layout, plus XLS and CSV, and sending "
 "the logbook by email."
 msgstr ""
-"Un export PDF à la présentation DGAC ou FCL 1.080, ainsi que les formats XLS "
-"et CSV, et l'envoi du carnet par e-mail."
+"Un export PDF à la présentation DGAC ou FCL 1.080, ainsi que les formats XLS"
+" et CSV, et l'envoi du carnet par e-mail."
 
 #: templates/core/cloudy.html:38
 msgid ""
@@ -1245,7 +1316,8 @@ msgstr ""
 
 #: templates/core/cloudy.html:41
 msgid ""
-"Import of a logbook already kept elsewhere, from Excel, CSV, or another file."
+"Import of a logbook already kept elsewhere, from Excel, CSV, or another "
+"file."
 msgstr ""
 "L'import d'un carnet déjà tenu ailleurs, depuis Excel, CSV ou un autre "
 "fichier."
@@ -1365,6 +1437,53 @@ msgstr "Participation aux frais : transparence sur les annonces"
 msgid "FAQ & safety"
 msgstr "FAQ & sécurité"
 
+#: templates/emails/listings/application_received.html:5
+#, python-format
+msgid ""
+"You received a new application on your listing « <strong "
+"style=\"color:#0c4a6e;\">%(title)s</strong> »."
+msgstr ""
+
+#: templates/emails/listings/application_received.html:8
+#, python-format
+msgid "Applicant: <strong style=\"color:#0c4a6e;\">%(name)s</strong>"
+msgstr ""
+
+#: templates/emails/listings/application_received.html:11
+#: templates/emails/listings/application_received.txt:6
+#| msgid "Messages"
+msgid "Message:"
+msgstr "Message :"
+
+#: templates/emails/listings/application_received.html:14
+#| msgid "New listing"
+msgid "View the listing"
+msgstr "Voir l'annonce"
+
+#: templates/emails/listings/application_received.txt:1
+#, python-format
+msgid "You received a new application on your listing « %(title)s »."
+msgstr "Tu as reçu une nouvelle candidature sur ton annonce « %(title)s »."
+
+#: templates/emails/listings/application_received.txt:3
+#, python-format
+#| msgid "Applications"
+msgid "Applicant: %(name)s"
+msgstr "Candidat : %(name)s"
+
+#: templates/emails/listings/application_received.txt:10
+#, python-format
+msgid "View the listing: %(url)s"
+msgstr "Voir l'annonce : %(url)s"
+
+#: templates/emails/listings/search_alert.html:5
+#: templates/emails/listings/search_alert.txt:1
+#, python-format
+msgid "One new listing matches your saved alert:"
+msgid_plural "%(count)s new listings match your saved alert:"
+msgstr[0] "Une nouvelle annonce correspond à ton alerte :"
+msgstr[1] ""
+
 #: templates/legal/cgu.html:9
 msgid "Last updated"
 msgstr "Dernière mise à jour"
@@ -1385,31 +1504,25 @@ msgstr "Mentions légales"
 #, python-format
 msgid ""
 "\n"
-"      Conformément à l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour "
-"la confiance dans l'économie numérique,\n"
-"      les utilisateurs du service %(SITE_NAME)s sont informés de l'identité "
-"des intervenants :\n"
+"      Conformément à l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique,\n"
+"      les utilisateurs du service %(SITE_NAME)s sont informés de l'identité des intervenants :\n"
 "      "
 msgstr ""
 "\n"
-"      Conformément à l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour "
-"la confiance dans l'économie numérique,\n"
-"      les utilisateurs du service %(SITE_NAME)s sont informés de l'identité "
-"des intervenants :\n"
+"      Conformément à l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique,\n"
+"      les utilisateurs du service %(SITE_NAME)s sont informés de l'identité des intervenants :\n"
 "      "
 
 #: templates/legal/cgu.html:26
 #, python-format
 msgid ""
 "\n"
-"      Le site et l'application %(SITE_NAME)s sont édités par la société "
-"<strong>SAS CLOUDY</strong>,\n"
+"      Le site et l'application %(SITE_NAME)s sont édités par la société <strong>SAS CLOUDY</strong>,\n"
 "      prestataire des services décrits dans les présentes conditions.\n"
 "      "
 msgstr ""
 "\n"
-"      Le site et l'application %(SITE_NAME)s sont édités par la société "
-"<strong>SAS CLOUDY</strong>,\n"
+"      Le site et l'application %(SITE_NAME)s sont édités par la société <strong>SAS CLOUDY</strong>,\n"
 "      prestataire des services décrits dans les présentes conditions.\n"
 "      "
 
@@ -1433,22 +1546,16 @@ msgstr "Objet du service"
 #, python-format
 msgid ""
 "\n"
-"      %(SITE_NAME)s est une plateforme de mise en relation entre skippers et "
-"équipiers pour des navigations\n"
-"      de longue distance. SAS CLOUDY fournit un hébergement technique, des "
-"outils de recherche, de messagerie et\n"
-"      d'évaluation entre utilisateurs. SAS CLOUDY n'est pas armateur, "
-"transporteur maritime, agence de voyage\n"
+"      %(SITE_NAME)s est une plateforme de mise en relation entre skippers et équipiers pour des navigations\n"
+"      de longue distance. SAS CLOUDY fournit un hébergement technique, des outils de recherche, de messagerie et\n"
+"      d'évaluation entre utilisateurs. SAS CLOUDY n'est pas armateur, transporteur maritime, agence de voyage\n"
 "      ni intermédiaire commercial pour le transport de passagers.\n"
 "      "
 msgstr ""
 "\n"
-"      %(SITE_NAME)s est une plateforme de mise en relation entre skippers et "
-"équipiers pour des navigations\n"
-"      de longue distance. SAS CLOUDY fournit un hébergement technique, des "
-"outils de recherche, de messagerie et\n"
-"      d'évaluation entre utilisateurs. SAS CLOUDY n'est pas armateur, "
-"transporteur maritime, agence de voyage\n"
+"      %(SITE_NAME)s est une plateforme de mise en relation entre skippers et équipiers pour des navigations\n"
+"      de longue distance. SAS CLOUDY fournit un hébergement technique, des outils de recherche, de messagerie et\n"
+"      d'évaluation entre utilisateurs. SAS CLOUDY n'est pas armateur, transporteur maritime, agence de voyage\n"
 "      ni intermédiaire commercial pour le transport de passagers.\n"
 "      "
 
@@ -1459,30 +1566,20 @@ msgstr "Participation aux frais et réglementation"
 #: templates/legal/cgu.html:59
 msgid ""
 "\n"
-"      Toute participation aux frais de bord annoncée sur la plateforme doit "
-"rester strictement non lucrative et\n"
-"      correspondre au partage réel des dépenses du bord (avitaillement, "
-"escales, etc.). Aucun enrichissement du\n"
-"      skipper ou de l'équipage au titre du transport ne doit en résulter. "
-"Les utilisateurs restent seuls responsables\n"
-"      du respect de la réglementation applicable (notamment transport "
-"maritime de passagers, assurance, permis et\n"
-"      qualifications). SAS CLOUDY ne contrôle pas les navigations et décline "
-"toute responsabilité en cas de manquement\n"
+"      Toute participation aux frais de bord annoncée sur la plateforme doit rester strictement non lucrative et\n"
+"      correspondre au partage réel des dépenses du bord (avitaillement, escales, etc.). Aucun enrichissement du\n"
+"      skipper ou de l'équipage au titre du transport ne doit en résulter. Les utilisateurs restent seuls responsables\n"
+"      du respect de la réglementation applicable (notamment transport maritime de passagers, assurance, permis et\n"
+"      qualifications). SAS CLOUDY ne contrôle pas les navigations et décline toute responsabilité en cas de manquement\n"
 "      réglementaire entre les parties.\n"
 "      "
 msgstr ""
 "\n"
-"      Toute participation aux frais de bord annoncée sur la plateforme doit "
-"rester strictement non lucrative et\n"
-"      correspondre au partage réel des dépenses du bord (avitaillement, "
-"escales, etc.). Aucun enrichissement du\n"
-"      skipper ou de l'équipage au titre du transport ne doit en résulter. "
-"Les utilisateurs restent seuls responsables\n"
-"      du respect de la réglementation applicable (notamment transport "
-"maritime de passagers, assurance, permis et\n"
-"      qualifications). SAS CLOUDY ne contrôle pas les navigations et décline "
-"toute responsabilité en cas de manquement\n"
+"      Toute participation aux frais de bord annoncée sur la plateforme doit rester strictement non lucrative et\n"
+"      correspondre au partage réel des dépenses du bord (avitaillement, escales, etc.). Aucun enrichissement du\n"
+"      skipper ou de l'équipage au titre du transport ne doit en résulter. Les utilisateurs restent seuls responsables\n"
+"      du respect de la réglementation applicable (notamment transport maritime de passagers, assurance, permis et\n"
+"      qualifications). SAS CLOUDY ne contrôle pas les navigations et décline toute responsabilité en cas de manquement\n"
 "      réglementaire entre les parties.\n"
 "      "
 
@@ -1518,22 +1615,16 @@ msgstr "Offres payantes"
 #: templates/legal/cgu.html:82
 msgid ""
 "\n"
-"      Les tarifs (Crew Pass, Skipper+, vérification d'identité) sont "
-"indiqués sur la page Tarifs.\n"
-"      Le paiement est traité par un prestataire tiers (Stripe). Les "
-"conditions de remboursement applicables\n"
-"      sont celles communiquées au moment de l'achat. SAS CLOUDY se réserve "
-"le droit de modifier ses tarifs\n"
+"      Les tarifs (Crew Pass, Skipper+, vérification d'identité) sont indiqués sur la page Tarifs.\n"
+"      Le paiement est traité par un prestataire tiers (Stripe). Les conditions de remboursement applicables\n"
+"      sont celles communiquées au moment de l'achat. SAS CLOUDY se réserve le droit de modifier ses tarifs\n"
 "      pour les souscriptions futures.\n"
 "      "
 msgstr ""
 "\n"
-"      Les tarifs (Crew Pass, Skipper+, vérification d'identité) sont "
-"indiqués sur la page Tarifs.\n"
-"      Le paiement est traité par un prestataire tiers (Stripe). Les "
-"conditions de remboursement applicables\n"
-"      sont celles communiquées au moment de l'achat. SAS CLOUDY se réserve "
-"le droit de modifier ses tarifs\n"
+"      Les tarifs (Crew Pass, Skipper+, vérification d'identité) sont indiqués sur la page Tarifs.\n"
+"      Le paiement est traité par un prestataire tiers (Stripe). Les conditions de remboursement applicables\n"
+"      sont celles communiquées au moment de l'achat. SAS CLOUDY se réserve le droit de modifier ses tarifs\n"
 "      pour les souscriptions futures.\n"
 "      "
 
@@ -1544,17 +1635,13 @@ msgstr "Données personnelles"
 #: templates/legal/cgu.html:94
 msgid ""
 "\n"
-"      Les données collectées sont nécessaires au fonctionnement du service "
-"(compte, profil, annonces, messagerie).\n"
-"      Pour toute demande relative à vos données, contactez SAS CLOUDY à "
-"contact@cloudy.fr.\n"
+"      Les données collectées sont nécessaires au fonctionnement du service (compte, profil, annonces, messagerie).\n"
+"      Pour toute demande relative à vos données, contactez SAS CLOUDY à contact@cloudy.fr.\n"
 "      "
 msgstr ""
 "\n"
-"      Les données collectées sont nécessaires au fonctionnement du service "
-"(compte, profil, annonces, messagerie).\n"
-"      Pour toute demande relative à vos données, contactez SAS CLOUDY à "
-"contact@cloudy.fr.\n"
+"      Les données collectées sont nécessaires au fonctionnement du service (compte, profil, annonces, messagerie).\n"
+"      Pour toute demande relative à vos données, contactez SAS CLOUDY à contact@cloudy.fr.\n"
 "      "
 
 #: templates/legal/cgu.html:102
@@ -1564,21 +1651,15 @@ msgstr "Limitation de responsabilité"
 #: templates/legal/cgu.html:104
 msgid ""
 "\n"
-"      Le service est fourni « en l'état ». SAS CLOUDY ne garantit pas la "
-"conclusion d'un embarquement ni la sécurité\n"
-"      des navigations organisées entre utilisateurs. Chaque skipper et "
-"chaque équipier demeure seul responsable des\n"
-"      vérifications préalables (compétences, assurance, équipement, contrat "
-"d'embarquement).\n"
+"      Le service est fourni « en l'état ». SAS CLOUDY ne garantit pas la conclusion d'un embarquement ni la sécurité\n"
+"      des navigations organisées entre utilisateurs. Chaque skipper et chaque équipier demeure seul responsable des\n"
+"      vérifications préalables (compétences, assurance, équipement, contrat d'embarquement).\n"
 "      "
 msgstr ""
 "\n"
-"      Le service est fourni « en l'état ». SAS CLOUDY ne garantit pas la "
-"conclusion d'un embarquement ni la sécurité\n"
-"      des navigations organisées entre utilisateurs. Chaque skipper et "
-"chaque équipier demeure seul responsable des\n"
-"      vérifications préalables (compétences, assurance, équipement, contrat "
-"d'embarquement).\n"
+"      Le service est fourni « en l'état ». SAS CLOUDY ne garantit pas la conclusion d'un embarquement ni la sécurité\n"
+"      des navigations organisées entre utilisateurs. Chaque skipper et chaque équipier demeure seul responsable des\n"
+"      vérifications préalables (compétences, assurance, équipement, contrat d'embarquement).\n"
 "      "
 
 #: templates/legal/cgu.html:113
@@ -1588,25 +1669,19 @@ msgstr "Propriété intellectuelle"
 #: templates/legal/cgu.html:115
 msgid ""
 "\n"
-"      Le nom « Sail with Me », la charte graphique du site (hors code) et "
-"les contenus éditoriaux sont la propriété\n"
+"      Le nom « Sail with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
 "      de SAS CLOUDY ou de ses ayants droit.\n"
 "      Le code source de l'application est publié sous la\n"
-"      <strong>GNU Affero General Public License version 3</strong> (voir "
-"fichier LICENSE du dépôt).\n"
-"      Cette licence ne couvre pas le nom « Sail with Me », les logos ni la "
-"charte graphique.\n"
+"      <strong>GNU Affero General Public License version 3</strong> (voir fichier LICENSE du dépôt).\n"
+"      Cette licence ne couvre pas le nom « Sail with Me », les logos ni la charte graphique.\n"
 "      "
 msgstr ""
 "\n"
-"      Le nom « Sail with Me », la charte graphique du site (hors code) et "
-"les contenus éditoriaux sont la propriété\n"
+"      Le nom « Sail with Me », la charte graphique du site (hors code) et les contenus éditoriaux sont la propriété\n"
 "      de SAS CLOUDY ou de ses ayants droit.\n"
 "      Le code source de l'application est publié sous la\n"
-"      <strong>GNU Affero General Public License version 3</strong> (voir "
-"fichier LICENSE du dépôt).\n"
-"      Cette licence ne couvre pas le nom « Sail with Me », les logos ni la "
-"charte graphique.\n"
+"      <strong>GNU Affero General Public License version 3</strong> (voir fichier LICENSE du dépôt).\n"
+"      Cette licence ne couvre pas le nom « Sail with Me », les logos ni la charte graphique.\n"
 "      "
 
 #: templates/legal/cgu.html:126
@@ -1616,17 +1691,13 @@ msgstr "Droit applicable"
 #: templates/legal/cgu.html:128
 msgid ""
 "\n"
-"      Les présentes conditions sont soumises au droit français. En cas de "
-"litige, et à défaut de résolution amiable,\n"
-"      les tribunaux compétents du ressort de SAS CLOUDY seront seuls "
-"compétents, sauf disposition impérative contraire.\n"
+"      Les présentes conditions sont soumises au droit français. En cas de litige, et à défaut de résolution amiable,\n"
+"      les tribunaux compétents du ressort de SAS CLOUDY seront seuls compétents, sauf disposition impérative contraire.\n"
 "      "
 msgstr ""
 "\n"
-"      Les présentes conditions sont soumises au droit français. En cas de "
-"litige, et à défaut de résolution amiable,\n"
-"      les tribunaux compétents du ressort de SAS CLOUDY seront seuls "
-"compétents, sauf disposition impérative contraire.\n"
+"      Les présentes conditions sont soumises au droit français. En cas de litige, et à défaut de résolution amiable,\n"
+"      les tribunaux compétents du ressort de SAS CLOUDY seront seuls compétents, sauf disposition impérative contraire.\n"
 "      "
 
 #: templates/listings/confirm_delete.html:6
@@ -1758,7 +1829,8 @@ msgstr "Couchettes, niveau attendu, langues à bord, participation demandée."
 
 #: templates/listings/form.html:26
 msgid "Your route and dates; skippers can offer you a place on board."
-msgstr "Ta route et tes dates ; les skippers peuvent te proposer une place à bord."
+msgstr ""
+"Ta route et tes dates ; les skippers peuvent te proposer une place à bord."
 
 #: templates/listings/form.html:34
 msgid "1. Route"
@@ -2002,7 +2074,8 @@ msgstr "Connexion impossible"
 #: templates/socialaccount/authentication_error.html:9
 msgid ""
 "We could not sign you in with that account. Try again, or use your email."
-msgstr "La connexion avec ce compte a échoué. Réessaie, ou utilise ton e-mail."
+msgstr ""
+"La connexion avec ce compte a échoué. Réessaie, ou utilise ton e-mail."
 
 #: templates/socialaccount/connections.html:10
 msgid ""

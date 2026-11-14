@@ -1,0 +1,18 @@
+{% extends "email/base.html" %}
+{% load account %}
+{% load i18n %}
+{% block content %}
+{% user_display user as user_display %}
+<p style="margin:0 0 16px;">
+{% blocktranslate with site_name=current_site.name site_domain=current_site.domain %}You're receiving this email because user {{ user_display }} has given your email address to register an account on {{ site_domain }}.{% endblocktranslate %}
+</p>
+{% if code %}
+<p style="margin:0 0 8px;">{% blocktranslate %}Your email verification code is listed below. Please enter it in your open browser window.{% endblocktranslate %}</p>
+<p style="margin:0;padding:16px;background-color:#fffbeb;border-radius:12px;font-family:monospace;font-size:22px;font-weight:700;letter-spacing:0.15em;color:#0c4a6e;text-align:center;">{{ code }}</p>
+{% else %}
+<p style="margin:0 0 8px;">{% blocktranslate %}To confirm this is correct, use the button below.{% endblocktranslate %}</p>
+{% trans "Confirm email" as confirm_label %}
+{% include "email/_button.html" with url=activate_url label=confirm_label %}
+<p style="margin:16px 0 0;font-size:13px;color:#64748b;word-break:break-all;">{{ activate_url }}</p>
+{% endif %}
+{% endblock %}

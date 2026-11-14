@@ -2,11 +2,12 @@ import logging
 
 from django.utils.translation import gettext as _
 
-from apps.core.mail import send_mail_with_bcc
+from apps.core.mail import send_branded_mail
 
 logger = logging.getLogger(__name__)
 
 MESSAGE_SNIPPET_MAX = 500
+APPLICATION_TEMPLATE = "emails/listings/application_received"
 
 
 def notify_author_of_application(*, author, listing, applicant, message: str, listing_url: str) -> None:
@@ -17,20 +18,18 @@ def notify_author_of_application(*, author, listing, applicant, message: str, li
         snippet = snippet[: MESSAGE_SNIPPET_MAX - 1] + "…"
 
     subject = _("Sail with Me — new application for « %(title)s »") % {"title": listing.title}
-    body_lines = [
-        _("You received a new application on your listing « %(title)s ».") % {"title": listing.title},
-        "",
-        _("Applicant: %(name)s") % {"name": applicant_name},
-    ]
-    if snippet:
-        body_lines.extend(["", _("Message:"), snippet])
-    body_lines.extend(["", _("View the listing: %(url)s") % {"url": listing_url}])
-    body = "\n".join(body_lines)
+    context = {
+        "listing": listing,
+        "applicant_name": applicant_name,
+        "message_snippet": snippet,
+        "listing_url": listing_url,
+    }
 
     try:
-        send_mail_with_bcc(
+        send_branded_mail(
             subject=subject,
-            message=body,
+            template=APPLICATION_TEMPLATE,
+            context=context,
             recipient_list=[author.email],
             fail_silently=False,
         )

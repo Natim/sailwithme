@@ -1,0 +1,23 @@
+{% extends "email/base.html" %}
+{% load i18n %}
+{% block content %}
+<p style="margin:0 0 20px;font-weight:600;">
+{% blocktranslate count count=listing_count %}One new listing matches your saved alert:{% plural %}{{ count }} new listings match your saved alert:{% endblocktranslate %}
+</p>
+{% for item in listings %}
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:12px;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+  <tr>
+    <td style="padding:16px;background-color:#f8fafc;">
+      <p style="margin:0 0 6px;font-family:'Fredoka',system-ui,Arial,sans-serif;font-size:16px;font-weight:600;color:#0c4a6e;">
+        <a href="{{ item.url }}" style="color:#0c4a6e;text-decoration:none;">{{ item.title }}</a>
+      </p>
+      <p style="margin:0;font-size:13px;color:#64748b;">
+        {{ item.route }}{% if item.weeks %} · {{ item.weeks }}{% endif %}
+      </p>
+    </td>
+  </tr>
+</table>
+{% endfor %}
+{% trans "Browse listings" as browse_label %}
+{% include "email/_button.html" with url=search_url label=browse_label %}
+{% endblock %}

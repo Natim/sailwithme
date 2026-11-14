@@ -1,6 +1,7 @@
 import pytest
 from django.contrib.gis.geos import Point
 from django.core import mail
+from django.core.management import call_command
 from django.test import override_settings
 from django.urls import reverse
 
@@ -10,9 +11,20 @@ from apps.listings.models import (
     ListingKind,
     ListingStatus,
     ProgrammeType,
+    SearchAlert,
 )
 
 BCC = ["contact@sailwithme.net"]
+
+
+def assert_branded_email(msg):
+    assert msg.alternatives, "expected HTML alternative"
+    html, mimetype = msg.alternatives[0]
+    assert mimetype == "text/html"
+    assert "cid:logo" in html
+    assert "0d9488" in html
+    raw = msg.message().as_bytes()
+    assert b"Content-ID: <logo>" in raw
 
 
 def make_berth_listing(author, **overrides):
@@ -56,6 +68,8 @@ def test_signup_sends_confirmation_email(client):
     assert len(mail.outbox) == 1
     assert mail.outbox[0].to == ["signup-confirm@example.com"]
     assert mail.outbox[0].bcc == BCC
+    assert mail.outbox[0].subject.startswith("Sail with Me —")
+    assert_branded_email(mail.outbox[0])
 
 
 @override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
@@ -70,6 +84,8 @@ def test_password_reset_sends_email(client, user):
     assert len(mail.outbox) == 1
     assert mail.outbox[0].to == [user.email]
     assert mail.outbox[0].bcc == BCC
+    assert mail.outbox[0].subject.startswith("Sail with Me —")
+    assert_branded_email(mail.outbox[0])
 
 
 @override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
@@ -87,6 +103,7 @@ def test_application_sends_email_to_author(client, user, other_user):
     assert mail.outbox[0].to == [user.email]
     assert mail.outbox[0].bcc == BCC
     assert listing.title in mail.outbox[0].subject
+    assert_branded_email(mail.outbox[0])
 
 
 @override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
@@ -99,3 +116,23 @@ def test_duplicate_application_does_not_send_second_email(client, user, other_us
         client.post(url, {"message": "First"})
         client.post(url, {"message": "Again"})
     assert len(mail.outbox) == 1
+
+
+@override_settings(
+    EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend",
+    ACCOUNT_DEFAULT_HTTP_PROTOCOL="https",
+)
+@pytest.mark.django_db
+def test_search_alert_email_uses_absolute_urls(user):
+    SearchAlert.objects.create(user=user, active=True)
+    listing = make_berth_listing(user, title="Alert match")
+    with override_settings(EMAIL_BCC=BCC):
+        call_command("send_search_alerts")
+    assert len(mail.outbox) == 1
+    msg = mail.outbox[0]
+    assert msg.to == [user.email]
+    assert msg.bcc == BCC
+    assert_branded_email(msg)
+    html, _ = msg.alternatives[0]
+    assert f"https://example.com{listing.get_absolute_url()}" in html
+    assert f"https://example.com{reverse('listings:search')}" in html

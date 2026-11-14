@@ -3,6 +3,8 @@ from allauth.core import context as allauth_context
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 
+from apps.core.mail import attach_inline_logo
+
 
 class SailWithMeAccountAdapter(DefaultAccountAdapter):
     def send_mail(self, template_prefix: str, email: str, context: dict) -> None:
@@ -17,4 +19,5 @@ class SailWithMeAccountAdapter(DefaultAccountAdapter):
         bcc = getattr(settings, "EMAIL_BCC", None) or []
         if bcc:
             msg.bcc = list(bcc)
+        attach_inline_logo(msg)
         msg.send()
