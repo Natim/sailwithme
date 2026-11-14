@@ -1,9 +1,5 @@
-import logging
-
 from django.conf import settings
-from django.core.mail import send_mail
-
-logger = logging.getLogger(__name__)
+from django.core.mail import EmailMessage
 
 
 def email_bcc() -> list[str]:
@@ -18,11 +14,12 @@ def send_mail_with_bcc(
     from_email: str | None = None,
     fail_silently: bool = False,
 ) -> int:
-    return send_mail(
+    # django.core.mail.send_mail() has no bcc argument.
+    email = EmailMessage(
         subject=subject,
-        message=message,
+        body=message,
         from_email=from_email,
-        recipient_list=recipient_list,
+        to=recipient_list,
         bcc=email_bcc(),
-        fail_silently=fail_silently,
     )
+    return email.send(fail_silently=fail_silently)

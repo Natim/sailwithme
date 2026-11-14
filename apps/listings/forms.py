@@ -145,13 +145,19 @@ class ListingForm(forms.ModelForm):
             cleaned["arrival_point"] = Point(alng, alat, srid=4326)
         elif self.instance.pk and self.instance.arrival_point:
             cleaned["arrival_point"] = self.instance.arrival_point
-        if not cleaned.get("departure_point") or not cleaned.get("arrival_point"):
-            raise forms.ValidationError(_("Click the map to set departure then arrival before publishing."))
         kind = cleaned.get("kind")
         if kind == ListingKind.BERTH_WANTED:
+            # Skipper-only fields are required on the model form, but a berth
+            # listing must publish without them. Field errors are recorded
+            # before clean(), so drop them here.
+            if self._errors is not None:
+                for name in ("boat", "berths_available", "min_skill_level"):
+                    self._errors.pop(name, None)
             cleaned["boat"] = None
             cleaned["min_skill_level"] = ""
             cleaned["berths_available"] = 1
+        if not cleaned.get("departure_point") or not cleaned.get("arrival_point"):
+            raise forms.ValidationError(_("Click the map to set departure then arrival before publishing."))
         return cleaned
 
     def save(self, commit=True):

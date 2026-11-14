@@ -47,14 +47,14 @@ def test_signup_sends_confirmation_email(client):
         response = client.post(
             reverse("account_signup"),
             {
-                "email": "new-crew@example.com",
+                "email": "signup-confirm@example.com",
                 "password1": "a-long-passphrase-1",
                 "password2": "a-long-passphrase-1",
             },
         )
     assert response.status_code == 302
     assert len(mail.outbox) == 1
-    assert mail.outbox[0].to == ["new-crew@example.com"]
+    assert mail.outbox[0].to == ["signup-confirm@example.com"]
     assert mail.outbox[0].bcc == BCC
 
 
