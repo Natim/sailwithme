@@ -121,6 +121,26 @@ def test_social_connections_require_login(client: Client):
 
 
 @pytest.mark.django_db
+def test_password_reset_entrance_templates_use_layout_and_coral_button(client: Client):
+    reset = client.get("/accounts/password/reset/")
+    assert reset.status_code == 200
+    assert b"rounded-4xl" in reset.content
+    assert b"btn-coral" in reset.content
+
+    done = client.get("/accounts/password/reset/done/")
+    assert done.status_code == 200
+    assert b"rounded-4xl" in done.content
+
+    key_done = client.get("/accounts/password/reset/key/done/")
+    assert key_done.status_code == 200
+    assert b"btn-coral" in key_done.content
+
+    verification = client.get("/accounts/confirm-email/")
+    assert verification.status_code == 200
+    assert b"rounded-4xl" in verification.content
+
+
+@pytest.mark.django_db
 def test_email_confirm_shows_coral_button(client: Client, user):
     email_address = EmailAddress.objects.create(
         user=user,

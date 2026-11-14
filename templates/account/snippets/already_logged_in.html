@@ -1,0 +1,6 @@
+{% load account i18n %}
+{% user_display user as user_display %}
+<p class="mt-3 rounded-lg border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-900">
+  <span class="font-semibold">{% trans "Note" %}:</span>
+  {% blocktranslate %}You are already logged in as {{ user_display }}.{% endblocktranslate %}
+</p>
