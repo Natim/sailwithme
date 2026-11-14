@@ -28,8 +28,8 @@ Les boutons n’apparaissent que lorsque les identifiants sont renseignés (voir
 
 URI de redirection à déclarer chez le fournisseur :
 
-- Google : `https://<domaine>/accounts/google/login/callback/`
-- Facebook : `https://<domaine>/accounts/facebook/login/callback/` (permissions `email` et `public_profile`)
+- Google : `https://sailwithme.net/accounts/google/login/callback/`
+- Facebook : `https://sailwithme.net/accounts/facebook/login/callback/` (permissions `email` et `public_profile`)
 
 Pour relier un compte déjà créé avec la même adresse e-mail, la personne se connecte avec son mot de passe, puis ajoute Google ou Facebook depuis son profil (« Connexion Google et Facebook »).
 
