@@ -7,12 +7,13 @@ from apps.core.language_choices import LANGUAGE_CHOICES
 from apps.profiles.models import ProfileRole, SkillLevel
 
 from .iso_weeks import SEASON_SHORTCUTS
-from .models import Listing, ListingApplication, ListingKind, SearchAlert
+from .models import Listing, ListingApplication, ListingKind, ProgrammeType, SearchAlert
 
 LISTING_KIND_SEARCH_CHOICES = [
     ("", _("All")),
     (ListingKind.CREW_WANTED, _("Skippers looking for crew")),
     (ListingKind.BERTH_WANTED, _("Crew looking for a berth")),
+    (ListingKind.TRAINING, _("Training")),
 ]
 
 
@@ -107,6 +108,9 @@ class ListingForm(forms.ModelForm):
             choices=[("", "—")] + list(SkillLevel.choices),
         )
         self.label_daily_contribution_berth = _("Contribution I can offer (€/day)")
+        self.label_daily_contribution_training = _("Training fee (€/day)")
+        self.label_departure_training = _("Place name")
+        self.label_berths_training = _("Places available")
         self.label_languages_berth = _("Languages I speak")
         self.label_requirements_berth = _("What I'm looking for on board")
         if not self.instance.pk and not self.is_bound:
@@ -156,7 +160,25 @@ class ListingForm(forms.ModelForm):
             cleaned["boat"] = None
             cleaned["min_skill_level"] = ""
             cleaned["berths_available"] = 1
-        if not cleaned.get("departure_point") or not cleaned.get("arrival_point"):
+        elif kind == ListingKind.TRAINING:
+            cleaned["programme_type"] = ProgrammeType.ROUND_TRIP_CRUISE
+            dep_point = cleaned.get("departure_point")
+            if dep_point:
+                cleaned["arrival_point"] = dep_point
+                cleaned["arrival_lat"] = cleaned.get("departure_lat")
+                cleaned["arrival_lng"] = cleaned.get("departure_lng")
+            dep_name = (cleaned.get("departure_name") or "").strip()
+            if dep_name:
+                cleaned["arrival_name"] = dep_name
+            if self._errors is not None:
+                self._errors.pop("arrival_name", None)
+                self._errors.pop("programme_type", None)
+            if not dep_point:
+                raise forms.ValidationError(_("Click the map to set the place before publishing."))
+        if kind == ListingKind.TRAINING:
+            if not cleaned.get("arrival_point"):
+                raise forms.ValidationError(_("Click the map to set the place before publishing."))
+        elif not cleaned.get("departure_point") or not cleaned.get("arrival_point"):
             raise forms.ValidationError(_("Click the map to set departure then arrival before publishing."))
         return cleaned
 

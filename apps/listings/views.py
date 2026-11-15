@@ -31,8 +31,11 @@ def listing_map_i18n():
         "hintStart": _("First click: departure · second click: arrival"),
         "hintDeparture": _("Departure set. Click for arrival."),
         "hintEdit": _("Route set. Click the map to change departure, then arrival."),
+        "hintTrainingStart": _("Click the map to set the training place."),
+        "hintTrainingEdit": _("Place set. Click the map to change it."),
         "departure": _("Departure"),
         "arrival": _("Arrival"),
+        "place": _("Place"),
     }
 
 
@@ -153,7 +156,10 @@ def listing_apply(request, pk):
     if listing.author_id == request.user.id:
         messages.error(request, _("You cannot apply to your own listing."))
         return redirect("listings:detail", pk=pk)
-    if not user_can_initiate_contact(request.user) and listing.kind == ListingKind.CREW_WANTED:
+    if not user_can_initiate_contact(request.user) and listing.kind in (
+        ListingKind.CREW_WANTED,
+        ListingKind.TRAINING,
+    ):
         messages.error(request, _("A Crew Pass is required to apply (see Pricing)."))
         return redirect("billing:pricing")
     form = ApplicationForm(request.POST or None, listing=listing)

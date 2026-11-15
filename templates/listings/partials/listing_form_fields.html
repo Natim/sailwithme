@@ -9,16 +9,33 @@
     {% endif %}
   {% elif field.name == 'boat' or field.name == 'berths_available' or field.name == 'min_skill_level' %}
     <div data-listing-kind="skipper" class="listing-skipper-field">
+      <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}"
+        {% if field.name == 'berths_available' %}data-label-berths-crew="{{ form.fields.berths_available.label }}" data-label-berths-training="{{ form.label_berths_training }}"{% endif %}>{{ field.label }}</label>
+      {{ field }}
+      {% if field.help_text %}<p class="mt-1 text-xs text-slate-500">{{ field.help_text }}</p>{% endif %}
+      {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+    </div>
+  {% elif field.name == 'arrival_name' or field.name == 'programme_type' or field.name == 'flexibility_nm' %}
+    <div data-listing-kind="passage">
       <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}">{{ field.label }}</label>
       {{ field }}
       {% if field.help_text %}<p class="mt-1 text-xs text-slate-500">{{ field.help_text }}</p>{% endif %}
+      {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
+    </div>
+  {% elif field.name == 'departure_name' %}
+    <div>
+      <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}"
+        data-label-departure-crew="{{ form.fields.departure_name.label }}"
+        data-label-departure-training="{{ form.label_departure_training }}">{{ field.label }}</label>
+      {{ field }}
       {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
     </div>
   {% elif field.name == 'daily_contribution_eur' %}
     <div>
       <label class="mb-1 block text-sm font-medium text-slate-700" for="{{ field.id_for_label }}"
         data-label-crew="{{ form.fields.daily_contribution_eur.label }}"
-        data-label-berth="{{ form.label_daily_contribution_berth }}">{{ field.label }}</label>
+        data-label-berth="{{ form.label_daily_contribution_berth }}"
+        data-label-training="{{ form.label_daily_contribution_training }}">{{ field.label }}</label>
       {{ field }}
       {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
     </div>

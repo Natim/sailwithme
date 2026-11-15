@@ -1,5 +1,5 @@
 /**
- * Two-click route picker: departure then arrival, with markers and dashed polyline.
+ * Route picker (departure + arrival) or single-place picker for training listings.
  */
 function initListingMapPicker(mapId) {
   const i18nEl = document.getElementById("listing-map-i18n");
@@ -7,8 +7,11 @@ function initListingMapPicker(mapId) {
     hintStart: "First click: departure · second click: arrival",
     hintDeparture: "Departure set. Click for arrival.",
     hintEdit: "Route set. Click the map to change departure, then arrival.",
+    hintTrainingStart: "Click the map to set the training place.",
+    hintTrainingEdit: "Place set. Click the map to change it.",
     departure: "Departure",
     arrival: "Arrival",
+    place: "Place",
   };
   let i18n = defaults;
   if (i18nEl) {
@@ -19,6 +22,7 @@ function initListingMapPicker(mapId) {
     }
   }
 
+  const form = document.getElementById("listing-form");
   const depLat = document.getElementById("id_departure_lat");
   const depLng = document.getElementById("id_departure_lng");
   const arrLat = document.getElementById("id_arrival_lat");
@@ -26,6 +30,13 @@ function initListingMapPicker(mapId) {
   const hint = document.getElementById("listing-map-hint");
   if (!depLat || !depLng || !arrLat || !arrLng) {
     return;
+  }
+
+  function isTrainingKind() {
+    const card = document.querySelector('input[name="listing_kind_card"]:checked');
+    const hiddenKind = document.getElementById("id_kind");
+    const kind = (card && card.value) || (hiddenKind && hiddenKind.value) || "";
+    return kind === "training";
   }
 
   const map = L.map(mapId).setView([28.1, -15.4], 4);
@@ -42,23 +53,35 @@ function initListingMapPicker(mapId) {
     if (hint) hint.textContent = msg;
   };
 
+  const samePoint = (dLat, dLng, aLat, aLng) =>
+    !Number.isNaN(dLat) &&
+    !Number.isNaN(dLng) &&
+    !Number.isNaN(aLat) &&
+    !Number.isNaN(aLng) &&
+    Math.abs(dLat - aLat) < 0.000001 &&
+    Math.abs(dLng - aLng) < 0.000001;
+
   const drawRoute = () => {
     layer.clearLayers();
     depMarker = null;
     arrMarker = null;
     routeLine = null;
+    const training = isTrainingKind();
     const dLat = parseFloat(depLat.value);
     const dLng = parseFloat(depLng.value);
     const aLat = parseFloat(arrLat.value);
     const aLng = parseFloat(arrLng.value);
     const bounds = [];
+    const onePlace = training || samePoint(dLat, dLng, aLat, aLng);
+
     if (!Number.isNaN(dLat) && !Number.isNaN(dLng)) {
-      depMarker = L.marker([dLat, dLng], { alt: i18n.departure })
-        .bindTooltip(i18n.departure, { permanent: false })
+      const label = training ? i18n.place : i18n.departure;
+      depMarker = L.marker([dLat, dLng], { alt: label })
+        .bindTooltip(label, { permanent: false })
         .addTo(layer);
       bounds.push([dLat, dLng]);
     }
-    if (!Number.isNaN(aLat) && !Number.isNaN(aLng)) {
+    if (!onePlace && !Number.isNaN(aLat) && !Number.isNaN(aLng)) {
       arrMarker = L.marker([aLat, aLng], { alt: i18n.arrival })
         .bindTooltip(i18n.arrival, { permanent: false })
         .addTo(layer);
@@ -73,21 +96,33 @@ function initListingMapPicker(mapId) {
         { color: "#0369a1", weight: 3, dashArray: "8 10" }
       ).addTo(layer);
       map.fitBounds(bounds, { padding: [32, 32], maxZoom: 8 });
-      setHint(i18n.hintEdit);
+      setHint(training ? i18n.hintTrainingEdit : i18n.hintEdit);
       step = 2;
     } else if (depMarker) {
-      setHint(i18n.hintDeparture);
-      step = 1;
-      map.setView([dLat, dLng], Math.max(map.getZoom(), 5));
+      if (onePlace) {
+        map.setView([dLat, dLng], Math.max(map.getZoom(), 6));
+        setHint(i18n.hintTrainingEdit);
+        step = 2;
+      } else {
+        setHint(i18n.hintDeparture);
+        step = 1;
+        map.setView([dLat, dLng], Math.max(map.getZoom(), 5));
+      }
     } else {
-      setHint(i18n.hintStart);
+      setHint(training ? i18n.hintTrainingStart : i18n.hintStart);
       step = 0;
     }
   };
 
   map.on("click", (e) => {
     const { lat, lng } = e.latlng;
-    if (step === 0) {
+    if (isTrainingKind()) {
+      depLat.value = lat.toFixed(6);
+      depLng.value = lng.toFixed(6);
+      arrLat.value = lat.toFixed(6);
+      arrLng.value = lng.toFixed(6);
+      step = 2;
+    } else if (step === 0) {
       depLat.value = lat.toFixed(6);
       depLng.value = lng.toFixed(6);
       arrLat.value = "";
@@ -114,6 +149,16 @@ function initListingMapPicker(mapId) {
       depLng.value = "";
       arrLat.value = "";
       arrLng.value = "";
+      drawRoute();
+    });
+  }
+
+  if (form) {
+    form.addEventListener("listing-kind-change", () => {
+      if (isTrainingKind() && depLat.value && depLng.value) {
+        arrLat.value = depLat.value;
+        arrLng.value = depLng.value;
+      }
       drawRoute();
     });
   }

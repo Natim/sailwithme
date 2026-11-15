@@ -42,6 +42,7 @@
         <option value="transatlantic">{% trans "Transatlantic" %}</option>
         <option value="transpacific">{% trans "Transpacific" %}</option>
         <option value="mediterranean">{% trans "Mediterranean" %}</option>
+        <option value="round_trip_cruise">{% trans "Round-trip cruise" %}</option>
       </select>
     </div>
     <div>
@@ -71,6 +72,12 @@
       <p class="mt-2 text-sm text-slate-600">{% trans "Cross-reviews after the passage build trust." %}</p>
     </article>
   </div>
+</section>
+
+<section class="mt-16">
+  <h2 class="section-title">{% trans "Training" %}</h2>
+  <p class="mt-2 text-sm text-slate-600">{% trans "Round-trip cruise sessions in port — apply for a place on a listing." %}</p>
+  <a href="{% url 'listings:search' %}?kind=training" class="btn-secondary mt-4 inline-flex">{% trans "Browse training listings" %}</a>
 </section>
 
 <section class="mt-16">

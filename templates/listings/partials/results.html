@@ -4,14 +4,14 @@
     <li class="card transition hover:-translate-y-0.5 hover:shadow-lift">
       <div class="flex flex-wrap items-start justify-between gap-3">
         <div class="min-w-0 flex-1">
-          <span class="{% if listing.kind == 'crew_wanted' %}badge-lagoon{% else %}badge-coral{% endif %}">{{ listing.get_kind_display }}</span>
+          <span class="{% if listing.kind == 'crew_wanted' %}badge-lagoon{% elif listing.kind == 'training' %}rounded-full bg-sun-pale px-3 py-0.5 text-xs font-bold uppercase tracking-wide text-ocean{% else %}badge-coral{% endif %}">{{ listing.get_kind_display }}</span>
           <a href="{% url 'listings:detail' listing.pk %}" class="font-display mt-2 block text-xl font-semibold text-ocean hover:text-lagoon">{{ listing.title }}</a>
           <p class="mt-1 text-sm font-medium text-slate-700">
-            {{ listing.departure_name }} → {{ listing.arrival_name }}
+            {% if listing.kind == 'training' %}{{ listing.departure_name }}{% else %}{{ listing.departure_name }} → {{ listing.arrival_name }}{% endif %}
           </p>
           <p class="mt-1 text-xs text-slate-500">
             {{ listing.period_months_display }} · {{ listing.get_programme_type_display }}
-            {% if listing.kind == 'crew_wanted' and listing.berths_available %} · {{ listing.berths_available }} {% trans "berths" %}{% endif %}
+            {% if listing.kind == 'training' and listing.berths_available %} · {{ listing.berths_available }} {% trans "places" %}{% elif listing.kind == 'crew_wanted' and listing.berths_available %} · {{ listing.berths_available }} {% trans "berths" %}{% endif %}
             {% if listing.daily_contribution_eur %} · ~{{ listing.daily_contribution_eur }} €/{% trans "day" %}{% endif %}
           </p>
         </div>

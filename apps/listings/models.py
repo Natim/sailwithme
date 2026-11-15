@@ -34,6 +34,7 @@ class Port(UUIDModel):
 class ListingKind(models.TextChoices):
     CREW_WANTED = "crew_wanted", _("I have a boat — looking for crew")
     BERTH_WANTED = "berth_wanted", _("Looking for a berth")
+    TRAINING = "training", _("Training")
 
 
 class ProgrammeType(models.TextChoices):
@@ -43,6 +44,7 @@ class ProgrammeType(models.TextChoices):
     DELIVERY = "delivery", _("Delivery")
     COASTAL = "coastal", _("Coastal")
     SEASON = "season", _("Full season")
+    ROUND_TRIP_CRUISE = "round_trip_cruise", _("Round-trip cruise")
 
 
 class ListingStatus(models.TextChoices):

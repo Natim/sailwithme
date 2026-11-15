@@ -5,7 +5,7 @@
 <div class="grid gap-8 lg:grid-cols-3">
   <article class="card lg:col-span-2 border-lagoon/10">
     <div class="flex flex-wrap items-center justify-between gap-2">
-      <span class="{% if listing.kind == 'crew_wanted' %}badge-lagoon{% else %}badge-coral{% endif %}">{{ listing.get_kind_display }}</span>
+      <span class="{% if listing.kind == 'crew_wanted' %}badge-lagoon{% elif listing.kind == 'training' %}rounded-full bg-sun-pale px-3 py-0.5 text-xs font-bold uppercase tracking-wide text-ocean{% else %}badge-coral{% endif %}">{{ listing.get_kind_display }}</span>
       {% if user.is_authenticated and listing.author_id == user.id %}
         <div class="flex flex-wrap items-center gap-2">
           {% if listing.status != 'published' %}<span class="chip">{{ listing.get_status_display }}</span>{% endif %}
@@ -17,12 +17,18 @@
       {% endif %}
     </div>
     <h1 class="font-display mt-2 text-3xl font-bold text-ocean">{{ listing.title }}</h1>
-    <p class="mt-2 text-lg font-medium text-slate-700">{{ listing.departure_name }} → {{ listing.arrival_name }}</p>
+    <p class="mt-2 text-lg font-medium text-slate-700">
+      {% if listing.kind == 'training' %}{{ listing.departure_name }}{% else %}{{ listing.departure_name }} → {{ listing.arrival_name }}{% endif %}
+    </p>
     <p class="text-sm text-slate-500">{{ listing.period_months_display }} · {{ listing.get_programme_type_display }}</p>
     <div id="listing-detail-map" class="mt-4 h-48 rounded-2xl border border-lagoon/20"></div>
     <p class="mt-6 whitespace-pre-line text-slate-700">{{ listing.description }}</p>
     {% if listing.daily_contribution_eur %}
-      <p class="mt-4 chip">{% trans "Indicative contribution" %}: {{ listing.daily_contribution_eur }} €/{% trans "day" %} ({% trans "non-commercial" %})</p>
+      {% if listing.kind == 'training' %}
+        <p class="mt-4 chip">{% trans "Training fee" %}: {{ listing.daily_contribution_eur }} €/{% trans "day" %}</p>
+      {% else %}
+        <p class="mt-4 chip">{% trans "Indicative contribution" %}: {{ listing.daily_contribution_eur }} €/{% trans "day" %} ({% trans "non-commercial" %})</p>
+      {% endif %}
     {% endif %}
   </article>
 
