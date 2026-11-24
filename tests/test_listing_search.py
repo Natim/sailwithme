@@ -36,6 +36,47 @@ def test_search_returns_published_listings(user):
 
 
 @pytest.mark.django_db
+def test_search_filters_by_kind(user):
+    Listing.objects.create(
+        author=user,
+        kind=ListingKind.CREW_WANTED,
+        title="Skipper post",
+        description="x",
+        programme_type=ProgrammeType.TRANSATLANTIC,
+        departure_name="A",
+        arrival_name="B",
+        departure_point=Point(0, 0, srid=4326),
+        arrival_point=Point(1, 1, srid=4326),
+        year=2026,
+        week_from=10,
+        week_to=12,
+        date_from="2026-03-02",
+        date_to="2026-03-22",
+        status=ListingStatus.PUBLISHED,
+    )
+    Listing.objects.create(
+        author=user,
+        kind=ListingKind.BERTH_WANTED,
+        title="Crew berth",
+        description="x",
+        programme_type=ProgrammeType.TRANSATLANTIC,
+        departure_name="C",
+        arrival_name="D",
+        departure_point=Point(2, 2, srid=4326),
+        arrival_point=Point(3, 3, srid=4326),
+        year=2026,
+        week_from=10,
+        week_to=12,
+        date_from="2026-03-02",
+        date_to="2026-03-22",
+        status=ListingStatus.PUBLISHED,
+    )
+    crew_only = search_listings({"kind": ListingKind.BERTH_WANTED})
+    assert len(crew_only) == 1
+    assert crew_only[0].title == "Crew berth"
+
+
+@pytest.mark.django_db
 def test_search_page_lists_announcements(client, user):
     Listing.objects.create(
         author=user,

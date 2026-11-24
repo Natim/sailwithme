@@ -6,8 +6,9 @@ from django.utils.translation import gettext as _
 
 from apps.core.mail import absolute_url, send_branded_mail
 from apps.listings.iso_weeks import weeks_overlap
-from apps.listings.models import Listing, ListingStatus, SearchAlert
+from apps.listings.models import Listing, SearchAlert
 from apps.listings.search import nm_to_meters
+from apps.listings.visibility import filter_searchable_listings
 
 SEARCH_ALERT_TEMPLATE = "emails/listings/search_alert"
 
@@ -44,10 +45,7 @@ class Command(BaseCommand):
         sent = 0
         search_url = absolute_url(reverse("listings:search"))
         for alert in SearchAlert.objects.filter(active=True).select_related("user"):
-            qs = Listing.objects.filter(
-                status=ListingStatus.PUBLISHED,
-                created_at__gte=alert.created_at,
-            )
+            qs = filter_searchable_listings(Listing.objects.filter(created_at__gte=alert.created_at))
             if alert.kind:
                 qs = qs.filter(kind=alert.kind)
             if alert.programme_type:

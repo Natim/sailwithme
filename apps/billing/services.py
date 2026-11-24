@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from datetime import timedelta
 from typing import Any
 
@@ -45,6 +47,25 @@ def membership_summary_for_user(user) -> dict[str, Any]:
     if lifetime and lifetime.is_current():
         summary["crew_pass_active"] = True
         summary["crew_pass_detail"] = _("Crew Pass — lifetime")
+
+    if not summary["crew_pass_active"]:
+        trial = (
+            Membership.objects.filter(
+                user=user,
+                plan=MembershipPlan.CREW_TRIAL,
+                active=True,
+            )
+            .order_by("-valid_until", "-created_at")
+            .first()
+        )
+        if trial and trial.is_current():
+            summary["crew_pass_active"] = True
+            if trial.valid_until:
+                summary["crew_pass_detail"] = _("Crew Pass — welcome month until %(date)s") % {
+                    "date": date_format(trial.valid_until, "SHORT_DATE_FORMAT")
+                }
+            else:
+                summary["crew_pass_detail"] = _("Crew Pass — welcome month")
 
     if not summary["crew_pass_active"]:
         season = (
@@ -99,9 +120,32 @@ def user_has_crew_pass(user) -> bool:
     for m in qs:
         if m.plan == MembershipPlan.CREW_LIFETIME and m.active:
             return True
-        if m.plan == MembershipPlan.CREW_SEASON and m.is_current():
+        if m.plan in (MembershipPlan.CREW_SEASON, MembershipPlan.CREW_TRIAL) and m.is_current():
             return True
     return False
+
+
+def author_listing_searchable(user) -> bool:
+    if not user.is_authenticated:
+        return False
+    if user.is_staff:
+        return True
+    profile = getattr(user, "profile", None)
+    if profile and profile.role == ProfileRole.SKIPPER:
+        return True
+    return user_has_crew_pass(user)
+
+
+def grant_registration_crew_trial(user) -> Membership | None:
+    if Membership.objects.filter(user=user, plan=MembershipPlan.CREW_TRIAL).exists():
+        return None
+    valid_until = timezone.now() + timedelta(days=31)
+    return Membership.objects.create(
+        user=user,
+        plan=MembershipPlan.CREW_TRIAL,
+        active=True,
+        valid_until=valid_until,
+    )
 
 
 def user_can_initiate_contact(user) -> bool:

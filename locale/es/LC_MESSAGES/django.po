@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-15 11:52+0000\n"
+"POT-Creation-Date: 2026-11-24 08:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,42 +19,54 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
 "1 : 2;\n"
 
-#: apps/billing/models.py:10 apps/billing/services.py:66
+#: apps/billing/models.py:10 apps/billing/services.py:68
+#, fuzzy
+#| msgid "Crew Pass — season"
+msgid "Crew Pass — welcome month"
+msgstr "Pase de tripulación — temporada"
+
+#: apps/billing/models.py:11 apps/billing/services.py:87
 msgid "Crew Pass — season"
 msgstr "Pase de tripulación — temporada"
 
-#: apps/billing/models.py:11 apps/billing/services.py:47
+#: apps/billing/models.py:12 apps/billing/services.py:49
 msgid "Crew Pass — lifetime"
 msgstr "Pase de tripulación — de por vida"
 
-#: apps/billing/models.py:12
+#: apps/billing/models.py:13
 msgid "Skipper+"
 msgstr "Capital"
 
-#: apps/billing/models.py:13 templates/billing/pricing.html:27
+#: apps/billing/models.py:14 templates/billing/pricing.html:28
 #: templates/profiles/detail.html:17
 msgid "Identity verified"
 msgstr "Identidad verificada"
 
-#: apps/billing/services.py:33
+#: apps/billing/services.py:35
 msgid "Staff access"
 msgstr "ACCESO PERSONAL"
 
-#: apps/billing/services.py:62
+#: apps/billing/services.py:64
+#, fuzzy, python-format
+#| msgid "Crew Pass — season active until %(date)s"
+msgid "Crew Pass — welcome month until %(date)s"
+msgstr "Pase de tripulación — temporada activa hasta el %(date)s"
+
+#: apps/billing/services.py:83
 #, python-format
 msgid "Crew Pass — season active until %(date)s"
 msgstr "Pase de tripulación — temporada activa hasta el %(date)s"
 
-#: apps/billing/services.py:80
+#: apps/billing/services.py:101
 #, python-format
 msgid "Renewal expected on %(date)s"
 msgstr "Renovación esperada el %(date)s"
 
-#: apps/billing/services.py:84
+#: apps/billing/services.py:105
 msgid "Monthly subscription active"
 msgstr "Suscripción mensual activa"
 
-#: apps/billing/services.py:88
+#: apps/billing/services.py:109
 msgid "Skipper role: contact without Crew Pass"
 msgstr "Rol de patrón: contacto sin Crew Pass"
 
@@ -91,6 +103,7 @@ msgid "Boat name"
 msgstr "Nombre del barco."
 
 #: apps/boats/forms.py:55 apps/listings/forms.py:203
+#: templates/core/home.html:30
 msgid "Type"
 msgstr "Tipo"
 
@@ -180,24 +193,29 @@ msgid "Sail with Me — new application for « %(title)s »"
 msgstr ""
 
 #: apps/listings/forms.py:13 apps/listings/forms.py:211
-#: apps/listings/forms.py:286 templates/core/home.html:41
+#: apps/listings/forms.py:286 templates/core/home.html:32
+#: templates/core/home.html:50 templates/listings/search.html:13
 msgid "All"
 msgstr "Todos"
 
-#: apps/listings/forms.py:14
+#: apps/listings/forms.py:14 templates/core/home.html:33
+#: templates/listings/search.html:14
 #, fuzzy
 #| msgid "Looking for crew"
-msgid "Skippers looking for crew"
+msgid "Captain / skipper looking for crew"
 msgstr "Buscando equipo"
 
-#: apps/listings/forms.py:15
+#: apps/listings/forms.py:15 templates/core/home.html:34
+#: templates/listings/search.html:15
 #, fuzzy
 #| msgid "Looking for a berth"
-msgid "Crew looking for a berth"
+msgid "Crew looking for a boat to cross"
 msgstr "Buscando litera"
 
 #: apps/listings/forms.py:16 apps/listings/models.py:37
-#: templates/core/home.html:78 templates/listings/form.html:30
+#: apps/listings/views.py:63 templates/core/home.html:35
+#: templates/core/home.html:92 templates/listings/form.html:30
+#: templates/listings/search.html:16
 msgid "Training"
 msgstr "Formación"
 
@@ -214,6 +232,7 @@ msgid "— None —"
 msgstr "— Ninguno —"
 
 #: apps/listings/forms.py:84 templates/listings/form.html:16
+#: templates/listings/search.html:12
 msgid "Listing type"
 msgstr "Tipo de anuncio"
 
@@ -222,7 +241,7 @@ msgid "Title"
 msgstr "Título"
 
 #: apps/listings/forms.py:87 apps/listings/forms.py:209
-#: templates/core/home.html:39
+#: templates/core/home.html:48
 msgid "Programme"
 msgstr "Ocupacional (Sharps)"
 
@@ -239,7 +258,7 @@ msgid "Arrival name"
 msgstr "Nombre de llegada"
 
 #: apps/listings/forms.py:91 apps/listings/forms.py:249
-#: templates/core/home.html:49
+#: templates/core/home.html:58
 msgid "Year"
 msgstr "Año"
 
@@ -338,7 +357,7 @@ msgid "Departure (port)"
 msgstr "Salida (puerto)"
 
 #: apps/listings/forms.py:218 apps/listings/forms.py:225
-#: templates/core/home.html:32
+#: templates/core/home.html:41
 msgid "— Any —"
 msgstr "— Cualquiera —"
 
@@ -409,7 +428,7 @@ msgstr "Pacific Puddle Jump (marzo-mayo)"
 msgid "Mediterranean (May–Oct.)"
 msgstr "Mediterráneo (mayo-octubre)"
 
-#: apps/listings/management/commands/send_search_alerts.py:23
+#: apps/listings/management/commands/send_search_alerts.py:24
 #, python-format
 msgid "Weeks %(from)s–%(to)s, %(year)s"
 msgstr "Semanas %(from)s–%(to)s, %(year)s"
@@ -428,15 +447,15 @@ msgstr "Buscando equipo"
 msgid "Looking for a berth"
 msgstr "Buscando litera"
 
-#: apps/listings/models.py:41 templates/core/home.html:42
+#: apps/listings/models.py:41 templates/core/home.html:51
 msgid "Transatlantic"
 msgstr "Transatlántico"
 
-#: apps/listings/models.py:42 templates/core/home.html:43
+#: apps/listings/models.py:42 templates/core/home.html:52
 msgid "Transpacific"
 msgstr "transpacífico"
 
-#: apps/listings/models.py:43 templates/core/home.html:44
+#: apps/listings/models.py:43 templates/core/home.html:53
 msgid "Mediterranean"
 msgstr "Mar Mediterráneo"
 
@@ -452,7 +471,7 @@ msgstr "Costero (m), costera (f)"
 msgid "Full season"
 msgstr "Temporada Completa:"
 
-#: apps/listings/models.py:47 templates/core/home.html:45
+#: apps/listings/models.py:47 templates/core/home.html:54
 msgid "Round-trip cruise"
 msgstr "Crucero ida y vuelta"
 
@@ -488,21 +507,21 @@ msgstr "Aceptado"
 msgid "Declined"
 msgstr "Rechazada"
 
-#: apps/listings/views.py:31 templates/listings/form.html:50
+#: apps/listings/views.py:32 templates/listings/form.html:50
 msgid "First click: departure · second click: arrival"
 msgstr "Primer clic: salida · segundo clic: llegada"
 
-#: apps/listings/views.py:32
+#: apps/listings/views.py:33
 msgid "Departure set. Click for arrival."
 msgstr "Salida establecida. Haga clic para la llegada."
 
-#: apps/listings/views.py:33
+#: apps/listings/views.py:34
 msgid "Route set. Click the map to change departure, then arrival."
 msgstr ""
 "Ruta establecida. Haz clic en el mapa para cambiar la salida y luego la "
 "llegada."
 
-#: apps/listings/views.py:34
+#: apps/listings/views.py:35
 #, fuzzy
 #| msgid "Click the map to set departure then arrival before publishing."
 msgid "Click the map to set the training place."
@@ -510,7 +529,7 @@ msgstr ""
 "Haz clic en el mapa para establecer la salida y la llegada antes de "
 "publicarlo."
 
-#: apps/listings/views.py:35
+#: apps/listings/views.py:36
 #, fuzzy
 #| msgid "Route set. Click the map to change departure, then arrival."
 msgid "Place set. Click the map to change it."
@@ -518,71 +537,91 @@ msgstr ""
 "Ruta establecida. Haz clic en el mapa para cambiar la salida y luego la "
 "llegada."
 
-#: apps/listings/views.py:36 templates/core/home.html:30
+#: apps/listings/views.py:37 templates/core/home.html:39
 msgid "Departure"
 msgstr "Departure"
 
-#: apps/listings/views.py:37
+#: apps/listings/views.py:38
 msgid "Arrival"
 msgstr "Llega"
 
-#: apps/listings/views.py:38
+#: apps/listings/views.py:39
 msgid "Place"
 msgstr ""
 
-#: apps/listings/views.py:49
+#: apps/listings/views.py:57
 msgid "Fix your search criteria."
 msgstr "SUS CRITERIOS DE BÚSQUEDA"
 
-#: apps/listings/views.py:109
+#: apps/listings/views.py:61 templates/core/home.html:64
+#, fuzzy
+#| msgid "Looking for crew"
+msgid "Captains looking for crew"
+msgstr "Buscando equipo"
+
+#: apps/listings/views.py:62 templates/core/home.html:66
+#, fuzzy
+#| msgid "Looking for a berth"
+msgid "Crew looking for a crossing"
+msgstr "Buscando litera"
+
+#: apps/listings/views.py:140
+msgid "Your Crew Pass has expired. Renew on Pricing to post listings."
+msgstr ""
+
+#: apps/listings/views.py:148
 msgid "Listing published."
 msgstr "Ficha publicada"
 
-#: apps/listings/views.py:124
+#: apps/listings/views.py:162
+msgid "Your Crew Pass has expired. Renew on Pricing to edit listings."
+msgstr ""
+
+#: apps/listings/views.py:169
 msgid "Listing updated."
 msgstr "Anuncio actualizado."
 
-#: apps/listings/views.py:141
+#: apps/listings/views.py:186
 msgid "Listing withdrawn (applications exist and are kept)."
 msgstr "Anuncio retirado (las solicitudes existen y se mantienen)."
 
-#: apps/listings/views.py:144
+#: apps/listings/views.py:189
 msgid "Listing deleted."
 msgstr "listado eliminado."
 
-#: apps/listings/views.py:157
+#: apps/listings/views.py:202
 msgid "You cannot apply to your own listing."
 msgstr "No puedes aplicar a tu propio anuncio."
 
-#: apps/listings/views.py:163
+#: apps/listings/views.py:208
 msgid "A Crew Pass is required to apply (see Pricing)."
 msgstr "Se requiere un pase de tripulación para aplicar (ver Precios)."
 
-#: apps/listings/views.py:173
+#: apps/listings/views.py:218
 msgid "You already applied."
 msgstr "Ya has aplicado. "
 
-#: apps/listings/views.py:175
+#: apps/listings/views.py:220
 msgid "Application sent."
 msgstr "Tu solicitud fue enviada."
 
-#: apps/listings/views.py:219
+#: apps/listings/views.py:264
 msgid "Application accepted — voyage created."
 msgstr "Solicitud aceptada — viaje creado."
 
-#: apps/listings/views.py:223
+#: apps/listings/views.py:268
 msgid "Application declined."
 msgstr "Solicitud rechazada"
 
-#: apps/listings/views.py:232
+#: apps/listings/views.py:277
 msgid "Alerts require a Crew Pass."
 msgstr "Las alertas requieren un pase de tripulación."
 
-#: apps/listings/views.py:252
+#: apps/listings/views.py:297
 msgid "Alert saved."
 msgstr "Alerta de Empleo Guardada"
 
-#: apps/listings/views.py:254
+#: apps/listings/views.py:299
 msgid "Could not save alert: invalid criteria."
 msgstr "No se pudo guardar la alerta: criterios no válidos."
 
@@ -721,7 +760,7 @@ msgstr "Vegetarianos bienvenidos"
 msgid "Visible in the crew directory"
 msgstr "Visible en el directorio de la tripulación"
 
-#: apps/profiles/models.py:24 templates/billing/pricing.html:9
+#: apps/profiles/models.py:24 templates/billing/pricing.html:10
 #: templates/listings/detail.html:38
 msgid "Skipper"
 msgstr "Capital"
@@ -1173,39 +1212,45 @@ msgstr "Términos de uso"
 msgid "No commission on on-board cost sharing."
 msgstr "Sin comisión en el reparto de costes a bordo."
 
-#: templates/billing/pricing.html:11
+#: templates/billing/pricing.html:7
+msgid ""
+"New accounts receive one free welcome month of Crew Pass to post listings, "
+"apply, and receive alerts."
+msgstr ""
+
+#: templates/billing/pricing.html:12
 msgid "Unlimited listings and applications."
 msgstr "Anuncios y aplicaciones ilimitados."
 
-#: templates/billing/pricing.html:12
+#: templates/billing/pricing.html:13
 msgid "month"
 msgstr "mes"
 
-#: templates/billing/pricing.html:15
+#: templates/billing/pricing.html:16
 msgid "Popular"
 msgstr "Populares"
 
-#: templates/billing/pricing.html:18
+#: templates/billing/pricing.html:19
 msgid "One season — apply, alerts, and directory."
 msgstr "Una temporada: solicitud, alertas y directorio."
 
-#: templates/billing/pricing.html:19
+#: templates/billing/pricing.html:20
 msgid "Activate"
 msgstr "Activar"
 
-#: templates/billing/pricing.html:22
+#: templates/billing/pricing.html:23
 msgid "lifetime"
 msgstr "de por vida"
 
-#: templates/billing/pricing.html:24
+#: templates/billing/pricing.html:25
 msgid "Lifetime"
 msgstr "Toda la vida útil"
 
-#: templates/billing/pricing.html:29
+#: templates/billing/pricing.html:30
 msgid "Verify"
 msgstr "Verificar"
 
-#: templates/billing/pricing.html:32
+#: templates/billing/pricing.html:33
 msgid "Shared on-board amounts must remain non-commercial."
 msgstr "Los importes compartidos a bordo deben seguir siendo no comerciales."
 
@@ -1245,12 +1290,12 @@ msgid "berths on board"
 msgstr "amarres a bordo"
 
 #: templates/boats/detail.html:17 templates/listings/detail.html:12
-#: templates/listings/mine.html:15
+#: templates/listings/mine.html:18
 msgid "Edit"
 msgstr "Editar"
 
 #: templates/boats/detail.html:18 templates/boats/partials/gallery_item.html:14
-#: templates/listings/detail.html:14 templates/listings/mine.html:17
+#: templates/listings/detail.html:14 templates/listings/mine.html:20
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -1417,73 +1462,73 @@ msgstr "Crear una cuenta"
 msgid "Where do you want to sail?"
 msgstr "¿Dónde quieres trabajar?"
 
-#: templates/core/home.html:53 templates/listings/search.html:26
+#: templates/core/home.html:63 templates/listings/search.html:35
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/core/home.html:57
+#: templates/core/home.html:71
 msgid "How it works"
 msgstr "Cómo funciona"
 
-#: templates/core/home.html:61
+#: templates/core/home.html:75
 msgid "Find your route"
 msgstr "Encuentre su ruta"
 
-#: templates/core/home.html:62
+#: templates/core/home.html:76
 msgid "Filter by port, programme, and ISO weeks."
 msgstr "Filtrar por puerto, programa y semanas ISO."
 
-#: templates/core/home.html:66
+#: templates/core/home.html:80
 msgid "Chat with the skipper"
 msgstr "Chatea con el patrón"
 
-#: templates/core/home.html:67
+#: templates/core/home.html:81
 msgid "Built-in messaging to prepare the crew."
 msgstr "Mensajes incorporados para preparar a la tripulación."
 
-#: templates/core/home.html:71
+#: templates/core/home.html:85
 msgid "Cast off"
 msgstr "Bind off."
 
-#: templates/core/home.html:72
+#: templates/core/home.html:86
 msgid "Cross-reviews after the passage build trust."
 msgstr "Las revisiones cruzadas después del pasaje generan confianza."
 
-#: templates/core/home.html:79
+#: templates/core/home.html:93
 msgid "Round-trip cruise sessions in port — apply for a place on a listing."
 msgstr ""
 
-#: templates/core/home.html:80
+#: templates/core/home.html:94
 #, fuzzy
 #| msgid "Browse listings"
 msgid "Browse training listings"
 msgstr "Navegar por listados"
 
-#: templates/core/home.html:84
+#: templates/core/home.html:98
 msgid "Popular routes"
 msgstr "Rutas populares"
 
-#: templates/core/home.html:102
+#: templates/core/home.html:116
 msgid "Sail with confidence"
 msgstr "CON CONFIANZA"
 
-#: templates/core/home.html:104
+#: templates/core/home.html:118
 msgid "Cross-reviews after each confirmed passage"
 msgstr "Revisiones cruzadas después de cada pasaje confirmado"
 
-#: templates/core/home.html:105
+#: templates/core/home.html:119
 msgid "Verifiable identity (Crew Pass)"
 msgstr "Identidad verificable (Crew Pass)"
 
-#: templates/core/home.html:106
+#: templates/core/home.html:120
 msgid "Report from messaging"
 msgstr "Informe de mensajería"
 
-#: templates/core/home.html:107
+#: templates/core/home.html:121
 msgid "Cost sharing: transparency on listings"
 msgstr "Coste compartido: transparencia en los anuncios"
 
-#: templates/core/home.html:109 templates/listings/faq.html:5
+#: templates/core/home.html:123 templates/listings/faq.html:5
 msgid "FAQ & safety"
 msgstr "Preguntas frecuentes y seguridad"
 
@@ -1975,7 +2020,11 @@ msgstr "Vía libre"
 msgid "Create"
 msgstr "Crear"
 
-#: templates/listings/mine.html:22
+#: templates/listings/mine.html:16
+msgid "Hidden from search — Crew Pass expired"
+msgstr ""
+
+#: templates/listings/mine.html:25
 msgid "You have not posted a listing yet."
 msgstr "No se han publicado publicaciones."
 
@@ -1999,27 +2048,26 @@ msgstr "Anuncios en esta ruta"
 msgid "Listing search"
 msgstr "Búsqueda de Anuncios"
 
-#: templates/listings/search.html:8
+#: templates/listings/search.html:9
 msgid ""
-"Filter by port, programme, and ISO weeks — with no filter, everyone is "
-"listed."
+"Filter by listing type, port, programme, and ISO weeks. Crew listings appear "
+"in search only while the author has an active Crew Pass (welcome month or "
+"paid plan). Skippers are always listed."
 msgstr ""
-"Filtrar por puerto, programa y semanas ISO: sin filtro, todos aparecen en la "
-"lista."
 
-#: templates/listings/search.html:27
+#: templates/listings/search.html:36
 msgid "Reset"
 msgstr "Restablecimiento"
 
-#: templates/listings/search.html:29
+#: templates/listings/search.html:38
 msgid "result(s)"
 msgstr "resultado(s)"
 
-#: templates/listings/search.html:37
+#: templates/listings/search.html:46
 msgid "Alerte annonces"
 msgstr "Alerte annonces"
 
-#: templates/listings/search.html:38
+#: templates/listings/search.html:47
 msgid "Save as alert"
 msgstr "Guardar como Alerta"
 
@@ -2112,13 +2160,21 @@ msgid "Identity"
 msgstr "Usuario"
 
 #: templates/profiles/edit.html:55
-msgid "You can contact other members and apply to listings."
+#, fuzzy
+#| msgid "You can contact other members and apply to listings."
+msgid ""
+"You can contact other members, apply to listings, and keep crew listings "
+"visible in search."
 msgstr ""
 "Puedes ponerte en contacto con otros miembros y enviar una solicitud a los "
 "anuncios."
 
 #: templates/profiles/edit.html:55
-msgid "A Crew Pass is required to contact members and apply."
+#, fuzzy
+#| msgid "A Crew Pass is required to contact members and apply."
+msgid ""
+"A Crew Pass is required to contact members, apply, and show crew listings in "
+"search."
 msgstr ""
 "Se requiere un pase de tripulación para contactar a los miembros y "
 "solicitarlo."
@@ -2276,6 +2332,13 @@ msgstr ""
 "¿Ya tienes una cuenta con este correo? <a href=\"%(login_url)s\" "
 "class=\"font-medium text-sky-700 hover:underline\">Inicia sesión</a> y "
 "vínculala desde tu perfil."
+
+#~ msgid ""
+#~ "Filter by port, programme, and ISO weeks — with no filter, everyone is "
+#~ "listed."
+#~ msgstr ""
+#~ "Filtrar por puerto, programa y semanas ISO: sin filtro, todos aparecen en "
+#~ "la lista."
 
 #~ msgid "Route · Dates · Crew · Details"
 #~ msgstr "Ruta · Fechas · Tripulación · Detalles"

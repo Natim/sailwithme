@@ -7,6 +7,7 @@ from apps.core.models import UUIDModel
 
 
 class MembershipPlan(models.TextChoices):
+    CREW_TRIAL = "crew_trial", _("Crew Pass — welcome month")
     CREW_SEASON = "crew_season", _("Crew Pass — season")
     CREW_LIFETIME = "crew_lifetime", _("Crew Pass — lifetime")
     SKIPPER_PLUS = "skipper_plus", _("Skipper+")

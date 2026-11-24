@@ -4,7 +4,8 @@ from django.contrib.gis.measure import D
 from django.db.models import Q
 
 from .iso_weeks import weeks_overlap
-from .models import Listing, ListingStatus
+from .models import Listing
+from .visibility import filter_searchable_listings
 
 
 def nm_to_meters(nm: int) -> float:
@@ -12,8 +13,14 @@ def nm_to_meters(nm: int) -> float:
 
 
 def search_listings(cleaned_data: dict) -> list[Listing]:
-    qs = Listing.objects.filter(status=ListingStatus.PUBLISHED).select_related(
-        "author", "boat", "departure_port", "arrival_port"
+    qs = filter_searchable_listings(
+        Listing.objects.select_related(
+            "author",
+            "author__profile",
+            "boat",
+            "departure_port",
+            "arrival_port",
+        )
     )
 
     kind = cleaned_data.get("kind")

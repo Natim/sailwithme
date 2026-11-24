@@ -25,7 +25,16 @@
 
 <form method="get" action="{% url 'listings:search' %}" class="card -mt-8 relative z-20 mx-auto max-w-4xl border-lagoon/20 shadow-lift">
   <p class="font-display text-lg font-semibold text-ocean">{% trans "Where do you want to sail?" %} 🌊</p>
-  <div class="mt-4 grid gap-3 sm:grid-cols-3">
+  <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="lg:col-span-1">
+      <label class="text-xs font-bold text-ocean/70">{% trans "Type" %}</label>
+      <select name="kind" class="input mt-1">
+        <option value="">{% trans "All" %}</option>
+        <option value="crew_wanted">{% trans "Captain / skipper looking for crew" %}</option>
+        <option value="berth_wanted">{% trans "Crew looking for a boat to cross" %}</option>
+        <option value="training">{% trans "Training" %}</option>
+      </select>
+    </div>
     <div class="sm:col-span-1">
       <label class="text-xs font-bold text-ocean/70">{% trans "Departure" %}</label>
       <select name="departure_port" class="input mt-1">
@@ -50,7 +59,12 @@
       <input type="number" name="year" class="input mt-1" placeholder="2026" min="2024" max="2035">
     </div>
   </div>
-  <button type="submit" class="btn-primary mt-4">{% trans "Search" %}</button>
+  <div class="mt-4 flex flex-wrap items-center gap-3">
+    <button type="submit" class="btn-primary">{% trans "Search" %}</button>
+    <a href="{% url 'listings:search' %}?kind=crew_wanted" class="text-sm font-semibold text-lagoon hover:underline">{% trans "Captains looking for crew" %}</a>
+    <span class="text-slate-300" aria-hidden="true">·</span>
+    <a href="{% url 'listings:search' %}?kind=berth_wanted" class="text-sm font-semibold text-coral hover:underline">{% trans "Crew looking for a crossing" %}</a>
+  </div>
 </form>
 
 <section class="mt-16">

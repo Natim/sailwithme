@@ -5,7 +5,16 @@
 
 {% block content %}
 <h1 class="font-display text-3xl font-bold text-ocean">{% trans "Listings" %}</h1>
-<p class="mt-2 text-slate-600">{% trans "Filter by port, programme, and ISO weeks — with no filter, everyone is listed." %}</p>
+<p class="mt-2 max-w-3xl text-slate-600">
+  {% trans "Filter by listing type, port, programme, and ISO weeks. Crew listings appear in search only while the author has an active Crew Pass (welcome month or paid plan). Skippers are always listed." %}
+</p>
+
+<div class="mt-6 flex flex-wrap gap-2" aria-label="{% trans 'Listing type' %}">
+  <a href="{% url 'listings:search' %}" class="{% if not selected_kind %}btn-primary{% else %}btn-ghost{% endif %} text-sm">{% trans "All" %}</a>
+  <a href="{% url 'listings:search' %}?kind=crew_wanted" class="{% if selected_kind == 'crew_wanted' %}rounded-full bg-lagoon px-4 py-2 text-sm font-semibold text-white{% else %}btn-ghost text-sm{% endif %}">{% trans "Captain / skipper looking for crew" %}</a>
+  <a href="{% url 'listings:search' %}?kind=berth_wanted" class="{% if selected_kind == 'berth_wanted' %}rounded-full bg-coral px-4 py-2 text-sm font-semibold text-white{% else %}btn-ghost text-sm{% endif %}">{% trans "Crew looking for a boat to cross" %}</a>
+  <a href="{% url 'listings:search' %}?kind=training" class="{% if selected_kind == 'training' %}rounded-full bg-sun px-4 py-2 text-sm font-semibold text-ocean{% else %}btn-ghost text-sm{% endif %}">{% trans "Training" %}</a>
+</div>
 
 <div class="mt-8 grid gap-8 lg:grid-cols-12">
   <aside class="lg:col-span-4">
@@ -15,7 +24,7 @@
       {% endif %}
       <div class="space-y-4">
         {% for field in form.visible_fields %}
-          <div class="{% if field.name == 'q' %}col-span-full{% endif %}">
+          <div class="{% if field.name == 'q' %}col-span-full{% endif %} {% if field.name == 'kind' %}order-first{% endif %}">
             <label class="mb-1 block text-xs font-bold uppercase tracking-wide text-ocean/60" for="{{ field.id_for_label }}">{{ field.label }}</label>
             {{ field }}
             {% for error in field.errors %}<p class="mt-1 text-xs text-red-600">{{ error }}</p>{% endfor %}
@@ -42,7 +51,18 @@
 
   <div class="space-y-6 lg:col-span-8">
     <div id="map" class="h-80 overflow-hidden rounded-4xl border border-lagoon/20 shadow-soft"></div>
-    <div id="search-results">{% include "listings/partials/results.html" %}</div>
+    <div id="search-results">
+      {% if grouped_display %}
+        {% for section_title, section_results in grouped_display %}
+          <h2 class="font-display text-xl font-semibold text-ocean {% if not forloop.first %}mt-8{% endif %}">{{ section_title }}</h2>
+          <div class="mt-4">
+            {% include "listings/partials/results.html" with results=section_results %}
+          </div>
+        {% endfor %}
+      {% else %}
+        {% include "listings/partials/results.html" %}
+      {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}

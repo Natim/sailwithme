@@ -11,8 +11,8 @@ from .models import Listing, ListingApplication, ListingKind, ProgrammeType, Sea
 
 LISTING_KIND_SEARCH_CHOICES = [
     ("", _("All")),
-    (ListingKind.CREW_WANTED, _("Skippers looking for crew")),
-    (ListingKind.BERTH_WANTED, _("Crew looking for a berth")),
+    (ListingKind.CREW_WANTED, _("Captain / skipper looking for crew")),
+    (ListingKind.BERTH_WANTED, _("Crew looking for a boat to cross")),
     (ListingKind.TRAINING, _("Training")),
 ]
 

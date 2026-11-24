@@ -10,7 +10,8 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView, TemplateView
 
-from apps.billing.services import user_can_initiate_contact
+from apps.billing.services import author_listing_searchable, user_can_initiate_contact
+from apps.profiles.models import ProfileRole
 
 from .forms import ApplicationForm, ListingForm, ListingSearchForm
 from .models import (
@@ -42,11 +43,28 @@ def listing_map_i18n():
 def listing_search(request):
     form = ListingSearchForm(request.GET)
     results = []
+    grouped_results = None
     map_data = []
     if form.is_valid():
         results = search_listings(form.cleaned_data)
+        if not (form.cleaned_data.get("kind") or ""):
+            by_kind: dict[str, list] = {}
+            for listing in results:
+                by_kind.setdefault(listing.kind, []).append(listing)
+            if len(by_kind) > 1:
+                grouped_results = by_kind
     elif form.is_bound:
         messages.error(request, _("Fix your search criteria."))
+    grouped_display = []
+    if grouped_results:
+        for kind, title in (
+            (ListingKind.CREW_WANTED, _("Captains looking for crew")),
+            (ListingKind.BERTH_WANTED, _("Crew looking for a crossing")),
+            (ListingKind.TRAINING, _("Training")),
+        ):
+            items = grouped_results.get(kind, [])
+            if items:
+                grouped_display.append((title, items))
     map_data = listings_for_map(results)
     alert_coords = {}
     if form.is_valid():
@@ -58,9 +76,12 @@ def listing_search(request):
     ctx = {
         "form": form,
         "results": results,
+        "grouped_results": grouped_results,
+        "grouped_display": grouped_display,
         "result_count": len(results),
         "map_data_json": json.dumps(map_data),
         "alert_coords": alert_coords,
+        "selected_kind": (form.cleaned_data.get("kind") or "") if form.is_valid() else (request.GET.get("kind") or ""),
     }
     return render(request, "listings/search.html", ctx)
 
@@ -98,9 +119,27 @@ class MyListingsView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Listing.objects.filter(author=self.request.user).order_by("-created_at")
 
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["author_searchable"] = author_listing_searchable(self.request.user)
+        return ctx
+
+
+def _crew_listing_post_allowed(user) -> bool:
+    profile = getattr(user, "profile", None)
+    if profile and profile.role == ProfileRole.CREW and not author_listing_searchable(user):
+        return False
+    return True
+
 
 @login_required
 def listing_create(request):
+    if not _crew_listing_post_allowed(request.user):
+        messages.error(
+            request,
+            _("Your Crew Pass has expired. Renew on Pricing to post listings."),
+        )
+        return redirect("billing:pricing")
     form = ListingForm(request.user, request.POST or None)
     if request.method == "POST" and form.is_valid():
         listing = form.save()
@@ -117,6 +156,12 @@ def listing_create(request):
 
 @login_required
 def listing_edit(request, pk):
+    if not _crew_listing_post_allowed(request.user):
+        messages.error(
+            request,
+            _("Your Crew Pass has expired. Renew on Pricing to edit listings."),
+        )
+        return redirect("billing:pricing")
     listing = get_object_or_404(Listing, pk=pk, author=request.user)
     form = ListingForm(request.user, request.POST or None, instance=listing)
     if request.method == "POST" and form.is_valid():
